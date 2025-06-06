@@ -1,0 +1,7 @@
+libft/libft.a
+libft/*.o
+_obj
+.vscode
+.DS_Store
+MLX42
+miniRT
