@@ -1,7 +1,8 @@
-#ifndef OBJ_STRUCTS_H
-# define OBJ_STRUCTS_H
+#ifndef OBJECTS_H
+# define OBJECTS_H
 
-# include "miniRT.h"
+# include "math.h"
+# include <unistd.h>
 
 typedef enum e_obj_type
 {
@@ -19,7 +20,7 @@ typedef struct s_obj_list
 
 typedef struct s_obj_node
 {
-	t_obj_type			type;
+	int					type;
 	t_obj_data			data;
 	struct s_obj_node	*next;
 }						t_obj_node;

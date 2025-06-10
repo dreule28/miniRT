@@ -1,5 +1,5 @@
-#ifndef MATH_STRUCTS_H
-# define MATH_STRUCTS_H
+#ifndef MATH_H
+# define MATH_H
 
 typedef struct s_vector
 {
