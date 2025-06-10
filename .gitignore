@@ -1,5 +1,7 @@
 libft/libft.a
 libft/*.o
+libft/ft_printf/*.o
+libft/get_next_line/*.o
 _obj
 .vscode
 .DS_Store

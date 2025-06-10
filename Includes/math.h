@@ -1,6 +1,7 @@
 #ifndef MATH_H
 # define MATH_H
 
+# include <stdbool.h>
 typedef struct s_vector
 {
 	double	x;

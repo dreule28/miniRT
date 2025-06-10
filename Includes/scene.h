@@ -2,7 +2,7 @@
 # define SCENE_H
 
 # include "math.h"
-
+# include "objects.h"
 typedef struct s_ambi_light
 {
 	double			ratio;
@@ -25,9 +25,12 @@ typedef struct s_light
 
 typedef struct s_scene
 {
+	mlx_t			*mlx;
+	mlx_image_t		*img;
 	t_ambi_light	ambi_light;
 	t_camera		camera;
 	t_light			light;
+	t_obj_list		*obj_list;
 }					t_scene;
 
 #endif
