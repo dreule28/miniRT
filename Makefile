@@ -14,7 +14,7 @@ SRC_DIRS := src
 HEADERS = -I $(LIBFT_DIR)/include -I $(MLX42_DIR)/include
 MLX42_DIR = MLX42
 MLX42_LIB = $(MLX42_DIR)/build/libmlx42.a
-LIBS = $(MLX42_LIB) $(LIBFT) -ldl -lglfw -pthread -lm
+LIBS = $(MLX42_LIB) $(LIBFT) -ldl -pthread -lm
 
 vpath %.h $(INC_DIRS)
 vpath %.c $(SRC_DIRS)
@@ -26,11 +26,14 @@ vpath %.c $(SRC_DIRS)
 SRC_FILES := main.c
 SRC := $(addprefix src/, $(SRC_FILES))
 
+PARSER_FILES := parser.c fill_structs.c
+PARSER := $(addprefix src/parser/, $(PARSER_FILES))
+
 ################################################################################
 ###############               OBJECT FILES & RULES                ##############
 ################################################################################
 
-OBJS := $(addprefix $(OBJ_DIR)/, $(SRC:%.c=%.o))
+OBJS := $(addprefix $(OBJ_DIR)/, $(SRC:%.c=%.o) $(PARSER:%.c=%.o))
 
 # Compilation flags and linking options
 CFLAGS := -Wall -Wextra -Werror -g -IIncludes -Ilibft -MMD -MP $(addprefix -I, $(INC_DIRS))
