@@ -3,38 +3,53 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: danielreule <danielreule@student.42.fr>    +#+  +:+       +#+        */
+/*   By: dreule <dreule@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 10:52:55 by dreule            #+#    #+#             */
-/*   Updated: 2024/12/14 02:19:52 by danielreule      ###   ########.fr       */
+/*   Updated: 2025/06/11 15:27:48 by dreule           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
+int	check_overflow(int result, int digit, int sign)
+{
+	if (sign == 1)
+	{
+		if (result > (INT_MAX - digit) / 10)
+			return (INT_MAX);
+	}
+	else
+	{
+		if (result > (INT_MAX - digit) / 10)
+			return (INT_MIN);
+	}
+	return (0);
+}
+
 int	ft_atoi(const char *str)
 {
-	int	min_count;
-	int	i;
-	int	nb;
+	int	sign;
+	int	result;
+	int	digit;
+	int	overflow_check;
 
-	i = 0;
-	min_count = 0;
-	while ((str[i] >= 9 && str[i] <= 13) || str[i] == 32)
-		i++;
-	if (str[i] == '+' || str[i] == '-')
+	sign = 1;
+	result = 0;
+	while (*str == ' ' || (*str >= 9 && *str <= 13))
+		str++;
+	if (*str == '-')
+		sign = -1;
+	if (*str == '+' || *str == '-')
+		str++;
+	while (*str >= '0' && *str <= '9')
 	{
-		if (str[i] == '-')
-			min_count++;
-		i++;
+		digit = *str - '0';
+		overflow_check = check_overflow(result, digit, sign);
+		if (overflow_check != 0)
+			return (overflow_check);
+		result = result * 10 + digit;
+		str++;
 	}
-	nb = 0;
-	while (str[i] >= '0' && str[i] <= '9')
-	{
-		nb = nb * 10 + (str[i] - '0');
-		i++;
-	}
-	if (min_count % 2 != 0)
-		nb = -nb;
-	return (nb);
+	return (sign * result);
 }
