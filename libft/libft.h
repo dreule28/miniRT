@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gzovkic <gzovkic@student.42.fr>            +#+  +:+       +#+        */
+/*   By: dreule <dreule@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 14:25:46 by dreule            #+#    #+#             */
-/*   Updated: 2025/04/25 14:17:39 by gzovkic          ###   ########.fr       */
+/*   Updated: 2025/06/11 12:27:44 by dreule           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,9 @@ int		ft_isascii(int c);
 
 /* Checks if the given character is printable, including space. */
 int		ft_isprint(int c);
+
+/*Checks if a character is a whitespace character. */
+int		ft_is_space(char c);
 
 /* Returns the length of a null-terminated string. */
 size_t	ft_strlen(const char *str);
