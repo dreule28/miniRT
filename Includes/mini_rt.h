@@ -1,7 +1,7 @@
 #ifndef MINI_RT_H
 # define MINI_RT_H
-# define HEIGHT 1920
-# define WIDTH 1080
+# define HEIGHT 1080
+# define WIDTH 1920
 
 //Includes -- BEGIN
 # include <stdio.h>
@@ -11,6 +11,7 @@
 # include "libft.h"
 # include "objects.h"
 # include "scene.h"
+# include "ray_tracing.h"
 //Includes -- END
 
 //Structs -- BEGIN

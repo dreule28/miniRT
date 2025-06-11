@@ -23,8 +23,12 @@ vpath %.c $(SRC_DIRS)
 ###############                  SOURCE FILES                     ##############
 ################################################################################
 
+RAY_TRACING_FILES := ray_tracing.c mlx_functions.c keyboard_hooks.c
+RAY_TRACING := $(addprefix /ray_tracing/, $(RAY_TRACING_FILES))
+
 SRC_FILES := main.c
-SRC := $(addprefix src/, $(SRC_FILES))
+SRC := $(addprefix src/, $(SRC_FILES) $(RAY_TRACING))
+
 
 ################################################################################
 ###############               OBJECT FILES & RULES                ##############
