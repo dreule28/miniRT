@@ -29,8 +29,8 @@ int	main(int argc, char **argv)
 	scene->obj_list->tail = scene->obj_list->head;
 	scene->obj_list->size = 1;
 	// Initialize sphere data
-	sphere_center = (t_tuples){2, 2, 2, POINT};
-	sphere_color = (t_rgb){255, 0, 0};
+	sphere_center = *create_point(2.0 , 2.0, 2.0);
+	sphere_color = *create_rgb(255,0 , 0);
 	sphere_diameter = 2;
 	// Set the node type and data
 	scene->obj_list->head->type = SPHERE;
@@ -39,9 +39,9 @@ int	main(int argc, char **argv)
 	scene->obj_list->head->data.sphere.sphere_diameter = sphere_diameter;
 	scene->obj_list->head->next = NULL;
 	// camera settings
-	scene->camera.view_point = (t_tuples){0, 0, -10, POINT};
+	scene->camera.view_point =  *create_point(0, 0, -10);
 	// Camera position
-	scene->camera.orientation_vector = (t_tuples){0, 0, 1, VECTOR};
+	scene->camera.orientation_vector = *create_vector(0, 0, 1);
 	// Looking towards +z (where sphere is)
 	scene->camera.fov = 70;
 	// 70-degree field of view

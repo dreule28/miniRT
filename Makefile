@@ -23,7 +23,7 @@ vpath %.c $(SRC_DIRS)
 ###############                  SOURCE FILES                     ##############
 ################################################################################
 
-RAY_TRACING_FILES := ray_tracing.c mlx_functions.c keyboard_hooks.c
+RAY_TRACING_FILES := ray_tracing.c mlx_functions.c keyboard_hooks.c custom_math_func.c
 RAY_TRACING := $(addprefix /ray_tracing/, $(RAY_TRACING_FILES))
 
 SRC_FILES := main.c

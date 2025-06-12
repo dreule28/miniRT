@@ -5,7 +5,7 @@
 void	ray_tracing(void *param);
 
 
-// ray_tracing/mlx_functions.c
+// ray_tracing/custom_mlx_functions.c
 bool	init_mlx_window(t_scene *scene);
 int get_rgba(int r, int g, int b, int a);
 void	mlx_custom_hooks(t_scene *scene);
