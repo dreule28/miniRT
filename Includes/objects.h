@@ -41,17 +41,17 @@ typedef union u_obj_data
 	t_cylinder_node	cylinder;
 }					t_obj_data;
 
-typedef struct s_obj_list
-{
-	struct s_obj_node	*head;
-	struct s_obj_node	*tail;
-	ssize_t				size;
-}						t_obj_list;
-
 typedef struct s_obj_node
 {
 	int					type;
 	t_obj_data			data;
 	struct s_obj_node	*next;
 }						t_obj_node;
+
+typedef struct s_obj_list
+{
+	t_obj_node	*head;
+	t_obj_node	*tail;
+	ssize_t		size;
+}				t_obj_list;
 #endif
