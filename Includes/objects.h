@@ -13,24 +13,24 @@ typedef enum e_obj_type
 
 typedef struct s_sphere_node
 {
-	t_tuples				sphere_center;
-	double					sphere_diameter;
+	t_tuples				pos;
+	double					diameter;
 	t_rgb					rgb;
 }							t_sphere_node;
 
 typedef struct s_plane_node
 {
-	t_tuples				plane_point;
-	t_tuples				plane_axis;
+	t_tuples				pos;
+	t_tuples				axis;
 	t_rgb					rgb;
 }							t_plane_node;
 
 typedef struct s_cylinder_node
 {
-	t_tuples				cylinder_center;
-	t_tuples				cylinder_axis;
-	double					cylinder_diameter;
-	double					cylinder_height;
+	t_tuples				pos;
+	t_tuples				axis;
+	double					diameter;
+	double					height;
 	t_rgb					rgb;
 }							t_cylinder_node;
 
