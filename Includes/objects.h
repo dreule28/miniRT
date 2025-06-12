@@ -55,10 +55,5 @@ typedef struct s_obj_list
 	ssize_t					size;
 }							t_obj_list;
 
-typedef struct				s_obj_node
-{
-	t_obj_type				type;
-	t_obj_data				data;
-	t_obj_node				*next;
-}				t_obj_node;
+
 #endif

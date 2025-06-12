@@ -17,7 +17,7 @@ int	main(int argc, char **argv)
 		free(scene);
 		return (1);
 	}
-	// Initialize the first node
+
 	scene->obj_list->head = ft_calloc(1, sizeof(t_obj_node));
 	if (!scene->obj_list->head)
 	{
@@ -25,7 +25,7 @@ int	main(int argc, char **argv)
 		free(scene);
 		return (1);
 	}
-	// Set tail to point to head since we only have one node
+	
 	scene->obj_list->tail = scene->obj_list->head;
 	scene->obj_list->size = 1;
 	// Initialize sphere data
@@ -35,11 +35,11 @@ int	main(int argc, char **argv)
 	// Set the node type and data
 	scene->obj_list->head->type = SPHERE;
 	scene->obj_list->head->data.sphere.rgb = sphere_color;
-	scene->obj_list->head->data.sphere.sphere_center = sphere_center;
-	scene->obj_list->head->data.sphere.sphere_diameter = sphere_diameter;
+	scene->obj_list->head->data.sphere.pos = sphere_center;
+	scene->obj_list->head->data.sphere.diameter = sphere_diameter;
 	scene->obj_list->head->next = NULL;
 	// camera settings
-	scene->camera.view_point =  *create_point(0, 0, -10);
+	scene->camera.pos =  *create_point(0, 0, -10);
 	// Camera position
 	scene->camera.orientation_vector = *create_vector(0, 0, 1);
 	// Looking towards +z (where sphere is)
@@ -50,6 +50,6 @@ int	main(int argc, char **argv)
 	mlx_custom_hooks(scene);
 	mlx_loop(scene->mlx);
 	mlx_terminate(scene->mlx);
-	// close_scene(scene);
+
 	return (0);
 }

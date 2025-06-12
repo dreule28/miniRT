@@ -40,3 +40,30 @@ t_rgb *create_rgb(double r ,double g ,double b)
 	rgb->b = b;
 	return(rgb);
 }
+
+bool	ft_tupcmp(t_tuples *tuples1, t_tuples *tuples2)
+{
+	if(tuples1->w == tuples2->w)
+		return(false);
+	else if(tuples1->x == tuples2->x)
+		return(false);
+	else if(tuples1->y == tuples2->y)
+		return(false);
+	else if(tuples1->z == tuples2->z)
+		return(false);
+	return(true);
+}
+
+t_tuples	*tup_add(t_tuples *tuples1, t_tuples *tuples2)
+{
+	t_tuples *new_tuples;
+
+	new_tuples = ft_calloc(1, sizeof(t_tuples));
+	if(!new_tuples)
+		return(NULL);
+	new_tuples->x = tuples1->x + tuples2->x;
+	new_tuples->y = tuples1->y + tuples2->y;
+	new_tuples->z = tuples1->z + tuples2->z;
+	new_tuples->w = tuples1->w +tuples2->w;
+	return(new_tuples);
+}

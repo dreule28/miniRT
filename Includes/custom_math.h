@@ -24,8 +24,11 @@ typedef struct s_rgb
 	double			b;
 }					t_rgb;
 
+// ray_tracing/custom_math_func.c
 t_tuples			*create_vector(double x, double y, double z);
 t_tuples			*create_point(double x, double y, double z);
 t_rgb				*create_rgb(double r, double g, double b);
+bool	ft_tupcmp(t_tuples *tuples1, t_tuples *tuples2);
+t_tuples	*tup_add(t_tuples *tuples1, t_tuples *tuples2);
 
 #endif
