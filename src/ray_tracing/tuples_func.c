@@ -1,6 +1,6 @@
 #include "mini_rt.h"
 
-bool	ft_tupcmp(t_tuples *tuples1, t_tuples *tuples2)
+bool	tupcmp(t_tuples *tuples1, t_tuples *tuples2)
 {
 	if(tuples1->w != tuples2->w)
 		return(true);

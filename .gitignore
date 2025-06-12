@@ -7,3 +7,4 @@ _obj
 .DS_Store
 MLX42
 miniRT
+main.c
