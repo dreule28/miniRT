@@ -3,12 +3,12 @@
 void	key_hook(mlx_key_data_t keydata, void *param)
 {
 	t_scene	*scene;
-	uint32_t	*pixels;
 	// int i;
+	// uint32_t	*pixels;
 
+	// pixels = (uint32_t *)scene->img->pixels;
 	// i = -1;
 	scene = (t_scene *)param;
-	pixels = (uint32_t *)scene->img->pixels;
 	if (keydata.action == MLX_PRESS)
 	{
 		if (keydata.key == MLX_KEY_ESCAPE)

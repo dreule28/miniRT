@@ -1,7 +1,7 @@
 #ifndef SCENE_H
 # define SCENE_H
 
-# include "math.h"
+# include "custom_math.h"
 # include "objects.h"
 typedef struct s_ambi_light
 {
