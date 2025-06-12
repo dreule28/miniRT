@@ -1,7 +1,7 @@
 #ifndef OBJECTS_H
 # define OBJECTS_H
 
-# include "math.h"
+# include "custom_math.h"
 # include <unistd.h>
 
 typedef enum e_obj_type
@@ -13,22 +13,22 @@ typedef enum e_obj_type
 
 typedef struct s_sphere_node
 {
-	t_vector				sphere_center;
+	t_tuples				sphere_center;
 	double					sphere_diameter;
 	t_rgb					rgb;
 }							t_sphere_node;
 
 typedef struct s_plane_node
 {
-	t_vector				plane_point;
-	t_vector				plane_axis;
+	t_tuples				plane_point;
+	t_tuples				plane_axis;
 	t_rgb					rgb;
 }							t_plane_node;
 
 typedef struct s_cylinder_node
 {
-	t_vector				cylinder_center;
-	t_vector				cylinder_axis;
+	t_tuples				cylinder_center;
+	t_tuples				cylinder_axis;
 	double					cylinder_diameter;
 	double					cylinder_height;
 	t_rgb					rgb;
@@ -50,10 +50,10 @@ typedef struct s_obj_list
 	ssize_t					size;
 }							t_obj_list;
 
-struct						s_obj_node
+typedef struct				s_obj_node
 {
-	int						type;
+	t_obj_type				type;
 	t_obj_data				data;
 	t_obj_node				*next;
-};
+}				t_obj_node;
 #endif

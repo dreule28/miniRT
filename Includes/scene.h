@@ -11,14 +11,14 @@ typedef struct s_ambi_light
 
 typedef struct s_camera
 {
-	t_vector		view_point;
-	t_vector		orientation_vector;
+	t_tuples		view_point;
+	t_tuples		orientation_vector;
 	int				fov;
 }					t_camera;
 
 typedef struct s_light
 {
-	t_vector		light_point;
+	t_tuples		light_point;
 	double			light_ratio;
 	t_rgb			rgb;
 }					t_light;

@@ -2,13 +2,20 @@
 # define MATH_H
 
 # include <stdbool.h>
-typedef struct s_vector
+
+typedef enum e_tuples_enum
+{
+	VECTOR,
+	POINT
+}	t_tuples_enum;
+
+typedef struct s_tuples
 {
 	double	x;
 	double	y;
 	double	z;
-	bool	w;
-}			t_vector;
+	t_tuples_enum w;
+}			t_tuples;
 
 typedef struct s_rgb
 {
