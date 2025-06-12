@@ -35,4 +35,7 @@ t_tuples	*tup_add(t_tuples *tuples1, t_tuples *tuples2);
 t_tuples	*tup_subtract(t_tuples *tuples1, t_tuples *tuples2);
 t_tuples	*tup_negate(t_tuples *tuples);
 
+// ray_tracing/more_tuples_function.c
+
+
 #endif
