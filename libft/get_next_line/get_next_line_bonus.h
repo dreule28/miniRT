@@ -6,14 +6,14 @@
 /*   By: dreule <dreule@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/01 18:46:57 by danielreule       #+#    #+#             */
-/*   Updated: 2024/11/04 11:46:00 by dreule           ###   ########.fr       */
+/*   Updated: 2025/06/10 15:52:56 by dreule           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GET_NEXT_LINE_BONUS_H
 # define GET_NEXT_LINE_BONUS_H
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE
+#  define BUFFER_SIZE 
 # endif
 
 # include <unistd.h>
