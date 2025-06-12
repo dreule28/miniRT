@@ -5,7 +5,7 @@ void	ray_tracing(void *param);
 
 // ray_tracing/mlx_functions.c
 bool	init_mlx_window(t_scene *scene);
-uint32_t create_rgba(uint8_t r, uint8_t g, uint8_t b, uint8_t a);
+int get_rgba(int r, int g, int b, int a);
 void	mlx_custom_hooks(t_scene *scene);
 
 // ray_tracing/keyboard_hooks.c

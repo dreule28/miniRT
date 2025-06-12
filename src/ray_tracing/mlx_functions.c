@@ -15,7 +15,8 @@ bool	init_mlx_window(t_scene *scene)
 		mlx_terminate(scene->mlx);
 		return (false);
 	}
-	ft_memset(scene->img->pixels, 128, scene->img->width * scene->img->height * sizeof(int32_t));
+	ft_memset(scene->img->pixels, 128, scene->img->width * scene->img->height
+		* sizeof(int32_t));
 	if (mlx_image_to_window(scene->mlx, scene->img, 0, 0) < 0)
 	{
 		printf("Failed to display image\n");
@@ -32,7 +33,7 @@ void	mlx_custom_hooks(t_scene *scene)
 	mlx_scroll_hook(scene->mlx, &scroll_hook, scene);
 }
 
-uint32_t create_rgba(uint8_t r, uint8_t g, uint8_t b, uint8_t a)
+int	get_rgba(int r, int g, int b, int a)
 {
-	return (a << 24 | r << 16 | g << 8 | b);
+	return (a << 24 | b << 16 | g << 8 | r);
 }
