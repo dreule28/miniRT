@@ -43,13 +43,6 @@ typedef union u_obj_data
 
 typedef struct s_obj_node
 {
-	int					type;
-	t_obj_data			data;
-	struct s_obj_node	*next;
-}						t_obj_node;
-
-typedef struct s_obj_node
-{
 	t_obj_type	type;
 	t_obj_data	data;
 	t_obj_node	*next;
