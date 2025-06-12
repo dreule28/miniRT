@@ -30,7 +30,7 @@ void		add_light(t_scene *scene, char *parsed_line);
 //fill_structs.c -- END
 
 //list_and_nodes.c -- BEGIN
-t_obj_list	*init_obj_list();
+t_obj_list	*init_obj_list(void);
 //list_and_nodes.c -- END
 
 //parser.c -- BEGIN

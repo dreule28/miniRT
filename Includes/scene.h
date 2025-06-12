@@ -3,6 +3,7 @@
 
 # include "custom_math.h"
 # include "objects.h"
+
 typedef struct s_ambi_light
 {
 	double			ratio;
