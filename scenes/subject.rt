@@ -11,12 +11,12 @@ C	-50.0,0,20	1,2,3	70
 L	-40,0,30	0.7				255,255,255
 
 # PLANE
-#	x,y,z		x,y,z			r,g,b
-pl	0,0,0		0,1.0,0			255,0,255
+#	x,y,zpos	x,y,z			r,g,b
+pl	1,2,3		0,1.0,0			255,0,255
 
 # SPHERE
 #	x,y,z		diameter		r,g,b
-sp	0,0,20		20				255,0,0
+sp	5,0,20		20				255,0,34
 
 # CYLINDER
 #	center_x,y,z	axis_x,y,z		diameter	height	r,g,b
