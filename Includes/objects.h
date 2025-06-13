@@ -36,17 +36,17 @@ typedef struct s_cylinder_node
 
 typedef union u_obj_data
 {
-	t_sphere_node	sphere;
-	t_plane_node	plane;
-	t_cylinder_node	cylinder;
+	t_sphere_node	*sphere;
+	t_plane_node	*plane;
+	t_cylinder_node	*cylinder;
 }					t_obj_data;
 
 typedef struct s_obj_node
 {
-	t_obj_type	type;
-	t_obj_data	data;
-	t_obj_node	*next;
-}				t_obj_node;
+	t_obj_type			type;
+	t_obj_data			*data;
+	struct s_obj_node	*next;
+}						t_obj_node;
 
 typedef struct s_obj_list
 {
