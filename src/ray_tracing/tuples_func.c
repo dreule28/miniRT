@@ -4,11 +4,11 @@ bool	tupcmp(t_tuples *tuples1, t_tuples *tuples2)
 {
 	if (tuples1->w != tuples2->w)
 		return (true);
-	else if ((tuples1->x - tuples2->x) < DBL_EPSILON)
+	else if (fabs(tuples1->x - tuples2->x) > DBL_EPSILON)
 		return (true);
-	else if ((tuples1->y - tuples2->y) < DBL_EPSILON)
+	else if (fabs(tuples1->y - tuples2->y) > DBL_EPSILON)
 		return (true);
-	else if ((tuples1->z - tuples2->z) < DBL_EPSILON)
+	else if (fabs(tuples1->z - tuples2->z) > DBL_EPSILON)
 		return (true);
 	return (false);
 }
@@ -40,6 +40,8 @@ t_tuples	*tup_subtract(t_tuples *tuples1, t_tuples *tuples2)
 	new_tuples->w = tuples1->w - tuples2->w;
 	return (new_tuples);
 }
+
+
 t_tuples	*tup_negate(t_tuples *tuples)
 {
 	t_tuples	*new_tuples;

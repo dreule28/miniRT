@@ -51,5 +51,11 @@ int	main(int argc, char **argv)
 	// mlx_loop(scene->mlx);
 	// mlx_terminate(scene->mlx);
 	// test_tuples_operations();
+	// t_tuples *vec;
+	// double	magnitude;
+
+	// vec = create_vector(0, 1, 0);
+	
+	// printf("%.5f\n", magnitude);
 	return (0);
 }
