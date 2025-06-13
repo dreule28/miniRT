@@ -1,55 +1,70 @@
 #include "mini_rt.h"
 
+void	free_obj_data(t_obj_data *data, int type)
+{
+	if (type == SPHERE && data->sphere)
+		free(data->sphere);
+	else if (type == PLANE && data->plane)
+		free(data->plane);
+	else if (type == CYLINDER && data->cylinder)
+		free(data->cylinder);
+	free(data);
+}
+
+void	free_obj_list(t_obj_list *obj_list)
+{
+	t_obj_node	*curr;
+	t_obj_node	*next;
+
+	curr = obj_list->head;
+	while (curr)
+	{
+		next = curr->next;
+		free_obj_data(curr->data, curr->type);
+		free(curr);
+		curr = next;
+	}
+	free(obj_list);
+}
+
+void	free_light_list(t_light_list *light_list)
+{
+	t_light	*curr;
+	t_light	*next;
+
+	curr = light_list->head;
+	while (curr)
+	{
+		next = curr->next;
+		free(curr);
+		curr = next;
+	}
+	free(light_list);
+}
+
 int	main(int argc, char **argv)
 {
-	t_scene		*scene;
-	t_rgb		sphere_color;
-	t_tuples	sphere_center;
-	double		sphere_diameter;
+	t_scene	*scene;
 
-	(void)argc;
-	(void)argv;
-	scene = ft_calloc(1, sizeof(t_scene));
-	scene->mlx = NULL;
-	scene->obj_list = ft_calloc(1, sizeof(t_obj_list));
-	if (!scene->obj_list)
+	scene = malloc(sizeof(t_scene));
+	if (!scene)
 	{
+		// DEBUG_ERROR("Failed to allocate memory for scene");
+		return (1);
+	}
+	// DEBUG_INFO("Starting miniRT parser...");
+	if (!parser(scene, argc, argv))
+	{
+		// DEBUG_ERROR("Parsing failed");
 		free(scene);
 		return (1);
 	}
-	// Initialize the first node
-	scene->obj_list->head = ft_calloc(1, sizeof(t_obj_node));
-	if (!scene->obj_list->head)
-	{
-		free(scene->obj_list);
-		free(scene);
-		return (1);
-	}
-	// Set tail to point to head since we only have one node
-	scene->obj_list->tail = scene->obj_list->head;
-	scene->obj_list->size = 1;
-	// Initialize sphere data
-	sphere_center = *create_point(2.0 , 2.0, 2.0);
-	sphere_color = *create_rgb(255,0 , 0);
-	sphere_diameter = 2;
-	// Set the node type and data
-	scene->obj_list->head->type = SPHERE;
-	scene->obj_list->head->data.sphere.rgb = sphere_color;
-	scene->obj_list->head->data.sphere.sphere_center = sphere_center;
-	scene->obj_list->head->data.sphere.sphere_diameter = sphere_diameter;
-	scene->obj_list->head->next = NULL;
-	// camera settings
-	scene->camera.view_point =  *create_point(0, 0, -10);
-	// Camera position
-	scene->camera.orientation_vector = *create_vector(0, 0, 1);
-	// Looking towards +z (where sphere is)
-	scene->camera.fov = 70;
-	// 70-degree field of view
-	if (!init_mlx_window(scene))
-		return (1);
-	mlx_custom_hooks(scene);
-	mlx_loop(scene->mlx);
-	mlx_terminate(scene->mlx);
-	// close_scene(scene);
+	// DEBUG_INFO("Parsing completed successfully");
+	// Debug the entire scene
+	// print_scene(scene);
+	// validate_scene(scene);
+	free_obj_list(scene->obj_list);
+	free_light_list(scene->light_list);
+	free(scene);
 	return (0);
 }
