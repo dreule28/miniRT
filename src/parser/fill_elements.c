@@ -1,4 +1,4 @@
-// #include "mini_rt.h"
+#include "mini_rt.h"
 
 void	skip_spaces_or_value(char **parsed_line, int value, int comma)
 {
@@ -21,18 +21,18 @@ void	skip_spaces_or_value(char **parsed_line, int value, int comma)
 	}
 }
 
-// void	add_ambient(t_scene *scene, char *parsed_line)
-// {
-// 	skip_spaces_or_value(&parsed_line, 1, 0);
-// 	skip_spaces_or_value(&parsed_line, 0, 0);
-// 	scene->ambi_light.ratio = ft_atof(parsed_line);
-// 	skip_spaces_or_value(&parsed_line, 1, 0);
-// 	scene->ambi_light.rgb.r = ft_atof(parsed_line);
-// 	skip_spaces_or_value(&parsed_line, 0, 1);
-// 	scene->ambi_light.rgb.g = ft_atof(parsed_line);
-// 	skip_spaces_or_value(&parsed_line, 0, 1);
-// 	scene->ambi_light.rgb.b = ft_atof(parsed_line);
-// }
+void	add_ambient(t_scene *scene, char *parsed_line)
+{
+	skip_spaces_or_value(&parsed_line, 1, 0);
+	skip_spaces_or_value(&parsed_line, 0, 0);
+	scene->ambi_light.ratio = ft_atof(parsed_line);
+	skip_spaces_or_value(&parsed_line, 1, 0);
+	scene->ambi_light.rgb.r = ft_atof(parsed_line);
+	skip_spaces_or_value(&parsed_line, 0, 1);
+	scene->ambi_light.rgb.g = ft_atof(parsed_line);
+	skip_spaces_or_value(&parsed_line, 0, 1);
+	scene->ambi_light.rgb.b = ft_atof(parsed_line);
+}
 
 void	add_camera(t_scene *scene, char *parsed_line)
 {
