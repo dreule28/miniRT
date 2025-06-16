@@ -7,5 +7,5 @@ _obj
 .DS_Store
 MLX42
 miniRT
+src/main.c
 docs
-.gitignore

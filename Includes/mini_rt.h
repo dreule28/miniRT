@@ -8,6 +8,7 @@
 # include <stdlib.h>
 # include <fcntl.h>
 # include <math.h>
+# include <float.h>
 # include "../MLX42/include/MLX42/MLX42.h"
 # include "libft.h"
 # include "objects.h"

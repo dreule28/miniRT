@@ -27,31 +27,23 @@ bool	init_mlx_window(t_scene *scene)
 }
 
 void	mlx_custom_hooks(t_scene *scene)
-{	
+{
 	t_sphere_node	*sphere;
 
 	sphere = &scene->obj_list->head->data.sphere;
-
 	printf("\n--- Camera Settings ---\n");
-    printf("Camera position: (%.1f, %.1f, %.1f. %d)\n", 
-        scene->camera.view_point.x, 
-        scene->camera.view_point.y, 
-        scene->camera.view_point.z,
-		scene->camera.view_point.w);
-    printf("Looking direction: (%.1f, %.1f, %.1f)\n", 
-        scene->camera.orientation_vector.x, 
-        scene->camera.orientation_vector.y, 
-        scene->camera.orientation_vector.z);
-    printf("Field of View: %.1d degrees\n", scene->camera.fov);
-
+	printf("Camera position: (%.1f, %.1f, %.1f. %d)\n", scene->camera.pos.x,
+		scene->camera.pos.y, scene->camera.pos.z, scene->camera.pos.w);
+	printf("Looking direction: (%.1f, %.1f, %.1f)\n",
+		scene->camera.orientation_vector.x, scene->camera.orientation_vector.y,
+		scene->camera.orientation_vector.z);
+	printf("Field of View: %.1d degrees\n", scene->camera.fov);
 	printf("\n--- Sphere  ---\n");
-	printf("Center point: (%.1f, %.1f, %.1f, %d)\n", 
-		sphere->sphere_center.x, sphere->sphere_center.y, sphere->sphere_center.z, sphere->sphere_center.w);
-	printf("Diameter: %.1f\n", sphere->sphere_diameter);
-	printf("Color: RGB(%.1f, %.1f, %.1f)\n\n", 
-		sphere->rgb.r, sphere->rgb.g, sphere->rgb.b);
-
-	
+	printf("Center point: (%.1f, %.1f, %.1f, %d)\n", sphere->pos.x,
+		sphere->pos.y, sphere->pos.z, sphere->pos.w);
+	printf("Diameter: %.1f\n", sphere->diameter);
+	printf("Color: RGB(%.1f, %.1f, %.1f)\n\n", sphere->rgb.r, sphere->rgb.g,
+		sphere->rgb.b);
 
 	mlx_loop_hook(scene->mlx, &ray_tracing, scene);
 	mlx_key_hook(scene->mlx, &key_hook, scene);

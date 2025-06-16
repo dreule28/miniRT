@@ -14,7 +14,7 @@ SRC_DIRS := src
 HEADERS = -I $(LIBFT_DIR)/include -I $(MLX42_DIR)/include
 MLX42_DIR = MLX42
 MLX42_LIB = $(MLX42_DIR)/build/libmlx42.a
-LIBS = $(MLX42_LIB) $(LIBFT) -ldl -pthread -lm
+LIBS = $(MLX42_LIB) $(LIBFT) -ldl -pthread -lm -lglfw
 
 vpath %.h $(INC_DIRS)
 vpath %.c $(SRC_DIRS)
@@ -23,8 +23,8 @@ vpath %.c $(SRC_DIRS)
 ###############                  SOURCE FILES                     ##############
 ################################################################################
 
-# RAY_TRACING_FILES := ray_tracing.c mlx_functions.c keyboard_hooks.c custom_math_func.c
-# RAY_TRACING := $(addprefix /ray_tracing/, $(RAY_TRACING_FILES))
+RAY_TRACING_FILES := ray_tracing.c custom_mlx_func.c keyboard_hooks.c custom_math_func.c tuples_func.c more_tuples_func.c
+RAY_TRACING := $(addprefix ray_tracing/, $(RAY_TRACING_FILES))
 
 SRC_FILES := main.c debug.c
 SRC := $(addprefix src/, $(SRC_FILES) $(RAY_TRACING))

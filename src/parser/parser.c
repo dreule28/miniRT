@@ -1,4 +1,4 @@
-#include "mini_rt.h"
+// #include "mini_rt.h"
 
 bool	check_argc(int argc)
 {
@@ -18,18 +18,18 @@ bool	check_argc(int argc)
 	return (true);
 }
 
-bool	check_argv(char **argv)
-{
-	char	*path;
+// bool	check_argv(char **argv)
+// {
+// 	char	*path;
 
-	path = argv[1];
-	if (ft_strncmp(path, "scenes/", 7))
-	{
-		ft_putstr_fd("Error\nWrong path\n", 2);
-		return (false);
-	}
-	return (true);
-}
+// 	path = argv[1];
+// 	if (ft_strncmp(path, "scenes/", 7))
+// 	{
+// 		ft_putstr_fd("Error\nWrong path\n", 2);
+// 		return (false);
+// 	}
+// 	return (true);
+// }
 
 bool	check_elements(t_scene *scene, char *parsed_line)
 {
