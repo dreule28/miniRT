@@ -59,12 +59,13 @@ bool			check_elements(t_scene *scene, char *parsed_line);
 bool			validate_file(char **argv);
 bool			parser(t_scene *scene, int argc, char **argv);
 
-//utils.c -- BEGIN
+//inits.c -- BEGIN
 bool			init_lists(t_obj_list **obj_list, t_light_list **light_list);
 t_obj_data		*init_sphere_data(t_obj_data *data);
 t_obj_data		*init_plane_data(t_obj_data *data);
 t_obj_data		*init_cylinder_data(t_obj_data *data);
-//utils.c -- END
+void			search_for_objects(t_scene *scene, char *parsed_line);
+//inits.c -- END
 //parser.c -- BEGIN
 //parser-Folder -- END
 //Functions -- END
