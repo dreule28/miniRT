@@ -42,7 +42,6 @@ t_tuples	*tup_mult(t_tuples *tuples, double multiplier);
 t_tuples	*tup_divied(t_tuples *tuples, double divider);
 double		magnitude_vector(t_tuples *vector);
 t_tuples	*tup_norm(t_tuples *vector);
-
-
+t_tuples	*tup_cross(t_tuples *tup1, t_tuples *tup2);
 
 #endif
