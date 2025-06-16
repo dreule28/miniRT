@@ -15,6 +15,7 @@
 # include "scene.h"
 # include "ray_tracing.h"
 # include "custom_math.h"
+# include "matrice.h"
 # include "debug.h"
 //Includes -- END
 
