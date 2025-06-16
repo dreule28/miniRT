@@ -42,6 +42,21 @@ bool	check_elements(t_scene *scene, char *parsed_line)
 	return (true);
 }
 
+bool	validate_file(char **argv)
+{
+	int	i;
+
+	i = 0;
+	while (argv[1][i])
+		i++;
+	if (ft_strncmp(&argv[1][i - 3], ".rt", 3))
+	{
+		ft_putstr_fd("Error\nWrong file type\n", 2);
+		return (false);
+	}
+	return (true);
+}
+
 void	search_for_objects(t_scene *scene, char *parsed_line)
 {
 	t_obj_node	*new_node;
@@ -68,7 +83,7 @@ bool	parser(t_scene *scene, int argc, char **argv)
 	int		rt_file;
 	char	*parsed_line;
 
-	if (!check_argc(argc) || !check_argv(argv))
+	if (!check_argc(argc) || !check_argv(argv) || !validate_file(argv))
 		return (false);
 	rt_file = open(argv[1], O_RDONLY);
 	if (rt_file == -1)
