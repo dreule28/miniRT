@@ -55,6 +55,7 @@ t_light			*add_light_node(t_light_list *light_list, char *parsed_line);
 bool			check_argc(int argc);
 bool			check_argv(char **argv);
 bool			check_elements(t_scene *scene, char *parsed_line);
+bool			validate_file(char **argv);
 bool			parser(t_scene *scene, int argc, char **argv);
 
 //utils.c -- BEGIN
