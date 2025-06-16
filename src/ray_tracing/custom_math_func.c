@@ -63,5 +63,6 @@ t_tuples	*tup_cross(t_tuples *tup1, t_tuples *tup2)
 	new_tuples->x = tup1->y * tup2->z - tup1->z * tup2->y;
 	new_tuples->y = tup1->z * tup2->x - tup1->x * tup2->z;
 	new_tuples->z = tup1->x * tup2->y - tup1->y * tup2->x;
+	new_tuples->w = VECTOR;
 	return(new_tuples);
 }
