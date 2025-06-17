@@ -1,6 +1,6 @@
 #include "mini_rt.h"
 
-t_m4	*init_m4()
+t_m4	*init_m4(void)
 {
 	t_m4 *m4;
 
@@ -14,7 +14,7 @@ t_m4	*init_m4()
 	return(m4);
 }
 
-t_m3	*init_m3()
+t_m3	*init_m3(void)
 {
 	t_m3 *m3;
 
@@ -26,7 +26,7 @@ t_m3	*init_m3()
 	m3->row3 = NULL;
 	return(m3);
 }
-t_m2	*init_m2()
+t_m2	*init_m2(void)
 {
 	t_m2 *m2;
 

@@ -47,5 +47,9 @@ typedef struct s_m4
 }					t_m4;
 
 
+// src/math_ops/init_matices.c
+t_m4	*init_m4(void);
+t_m3	*init_m3(void);
+t_m2	*init_m2(void);
 
 #endif
