@@ -56,7 +56,7 @@ int	main(int argc, char **argv)
 	// if (!parser(scene, argc, argv))
 	// {
 	// 	// DEBUG_ERROR("Parsing failed");
-	// 	free(scene);
+	// 	free(sc
 	// 	return (1);
 	// }
 	// DEBUG_INFO("Parsing completed successfully");

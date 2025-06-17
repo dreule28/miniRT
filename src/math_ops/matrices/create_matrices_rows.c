@@ -1,44 +1,44 @@
 #include "mini_rt.h"
 
-t_m4_row	*create_m4_row(double x, double y, double z, double w)
+t_m4_col	*create_m4_col(double x, double y, double z, double w)
 {
-	t_m4_row	*new_row;
+	t_m4_col	*new_col;
 
-	new_row = ft_calloc(1, sizeof(t_m4_row));
-	if (!new_row)
+	new_col = ft_calloc(1, sizeof(t_m4_col));
+	if (!new_col)
 		return (NULL);
-	new_row->x = x;
-	new_row->y = y;
-	new_row->z = z;
-	new_row->w = w;
-	new_row->next = NULL;
-	return (new_row);
+	new_col->x = x;
+	new_col->y = y;
+	new_col->z = z;
+	new_col->w = w;
+	new_col->next = NULL;
+	return (new_col);
 }
 
-t_m3_row	*create_m3_row(double x, double y, double z)
+t_m3_col	*create_m3_col(double x, double y, double z)
 {
-	t_m3_row	*new_row;
+	t_m3_col	*new_col;
 
-	new_row = ft_calloc(1, sizeof(t_m3_row));
-	if (!new_row)
+	new_col = ft_calloc(1, sizeof(t_m3_col));
+	if (!new_col)
 		return (NULL);
-	new_row->x = x;
-	new_row->y = y;
-	new_row->z = z;
-	new_row->next = NULL;
-	return (new_row);
+	new_col->x = x;
+	new_col->y = y;
+	new_col->z = z;
+	new_col->next = NULL;
+	return (new_col);
 }
 
-t_m2_row	*create_m2_row(double x, double y)
+t_m2_col	*create_m2_col(double x, double y)
 {
-	t_m2_row	*new_row;
+	t_m2_col	*new_col;
 
-	new_row = ft_calloc(1, sizeof(t_m2_row));
-	if (!new_row)
+	new_col = ft_calloc(1, sizeof(t_m2_col));
+	if (!new_col)
 		return (NULL);
-	new_row->x = x;
-	new_row->y = y;
-	new_row->next = NULL;
-	return (new_row);
+	new_col->x = x;
+	new_col->y = y;
+	new_col->next = NULL;
+	return (new_col);
 }
 
