@@ -57,27 +57,6 @@ bool	validate_file(char **argv)
 	return (true);
 }
 
-void	search_for_objects(t_scene *scene, char *parsed_line)
-{
-	t_obj_node	*new_node;
-
-	if (!ft_strncmp(parsed_line, "pl", 2))
-	{
-		new_node = add_obj_node(scene->obj_list, PLANE);
-		add_plane(new_node, parsed_line);
-	}
-	if (!ft_strncmp(parsed_line, "sp", 2))
-	{
-		new_node = add_obj_node(scene->obj_list, SPHERE);
-		add_sphere(new_node, parsed_line);
-	}
-	if (!ft_strncmp(parsed_line, "cy", 2))
-	{
-		new_node = add_obj_node(scene->obj_list, CYLINDER);
-		add_cylinder(new_node, parsed_line);
-	}
-}
-
 bool	parser(t_scene *scene, int argc, char **argv)
 {
 	int		rt_file;
