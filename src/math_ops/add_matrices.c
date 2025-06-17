@@ -1,16 +1,45 @@
 #include "mini_rt.h"
 
-void	add_m4_row(t_m4 *m4)
+bool	add_row_to_m4(t_m4 *m4, t_m4_row *new_row)
 {
-	t_m4_row *m4_row;
+	if (!m4 || !new_row)
+		return (false);
+	if (!m4->row1)
+		m4->row1 = new_row;
+	else if (!m4->row2)
+	{
+		m4->row2 = new_row;
+		m4->row1->next = m4->row2;
+	}
+	else if (!m4->row3)
+	{
+		m4->row3 = new_row;
+		m4->row2->next = m4->row3;
+	}
+	else if (!m4->row4)
+	{
+		m4->row4 = new_row;
+		m4->row3->next = m4->row4;
+	}
+	else
+	{
+		free(new_row);
+		return (false);
+	}
+	return (true);
+}
 
-	m4_row = ft_calloc(1, sizeof(m4_row));
-	if(!m4_row)
-		return(NULL);
-	m4_row->x = 0;
-	m4_row->y = 0;
-	m4_row->z = 0;
-	m4_row->w = 0;
-	m4_row->next = NULL;
-	
+t_m4_row	*create_m4_row(double x, double y, double z, double w)
+{
+	t_m4_row	*new_row;
+
+	new_row = ft_calloc(1, sizeof(t_m4_row));
+	if (!new_row)
+		return (NULL);
+	new_row->x = x;
+	new_row->y = y;
+	new_row->z = z;
+	new_row->w = w;
+	new_row->next = NULL;
+	return (new_row);
 }
