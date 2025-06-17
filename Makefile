@@ -23,7 +23,7 @@ vpath %.c $(SRC_DIRS)
 ###############                  SOURCE FILES                     ##############
 ################################################################################
 
-MATH_OPS_FILES := tuples_func.c more_tuples_func.c matrices_func.c tup_func.c init_matrices.c
+MATH_OPS_FILES := tuples_func.c more_tuples_func.c matrices_func.c tup_func.c init_matrices.c add_matrices.c create_matrices_rows.c
 MATH_OPS := $(addprefix math_ops/, $(MATH_OPS_FILES))
 
 RAY_TRACING_FILES := ray_tracing.c custom_mlx_func.c projectile.c keyboard_hooks.c custom_math_func.c

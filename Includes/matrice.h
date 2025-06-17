@@ -52,4 +52,14 @@ t_m4	*init_m4(void);
 t_m3	*init_m3(void);
 t_m2	*init_m2(void);
 
+// src/math_ops/create_matrices_rows.c
+t_m4_row	*create_m4_row(double x, double y, double z, double w);
+t_m3_row	*create_m3_row(double x, double y, double z);
+t_m2_row	*create_m2_row(double x, double y);
+
+// src/math_ops/add_matrices.c
+bool	add_row_m4(t_m4 *m4, t_m4_row *new_row);
+bool	add_row_m3(t_m3 *m3, t_m3_row *new_row);
+bool	add_row_m2(t_m2 *m2, t_m2_row *new_row);
+
 #endif
