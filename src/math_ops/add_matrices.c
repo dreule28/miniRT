@@ -29,17 +29,4 @@ bool	add_row_to_m4(t_m4 *m4, t_m4_row *new_row)
 	return (true);
 }
 
-t_m4_row	*create_m4_row(double x, double y, double z, double w)
-{
-	t_m4_row	*new_row;
 
-	new_row = ft_calloc(1, sizeof(t_m4_row));
-	if (!new_row)
-		return (NULL);
-	new_row->x = x;
-	new_row->y = y;
-	new_row->z = z;
-	new_row->w = w;
-	new_row->next = NULL;
-	return (new_row);
-}
