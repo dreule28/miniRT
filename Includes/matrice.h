@@ -62,4 +62,6 @@ bool	add_row_m4(t_m4 *m4, t_m4_row *new_row);
 bool	add_row_m3(t_m3 *m3, t_m3_row *new_row);
 bool	add_row_m2(t_m2 *m2, t_m2_row *new_row);
 
+// src/math_ops/matrice_func.c
+
 #endif
