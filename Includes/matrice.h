@@ -62,6 +62,10 @@ bool	add_row_m4(t_m4 *m4, t_m4_row *new_row);
 bool	add_row_m3(t_m3 *m3, t_m3_row *new_row);
 bool	add_row_m2(t_m2 *m2, t_m2_row *new_row);
 
-// src/math_ops/matrice_func.c
+// src/math_ops/m_cmp.c
+bool	m_cmp(void *matrice1, void *matrice2, int size);
+bool	m4_cmp(t_m4 *matrice1, t_m4 *matrice2);
+bool	m3_cmp(t_m3 *matrice1, t_m3 *matrice2);
+bool	m2_cmp(t_m2 *matrice1, t_m2 *matrice2);
 
 #endif
