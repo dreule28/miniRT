@@ -235,3 +235,78 @@ void debug_color(t_rgb color, const char *description)
            COLOR_MAGENTA, description, COLOR_RESET,
            color.r, color.g, color.b);
 }
+
+void debug_matrix_m2(t_m2 *m2, const char *description)
+{
+    if (!m2)
+    {
+        DEBUG_ERROR("Matrix M2 is NULL: %s", description);
+        return;
+    }
+
+    printf("\n%s=== M2 Matrix Debug: %s ===%s\n", COLOR_CYAN, description, COLOR_RESET);
+    printf("%sSize:%s %zd columns\n", COLOR_YELLOW, COLOR_RESET, m2->size);
+
+    t_m2_col *current = m2->head;
+    int col_index = 0;
+
+    while (current)
+    {
+        printf("%sCol[%d]:%s (%.3f, %.3f)\n",
+               COLOR_MAGENTA, col_index, COLOR_RESET,
+               current->x, current->y);
+        current = current->next;
+        col_index++;
+    }
+    printf("%s========================%s\n\n", COLOR_CYAN, COLOR_RESET);
+}
+
+void debug_matrix_m3(t_m3 *m3, const char *description)
+{
+    if (!m3)
+    {
+        DEBUG_ERROR("Matrix M3 is NULL: %s", description);
+        return;
+    }
+
+    printf("\n%s=== M3 Matrix Debug: %s ===%s\n", COLOR_GREEN, description, COLOR_RESET);
+    printf("%sSize:%s %zd columns\n", COLOR_YELLOW, COLOR_RESET, m3->size);
+
+    t_m3_col *current = m3->head;
+    int col_index = 0;
+
+    while (current)
+    {
+        printf("%sCol[%d]:%s (%.3f, %.3f, %.3f)\n",
+               COLOR_MAGENTA, col_index, COLOR_RESET,
+               current->x, current->y, current->z);
+        current = current->next;
+        col_index++;
+    }
+    printf("%s========================%s\n\n", COLOR_GREEN, COLOR_RESET);
+}
+
+void debug_matrix_m4(t_m4 *m4, const char *description)
+{
+    if (!m4)
+    {
+        DEBUG_ERROR("Matrix M4 is NULL: %s", description);
+        return;
+    }
+
+    printf("\n%s=== M4 Matrix Debug: %s ===%s\n", COLOR_BLUE, description, COLOR_RESET);
+    printf("%sSize:%s %zd columns\n", COLOR_YELLOW, COLOR_RESET, m4->size);
+
+    t_m4_col *current = m4->head;
+    int col_index = 0;
+
+    while (current)
+    {
+        printf("%sCol[%d]:%s (%.3f, %.3f, %.3f, %.3f)\n",
+               COLOR_MAGENTA, col_index, COLOR_RESET,
+               current->x, current->y, current->z, current->w);
+        current = current->next;
+        col_index++;
+    }
+    printf("%s========================%s\n\n", COLOR_BLUE, COLOR_RESET);
+}

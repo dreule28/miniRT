@@ -59,5 +59,8 @@ void validate_scene(t_scene *scene);
 // void debug_ray(t_ray ray, const char *description);
 // void debug_intersection(t_hit *hit, const char *description);
 // void debug_color(t_color color, const char *description);
+void debug_matrix_m2(t_m2 *m2, const char *description);
+void debug_matrix_m3(t_m3 *m3, const char *description);
+void debug_matrix_m4(t_m4 *m4, const char *description);
 
 #endif /* DEBUG_H */
