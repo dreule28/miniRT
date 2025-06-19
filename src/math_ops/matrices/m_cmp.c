@@ -13,75 +13,75 @@ bool	m_cmp(void *matrice1, void *matrice2, int size)
 
 bool	m4_cmp(t_m4 *matrice1, t_m4 *matrice2)
 {
-	t_m4_row	*current1;
-	t_m4_row	*current2;
+	t_m4_col	*curr1;
+	t_m4_col	*curr2;
 
 	if (!matrice1 || !matrice2)
 		return (false);
-	current1 = matrice1->row1;
-	current2 = matrice2->row1;
-	while (current1 != NULL && current2 != NULL)
+	curr1 = matrice1->head;
+	curr2 = matrice2->head;
+	while (curr1 != NULL && curr2 != NULL)
 	{
-		if (fabs(current1->x - current2->x) > DBL_EPSILON)
+		if (fabs(curr1->x - curr2->x) > DBL_EPSILON)
 			return (false);
-		else if (fabs(current1->y - current2->y) > DBL_EPSILON)
+		else if (fabs(curr1->y - curr2->y) > DBL_EPSILON)
 			return (false);
-		else if (fabs(current1->z - current2->z) > DBL_EPSILON)
+		else if (fabs(curr1->z - curr2->z) > DBL_EPSILON)
 			return (false);
-		else if (fabs(current1->w - current2->w) > DBL_EPSILON)
+		else if (fabs(curr1->w - curr2->w) > DBL_EPSILON)
 			return (false);
-		current1 = current1->next;
-		current2 = current2->next;
+		curr1 = curr1->next;
+		curr2 = curr2->next;
 	}
-	if (current1 != NULL || current2 != NULL)
+	if (curr1 != NULL || curr2 != NULL)
 		return (false);
 	return (true);
 }
 
 bool	m3_cmp(t_m3 *matrice1, t_m3 *matrice2)
 {
-	t_m3_row	*current1;
-	t_m3_row	*current2;
+	t_m3_col	*curr1;
+	t_m3_col	*curr2;
 
 	if (!matrice1 || !matrice2)
 		return (false);
-	current1 = matrice1->row1;
-	current2 = matrice2->row1;
-	while (current1 != NULL && current2 != NULL)
+	curr1 = matrice1->head;
+	curr2 = matrice2->head;
+	while (curr1 != NULL && curr2 != NULL)
 	{
-		if (fabs(current1->x - current2->x) > DBL_EPSILON)
+		if (fabs(curr1->x - curr2->x) > DBL_EPSILON)
 			return (false);
-		else if (fabs(current1->y - current2->y) > DBL_EPSILON)
+		else if (fabs(curr1->y - curr2->y) > DBL_EPSILON)
 			return (false);
-		else if (fabs(current1->z - current2->z) > DBL_EPSILON)
+		else if (fabs(curr1->z - curr2->z) > DBL_EPSILON)
 			return (false);
-		current1 = current1->next;
-		current2 = current2->next;
+		curr1 = curr1->next;
+		curr2 = curr2->next;
 	}
-	if (current1 != NULL || current2 != NULL)
+	if (curr1 != NULL || curr2 != NULL)
 		return (false);
 	return (true);
 }
 
 bool	m2_cmp(t_m2 *matrice1, t_m2 *matrice2)
 {
-	t_m2_row	*current1;
-	t_m2_row	*current2;
+	t_m2_col	*curr1;
+	t_m2_col	*curr2;
 
 	if (!matrice1 || !matrice2)
 		return (false);
-	current1 = matrice1->row1;
-	current2 = matrice2->row1;
-	while (current1 != NULL && current2 != NULL)
+	curr1 = matrice1->head;
+	curr2 = matrice2->head;
+	while (curr1 != NULL && curr2 != NULL)
 	{
-		if (fabs(current1->x - current2->x) > DBL_EPSILON)
+		if (fabs(curr1->x - curr2->x) > DBL_EPSILON)
 			return (false);
-		else if (fabs(current1->y - current2->y) > DBL_EPSILON)
+		else if (fabs(curr1->y - curr2->y) > DBL_EPSILON)
 			return (false);
-		current1 = current1->next;
-		current2 = current2->next;
+		curr1 = curr1->next;
+		curr2 = curr2->next;
 	}
-	if (current1 != NULL || current2 != NULL)
+	if (curr1 != NULL || curr2 != NULL)
 		return (false);
 	return (true);
 }
