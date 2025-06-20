@@ -11,71 +11,35 @@ bool	m_cmp(void *matrix1, void *matrix2, int size)
 	return (false);
 }
 
-bool	m4_cmp(t_m4 *matrix1, t_m4 *matrix2)
+bool	m2_cmp(t_m2 *matrix1, t_m2 *matrix2)
 {
-	t_m4_col	*curr1;
-	t_m4_col	*curr2;
-
+	if (!matrix1 && !matrix2)
+		return (true);
 	if (!matrix1 || !matrix2)
 		return (false);
-	curr1 = matrix1->head;
-	curr2 = matrix2->head;
-	while (curr1 && curr2)
-	{
-		if (fabs(curr1->x - curr2->x) > DBL_EPSILON
-			|| fabs(curr1->y - curr2->y) > DBL_EPSILON
-			|| fabs(curr1->z - curr2->z) > DBL_EPSILON
-			|| fabs(curr1->w - curr2->w) > DBL_EPSILON)
-			return (false);
-		curr1 = curr1->next;
-		curr2 = curr2->next;
-	}
-	if (curr1 || curr2)
-		return (false);
-	return (true);
+	return (cmp_m2_col(matrix1->col1, matrix2->col1)
+			&& cmp_m2_col(matrix1->col2, matrix2->col2));
 }
 
 bool	m3_cmp(t_m3 *matrix1, t_m3 *matrix2)
 {
-	t_m3_col	*curr1;
-	t_m3_col	*curr2;
-
+	if (!matrix1 && !matrix2)
+		return (true);
 	if (!matrix1 || !matrix2)
 		return (false);
-	curr1 = matrix1->head;
-	curr2 = matrix2->head;
-	while (curr1 && curr2)
-	{
-		if (fabs(curr1->x - curr2->x) > DBL_EPSILON
-			|| fabs(curr1->y - curr2->y) > DBL_EPSILON
-			|| fabs(curr1->z - curr2->z) > DBL_EPSILON)
-			return (false);
-		curr1 = curr1->next;
-		curr2 = curr2->next;
-	}
-	if (curr1 || curr2)
-		return (false);
-	return (true);
+	return (cmp_m3_col(matrix1->col1, matrix2->col1)
+		&& cmp_m3_col(matrix1->col2, matrix2->col2)
+		&& cmp_m3_col(matrix1->col3, matrix2->col3));
 }
 
-bool	m2_cmp(t_m2 *matrix1, t_m2 *matrix2)
+bool	m4_cmp(t_m4 *matrix1, t_m4 *matrix2)
 {
-	t_m2_col	*curr1;
-	t_m2_col	*curr2;
-
+	if (!matrix1 && !matrix2)
+		return (true);
 	if (!matrix1 || !matrix2)
 		return (false);
-	curr1 = matrix1->head;
-	curr2 = matrix2->head;
-	while (curr1 && curr2)
-	{
-		if (fabs(curr1->x - curr2->x) > DBL_EPSILON
-			|| fabs(curr1->y - curr2->y) > DBL_EPSILON)
-			return (false);
-		curr1 = curr1->next;
-		curr2 = curr2->next;
-	}
-	if (curr1 || curr2)
-		return (false);
-	return (true);
+	return (cmp_m4_col(matrix1->col1, matrix2->col1)
+		&& cmp_m4_col(matrix1->col2, matrix2->col2)
+		&& cmp_m4_col(matrix1->col3, matrix2->col3)
+		&& cmp_m4_col(matrix1->col4, matrix2->col4));
 }
