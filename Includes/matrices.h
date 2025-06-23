@@ -71,6 +71,10 @@ bool		m2_cmp(t_m2 *matrice1, t_m2 *matrice2);
 //m_cmp.c -- END
 
 //matrix-math.c -- BEGIN
+t_tuples	*matrix_times_tuple(t_m4 *matrix, t_tuples *tuple);
+double		get_col_component(t_m4_col *col, int row);
+double		get_col_val(t_m4 *matrix, int col, int row);
+void		set_result_col(t_m4 *matrix, int col_index, double vals[4]);
 t_m4		*matrix_mult(t_m4 *m_a, t_m4 *m_b);
 //matrix-math.c -- END
 
