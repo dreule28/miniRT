@@ -17,8 +17,8 @@ bool	m2_cmp(t_m2 *matrix1, t_m2 *matrix2)
 		return (true);
 	if (!matrix1 || !matrix2)
 		return (false);
-	return (cmp_m2_col(matrix1->col1, matrix2->col1)
-			&& cmp_m2_col(matrix1->col2, matrix2->col2));
+	return (cmp_m2_col(matrix1->col0, matrix2->col0)
+			&& cmp_m2_col(matrix1->col1, matrix2->col1));
 }
 
 bool	m3_cmp(t_m3 *matrix1, t_m3 *matrix2)
@@ -27,9 +27,9 @@ bool	m3_cmp(t_m3 *matrix1, t_m3 *matrix2)
 		return (true);
 	if (!matrix1 || !matrix2)
 		return (false);
-	return (cmp_m3_col(matrix1->col1, matrix2->col1)
-		&& cmp_m3_col(matrix1->col2, matrix2->col2)
-		&& cmp_m3_col(matrix1->col3, matrix2->col3));
+	return (cmp_m3_col(matrix1->col0, matrix2->col0)
+		&& cmp_m3_col(matrix1->col1, matrix2->col1)
+		&& cmp_m3_col(matrix1->col2, matrix2->col2));
 }
 
 bool	m4_cmp(t_m4 *matrix1, t_m4 *matrix2)
@@ -38,8 +38,8 @@ bool	m4_cmp(t_m4 *matrix1, t_m4 *matrix2)
 		return (true);
 	if (!matrix1 || !matrix2)
 		return (false);
-	return (cmp_m4_col(matrix1->col1, matrix2->col1)
+	return (cmp_m4_col(matrix1->col0, matrix2->col0)
+		&& cmp_m4_col(matrix1->col1, matrix2->col1)
 		&& cmp_m4_col(matrix1->col2, matrix2->col2)
-		&& cmp_m4_col(matrix1->col3, matrix2->col3)
-		&& cmp_m4_col(matrix1->col4, matrix2->col4));
+		&& cmp_m4_col(matrix1->col3, matrix2->col3));
 }
