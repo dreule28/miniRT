@@ -245,19 +245,20 @@ void debug_matrix_m2(t_m2 *m2, const char *description)
     }
 
     printf("\n%s=== M2 Matrix Debug: %s ===%s\n", COLOR_CYAN, description, COLOR_RESET);
-    printf("%sSize:%s %zd columns\n", COLOR_YELLOW, COLOR_RESET, m2->size);
 
-    t_m2_col *current = m2->head;
-    int col_index = 0;
+    int col_count = 0;
+    if (m2->col0) col_count++;
+    if (m2->col1) col_count++;
 
-    while (current)
-    {
-        printf("%sCol[%d]:%s (%.3f, %.3f)\n",
-               COLOR_MAGENTA, col_index, COLOR_RESET,
-               current->x, current->y);
-        current = current->next;
-        col_index++;
-    }
+    printf("%sColumns:%s %d\n", COLOR_YELLOW, COLOR_RESET, col_count);
+
+    if (m2->col0)
+        printf("%sCol[0]:%s (%.3f, %.3f)\n", COLOR_MAGENTA, COLOR_RESET,
+               m2->col0->x, m2->col0->y);
+    if (m2->col1)
+        printf("%sCol[1]:%s (%.3f, %.3f)\n", COLOR_MAGENTA, COLOR_RESET,
+               m2->col1->x, m2->col1->y);
+
     printf("%s========================%s\n\n", COLOR_CYAN, COLOR_RESET);
 }
 
@@ -270,19 +271,24 @@ void debug_matrix_m3(t_m3 *m3, const char *description)
     }
 
     printf("\n%s=== M3 Matrix Debug: %s ===%s\n", COLOR_GREEN, description, COLOR_RESET);
-    printf("%sSize:%s %zd columns\n", COLOR_YELLOW, COLOR_RESET, m3->size);
 
-    t_m3_col *current = m3->head;
-    int col_index = 0;
+    int col_count = 0;
+    if (m3->col0) col_count++;
+    if (m3->col1) col_count++;
+    if (m3->col2) col_count++;
 
-    while (current)
-    {
-        printf("%sCol[%d]:%s (%.3f, %.3f, %.3f)\n",
-               COLOR_MAGENTA, col_index, COLOR_RESET,
-               current->x, current->y, current->z);
-        current = current->next;
-        col_index++;
-    }
+    printf("%sColumns:%s %d\n", COLOR_YELLOW, COLOR_RESET, col_count);
+
+    if (m3->col0)
+        printf("%sCol[0]:%s (%.3f, %.3f, %.3f)\n", COLOR_MAGENTA, COLOR_RESET,
+               m3->col0->x, m3->col0->y, m3->col0->z);
+    if (m3->col1)
+        printf("%sCol[1]:%s (%.3f, %.3f, %.3f)\n", COLOR_MAGENTA, COLOR_RESET,
+               m3->col1->x, m3->col1->y, m3->col1->z);
+    if (m3->col2)
+        printf("%sCol[2]:%s (%.3f, %.3f, %.3f)\n", COLOR_MAGENTA, COLOR_RESET,
+               m3->col2->x, m3->col2->y, m3->col2->z);
+
     printf("%s========================%s\n\n", COLOR_GREEN, COLOR_RESET);
 }
 
@@ -295,18 +301,27 @@ void debug_matrix_m4(t_m4 *m4, const char *description)
     }
 
     printf("\n%s=== M4 Matrix Debug: %s ===%s\n", COLOR_BLUE, description, COLOR_RESET);
-    printf("%sSize:%s %zd columns\n", COLOR_YELLOW, COLOR_RESET, m4->size);
 
-    t_m4_col *current = m4->head;
-    int col_index = 0;
+    int col_count = 0;
+    if (m4->col0) col_count++;
+    if (m4->col1) col_count++;
+    if (m4->col2) col_count++;
+    if (m4->col3) col_count++;
 
-    while (current)
-    {
-        printf("%sCol[%d]:%s (%.3f, %.3f, %.3f, %.3f)\n",
-               COLOR_MAGENTA, col_index, COLOR_RESET,
-               current->x, current->y, current->z, current->w);
-        current = current->next;
-        col_index++;
-    }
+    printf("%sColumns:%s %d\n", COLOR_YELLOW, COLOR_RESET, col_count);
+
+    if (m4->col0)
+        printf("%sCol[0]:%s (%.3f, %.3f, %.3f, %d)\n", COLOR_MAGENTA, COLOR_RESET,
+               m4->col0->x, m4->col0->y, m4->col0->z, m4->col0->w);
+    if (m4->col1)
+        printf("%sCol[1]:%s (%.3f, %.3f, %.3f, %d)\n", COLOR_MAGENTA, COLOR_RESET,
+               m4->col1->x, m4->col1->y, m4->col1->z, m4->col1->w);
+    if (m4->col2)
+        printf("%sCol[2]:%s (%.3f, %.3f, %.3f, %d)\n", COLOR_MAGENTA, COLOR_RESET,
+               m4->col2->x, m4->col2->y, m4->col2->z, m4->col2->w);
+    if (m4->col3)
+        printf("%sCol[3]:%s (%.3f, %.3f, %.3f, %d)\n", COLOR_MAGENTA, COLOR_RESET,
+               m4->col3->x, m4->col3->y, m4->col3->z, m4->col3->w);
+
     printf("%s========================%s\n\n", COLOR_BLUE, COLOR_RESET);
 }
