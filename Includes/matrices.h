@@ -78,4 +78,8 @@ void		set_result_col(t_m4 *matrix, int col_index, double vals[4]);
 t_m4		*matrix_mult(t_m4 *m_a, t_m4 *m_b);
 //matrix-math.c -- END
 
+//transpose_matrix.c -- BEGIN
+t_m4		*transpose_matrix(t_m4 *old_matrix);
+//transpose_matrix.c -- END
+
 #endif

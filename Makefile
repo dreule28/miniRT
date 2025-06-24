@@ -23,7 +23,7 @@ vpath %.c $(SRC_DIRS)
 ###############                  SOURCE FILES                     ##############
 ################################################################################
 
-MATRICES_FILES := add_col.c cmp_col.c init_matrices.c m_cmp.c matrix_math.c
+MATRICES_FILES := add_col.c cmp_col.c init_matrices.c m_cmp.c matrix_math.c transpose_matrix.c
 MATRICES := $(addprefix math_ops/matrices/, $(MATRICES_FILES))
 
 TUPLES_FILES := tuples_func.c more_tuples_func.c tup_func.c
