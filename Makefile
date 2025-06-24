@@ -23,7 +23,7 @@ vpath %.c $(SRC_DIRS)
 ###############                  SOURCE FILES                     ##############
 ################################################################################
 
-MATRICES_FILES :=	m_cmp.c  init_matrices.c add_matrices.c create_matrices_rows.c
+MATRICES_FILES := add_col.c cmp_col.c init_matrices.c m_cmp.c matrix_math.c transpose_matrix.c
 MATRICES := $(addprefix math_ops/matrices/, $(MATRICES_FILES))
 
 TUPLES_FILES := tuples_func.c more_tuples_func.c tup_func.c
@@ -36,17 +36,12 @@ PARSER_FILES := fill_elements.c fill_objects.c initialize_objects.c list_and_nod
 PARSER := $(addprefix parser/, $(PARSER_FILES))
 
 SRC_FILES := main.c debug.c
-SRC := $(addprefix src/, $(SRC_FILES) $(RAY_TRACING) $(PARSER) $(MATH_OPS))
-PARSER := $(addprefix parser/, $(PARSER_FILES))
-
-SRC_FILES := main.c debug.c
 SRC := $(addprefix src/, $(SRC_FILES) $(RAY_TRACING) $(MATRICES) $(TUPLES) $(PARSER))
 
 ################################################################################
 ###############               OBJECT FILES & RULES                ##############
 ################################################################################
 
-OBJS := $(addprefix $(OBJ_DIR)/, $(SRC:%.c=%.o))
 OBJS := $(addprefix $(OBJ_DIR)/, $(SRC:%.c=%.o))
 
 # Compilation flags and linking options

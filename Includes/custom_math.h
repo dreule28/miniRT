@@ -11,18 +11,18 @@ typedef enum e_tuples_enum
 
 typedef struct s_tuples
 {
-	double			x;
-	double			y;
-	double			z;
-	t_tuples_enum	w;
+	double	x;
+	double	y;
+	double	z;
+	int		w;
 }					t_tuples;
 
 typedef struct s_rgb
 {
-	double			r;
-	double			g;
-	double			b;
-}					t_rgb;
+	double	r;
+	double	g;
+	double	b;
+}			t_rgb;
 
 
 
