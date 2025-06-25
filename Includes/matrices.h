@@ -94,7 +94,11 @@ void	m3_subm_col_2(t_m3 *m3, t_m2 *m2, int *row);
 // m3_sub_matrix.c -- END
 
 // m4_sub_matrix.c -- BEGIN
-
+t_m3	*m4_subm(t_m4 *m4, int col, int row);
+void	m4_subm_col_0(t_m4 *m4, t_m3 *m3, int *row);
+void	m4_subm_col_1(t_m4 *m4, t_m3 *m3, int *row);
+void	m4_subm_col_2(t_m4 *m4, t_m3 *m3, int *row);
+void	m4_subm_col_3(t_m4 *m4, t_m3 *m3, int *row);
 // m4_sub_matrix.c -- END
 
 #endif
