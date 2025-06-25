@@ -85,6 +85,8 @@ t_m4		*transpose_matrix(t_m4 *old_matrix);
 //determinant.c -- BEGIN
 double m_dmt(t_m2 *m2);
 double	m_minor(t_m3 *m3, int col, int row);
+double	m_cofactor(t_m3 *m3, int col, int row);
+t_m3	*ftm_cofomatrix(t_m3 *m3);
 //determinant.c -- END
 
 // m3_sub_matrix.c -- BEGIN

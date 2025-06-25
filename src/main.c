@@ -45,32 +45,36 @@ void	free_light_list(t_light_list *light_list)
 int main(void)
 {
     t_m3 *m3;
-    double minor;
+    t_m3 *cofactor_matrix;
 
-    // Initialize 3x3 matrix with test values
+    // Initialize and assign values to 3x3 matrix
     m3 = init_m3();
-    m3->col0 = assign_m3_col(3.0, 2.0, 6.0);
-    m3->col1 = assign_m3_col(5.0, -1.0, -1.0);
-    m3->col2 = assign_m3_col(0.0, -7.0, 5.0);
+    m3->col0 = assign_m3_col(3.0, 5.0, 0.0);
+    m3->col1 = assign_m3_col(2.0, -1.0, -7.0);
+    m3->col2 = assign_m3_col(6.0, -1.0, 5.0);
 
-    // Print original 3x3 matrix
-    printf("\nOriginal 3x3 Matrix:\n");
+    // Print original matrix
+    printf("\nOriginal Matrix:\n");
     printf("[%.2f  %.2f  %.2f]\n", m3->col0->x, m3->col1->x, m3->col2->x);
     printf("[%.2f  %.2f  %.2f]\n", m3->col0->y, m3->col1->y, m3->col2->y);
     printf("[%.2f  %.2f  %.2f]\n", m3->col0->z, m3->col1->z, m3->col2->z);
 
-    // Test minor for different positions
-    int col = 0;  // Try different values 0-2
-    int row = 1;  // Try different values 0-2
-    
-    minor = m_minor(m3, col, row);
-    printf("\nMinor (col %d, row %d): %.2f\n", col, row, minor);
+    // Get and print cofactor matrix
+    cofactor_matrix = ftm_cofomatrix(m3);
+    printf("\nCofactor Matrix:\n");
+    printf("[%.2f  %.2f  %.2f]\n", cofactor_matrix->col0->x, cofactor_matrix->col1->x, cofactor_matrix->col2->x);
+    printf("[%.2f  %.2f  %.2f]\n", cofactor_matrix->col0->y, cofactor_matrix->col1->y, cofactor_matrix->col2->y);
+    printf("[%.2f  %.2f  %.2f]\n", cofactor_matrix->col0->z, cofactor_matrix->col1->z, cofactor_matrix->col2->z);
 
     // Free memory
     free(m3->col0);
     free(m3->col1);
     free(m3->col2);
     free(m3);
+    free(cofactor_matrix->col0);
+    free(cofactor_matrix->col1);
+    free(cofactor_matrix->col2);
+    free(cofactor_matrix);
 
     return (0);
 }
