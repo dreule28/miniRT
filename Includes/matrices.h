@@ -86,5 +86,15 @@ t_m4		*transpose_matrix(t_m4 *old_matrix);
 double m_dmt(t_m2 *m2);
 //determinant.c -- END
 
+// m3_sub_matrix.c -- BEGIN
+t_m2	*m3_subm(t_m3 *m3, int col, int row);
+void	m3_subm_col_0(t_m3 *m3, t_m2 *m2, int *row);
+void	m3_subm_col_1(t_m3 *m3, t_m2 *m2, int *row);
+void	m3_subm_col_2(t_m3 *m3, t_m2 *m2, int *row);
+// m3_sub_matrix.c -- END
+
+// m4_sub_matrix.c -- BEGIN
+
+// m4_sub_matrix.c -- END
 
 #endif

@@ -42,80 +42,32 @@ void	free_light_list(t_light_list *light_list)
 	free(light_list);
 }
 
-int	main(int argc, char **argv)
+int main(int argc, char **argv)
 {
-	t_m2	*m2;
-	t_m3	*m3;
-	t_m4	*m4;
-	t_scene	*scene;
+    (void)argc;
+    (void)argv;
+	t_m3 *m3;
 
-	scene = malloc(sizeof(t_scene));
-	if (!scene)
-		return (1);
-	// if (!parser(scene, argc, argv))
-	// 	return (free(scene),1);
-	(void)argc;
-	(void)argv;
-
-	DEBUG_INFO("Starting matrix function tests...");
-
-	// Test M4 matrix
-	m2 = init_m2();
-	add_m2_col(m2, 1.0, 5.5);
-	add_m2_col(m2, 2.0, 6.5);
-
-	t_m2_col *curr = m2->head;
-	int i = 1;
-	write(1, "M2\n", 3);
-	while (curr)
-	{
-		printf("COL%d X: %.3f Y:%.3f\n", i, curr->x, curr->y);
-		i++;
-		curr = curr->next;
-	}
-
-	// Test M3 matrix
 	m3 = init_m3();
-	add_m3_col(m3, 1.0, 5.5, 9.0);
-	add_m3_col(m3, 2.0, 6.5, 10.0);
-	add_m3_col(m3, 3.0, 7.5, 11.0);
+    m3->col0 = assign_m3_col(1.0, 5.0, 0.0);
+    m3->col1 = assign_m3_col(2.0, 6.0, -3.0);
+    m3->col2 = assign_m3_col(3.0, 8.0, 4.0);
+    // Test Case 1: Identity matrix (should return 1)
+// First print the original 3x3 matrix
+printf("\nOriginal 3x3 Matrix:\n");
+printf("[%.2f  %.2f  %.2f]\n", m3->col0->x, m3->col1->x, m3->col2->x);
+printf("[%.2f  %.2f  %.2f]\n", m3->col0->y, m3->col1->y, m3->col2->y);
+printf("[%.2f  %.2f  %.2f]\n", m3->col0->z, m3->col1->z, m3->col2->z);
 
-	t_m3_col *curr3 = m3->head;
-	i = 1;
-	write(1, "M3\n", 3);
-	while (curr3)
-	{
-		printf("COL%d X: %.3f Y:%.3f Z:%.3f\n", i, curr3->x, curr3->y, curr3->z);
-		i++;
-		curr3 = curr3->next;
-	}
-
-	// Test M4 matrix
-	m4 = init_m4();
-	append_col(m4, add_m4_col(1, 5.5, 9, 13.5));
-	append_col(m4, add_m4_col(2, 6.5, 10, 14.5));
-	append_col(m4, add_m4_col(3, 7.5, 11, 15.5));
-	append_col(m4, add_m4_col(4, 8.5, 12, 16.5));
-
-	t_m4_col *curr4 = m4->head;
-	i = 1;
-	write(1, "M4\n", 3);
-	while (curr4)
-	{
-		printf("COL%d X: %.3f Y:%.3f Z:%.3f W:%.3f\n", i, curr4->x, curr4->y, curr4->z, curr4->w);
-		i++;
-		curr4 = curr4->next;
-	}
-
-
-	DEBUG_INFO("Matrix function tests completed");
-
-
-	// free_obj_list(scene->obj_list);
-	// free_light_list(scene->light_list);
-	free(scene);
-	free(m2);
-	free(m3);
-	free(m4);
-	return (0);
+// Get and print the submatrix
+int col = 1;
+int row = 1;
+t_m2 *subm = m3_subm(m3, col, row);  // Example: removing row 0, col 0
+printf("\nSubmatrix (removing col %d, row %d):\n", col , row);
+printf("[%.2f  %.2f]\n", subm->col0->x, subm->col1->x);
+printf("[%.2f  %.2f]\n", subm->col0->y, subm->col1->y);
+free(subm->col0);
+free(subm->col1);
+free(subm);
+    return(0);
 }

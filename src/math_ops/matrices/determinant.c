@@ -11,3 +11,6 @@ double m_dmt(t_m2 *m2)
 	result = x - y;
 	return(result);
 }
+
+
+
