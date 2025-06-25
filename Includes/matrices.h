@@ -82,4 +82,9 @@ t_m4		*matrix_mult(t_m4 *m_a, t_m4 *m_b);
 t_m4		*transpose_matrix(t_m4 *old_matrix);
 //transpose_matrix.c -- END
 
+//determinant.c -- BEGIN
+double m_dmt(t_m2 *m2);
+//determinant.c -- END
+
+
 #endif
