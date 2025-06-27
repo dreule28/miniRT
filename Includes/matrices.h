@@ -78,6 +78,8 @@ t_m2		*init_m2(void);
 
 //inversion.c -- BEGIN
 bool	is_inversible(double determinante);
+void	apply_col_inversion(t_m4 *m4, t_m4 *new_m4, double dmt);
+t_m4	*m4_inversion(t_m4 *m4);
 //inversion.c -- END
 
 //m_cmp.c -- BEGIN
