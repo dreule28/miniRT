@@ -8,13 +8,13 @@ t_tuples	*matrix_times_tuple(t_m4 *matrix, t_tuples *tuple)
 	if (!res)
 		return (NULL);
 	res->x = matrix->col0->x * tuple->x + matrix->col1->x * tuple->y
-			+ matrix->col2->x * tuple->z + matrix->col3->x * tuple->w;
+		+ matrix->col2->x * tuple->z + matrix->col3->x * tuple->w;
 	res->y = matrix->col0->y * tuple->x + matrix->col1->y * tuple->y
-			+ matrix->col2->y * tuple->z + matrix->col3->y * tuple->w;
+		+ matrix->col2->y * tuple->z + matrix->col3->y * tuple->w;
 	res->z = matrix->col0->z * tuple->x + matrix->col1->z * tuple->y
-			+ matrix->col2->z * tuple->z + matrix->col3->z * tuple->w;
+		+ matrix->col2->z * tuple->z + matrix->col3->z * tuple->w;
 	res->w = matrix->col0->w * tuple->x + matrix->col1->w * tuple->y
-			+ matrix->col2->w * tuple->z + matrix->col3->w * tuple->w;
+		+ matrix->col2->w * tuple->z + matrix->col3->w * tuple->w;
 	return (res);
 }
 

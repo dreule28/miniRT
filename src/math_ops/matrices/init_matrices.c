@@ -32,9 +32,9 @@ t_m4	*init_m4(void)
 	m4 = ft_calloc(1, sizeof(t_m4));
 	if (!m4)
 		return (NULL);
-	m4->col0 =  NULL;
-	m4->col1 =  NULL;
-	m4->col2 =  NULL;
-	m4->col3 =  NULL;
+	m4->col0 = NULL;
+	m4->col1 = NULL;
+	m4->col2 = NULL;
+	m4->col3 = NULL;
 	return (m4);
 }

@@ -18,7 +18,7 @@ bool	m2_cmp(t_m2 *matrix1, t_m2 *matrix2)
 	if (!matrix1 || !matrix2)
 		return (false);
 	return (cmp_m2_col(matrix1->col0, matrix2->col0)
-			&& cmp_m2_col(matrix1->col1, matrix2->col1));
+		&& cmp_m2_col(matrix1->col1, matrix2->col1));
 }
 
 bool	m3_cmp(t_m3 *matrix1, t_m3 *matrix2)
