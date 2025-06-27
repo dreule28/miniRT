@@ -41,11 +41,11 @@ t_m3	*ftm_cofomatrix(t_m3 *m3)
 	cofomatrix = init_m3();
 	if (!cofomatrix)
 		return (NULL);
-	cofomatrix->col0 = assign_m3_col(m3_cofactor(m3, 0, 0), m3_cofactor(m3, 0, 1),
-			m3_cofactor(m3, 0, 2));
-	cofomatrix->col1 = assign_m3_col(m3_cofactor(m3, 1, 0), m3_cofactor(m3, 1, 1),
-			m3_cofactor(m3, 1, 2));
-	cofomatrix->col2 = assign_m3_col(m3_cofactor(m3, 2, 0), m3_cofactor(m3, 2, 1),
-			m3_cofactor(m3, 2, 2));
+	cofomatrix->col0 = assign_m3_col(m3_cofactor(m3, 0, 0), m3_cofactor(m3, 0,
+				1), m3_cofactor(m3, 0, 2));
+	cofomatrix->col1 = assign_m3_col(m3_cofactor(m3, 1, 0), m3_cofactor(m3, 1,
+				1), m3_cofactor(m3, 1, 2));
+	cofomatrix->col2 = assign_m3_col(m3_cofactor(m3, 2, 0), m3_cofactor(m3, 2,
+				1), m3_cofactor(m3, 2, 2));
 	return (cofomatrix);
 }
