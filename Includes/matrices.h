@@ -76,6 +76,10 @@ t_m3		*init_m3(void);
 t_m2		*init_m2(void);
 //init_matrices.c -- END
 
+//inversion.c -- BEGIN
+bool	is_inversible(double determinante);
+//inversion.c -- END
+
 //m_cmp.c -- BEGIN
 bool		m_cmp(void *matrice1, void *matrice2, int size);
 bool		m4_cmp(t_m4 *matrice1, t_m4 *matrice2);
