@@ -11,7 +11,7 @@ LIBFT_DIR = libft
 LIBFT = $(LIBFT_DIR)/libft.a
 INC_DIRS := Includes $(LIBFT_DIR)
 SRC_DIRS := src
-HEADERS = -I $(LIBFT_DIR)/include -I $(MLX42_DIR)/include
+HEADERS = -I $(LIBFT_DIR)/include -I $(MLX42_DIR)/include/MLX42
 MLX42_DIR = MLX42
 MLX42_LIB = $(MLX42_DIR)/build/libmlx42.a
 LIBS = $(MLX42_LIB) $(LIBFT) -ldl -pthread -lm -lglfw
@@ -23,20 +23,20 @@ vpath %.c $(SRC_DIRS)
 ###############                  SOURCE FILES                     ##############
 ################################################################################
 
-MATRICES_FILES := add_col.c cmp_col.c init_matrices.c m_cmp.c matrix_math.c transpose_matrix.c determinant.c m3_sub_matrix.c m4_sub_matrix.c cofo.c inversion.c
+MATRICES_FILES := add_col.c cmp_col.c init_matrices.c m_cmp.c matrix_multi.c transpose_matrix.c determinant.c m3_sub_matrix.c m4_sub_matrix.c cofo.c inversion.c
 MATRICES := $(addprefix math_ops/matrices/, $(MATRICES_FILES))
 
 TUPLES_FILES := tuples_func.c more_tuples_func.c tup_func.c
 TUPLES := $(addprefix math_ops/tuples/, $(TUPLES_FILES))
 
-RAY_TRACING_FILES := ray_tracing.c custom_mlx_func.c projectile.c keyboard_hooks.c custom_math_func.c
-RAY_TRACING := $(addprefix ray_tracing/, $(RAY_TRACING_FILES))
+# RAY_TRACING_FILES := ray_tracing.c custom_mlx_func.c projectile.c keyboard_hooks.c custom_math_func.c
+# RAY_TRACING := $(addprefix ray_tracing/, $(RAY_TRACING_FILES))
 
 PARSER_FILES := fill_elements.c fill_objects.c initialize_objects.c list_and_nodes.c parser.c inits.c
 PARSER := $(addprefix parser/, $(PARSER_FILES))
 
 SRC_FILES := main.c debug.c
-SRC := $(addprefix src/, $(SRC_FILES) $(RAY_TRACING) $(MATRICES) $(TUPLES) $(PARSER))
+SRC := $(addprefix src/, $(SRC_FILES)  $(MATRICES) $(TUPLES) $(PARSER))
 
 ################################################################################
 ###############               OBJECT FILES & RULES                ##############
@@ -45,7 +45,7 @@ SRC := $(addprefix src/, $(SRC_FILES) $(RAY_TRACING) $(MATRICES) $(TUPLES) $(PAR
 OBJS := $(addprefix $(OBJ_DIR)/, $(SRC:%.c=%.o))
 
 # Compilation flags and linking options
-CFLAGS := -Wall -Wextra -Werror -g -IIncludes -Ilibft -MMD -MP $(addprefix -I, $(INC_DIRS))
+CFLAGS := -Wall -Wextra -Werror -g -IIncludes -Ilibft -I$(MLX42_DIR)/include/MLX42 -MMD -MP $(addprefix -I, $(INC_DIRS))
 LDFLAGS := -Llibft -lft  -lreadline -lncurses
 CFLAGS_SAN := $(CFLAGS) -fsanitize=address -g
 LDFLAGS_SAN := $(LDFLAGS) -fsanitize=address
@@ -60,7 +60,7 @@ all: $(NAME)
 
 $(NAME): $(LIBFT) $(MLX42_LIB) $(OBJS)
 	@echo "$(COLOR_GREEN)Creating $(NAME)...$(COLOR_RESET)"
-	@$(CC) $(CFLAGS) $(OBJS) -o $(NAME) $(LIBS) $(LDFLAGS)
+	@$(CC) $(OBJS) -o $(NAME) $(LIBS) $(LDFLAGS)
 	@echo "$(COLOR_GREEN)Successful Compilation of $(NAME)$(COLOR_RESET)"
 
 $(OBJ_DIR)/%.o: %.c | $(OBJ_DIR)
@@ -80,9 +80,12 @@ $(MLX42_LIB):
 		echo "Cloning MLX42..."; \
 		git clone https://github.com/codam-coding-college/MLX42.git; \
 	fi
-	@cmake $(MLX42_DIR) -B $(MLX42_DIR)/build
-	@make -C $(MLX42_DIR)/build -j4
-	@echo "\033[0;32mSuccessful Compilation of MLX42\033[0m"
+	@if [ ! -f "$(MLX42_LIB)" ]; then \
+		echo "$(COLOR_GREEN)Building MLX42...$(COLOR_RESET)"; \
+		cmake $(MLX42_DIR) -B $(MLX42_DIR)/build; \
+		make -C $(MLX42_DIR)/build -j4; \
+	fi
+	@echo "$(COLOR_GREEN)MLX42 ready$(COLOR_RESET)"
 
 %.o: %.c
 	@echo "Compiling $<..."
