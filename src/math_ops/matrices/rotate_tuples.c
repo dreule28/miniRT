@@ -50,3 +50,20 @@ t_tuples	*rotate_point_z(t_tuples *point, double radians)
 	free(rotation_matrix);
 	return (rotated_point);
 }
+
+t_tuples	*shear_point(t_tuples *point, t_shear_params *params)
+{
+	t_m4		*shear_matrix;
+	t_tuples	*sheared_point;
+
+	shear_matrix = shearing(params);
+	if (!shear_matrix)
+		return (NULL);
+	sheared_point = matrix_times_tuple(shear_matrix, point);
+	free(shear_matrix->col0);
+	free(shear_matrix->col1);
+	free(shear_matrix->col2);
+	free(shear_matrix->col3);
+	free(shear_matrix);
+	return (sheared_point);
+}
