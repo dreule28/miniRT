@@ -3,6 +3,16 @@
 
 #include <sys/types.h>
 
+typedef struct s_shear_params
+{
+	double	xy;
+	double	xz;
+	double	yx;
+	double	yz;
+	double	zx;
+	double	zy;
+}			t_shear_params;
+
 typedef struct s_m2_col
 {
 	double	x;
@@ -111,6 +121,32 @@ double		get_col_val(t_m4 *matrix, int col, int row);
 void		set_result_col(t_m4 *matrix, int col_index, double vals[4]);
 t_m4		*matrix_mult(t_m4 *m_a, t_m4 *m_b);
 //matrix-math.c -- END
+
+// rotate_matrix.c -- BEGIN
+t_m4		*rotate_x(double radians);
+t_m4		*rotate_y(double radians);
+t_m4		*rotate_z(double radians);
+double		radians(double degree);
+// rotate_matrix.c -- END
+
+// rotate_tuples.c -- BEGIN
+t_tuples	*rotate_point_x(t_tuples *point, double radians);
+t_tuples	*rotate_point_y(t_tuples *point, double radians);
+t_tuples	*rotate_point_z(t_tuples *point, double radians);
+t_tuples	*shear_point(t_tuples *point, t_shear_params *params);
+// rotate_tuples.c -- END
+
+// shearing.c -- BEGIN
+t_m4		*shear_x(double xy, double xz);
+t_m4		*shear_y(double xy, double xz);
+t_m4		*shear_z(double xy, double xz);
+t_m4		*shearing(t_shear_params *params);
+// shearing.c -- END
+
+// transformation.c -- BEGIN
+t_m4		*translation(t_m4 *matrix, t_tuples *tuple);
+t_m4		*scaling(t_m4 *matrix, t_tuples *tuple);
+// transformation.c -- END
 
 //transpose_matrix.c -- BEGIN
 t_m4		*transpose_matrix(t_m4 *old_matrix);
