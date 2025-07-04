@@ -30,5 +30,4 @@ t_projectile	*create_projectile(t_tuples *position, t_tuples *velocity);
 t_environment	*create_environment(t_tuples *gravity, t_tuples *wind);
 t_projectile	*tick(t_environment *env, t_projectile *proj);
 
-
 #endif

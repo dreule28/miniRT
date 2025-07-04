@@ -24,24 +24,22 @@ typedef struct s_rgb
 	double	b;
 }			t_rgb;
 
-
-
 // ray_tracing/custom_math_func.c
-t_tuples			*create_vector(double x, double y, double z);
-t_tuples			*create_point(double x, double y, double z);
-t_rgb				*create_rgb(double r, double g, double b);
-double				tup_dot(t_tuples *vec1, t_tuples *vec2);
+t_tuples			*init_vector(double x, double y, double z);
+t_tuples			*init_point(double x, double y, double z);
+t_rgb				*init_rgb(double r, double g, double b);
+double				ftm_tup_dot(t_tuples *vec1, t_tuples *vec2);
 // ray_tracing/tulpes_func.c
-bool				tupcmp(t_tuples *tuples1, t_tuples *tuples2);
-t_tuples			*tup_add(t_tuples *tuples1, t_tuples *tuples2);
-t_tuples			*tup_subtract(t_tuples *tuples1, t_tuples *tuples2);
-t_tuples			*tup_negate(t_tuples *tuples);
+bool				ftm_tup_cmp(t_tuples *tuples1, t_tuples *tuples2);
+t_tuples			*ftm_tup_add(t_tuples *tuples1, t_tuples *tuples2);
+t_tuples			*ftm_tup_subtract(t_tuples *tuples1, t_tuples *tuples2);
+t_tuples			*ftm_tup_negate(t_tuples *tuples);
 
 // ray_tracing/more_tuples_function.c
-t_tuples			*tup_mult(t_tuples *tuples, double multiplier);
-t_tuples			*tup_divied(t_tuples *tuples, double divider);
+t_tuples			*ftm_tup_mult(t_tuples *tuples, double multiplier);
+t_tuples			*ftm_tup_divied(t_tuples *tuples, double divider);
 double				magnitude_vector(t_tuples *vector);
-t_tuples			*tup_norm(t_tuples *vector);
-t_tuples			*tup_cross(t_tuples *tup1, t_tuples *tup2);
+t_tuples			*ftm_tup_norm(t_tuples *vector);
+t_tuples			*ftm_tup_cross(t_tuples *tup1, t_tuples *tup2);
 
 #endif
