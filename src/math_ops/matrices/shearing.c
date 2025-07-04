@@ -1,6 +1,6 @@
 #include "mini_rt.h"
 
-t_m4	*shear_x(double xy, double xz)
+t_m4	*ftm_shear_x(double xy, double xz)
 {
 	t_m4	*matrix;
 
@@ -14,7 +14,7 @@ t_m4	*shear_x(double xy, double xz)
 	return (matrix);
 }
 
-t_m4	*shear_y(double yx, double yz)
+t_m4	*ftm_shear_y(double yx, double yz)
 {
 	t_m4	*matrix;
 
@@ -28,7 +28,7 @@ t_m4	*shear_y(double yx, double yz)
 	return (matrix);
 }
 
-t_m4	*shear_z(double zx, double zy)
+t_m4	*ftm_shear_z(double zx, double zy)
 {
 	t_m4	*matrix;
 
@@ -42,7 +42,7 @@ t_m4	*shear_z(double zx, double zy)
 	return (matrix);
 }
 
-t_m4	*shearing(t_shear_params *params)
+t_m4	*ftm_shearing(t_shear_params *params)
 {
 	t_m4	*matrix;
 

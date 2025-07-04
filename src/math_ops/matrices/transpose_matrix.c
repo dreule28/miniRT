@@ -1,6 +1,6 @@
 #include "mini_rt.h"
 
-t_m4	*transpose_matrix(t_m4 *old_matrix)
+t_m4	*ftm_transpose_matrix(t_m4 *old_matrix)
 {
 	t_m4	*new_matrix;
 

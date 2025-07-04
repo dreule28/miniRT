@@ -1,6 +1,6 @@
 #include "mini_rt.h"
 
-t_m4	*rotate_x(double radians)
+t_m4	*ftm_rotate_x(double radians)
 {
 	t_m4	*matrix;
 
@@ -14,7 +14,7 @@ t_m4	*rotate_x(double radians)
 	return (matrix);
 }
 
-t_m4	*rotate_y(double radians)
+t_m4	*ftm_rotate_y(double radians)
 {
 	t_m4	*matrix;
 
@@ -28,7 +28,7 @@ t_m4	*rotate_y(double radians)
 	return (matrix);
 }
 
-t_m4	*rotate_z(double radians)
+t_m4	*ftm_rotate_z(double radians)
 {
 	t_m4	*matrix;
 

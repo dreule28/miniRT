@@ -1,6 +1,6 @@
 #include "mini_rt.h"
 
-bool	tupcmp(t_tuples *tuples1, t_tuples *tuples2)
+bool	ftm_tup_cmp(t_tuples *tuples1, t_tuples *tuples2)
 {
 	if (tuples1->w != tuples2->w)
 		return (true);
@@ -13,7 +13,7 @@ bool	tupcmp(t_tuples *tuples1, t_tuples *tuples2)
 	return (false);
 }
 
-t_tuples	*tup_add(t_tuples *tuples1, t_tuples *tuples2)
+t_tuples	*ftm_tup_add(t_tuples *tuples1, t_tuples *tuples2)
 {
 	t_tuples	*new_tuples;
 
@@ -27,7 +27,7 @@ t_tuples	*tup_add(t_tuples *tuples1, t_tuples *tuples2)
 	return (new_tuples);
 }
 
-t_tuples	*tup_subtract(t_tuples *tuples1, t_tuples *tuples2)
+t_tuples	*ftm_tup_subtract(t_tuples *tuples1, t_tuples *tuples2)
 {
 	t_tuples	*new_tuples;
 
@@ -41,8 +41,7 @@ t_tuples	*tup_subtract(t_tuples *tuples1, t_tuples *tuples2)
 	return (new_tuples);
 }
 
-
-t_tuples	*tup_negate(t_tuples *tuples)
+t_tuples	*ftm_tup_negate(t_tuples *tuples)
 {
 	t_tuples	*new_tuples;
 

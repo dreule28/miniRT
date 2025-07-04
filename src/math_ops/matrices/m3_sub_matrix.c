@@ -1,12 +1,13 @@
 #include "mini_rt.h"
 
-/* m3_subm: Creates a 2x2 matrix from a 3x3 matrix by removing one row and one column
+/* m3_subm: Creates a 2x2 matrix from a 3x3 matrix by removing one row and
+ * one column
  * @param m3:  Source 3x3 matrix
  * @param col: Column to remove (0-2)
  * @param row: Row to remove (0-2)
  * @return:    New 2x2 matrix with specified row and column removed
  */
-t_m2	*m3_subm(t_m3 *m3, int col, int row)
+t_m2	*ftm_m3_subm(t_m3 *m3, int col, int row)
 {
 	t_m2	*m2;
 
@@ -14,7 +15,7 @@ t_m2	*m3_subm(t_m3 *m3, int col, int row)
 		return (NULL);
 	if (col > 2 || row > 2 || col < 0 || row < 0)
 	{
-		ft_putstr_fd("wrong number of rows\n", 2);
+		ft_putstr_fd("Error\nWrong number of rows\n", 2);
 		return (NULL);
 	}
 	m2 = init_m2();

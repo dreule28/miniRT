@@ -1,12 +1,13 @@
 #include "mini_rt.h"
 
-/* m4_subm: Creates a 3x3 matrix from a 4x4 matrix by removing one row and one column
+/* m4_subm: Creates a 3x3 matrix from a 4x4 matrix by removing one row and 
+ * one column
  * @param m4:  Source 4x4 matrix
  * @param col: Column to remove (0-3)
  * @param row: Row to remove (0-3)
  * @return:    New 3x3 matrix with specified row and column removed
  */
-t_m3	*m4_subm(t_m4 *m4, int col, int row)
+t_m3	*ftm_m4_subm(t_m4 *m4, int col, int row)
 {
 	t_m3	*m3;
 
@@ -14,7 +15,7 @@ t_m3	*m4_subm(t_m4 *m4, int col, int row)
 		return (NULL);
 	if (col > 3 || row > 3 || col < 0 || row < 0)
 	{
-		ft_putstr_fd("wrong number of rows in m4_subm\n", 2);
+		ft_putstr_fd("Error\nwrong number of rows in m4_subm\n", 2);
 		return (NULL);
 	}
 	m3 = init_m3();

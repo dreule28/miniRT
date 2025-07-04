@@ -8,7 +8,7 @@
  * Return: A new tuple with each component multiplied by the value.
  *         Returns NULL if memory allocation fails.
  */
-t_tuples	*tup_mult(t_tuples *tuples, double value)
+t_tuples	*ftm_tup_mult(t_tuples *tuples, double value)
 {
 	t_tuples	*new_tuples;
 
@@ -30,7 +30,7 @@ t_tuples	*tup_mult(t_tuples *tuples, double value)
  * Return: A new tuple with each component divided by the value .
  *         Returns NULL if memory allocation fails or if value is zero.
  */
-t_tuples	*tup_divied(t_tuples *tuples, double value)
+t_tuples	*ftm_tup_divied(t_tuples *tuples, double value)
 {
 	t_tuples	*new_tuples;
 
@@ -48,27 +48,27 @@ t_tuples	*tup_divied(t_tuples *tuples, double value)
 
 double	magnitude_vector(t_tuples *vector)
 {
-	double sum;
-	double magnitude;
+	double	sum;
+	double	magnitude;
 
 	sum = 0;
 	sum += vector->x * vector->x;
 	sum += vector->y * vector->y;
 	sum += vector->z * vector->z;
 	magnitude = sqrt(sum);
-	return(magnitude);
+	return (magnitude);
 }
 
-t_tuples	*tup_norm(t_tuples *vector)
+t_tuples	*ftm_tup_norm(t_tuples *vector)
 {
-	t_tuples *new_vector;
+	t_tuples	*new_vector;
 
 	new_vector = ft_calloc(1, sizeof(t_tuples));
-	if(!new_vector)
-		return(NULL);
+	if (!new_vector)
+		return (NULL);
 	new_vector->w = vector->w / magnitude_vector(vector);
 	new_vector->x = vector->x / magnitude_vector(vector);
 	new_vector->y = vector->y / magnitude_vector(vector);
 	new_vector->z = vector->z / magnitude_vector(vector);
-	return(new_vector);
+	return (new_vector);
 }

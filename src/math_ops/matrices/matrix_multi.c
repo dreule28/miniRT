@@ -1,6 +1,6 @@
 #include "mini_rt.h"
 
-t_tuples	*matrix_times_tuple(t_m4 *matrix, t_tuples *tuple)
+t_tuples	*ftm_matrix_times_tuple(t_m4 *matrix, t_tuples *tuple)
 {
 	t_tuples	*res;
 
@@ -67,7 +67,7 @@ void	set_result_col(t_m4 *matrix, int col_index, double vals[4])
 		matrix->col3 = new_col;
 }
 
-t_m4	*matrix_mult(t_m4 *m_a, t_m4 *m_b)
+t_m4	*ftm_matrix_mult(t_m4 *m_a, t_m4 *m_b)
 {
 	t_m4	*m_c;
 	int		col;
@@ -77,8 +77,8 @@ t_m4	*matrix_mult(t_m4 *m_a, t_m4 *m_b)
 	m_c = init_m4();
 	if (!m_c || !m_a || !m_b)
 		return (NULL);
-	if (!m_a->col0 || !m_a->col1 || !m_a->col2 || !m_a->col3
-		|| !m_b->col0 || !m_b->col1 || !m_b->col2 || !m_b->col3)
+	if (!m_a->col0 || !m_a->col1 || !m_a->col2 || !m_a->col3 || !m_b->col0
+		|| !m_b->col1 || !m_b->col2 || !m_b->col3)
 		return (m_c);
 	col = -1;
 	while (++col < 4)
