@@ -14,7 +14,7 @@ typedef enum e_obj_type
 typedef struct s_sphere_node
 {
 	t_tuples	pos;
-	double		diameter;
+	double		radius;
 	t_rgb		rgb;
 }				t_sphere_node;
 
@@ -29,7 +29,7 @@ typedef struct s_cylinder_node
 {
 	t_tuples	pos;
 	t_tuples	axis;
-	double		diameter;
+	double		radius;
 	double		height;
 	t_rgb		rgb;
 }				t_cylinder_node;
