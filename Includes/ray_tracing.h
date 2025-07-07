@@ -13,21 +13,18 @@ typedef struct s_environment
 	t_tuples	*wind;
 }				t_environment;
 
-// ray_tracing/ray_tracing.c
-void			ray_tracing(void *param);
+typedef struct s_ray
+{
+	t_tuples	*origin;
+	t_tuples	*direction;
+}				t_ray;
 
-// ray_tracing/custom_mlx_functions.c
-bool			init_mlx_window(t_scene *scene);
-int				get_rgba(int r, int g, int b, int a);
-void			mlx_custom_hooks(t_scene *scene);
 
-// ray_tracing/keyboard_hooks.c
-void			key_hook(mlx_key_data_t keydata, void *param);
-void			scroll_hook(double xdelta, double ydelta, void *param);
+// rays.c -- BEGIN
+void		free_ray(t_ray *ray);
+t_ray		*init_ray(t_tuples *origin, t_tuples *direction);
+t_tuples	*ray_position(t_ray *ray, double time);
+// rays.c -- END
 
-// ray_tracing/projectile.c
-t_projectile	*create_projectile(t_tuples *position, t_tuples *velocity);
-t_environment	*create_environment(t_tuples *gravity, t_tuples *wind);
-t_projectile	*tick(t_environment *env, t_projectile *proj);
 
 #endif
