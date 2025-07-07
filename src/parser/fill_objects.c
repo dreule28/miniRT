@@ -40,7 +40,7 @@ void	add_cylinder(t_obj_node *obj_node, char *parsed_line)
 	skip_spaces_or_value(&parsed_line, 0, 1);
 	obj_node->data->cylinder->axis.z = ft_atof(parsed_line);
 	skip_spaces_or_value(&parsed_line, 1, 0);
-	obj_node->data->cylinder->diameter = ft_atof(parsed_line);
+	obj_node->data->cylinder->radius = ft_atof(parsed_line);
 	skip_spaces_or_value(&parsed_line, 0, 0);
 	skip_spaces_or_value(&parsed_line, 1, 0);
 	obj_node->data->cylinder->height = ft_atof(parsed_line);
@@ -63,7 +63,7 @@ void	add_sphere(t_obj_node *obj_node, char *parsed_line)
 	skip_spaces_or_value(&parsed_line, 0, 1);
 	obj_node->data->sphere->pos.z = ft_atof(parsed_line);
 	skip_spaces_or_value(&parsed_line, 1, 0);
-	obj_node->data->sphere->diameter = ft_atof(parsed_line);
+	obj_node->data->sphere->radius = ft_atof(parsed_line);
 	skip_spaces_or_value(&parsed_line, 0, 0);
 	skip_spaces_or_value(&parsed_line, 1, 0);
 	obj_node->data->sphere->rgb.r = ft_atof(parsed_line);
