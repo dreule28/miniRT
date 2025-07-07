@@ -2,12 +2,14 @@
 # define MINI_RT_H
 # define HEIGHT 1080
 # define WIDTH 1920
+# define DBL_EPSILON 2.2204460492503131e-16
 
 //Includes -- BEGIN
 # include <stdio.h>
 # include <stdlib.h>
 # include <fcntl.h>
 # include <math.h>
+// # include <float.h>
 # include "../MLX42/include/MLX42/MLX42.h"
 # include "libft.h"
 # include "objects.h"
@@ -39,9 +41,9 @@ void			add_sphere(t_obj_node *obj_node, char *parsed_line);
 //fill_objects.c -- END
 
 //initialize_objects.c -- BEGIN
-t_sphere_node	*init_sphere(t_sphere_node *sphere);
-t_plane_node	*init_plane(t_plane_node *plane);
-t_cylinder_node	*init_cylinder(t_cylinder_node *cylinder);
+t_sphere_node	*init_sphere();
+t_plane_node	*init_plane();
+t_cylinder_node	*init_cylinder();
 //initialize_objects.c -- END
 
 //list_and_nodes.c -- BEGIN
