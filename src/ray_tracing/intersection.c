@@ -22,7 +22,7 @@ double	*intersect_sphere(t_ray *ray, t_sphere *sphere)
 	double	a;
 	double	b;
 	double	discriminant;
-	
+
 	t = ft_calloc(sizeof(double), 2);
 	if (!t)
 		return (NULL);

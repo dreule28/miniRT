@@ -21,6 +21,7 @@ void	free_obj_list(t_obj_list *obj_list)
 	{
 		next = curr->next;
 		free_obj_data(curr->data, curr->type);
+		free(curr->t);
 		free(curr);
 		curr = next;
 	}
