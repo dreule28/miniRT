@@ -11,21 +11,21 @@ typedef enum e_obj_type
 	CYLINDER
 }	t_obj_type;
 
-typedef struct s_sphere_node
+typedef struct s_sphere
 {
 	t_tuples	pos;
 	double		radius;
 	t_rgb		rgb;
 }				t_sphere;
 
-typedef struct s_plane_node
+typedef struct s_plane
 {
 	t_tuples	pos;
 	t_tuples	axis;
 	t_rgb		rgb;
 }				t_plane;
 
-typedef struct s_cylinder_node
+typedef struct s_cylinder
 {
 	t_tuples	pos;
 	t_tuples	axis;
@@ -45,6 +45,7 @@ typedef struct s_obj_node
 {
 	t_obj_type			type;
 	t_obj_data			*data;
+	double				*t;
 	struct s_obj_node	*next;
 }						t_obj_node;
 
