@@ -12,6 +12,7 @@ double	discri(t_ray *ray, t_sphere *sphere, double *a, double *b)
 	c = ftm_tup_dot(sphere_to_ray, sphere_to_ray) -
 		(sphere->radius * sphere->radius);
 	discriminant = *b * *b - 4 * *a * c;
+	free(sphere_to_ray);
 	return (discriminant);
 }
 
@@ -52,4 +53,24 @@ t_obj_list	*intersect_to_list(t_scene *scene)
 		curr = curr->next;
 	}
 	return (scene->obj_list);
+}
+
+double	*hit_obj(t_scene *scene)
+{
+	t_obj_node	*curr;
+	double		*old_hit;
+
+	old_hit = ft_calloc(sizeof(double), 2);
+	if(!old_hit)
+		return(NULL);
+	curr = scene->obj_list->head;
+	old_hit = curr->t;
+	while (curr)
+	{	
+		if (curr->t)
+			if (old_hit[0] >= 0 && old_hit[0] > curr->t[0])
+				old_hit = curr->t;
+		curr = curr->next;
+	}
+	return (old_hit);
 }
