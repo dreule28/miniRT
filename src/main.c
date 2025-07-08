@@ -46,8 +46,8 @@ void	free_light_list(t_light_list *light_list)
 int	main(int argc, char **argv)
 {
 	t_scene	*scene;
-	double *hited;
-	
+	double	*hited;
+
 	scene = ft_calloc(sizeof(t_scene), 1);
 	if (!scene)
 		return (1);
@@ -62,6 +62,5 @@ int	main(int argc, char **argv)
 	free_obj_list(scene->obj_list);
 	free_light_list(scene->light_list);
 	free(scene);
-	free(hited);
 	return (0);
 }

@@ -1,6 +1,6 @@
 #include "mini_rt.h"
 
-t_sphere	*init_sphere()
+t_sphere	*init_sphere(void)
 {
 	t_sphere	*sphere;
 
@@ -18,7 +18,7 @@ t_sphere	*init_sphere()
 	return (sphere);
 }
 
-t_plane	*init_plane()
+t_plane	*init_plane(void)
 {
 	t_plane	*plane;
 
@@ -39,7 +39,7 @@ t_plane	*init_plane()
 	return (plane);
 }
 
-t_cylinder	*init_cylinder()
+t_cylinder	*init_cylinder(void)
 {
 	t_cylinder	*cylinder;
 

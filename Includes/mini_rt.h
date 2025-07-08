@@ -41,9 +41,9 @@ void			add_sphere(t_obj_node *obj_node, char *parsed_line);
 //fill_objects.c -- END
 
 //initialize_objects.c -- BEGIN
-t_sphere		*init_sphere();
-t_plane			*init_plane();
-t_cylinder		*init_cylinder();
+t_sphere		*init_sphere(void);
+t_plane			*init_plane(void);
+t_cylinder		*init_cylinder(void);
 //initialize_objects.c -- END
 
 //list_and_nodes.c -- BEGIN
