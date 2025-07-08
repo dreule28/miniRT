@@ -21,6 +21,7 @@ void	free_obj_list(t_obj_list *obj_list)
 	{
 		next = curr->next;
 		free_obj_data(curr->data, curr->type);
+		free(curr->t);
 		free(curr);
 		curr = next;
 	}
@@ -54,5 +55,6 @@ int	main(int argc, char **argv)
 	scene->obj_list = intersect_to_list(scene);
 	free_obj_list(scene->obj_list);
 	free_light_list(scene->light_list);
+	free(scene);
 	return (0);
 }

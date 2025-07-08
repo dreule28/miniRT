@@ -12,6 +12,7 @@ double	discri(t_ray *ray, t_sphere *sphere, double *a, double *b)
 	c = ftm_tup_dot(sphere_to_ray, sphere_to_ray) -
 		(sphere->radius * sphere->radius);
 	discriminant = *b * *b - 4 * *a * c;
+	free(sphere_to_ray);
 	return (discriminant);
 }
 
@@ -21,7 +22,7 @@ double	*intersect_sphere(t_ray *ray, t_sphere *sphere)
 	double	a;
 	double	b;
 	double	discriminant;
-	
+
 	t = ft_calloc(sizeof(double), 2);
 	if (!t)
 		return (NULL);
