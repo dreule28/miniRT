@@ -46,7 +46,7 @@ int	main(int argc, char **argv)
 {
 	t_scene	*scene;
 
-	scene = malloc(sizeof(t_scene));
+	scene = ft_calloc(sizeof(t_scene), 1);
 	if (!scene)
 		return (1);
 	if (!parser(scene, argc, argv))

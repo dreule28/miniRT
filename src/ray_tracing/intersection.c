@@ -12,7 +12,6 @@ double	discri(t_ray *ray, t_sphere *sphere, double *a, double *b)
 	c = ftm_tup_dot(sphere_to_ray, sphere_to_ray) -
 		(sphere->radius * sphere->radius);
 	discriminant = *b * *b - 4 * *a * c;
-	// printf ("disc: %.2f", discriminant);
 	return (discriminant);
 }
 
@@ -22,7 +21,7 @@ double	*intersect_sphere(t_ray *ray, t_sphere *sphere)
 	double	a;
 	double	b;
 	double	discriminant;
-
+	
 	t = ft_calloc(sizeof(double), 2);
 	if (!t)
 		return (NULL);
@@ -37,17 +36,19 @@ double	*intersect_sphere(t_ray *ray, t_sphere *sphere)
 t_obj_list	*intersect_to_list(t_scene *scene)
 {
 	t_obj_node	*curr;
-
+	t_ray	*ray;
 	curr = scene->obj_list->head;
 	while (curr)
 	{
 		if (curr->type == SPHERE)
-			curr->t = intersect_sphere(init_ray(&scene->camera.pos,
-						&scene->camera.orientation_vector), curr->data->sphere);
-		if (!curr->t)
-				printf("Womp womp\n");
-		else
-			printf("Intersects: t[0]:%.2f t[1]:%.2f", curr->t[0], curr->t[1]);
+		{
+			ray = init_ray(&scene->camera.pos,
+					&scene->camera.orientation_vector);
+			if (!ray)
+				return (NULL);
+			curr->t = intersect_sphere(ray, curr->data->sphere);
+			free(ray);
+		}
 		curr = curr->next;
 	}
 	return (scene->obj_list);
