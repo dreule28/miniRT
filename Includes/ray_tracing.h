@@ -20,8 +20,9 @@ typedef struct s_ray
 }				t_ray;
 
 // intersection.c -- BEGIN
-double		discri(t_ray *ray, double *a, double *b);
-double		*intersects(t_ray *ray);
+double		discri(t_ray *ray, t_sphere *sphere,double *a, double *b);
+double		*intersect_sphere(t_ray *ray, t_sphere *sphere);
+t_obj_list	*intersect_to_list(t_scene *scene);
 // intersection.c -- END
 
 

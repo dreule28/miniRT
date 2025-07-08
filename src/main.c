@@ -42,21 +42,17 @@ void	free_light_list(t_light_list *light_list)
 	free(light_list);
 }
 
-int main(void)
+int	main(int argc, char **argv)
 {
-	t_sphere_node	*sphere;
-	t_ray			*ray;
-	double			*interesection;
+	t_scene	*scene;
 
-	sphere = init_sphere();
-	ray = init_ray(init_point(0, 2, -5), init_vector(0, 0, 1));
-
-	interesection = intersects(ray);
-	if (!interesection)
-	{
-		printf("No interseciton\n");
+	scene = malloc(sizeof(t_scene));
+	if (!scene)
 		return (1);
-	}
-	printf("T[0]: %f T[1]: %f\n", interesection[0], interesection[1]);
+	if (!parser(scene, argc, argv))
+		return (free(scene), 1);
+	scene->obj_list = intersect_to_list(scene);
+	free_obj_list(scene->obj_list);
+	free_light_list(scene->light_list);
 	return (0);
 }

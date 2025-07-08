@@ -4,7 +4,7 @@ A	0.2							253,254,255
 
 # CAMERA
 #	vpx,y,z		ovx,y,z	fov
-C	-50.0,0,20	1,2,3	70
+C	0,1,-5	0,0,1	70
 
 # LIGHT SOURCEz
 #	x,y,z		brightness		r,g,b
@@ -12,12 +12,14 @@ L	-40,0,30	0.7				255,255,255
 
 # PLANE
 #	x,y,zpos	x,y,z			r,g,b
-pl	1,2,3		0,1.0,0			255,0,255
+# pl	1,2,3		0,1.0,0			255,0,255
 
 # SPHERE
-#	x,y,z		diameter		r,g,b
-sp	5,0,20		20				255,0,34
+#	x,y,z		radius			r,g,b
+sp	0,0,0		1				255,0,34
+# sp	0,5,0		1				255,0,34
+# sp	0,10,0		1				255,0,34
 
 # CYLINDER
 #	center_x,y,z	axis_x,y,z		diameter	height	r,g,b
-cy	50.0,0.0,20.6	0,0,1.0			14.2		21.42	10,0,255
+# cy	50.0,0.0,20.6	0,0,1.0			14.2		21.42	10,0,255
