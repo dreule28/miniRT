@@ -19,6 +19,11 @@ typedef struct s_ray
 	t_tuples	*direction;
 }				t_ray;
 
+// intersection.c -- BEGIN
+double		discri(t_ray *ray, double *a, double *b);
+double		*intersects(t_ray *ray);
+// intersection.c -- END
+
 
 // rays.c -- BEGIN
 void		free_ray(t_ray *ray);

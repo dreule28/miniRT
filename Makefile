@@ -29,14 +29,14 @@ MATRICES := $(addprefix math_ops/matrices/, $(MATRICES_FILES))
 TUPLES_FILES := tuples_func.c more_tuples_func.c tup_func.c custom_math_func.c
 TUPLES := $(addprefix math_ops/tuples/, $(TUPLES_FILES))
 
-# RAY_TRACING_FILES := ray_tracing.c custom_mlx_func.c projectile.c keyboard_hooks.c custom_math_func.c
-# RAY_TRACING := $(addprefix ray_tracing/, $(RAY_TRACING_FILES))
+RAY_TRACING_FILES := rays.c intersection.c
+RAY_TRACING := $(addprefix ray_tracing/, $(RAY_TRACING_FILES))
 
 PARSER_FILES := fill_elements.c fill_objects.c initialize_objects.c list_and_nodes.c parser.c inits.c
 PARSER := $(addprefix parser/, $(PARSER_FILES))
 
-SRC_FILES := main.c debug.c
-SRC := $(addprefix src/, $(SRC_FILES)  $(MATRICES) $(TUPLES) $(PARSER))
+SRC_FILES := main.c 
+SRC := $(addprefix src/, $(SRC_FILES)  $(MATRICES) $(TUPLES) $(RAY_TRACING) $(PARSER))
 
 ################################################################################
 ###############               OBJECT FILES & RULES                ##############

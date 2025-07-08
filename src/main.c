@@ -44,59 +44,19 @@ void	free_light_list(t_light_list *light_list)
 
 int main(void)
 {
-    t_m4 *m4;
-	double det;
-	double cofo;
-    // Initialize and assign values to 3x3 matrix
-    m4 = init_m4();
-    m4->col0 = assign_m4_col(-5.0, 1.0, 7.0, 1);
-    m4->col1 = assign_m4_col(2.0, -5.0, 7.0, -3);
-    m4->col2 = assign_m4_col(6.0, 1.0, -6.0, 7);
-    m4->col3 = assign_m4_col(-8.0, 8.0, -7.0, 4);
+	t_sphere_node	*sphere;
+	t_ray			*ray;
+	double			*interesection;
 
-    // Print original matrix
-    printf("\nOriginal invertible Matrix:\n");
-    printf("[%.2f  %.2f  %.2f  %.2f]\n", m4->col0->x, m4->col1->x, m4->col2->x, m4->col3->x);
-    printf("[%.2f  %.2f  %.2f  %.2f]\n", m4->col0->y, m4->col1->y, m4->col2->y, m4->col3->y);
-    printf("[%.2f  %.2f  %.2f  %.2f]\n", m4->col0->z, m4->col1->z, m4->col2->z, m4->col3->z);
-    printf("[%d  %d  %d  %d]\n", m4->col0->w, m4->col1->w, m4->col2->w, m4->col3->w);
-	// printf("DET: %.2f\n", det);
-	// if (is_inversible(m4_dmt(m4)))
-	// 	printf("Is inversible\n");
-	// else
-	// 	printf("Is not inversible\n");
-	det = m4_dmt(m4);
-	cofo = m4_cofactor(m4, 3, 2);
-	printf("cofo(A, 2, 3): %.2f\n", m4_cofactor(m4, 3, 2));
-	printf("B[3,2]: %.5f\n", cofo / det);
-	cofo = m4_cofactor(m4, 2, 3);
-	printf("cofo(A, 3, 2): %.2f\n", m4_cofactor(m4, 2, 3));
-	printf("B[2,3]: %.5f\n", cofo / det);
+	sphere = init_sphere();
+	ray = init_ray(init_point(0, 2, -5), init_vector(0, 0, 1));
 
-    // m4 = init_m4();
-    // m4->col0 = assign_m4_col(6.0, 9.0, 0.0, 0);
-    // m4->col1 = assign_m4_col(2.0, 6.0, -5.0, 0);
-    // m4->col2 = assign_m4_col(-2.0, 2.0, 1.0, 0);
-    // m4->col3 = assign_m4_col(-3.0, 6.0, -5.0, 0);
-
-    // printf("\nOriginal non-invertible Matrix:\n");
-    // printf("[%.2f  %.2f  %.2f  %.2f]\n", m4->col0->x, m4->col1->x, m4->col2->x, m4->col3->x);
-    // printf("[%.2f  %.2f  %.2f  %.2f]\n", m4->col0->y, m4->col1->y, m4->col2->y, m4->col3->y);
-    // printf("[%.2f  %.2f  %.2f  %.2f]\n", m4->col0->z, m4->col1->z, m4->col2->z, m4->col3->z);
-    // printf("[%d  %d  %d  %d]\n", m4->col0->w, m4->col1->w, m4->col2->w, m4->col3->w);
-	// printf("DET: %.2f\n", m4_dmt(m4));
-	// if (is_inversible(m4_dmt(m4)))
-	// 	printf("Is inversible\n");
-	// else
-	// 	printf("Is not inversible\n");
-    // Get and print cofactor matrix
-
-    // Free memory
-    free(m4->col0);
-    free(m4->col1);
-    free(m4->col2);
-    free(m4->col3);
-    free(m4);
-
-    return (0);
+	interesection = intersects(ray);
+	if (!interesection)
+	{
+		printf("No interseciton\n");
+		return (1);
+	}
+	printf("T[0]: %f T[1]: %f\n", interesection[0], interesection[1]);
+	return (0);
 }
