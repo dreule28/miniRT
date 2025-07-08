@@ -1,10 +1,10 @@
 #include "mini_rt.h"
 
-t_sphere_node	*init_sphere()
+t_sphere	*init_sphere()
 {
-	t_sphere_node	*sphere;
+	t_sphere	*sphere;
 
-	sphere = malloc(sizeof(t_sphere_node));
+	sphere = malloc(sizeof(t_sphere));
 	if (!sphere)
 		return (NULL);
 	sphere->pos.x = 0;
@@ -18,11 +18,11 @@ t_sphere_node	*init_sphere()
 	return (sphere);
 }
 
-t_plane_node	*init_plane()
+t_plane	*init_plane()
 {
-	t_plane_node	*plane;
+	t_plane	*plane;
 
-	plane = malloc(sizeof(t_plane_node));
+	plane = malloc(sizeof(t_plane));
 	if (!plane)
 		return (NULL);
 	plane->pos.x = 0;
@@ -39,11 +39,11 @@ t_plane_node	*init_plane()
 	return (plane);
 }
 
-t_cylinder_node	*init_cylinder()
+t_cylinder	*init_cylinder()
 {
-	t_cylinder_node	*cylinder;
+	t_cylinder	*cylinder;
 
-	cylinder = malloc(sizeof(t_cylinder_node));
+	cylinder = malloc(sizeof(t_cylinder));
 	if (!cylinder)
 		return (NULL);
 	cylinder->pos.x = 0;

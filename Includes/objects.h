@@ -16,14 +16,14 @@ typedef struct s_sphere_node
 	t_tuples	pos;
 	double		radius;
 	t_rgb		rgb;
-}				t_sphere_node;
+}				t_sphere;
 
 typedef struct s_plane_node
 {
 	t_tuples	pos;
 	t_tuples	axis;
 	t_rgb		rgb;
-}				t_plane_node;
+}				t_plane;
 
 typedef struct s_cylinder_node
 {
@@ -32,13 +32,13 @@ typedef struct s_cylinder_node
 	double		radius;
 	double		height;
 	t_rgb		rgb;
-}				t_cylinder_node;
+}				t_cylinder;
 
 typedef union u_obj_data
 {
-	t_sphere_node	*sphere;
-	t_plane_node	*plane;
-	t_cylinder_node	*cylinder;
+	t_sphere	*sphere;
+	t_plane		*plane;
+	t_cylinder	*cylinder;
 }					t_obj_data;
 
 typedef struct s_obj_node
