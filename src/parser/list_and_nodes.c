@@ -23,9 +23,6 @@ t_obj_node	*add_obj_node(t_obj_list *obj_list, int obj_type)
 	new_node->next = NULL;
 	new_node->type = obj_type;
 	new_node->data = init_obj_data(obj_type);
-	// new_node->t = ft_calloc(sizeof(double), 2);
-	// if (!new_node->t)
-	// 	return (free(new_node), NULL);
 	if (!new_node->data)
 		return (free(new_node), NULL);
 	if (!obj_list->head)
