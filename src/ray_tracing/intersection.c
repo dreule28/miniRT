@@ -37,7 +37,7 @@ t_obj_list	*intersect_to_list(t_scene *scene)
 {
 	t_obj_node	*curr;
 	t_ray		*ray;
-	// t_m4		*inv;
+	t_m4		*inv;
 
 	curr = scene->obj_list->head;
 	while (curr)
@@ -48,10 +48,10 @@ t_obj_list	*intersect_to_list(t_scene *scene)
 					init_vector(scene->camera.orientation_vector.x, scene->camera.orientation_vector.y, scene->camera.orientation_vector.z));
 			if (!ray)
 				return (NULL);
-			// set_transform(curr->data->sphere,
-			// 	ftm_translation(init_identity(), init_vector(5, 0, 0)));
-			// inv = ftm_m4_inversion(curr->data->sphere->matrix);
-			// ray = transform_ray(ray, inv);
+			set_transform(curr->data->sphere,
+				ftm_translation(init_identity(), init_vector(5, 0, 0)));
+			inv = ftm_m4_inversion(curr->data->sphere->matrix);
+			ray = transform_ray(ray, inv);
 			curr->t = intersect_sphere(ray, curr->data->sphere);
 			free(ray);
 		}

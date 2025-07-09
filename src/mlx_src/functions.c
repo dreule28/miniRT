@@ -48,10 +48,22 @@ void	key_hook(mlx_key_data_t keydata, void *param)
 	{
 		if (keydata.key == MLX_KEY_ESCAPE)
 			mlx_close_window(scene->mlx);
+		if (keydata.key == MLX_KEY_W)
+			scene->camera.pos.y += 1;
+		if (keydata.key == MLX_KEY_S)
+			scene->camera.pos.y -= 1;
+		if (keydata.key == MLX_KEY_A)
+			scene->camera.pos.x -= 1;
+		if (keydata.key == MLX_KEY_D)
+			scene->camera.pos.x += 1;
+		if (keydata.key == MLX_KEY_Q)
+			scene->camera.pos.z += 1;
+		if (keydata.key == MLX_KEY_E)
+			scene->camera.pos.z -= 1;
 	}
 }
 
-bool	ray_hits_sphere(t_scene *scene, t_ray *ray)
+t_sphere	*ray_hits_sphere(t_scene *scene, t_ray *ray)
 {
     t_obj_node	*curr;
 
@@ -80,12 +92,12 @@ bool	ray_hits_sphere(t_scene *scene, t_ray *ray)
             if (t)
             {
                 free(t);
-                return (true);
+                return (curr->data->sphere);
             }
         }
         curr = curr->next;
     }
-    return (false);
+    return (NULL);
 }
 
 int	get_rgba(int r, int g, int b, int a)
@@ -103,7 +115,7 @@ void	ray_tracing(void *param)
     pixels = (uint32_t *)scene->img->pixels;
 
     // Book's suggested values
-    t_tuples	*ray_origin = init_point(0, 0, -5);
+    t_tuples	*ray_origin = init_point(scene->camera.pos.x,scene->camera.pos.y, scene->camera.pos.z);
     double		wall_z = 10;
     double		wall_size = 7.0;
     int			canvas_pixels = 100; // Start small for testing
@@ -131,14 +143,14 @@ void	ray_tracing(void *param)
             t_ray *ray = init_ray(ray_origin, normalized_dir);
 
             // Test intersection with sphere
-            bool hit = ray_hits_sphere(scene, ray);
+            t_sphere *hit = ray_hits_sphere(scene, ray);
 
             // Set pixel color
             int pixel_index = y * canvas_pixels + x;
             if (pixel_index < (int)scene->img->width * (int)scene->img->height)
             {
                 if (hit)
-                    pixels[pixel_index] = get_rgba(255, 0, 0, 255); // Red
+                    pixels[pixel_index] = get_rgba(hit->rgb.r, hit->rgb.g, hit->rgb.b, 255); // Red
                 else
                     pixels[pixel_index] = get_rgba(0, 0, 0, 255);   // Black
             }
