@@ -62,7 +62,6 @@ void	print_matrix(t_m4 *m)
 int	main(int argc, char **argv)
 {
 	t_scene	*scene;
-	double	*hited;
 
 	scene = ft_calloc(sizeof(t_scene), 1);
 	if (!scene)
@@ -71,15 +70,15 @@ int	main(int argc, char **argv)
 		return (free(scene), 1);
 
 
-	scene->obj_list = intersect_to_list(scene);
-	hited = hit_obj(scene);
-	if (!hited)
-		printf("womp womp\n");
-	else
-	{
-		printf("hit[0]: %.2f\nhit[1]: %.2f\n", hited[0], hited[1]);
-		printf("T[0]: %.2f T[1]: %.2f\n", scene->obj_list->head->t[0], scene->obj_list->head->t[1]);
-	}
+	if(!init_mlx_window(scene))
+		return(1);
+	mlx_custom_hooks(scene);
+	mlx_loop(scene->mlx);
+	mlx_terminate(scene->mlx);
+
+
+
+
 	free_obj_list(scene->obj_list);
 	free_light_list(scene->light_list);
 	free(scene);

@@ -14,7 +14,7 @@ SRC_DIRS := src
 HEADERS = -I $(LIBFT_DIR)/include -I $(MLX42_DIR)/include/MLX42
 MLX42_DIR = MLX42
 MLX42_LIB = $(MLX42_DIR)/build/libmlx42.a
-LIBS = $(MLX42_LIB) $(LIBFT) -ldl -pthread -lm #-lglfw
+LIBS = $(MLX42_LIB) $(LIBFT) -ldl -pthread -lm -lglfw
 
 vpath %.h $(INC_DIRS)
 vpath %.c $(SRC_DIRS)
@@ -35,8 +35,11 @@ RAY_TRACING := $(addprefix ray_tracing/, $(RAY_TRACING_FILES))
 PARSER_FILES := fill_elements.c fill_objects.c initialize_objects.c list_and_nodes.c parser.c inits.c
 PARSER := $(addprefix parser/, $(PARSER_FILES))
 
+MLX_FILES := functions.c
+MLX := $(addprefix mlx_src/, $(MLX_FILES))
+
 SRC_FILES := main.c
-SRC := $(addprefix src/, $(SRC_FILES)  $(MATRICES) $(TUPLES) $(RAY_TRACING) $(PARSER))
+SRC := $(addprefix src/, $(SRC_FILES) $(MATRICES) $(TUPLES) $(RAY_TRACING) $(PARSER) $(MLX))
 
 ################################################################################
 ###############               OBJECT FILES & RULES                ##############

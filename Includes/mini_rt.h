@@ -17,7 +17,8 @@
 # include "ray_tracing.h"
 # include "custom_math.h"
 # include "matrices.h"
-# include "debug.h"
+# include "mlx_cusotm.h"
+
 //Includes -- END
 
 //Structs -- BEGIN
