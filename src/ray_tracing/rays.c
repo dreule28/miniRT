@@ -33,3 +33,15 @@ t_tuples	*ray_position(t_ray *ray, double time)
 	free(scalar);
 	return (pos);
 }
+
+t_ray	*transform_ray(t_ray *ray, t_m4 *m4)
+{
+	t_ray	*new_ray;
+
+	new_ray = ft_calloc(sizeof(t_ray), 1);
+	if (!new_ray)
+		return (NULL);
+	new_ray->direction = ftm_matrix_times_tuple(m4, ray->direction);
+	new_ray->origin = ftm_matrix_times_tuple(m4, ray->origin);
+	return (new_ray);
+}
