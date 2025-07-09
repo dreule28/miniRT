@@ -14,7 +14,7 @@ typedef struct s_tuples
 	double	x;
 	double	y;
 	double	z;
-	int		w;
+	double	w;
 }					t_tuples;
 
 typedef struct s_rgb

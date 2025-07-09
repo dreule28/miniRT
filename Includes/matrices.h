@@ -31,7 +31,7 @@ typedef struct s_m4_col
 	double	x;
 	double	y;
 	double	z;
-	int		w;
+	double	w;
 }			t_m4_col;
 
 typedef struct s_m2
@@ -58,7 +58,7 @@ typedef struct s_m4
 //add_col.c -- BEGIN
 t_m2_col	*assign_m2_col(double x, double y);
 t_m3_col	*assign_m3_col(double x, double y, double z);
-t_m4_col	*assign_m4_col(double x, double y, double z, int w);
+t_m4_col	*assign_m4_col(double x, double y, double z,  double w);
 //add_col.c -- END
 
 //cmp_col.c -- BEGIN

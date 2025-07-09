@@ -9,7 +9,7 @@ double	discri(t_ray *ray, t_sphere *sphere, double *a, double *b)
 	sphere_to_ray = ftm_tup_subtract(ray->origin, &sphere->pos);
 	*a = ftm_tup_dot(ray->direction, ray->direction);
 	*b = 2 * ftm_tup_dot(ray->direction, sphere_to_ray);
-	c = ftm_tup_dot(sphere_to_ray, sphere_to_ray) - 1;
+	c = ftm_tup_dot(sphere_to_ray, sphere_to_ray) - (sphere->radius * sphere->radius);
 	discriminant = *b * *b - 4 * *a * c;
 	free(sphere_to_ray);
 	return (discriminant);

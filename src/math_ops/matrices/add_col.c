@@ -25,7 +25,7 @@ t_m3_col	*assign_m3_col(double x, double y, double z)
 	return (new_col);
 }
 
-t_m4_col	*assign_m4_col(double x, double y, double z, int w)
+t_m4_col	*assign_m4_col(double x, double y, double z, double w)
 {
 	t_m4_col	*new_col;
 

@@ -16,8 +16,8 @@ t_m4	*ftm_transpose_matrix(t_m4 *old_matrix)
 			old_matrix->col2->y, old_matrix->col3->y);
 	new_matrix->col2 = assign_m4_col(old_matrix->col0->z, old_matrix->col1->z,
 			old_matrix->col2->z, old_matrix->col3->z);
-	new_matrix->col3 = assign_m4_col((double)old_matrix->col0->w,
-			(double)old_matrix->col1->w, (double)old_matrix->col2->w,
-			(double)old_matrix->col3->w);
+	new_matrix->col3 = assign_m4_col(old_matrix->col0->w,
+			old_matrix->col1->w, old_matrix->col2->w,
+			old_matrix->col3->w);
 	return (new_matrix);
 }

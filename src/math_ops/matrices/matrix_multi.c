@@ -29,7 +29,7 @@ double	get_col_component(t_m4_col *col, int row)
 	if (row == 2)
 		return (col->z);
 	if (row == 3)
-		return ((double)col->w);
+		return (col->w);
 	return (0.0);
 }
 
