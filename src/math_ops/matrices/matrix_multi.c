@@ -54,7 +54,7 @@ void	set_result_col(t_m4 *matrix, int col_index, double vals[4])
 
 	if (!matrix || col_index < 0 || col_index > 3 || !vals)
 		return ;
-	new_col = assign_m4_col(vals[0], vals[1], vals[2], (int)vals[3]);
+	new_col = assign_m4_col(vals[0], vals[1], vals[2], vals[3]);
 	if (!new_col)
 		return ;
 	if (col_index == 0)

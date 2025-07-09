@@ -6,7 +6,7 @@ double	discri(t_ray *ray, t_sphere *sphere, double *a, double *b)
 	double		discriminant;
 	double		c;
 
-	sphere_to_ray = ftm_tup_subtract(ray->origin, &sphere->pos);
+	sphere_to_ray = ftm_tup_subtract(ray->origin, init_point(0, 0, 0));
 	*a = ftm_tup_dot(ray->direction, ray->direction);
 	*b = 2 * ftm_tup_dot(ray->direction, sphere_to_ray);
 	c = ftm_tup_dot(sphere_to_ray, sphere_to_ray) - (sphere->radius * sphere->radius);
@@ -44,12 +44,12 @@ t_obj_list	*intersect_to_list(t_scene *scene)
 	{
 		if (curr->type == SPHERE)
 		{
-			ray = init_ray(&scene->camera.pos,
-					&scene->camera.orientation_vector);
+			ray = init_ray(init_point(scene->camera.pos.x, scene->camera.pos.y, scene->camera.pos.z),
+					init_vector(scene->camera.orientation_vector.x, scene->camera.orientation_vector.y, scene->camera.orientation_vector.z));
 			if (!ray)
 				return (NULL);
 			set_transform(curr->data->sphere,
-				 ftm_translation(init_identity(), init_vector(5, 0, 0)));
+				ftm_translation(ginit_identity(), init_vector(5, 0, 0)));
 			inv = ftm_m4_inversion(curr->data->sphere->matrix);
 			ray = transform_ray(ray, inv);
 			curr->t = intersect_sphere(ray, curr->data->sphere);

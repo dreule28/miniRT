@@ -50,7 +50,7 @@ void	print_matrix(t_m4 *m)
 		printf("Invalid matrix pointer.\n");
 		return;
 	}
-	
+
 	printf("Matrix:\n");
 	printf("| %6.2f %6.2f %6.2f %6.2f |\n", m->col0->x, m->col1->x, m->col2->x, m->col3->x);
 	printf("| %6.2f %6.2f %6.2f %6.2f |\n", m->col0->y, m->col1->y, m->col2->y, m->col3->y);
@@ -62,6 +62,7 @@ void	print_matrix(t_m4 *m)
 int	main(int argc, char **argv)
 {
 	t_scene	*scene;
+	double	*hited;
 
 	scene = ft_calloc(sizeof(t_scene), 1);
 	if (!scene)
@@ -69,24 +70,17 @@ int	main(int argc, char **argv)
 	if (!parser(scene, argc, argv))
 		return (free(scene), 1);
 
-	// t_m4 *m = ftm_translation(init_identity(), init_vector(5, 0, 0));
-	t_m4	*new_matrix;
 
-	new_matrix = init_m4();
-	// if (!new_matrix)
-	// 	return (NULL);
-	new_matrix->col0 = assign_m4_col(8, 7, -6, -3);
-	new_matrix->col1 = assign_m4_col(-5, 5, 0, 0);
-	new_matrix->col2 = assign_m4_col(9, 6, 9, -9);
-	new_matrix->col3 = assign_m4_col(2, 1, 6, -4);
-	print_matrix(new_matrix);
-	t_m4 *inv = ftm_m4_inversion(new_matrix);
-	print_matrix(inv);
-	t_m4 *result = ftm_matrix_mult(new_matrix, inv);
-	print_matrix(result);
-
-	// free_obj_list(scene->obj_list);
-	// free_light_list(scene->light_list);
-	// free(scene);
-	return (0);
+	scene->obj_list = intersect_to_list(scene);
+	hited = hit_obj(scene);
+	if (!hited)
+		printf("womp womp\n");
+	else
+	{
+		printf("hit[0]: %.2f\nhit[1]: %.2f\n", hited[0], hited[1]);
+		printf("T[0]: %.2f T[1]: %.2f\n", scene->obj_list->head->t[0], scene->obj_list->head->t[1]);
+	}
+	free_obj_list(scene->obj_list);
+	free_light_list(scene->light_list);
+	free(scene);
 }
