@@ -16,6 +16,7 @@ typedef struct s_sphere
 	t_tuples	pos;
 	double		radius;
 	t_rgb		rgb;
+	t_m4		*matrix;
 }				t_sphere;
 
 typedef struct s_plane

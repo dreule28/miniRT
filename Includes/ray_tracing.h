@@ -1,6 +1,9 @@
 #ifndef RAY_TRACING_H
 # define RAY_TRACING_H
 
+typedef struct s_m2	t_m2;
+typedef struct s_m3	t_m3;
+typedef struct s_m4	t_m4;
 typedef struct s_projectile
 {
 	t_tuples	*position;
@@ -19,6 +22,7 @@ typedef struct s_ray
 	t_tuples	*direction;
 }				t_ray;
 
+
 // intersection.c -- BEGIN
 double		discri(t_ray *ray, t_sphere *sphere, double *a, double *b);
 double		*intersect_sphere(t_ray *ray, t_sphere *sphere);
@@ -30,6 +34,7 @@ double		*hit_obj(t_scene *scene);
 void		free_ray(t_ray *ray);
 t_ray		*init_ray(t_tuples *origin, t_tuples *direction);
 t_tuples	*ray_position(t_ray *ray, double time);
+t_ray		*transform_ray(t_ray *ray, t_m4 *m4);
 // rays.c -- END
 
 #endif
