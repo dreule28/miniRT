@@ -80,6 +80,10 @@ double		ftm_m3_dmt(t_m3 *m3);
 double		ftm_m4_dmt(t_m4 *m4);
 //determinant.c -- END
 
+//identity_matrix.c -- BEGIN
+t_m4		*init_identity(void);
+//identity_matrix.c -- END
+
 //init_matrices.c -- BEGIN
 t_m4		*init_m4(void);
 t_m3		*init_m3(void);

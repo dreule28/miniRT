@@ -2,8 +2,9 @@
 
 t_m4	*ftm_translation(t_m4 *matrix, t_tuples *tuple)
 {
-	matrix->col3 = assign_m4_col(matrix->col3->x + tuple->x, matrix->col3->y
-			+ tuple->y, matrix->col3->z + tuple->z, 1);
+	if (matrix->col3)
+		free(matrix->col3);
+	matrix->col3 = assign_m4_col(tuple->x, tuple->y, tuple->z, 1);
 	return (matrix);
 }
 

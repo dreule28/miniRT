@@ -45,3 +45,16 @@ t_ray	*transform_ray(t_ray *ray, t_m4 *m4)
 	new_ray->origin = ftm_matrix_times_tuple(m4, ray->origin);
 	return (new_ray);
 }
+
+void	set_transform(t_sphere *sphere, t_m4 *translation_matrix)
+{
+	if (sphere->matrix)
+	{
+		free(sphere->matrix->col0);
+		free(sphere->matrix->col1);
+		free(sphere->matrix->col2);
+		free(sphere->matrix->col3);
+		free(sphere->matrix);
+	}
+	sphere->matrix = translation_matrix;
+}

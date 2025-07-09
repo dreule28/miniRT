@@ -4,6 +4,8 @@
 # include "custom_math.h"
 # include <unistd.h>
 
+typedef struct s_m4	t_m4;
+
 typedef enum e_obj_type
 {
 	SPHERE,

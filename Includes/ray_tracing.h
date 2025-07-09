@@ -35,6 +35,7 @@ void		free_ray(t_ray *ray);
 t_ray		*init_ray(t_tuples *origin, t_tuples *direction);
 t_tuples	*ray_position(t_ray *ray, double time);
 t_ray		*transform_ray(t_ray *ray, t_m4 *m4);
+void		set_transform(t_sphere *sphere, t_m4 *matrix);
 // rays.c -- END
 
 #endif
