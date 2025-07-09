@@ -19,7 +19,7 @@ t_obj_data	*init_sphere_data(t_obj_data *data)
 
 t_obj_data	*init_plane_data(t_obj_data *data)
 {
-	data->plane = init_plane(NULL);
+	data->plane = init_plane();
 	if (!data->plane)
 		return (free(data), NULL);
 	return (data);
@@ -27,7 +27,7 @@ t_obj_data	*init_plane_data(t_obj_data *data)
 
 t_obj_data	*init_cylinder_data(t_obj_data *data)
 {
-	data->cylinder = init_cylinder(NULL);
+	data->cylinder = init_cylinder();
 	if (!data->cylinder)
 		return (free(data), NULL);
 	return (data);
