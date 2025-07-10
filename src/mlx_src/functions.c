@@ -26,10 +26,25 @@ bool	init_mlx_window(t_scene *scene)
 	return (true);
 }
 
+void	scroll_hook(double xdelta, double ydelta , void *param)
+{
+	t_scene	*scene;
+
+	(void)xdelta;
+	scene = (t_scene *)param;
+	uint32_t	*pixels;
+	pixels = (uint32_t *)scene->img->pixels;
+	if (ydelta > 0)
+		scene->camera.pos.z +=1;
+	else if (ydelta < 0)
+		scene->camera.pos.z -=1;
+}
+
 void	mlx_custom_hooks(t_scene *scene)
 {
 	mlx_loop_hook(scene->mlx, &ray_tracing, scene);
 	mlx_key_hook(scene->mlx, &key_hook, scene);
+	mlx_scroll_hook(scene->mlx, &scroll_hook, scene);
 }
 
 uint32_t create_rgba(uint8_t r, uint8_t g, uint8_t b, uint8_t a)
@@ -56,10 +71,6 @@ void	key_hook(mlx_key_data_t keydata, void *param)
 			scene->camera.pos.x -= 1;
 		if (keydata.key == MLX_KEY_D)
 			scene->camera.pos.x += 1;
-		if (keydata.key == MLX_KEY_Q)
-			scene->camera.pos.z += 1;
-		if (keydata.key == MLX_KEY_E)
-			scene->camera.pos.z -= 1;
 	}
 }
 

@@ -76,9 +76,6 @@ int	main(int argc, char **argv)
 	mlx_loop(scene->mlx);
 	mlx_terminate(scene->mlx);
 
-
-
-
 	free_obj_list(scene->obj_list);
 	free_light_list(scene->light_list);
 	free(scene);
