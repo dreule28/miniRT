@@ -58,6 +58,16 @@ void	print_matrix(t_m4 *m)
 	printf("| %6.2f %6.2f %6.2f %6.2f |\n", m->col0->w, m->col1->w, m->col2->w, m->col3->w);
 }
 
+void	print_terminal(void)
+{
+	printf("===========================\n");
+	printf("camera pos:\n");
+	printf("x : 0.000000 y : 0.000000 z : 0.000000\n");
+	printf("camera orientation:\n");
+	printf("x : 0.000000 y : 0.000000 z : 0.000000\n");
+	printf("===========================\n");
+	fflush(stdout);
+}
 
 int	main(int argc, char **argv)
 {
@@ -70,6 +80,7 @@ int	main(int argc, char **argv)
 		return (free(scene), 1);
 	// scene->camera.movement = ft_calloc(sizeof(t_movement), 1);
 
+	print_terminal();
 	if(!init_mlx_window(scene))
 		return(1);
 	mlx_custom_hooks(scene);

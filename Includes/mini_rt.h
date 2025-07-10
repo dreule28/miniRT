@@ -1,7 +1,7 @@
 #ifndef MINI_RT_H
 # define MINI_RT_H
-# define HEIGHT 1080
-# define WIDTH 1920
+# define HEIGHT 200
+# define WIDTH 200
 # define DBL_EPSILON 2.2204460492503131e-16
 
 //Includes -- BEGIN

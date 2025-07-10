@@ -48,7 +48,7 @@ SRC := $(addprefix src/, $(SRC_FILES) $(MATRICES) $(TUPLES) $(RAY_TRACING) $(PAR
 OBJS := $(addprefix $(OBJ_DIR)/, $(SRC:%.c=%.o))
 
 # Compilation flags and linking options
-CFLAGS := -Wall -Wextra -Werror -g -IIncludes -Ilibft -I$(MLX42_DIR)/include/MLX42 -MMD -MP $(addprefix -I, $(INC_DIRS))
+CFLAGS := -Wall -Wextra -Werror -g -IIncludes -Ofast -flto -march=native -Ilibft -I$(MLX42_DIR)/include/MLX42 -MMD -MP $(addprefix -I, $(INC_DIRS))
 LDFLAGS := -Llibft -lft  -lreadline -lncurses
 CFLAGS_SAN := $(CFLAGS) -fsanitize=address -g
 LDFLAGS_SAN := $(LDFLAGS) -fsanitize=address
