@@ -40,11 +40,30 @@ void	scroll_hook(double xdelta, double ydelta , void *param)
 		scene->camera.pos.z -=1;
 }
 
+void	cursor_hook(double xpos, double ypos, void *param)
+{
+	t_scene	*scene;
+	double	center_x;
+	double	center_y;
+	scene = (t_scene *)param;
+	uint32_t	*pixels;
+	pixels = (uint32_t *)scene->img->pixels;
+	center_x = WIDTH / 2;
+	center_y = HEIGHT / 2;
+	scene->camera.orientation_vector.x += (xpos - center_x) * 0.001;
+	scene->camera.orientation_vector.y += (ypos - center_y) * 0.001;
+	mlx_set_mouse_pos(scene->mlx, center_x, center_y);
+}	
+
 void	mlx_custom_hooks(t_scene *scene)
 {
+	if (mlx_is_key_down(scene->mlx, MLX_KEY_W))
+		scene->camera.pos.y += 0.2;
 	mlx_loop_hook(scene->mlx, &ray_tracing, scene);
 	mlx_key_hook(scene->mlx, &key_hook, scene);
 	mlx_scroll_hook(scene->mlx, &scroll_hook, scene);
+	// mlx_set_cursor_mode(scene->mlx, MLX_MOUSE_DISABLED);
+	// mlx_cursor_hook(scene->mlx, &cursor_hook, scene);
 }
 
 uint32_t create_rgba(uint8_t r, uint8_t g, uint8_t b, uint8_t a)
@@ -56,22 +75,23 @@ void	key_hook(mlx_key_data_t keydata, void *param)
 {
 	t_scene	*scene;
 
+	(void)keydata;
 	scene = (t_scene *)param;
 	uint32_t	*pixels;
 	pixels = (uint32_t *)scene->img->pixels;
-	if (keydata.action == MLX_PRESS)
-	{
-		if (keydata.key == MLX_KEY_ESCAPE)
-			mlx_close_window(scene->mlx);
-		if (keydata.key == MLX_KEY_W)
-			scene->camera.pos.y += 1;
-		if (keydata.key == MLX_KEY_S)
-			scene->camera.pos.y -= 1;
-		if (keydata.key == MLX_KEY_A)
-			scene->camera.pos.x -= 1;
-		if (keydata.key == MLX_KEY_D)
-			scene->camera.pos.x += 1;
-	}
+	// if (keydata.action == MLX_PRESS || keydata.action == MLX_REPEAT)
+	// {
+	// 	if (keydata.key == MLX_KEY_ESCAPE)
+	// 		mlx_close_window(scene->mlx);
+	// 	if (keydata.key == MLX_KEY_W)
+	// 		scene->camera.pos.y += 0.2;
+	// 	if (keydata.key == MLX_KEY_S)
+	// 		scene->camera.pos.y -= 0.2;
+	// 	if (keydata.key == MLX_KEY_A)
+	// 		scene->camera.pos.x -= 0.2;
+	// 	if (keydata.key == MLX_KEY_D)
+	// 		scene->camera.pos.x += 0.2;
+	// }
 }
 
 t_sphere	*ray_hits_sphere(t_scene *scene, t_ray *ray)
