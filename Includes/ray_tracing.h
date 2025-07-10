@@ -38,4 +38,8 @@ t_ray		*transform_ray(t_ray *ray, t_m4 *m4);
 void		set_transform(t_sphere *sphere, t_m4 *matrix);
 // rays.c -- END
 
+// intersec_sphere.c -- BEGIN
+t_sphere	*ray_hits_sphere(t_scene *scene, t_ray *ray);
+// intersec_sphere.c -- END
+
 #endif

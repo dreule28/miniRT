@@ -78,9 +78,7 @@ int	main(int argc, char **argv)
 		return (1);
 	if (!parser(scene, argc, argv))
 		return (free(scene), 1);
-	// scene->camera.movement = ft_calloc(sizeof(t_movement), 1);
-
-	print_terminal();
+	print_terminal();// debug prints
 	if(!init_mlx_window(scene))
 		return(1);
 	mlx_custom_hooks(scene);

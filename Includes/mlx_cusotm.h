@@ -5,11 +5,25 @@
 # include "scene.h"
 # include "../MLX42/include/MLX42/MLX42.h"
 
+t_sphere	*ray_hits_sphere(t_scene *scene, t_ray *ray);
+
+// src/mlx_src/ray_tracing_loop.c -- BEGIN
+void	ray_tracing(void *param);
+// src/mlx_src/ray_tracing_loop.c -- END
+
+// src/mlx_src/mlx_utils.c -- BEGIN
 bool	init_mlx_window(t_scene *scene);
 void	mlx_custom_hooks(t_scene *scene);
-uint32_t create_rgba(uint8_t r, uint8_t g, uint8_t b, uint8_t a);
+int		get_rgba(int r, int g, int b, int a);
+void	print_terminal_update(t_scene *scene);
+// src/mlx_src/mlx_utils.c -- END
+
+// src/mlx_src/mlx_hooks.c -- BEGIN
 void	key_hook(mlx_key_data_t keydata, void *param);
-void	ray_tracing(void *param);
-t_sphere	*ray_hits_sphere(t_scene *scene, t_ray *ray);
+void	mlx_custom_hooks(t_scene *scene);
+void	update_camera(void *param);
+void	cursor_hook(double xpos, double ypos, void *param);
+void	scroll_hook(double xdelta, double ydelta, void *param);
+// src/mlx_src/mlx_hooks.c -- END
 
 #endif
