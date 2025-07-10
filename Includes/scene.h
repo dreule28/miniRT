@@ -10,11 +10,20 @@ typedef struct s_ambi_light
 	t_rgb			rgb;
 }					t_ambi_light;
 
+typedef	struct s_movement
+{
+	bool key_w;
+    bool key_s;
+    bool key_a;
+    bool key_d;
+}					t_movement;
+
 typedef struct s_camera
 {
 	t_tuples		pos;
 	t_tuples		orientation_vector;
 	int				fov;
+	t_movement		movement;
 }					t_camera;
 
 typedef struct s_light

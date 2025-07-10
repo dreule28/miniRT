@@ -68,15 +68,15 @@ int	main(int argc, char **argv)
 		return (1);
 	if (!parser(scene, argc, argv))
 		return (free(scene), 1);
-
+	// scene->camera.movement = ft_calloc(sizeof(t_movement), 1);
 
 	if(!init_mlx_window(scene))
 		return(1);
 	mlx_custom_hooks(scene);
 	mlx_loop(scene->mlx);
 	mlx_terminate(scene->mlx);
-
-	free_obj_list(scene->obj_list);
-	free_light_list(scene->light_list);
-	free(scene);
+	// free_obj_list(scene->obj_list);
+	// free_light_list(scene->light_list);
+	// free(scene);
+	return(0);
 }

@@ -55,6 +55,32 @@ void	cursor_hook(double xpos, double ypos, void *param)
 	mlx_set_mouse_pos(scene->mlx, center_x, center_y);
 }	
 
+void	print_terminal(t_scene *scene)
+{
+	printf("===========================");
+	printf("camera pos:\n");
+	printf("x : %.6f y : %.6f z : %.6f\n",scene->camera.pos.x,scene->camera.pos.y,scene->camera.pos.z);
+	printf("camera oriantaion:\n");
+	printf("x : %.6f y : %.6f z : %.6f\n",scene->camera.pos.x, scene->camera.pos.y, scene->camera.pos.z);
+	printf("===========================");
+}
+
+void update_camera(void *param)
+{
+	t_scene	*scene;
+	scene = (t_scene *)param;
+
+	print_terminal(scene);
+    if (scene->camera.movement.key_w)
+        scene->camera.pos.y += 0.08;
+    if (scene->camera.movement.key_s)
+        scene->camera.pos.y -= 0.08;
+    if (scene->camera.movement.key_a)
+        scene->camera.pos.x -= 0.08;
+    if (scene->camera.movement.key_d)
+        scene->camera.pos.x += 0.08;
+}
+
 void	mlx_custom_hooks(t_scene *scene)
 {
 	if (mlx_is_key_down(scene->mlx, MLX_KEY_W))
@@ -62,6 +88,7 @@ void	mlx_custom_hooks(t_scene *scene)
 	mlx_loop_hook(scene->mlx, &ray_tracing, scene);
 	mlx_key_hook(scene->mlx, &key_hook, scene);
 	mlx_scroll_hook(scene->mlx, &scroll_hook, scene);
+	mlx_loop_hook(scene->mlx, &update_camera, scene);
 	// mlx_set_cursor_mode(scene->mlx, MLX_MOUSE_DISABLED);
 	// mlx_cursor_hook(scene->mlx, &cursor_hook, scene);
 }
@@ -73,25 +100,22 @@ uint32_t create_rgba(uint8_t r, uint8_t g, uint8_t b, uint8_t a)
 
 void	key_hook(mlx_key_data_t keydata, void *param)
 {
-	t_scene	*scene;
+    t_scene *scene = (t_scene *)param;
 
-	(void)keydata;
-	scene = (t_scene *)param;
-	uint32_t	*pixels;
-	pixels = (uint32_t *)scene->img->pixels;
-	// if (keydata.action == MLX_PRESS || keydata.action == MLX_REPEAT)
-	// {
-	// 	if (keydata.key == MLX_KEY_ESCAPE)
-	// 		mlx_close_window(scene->mlx);
-	// 	if (keydata.key == MLX_KEY_W)
-	// 		scene->camera.pos.y += 0.2;
-	// 	if (keydata.key == MLX_KEY_S)
-	// 		scene->camera.pos.y -= 0.2;
-	// 	if (keydata.key == MLX_KEY_A)
-	// 		scene->camera.pos.x -= 0.2;
-	// 	if (keydata.key == MLX_KEY_D)
-	// 		scene->camera.pos.x += 0.2;
-	// }
+    if (keydata.key == MLX_KEY_ESCAPE && keydata.action == MLX_PRESS)
+        mlx_close_window(scene->mlx);
+
+    if (keydata.key == MLX_KEY_W)
+        scene->camera.movement.key_w = (keydata.action != MLX_RELEASE);
+
+    if (keydata.key == MLX_KEY_S)
+        scene->camera.movement.key_s = (keydata.action != MLX_RELEASE);
+
+    if (keydata.key == MLX_KEY_A)
+        scene->camera.movement.key_a = (keydata.action != MLX_RELEASE);
+
+    if (keydata.key == MLX_KEY_D)
+        scene->camera.movement.key_d = (keydata.action != MLX_RELEASE);
 }
 
 t_sphere	*ray_hits_sphere(t_scene *scene, t_ray *ray)
