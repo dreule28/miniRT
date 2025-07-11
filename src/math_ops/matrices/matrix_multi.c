@@ -4,7 +4,7 @@ t_tuples	*ftm_matrix_times_tuple(t_m4 *matrix, t_tuples *tuple)
 {
 	t_tuples	*res;
 
-	res = malloc(sizeof(t_tuples));
+	res = ft_calloc(sizeof(t_tuples), 1);
 	if (!res)
 		return (NULL);
 	res->x = matrix->col0->x * tuple->x + matrix->col1->x * tuple->y
