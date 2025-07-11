@@ -10,7 +10,8 @@ t_sphere	*ray_hits_sphere(t_scene *scene, t_ray *ray);
 // src/mlx_src/ray_tracing_loop.c -- BEGIN
 void	ray_tracing(void *param);
 void	paint_pixel(t_scene *scene, t_ray *ray, int pixel_index);
-t_ray	 *setup_shooting_ray(t_tuples *ray_origin, double world_x, double world_y, double wall_z);
+t_ray	*setup_shooting_ray(t_tuples *ray_origin, double world_x, double world_y, double wall_z);
+void	calculate_ray(t_scene *scene, t_tuples *window_cord, t_tuples *world_cord);
 // src/mlx_src/ray_tracing_loop.c -- END
 
 // src/mlx_src/mlx_utils.c -- BEGIN

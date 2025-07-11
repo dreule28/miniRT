@@ -3,43 +3,27 @@
 void	ray_tracing(void *param)
 {
 	t_scene		*scene;
-	t_tuples	*ray_origin;
-	double		wall_z;
-	double		wall_size;
+	t_tuples	*window_cord;
+	t_tuples	*world_cord;
 	double		pixel_size;
 	double		half;
-	double		world_y;
-	double		world_x;
 
-	int			pixel_index;
-	t_ray		*ray;
-	int x, y;
 	scene = (t_scene *)param;
-	// Book's suggested values
-	ray_origin = init_point(scene->camera.pos.x, scene->camera.pos.y,
-			scene->camera.pos.z);
-	
-
-	wall_z = HEIGHT * 0.1;
-	wall_size = WIDTH * 0.07;
-	int canvas_pixels = HEIGHT; // Start small for testing
-	pixel_size = wall_size / canvas_pixels;
-	half = wall_size / 2;
-
-	y = 0;
-	while(y < canvas_pixels)
+	window_cord = init_point(0, 0, HEIGHT * 0.1);
+	world_cord = init_point(0, 0, 0);
+	pixel_size = WIDTH * 0.07 / HEIGHT;
+	half = WIDTH * 0.07 / 2;
+	while (window_cord->y < HEIGHT)
 	{
-		world_y = half - pixel_size * y;
-		x = 0;
-		while (x < canvas_pixels)
+		world_cord->y = half - pixel_size * window_cord->y;
+		window_cord->x = 0;
+		while (window_cord->x < HEIGHT)
 		{
-			world_x = -half + pixel_size * x;
-			ray = setup_shooting_ray(ray_origin, world_x, world_y, wall_z);
-			pixel_index = y * canvas_pixels + x;
-			paint_pixel(scene, ray, pixel_index);
-			x++;
+			world_cord->x = -half + pixel_size * window_cord->x;
+			calculate_ray(scene, window_cord, world_cord);
+			window_cord->x++;
 		}
-		y++;
+		window_cord->y++;
 	}
 }
 
@@ -53,23 +37,38 @@ void	paint_pixel(t_scene *scene, t_ray *ray, int pixel_index)
 	if (pixel_index < (int)scene->img->width * (int)scene->img->height)
 	{
 		if (hit)
-			pixels[pixel_index] = get_rgba(hit->rgb.r, hit->rgb.g,
-					hit->rgb.b, 255);
+			pixels[pixel_index] = get_rgba(hit->rgb.r, hit->rgb.g, hit->rgb.b,
+					255);
 		else
 			pixels[pixel_index] = get_rgba(0, 0, 0, 255);
 	}
 }
 
-t_ray	*setup_shooting_ray(t_tuples *ray_origin, double world_x, double world_y, double wall_z)
-{	
+t_ray	*setup_shooting_ray(t_tuples *ray_origin, double world_x,
+		double world_y, double wall_z)
+{
 	t_tuples	*position;
 	t_tuples	*direction;
 	t_tuples	*normalized_dir;
-	t_ray	*ray;
+	t_ray		*ray;
 
 	position = init_point(world_x, world_y, wall_z);
 	direction = ftm_tup_subtract(position, ray_origin);
 	normalized_dir = ftm_tup_norm(direction);
 	ray = init_ray(ray_origin, normalized_dir);
-	return(ray);
+	return (ray);
+}
+
+void	calculate_ray(t_scene *scene, t_tuples *window_cord,
+		t_tuples *world_cord)
+{
+	t_tuples	*ray_origin;
+	t_ray		*ray;
+	int			pixel_index;
+
+	ray_origin = copy_point(&scene->camera.pos);
+	ray = setup_shooting_ray(ray_origin, world_cord->x, world_cord->y,
+			window_cord->z);
+	pixel_index = window_cord->y * HEIGHT + window_cord->x;
+	paint_pixel(scene, ray, pixel_index);
 }
