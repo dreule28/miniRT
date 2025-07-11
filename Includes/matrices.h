@@ -109,6 +109,12 @@ double		ftm_m3_dmt(t_m3 *m3);
 double		ftm_m4_dmt(t_m4 *m4);
 //determinant.c -- END
 
+// free_matrices.c -- BEGIN
+void		free_matrix_m2(t_m2 *matrix);
+void		free_matrix_m3(t_m3 *matrix);
+void		free_matrix_m4(t_m4 *matrix);
+// free_matrices.c -- END
+
 //init_matrices.c -- BEGIN
 /* Creates a 4x4 identity matrix */
 t_m4		*init_identity(void);

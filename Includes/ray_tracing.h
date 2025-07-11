@@ -43,6 +43,8 @@ void		set_transform(t_sphere *sphere, t_m4 *matrix);
 // rays.c -- END
 
 // surface_normals.c -- BEGIN
+void		free_tuple(t_tuples *tuple);
+t_tuples	*get_world_normal(t_m4 *inverse, t_tuples *obj_point);
 t_tuples	*normal_at(t_sphere *sphere, t_tuples *point);
 // surface_normals.c -- END
 
