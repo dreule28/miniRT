@@ -10,9 +10,7 @@ void	ray_tracing(void *param)
 	double		half;
 	double		world_y;
 	double		world_x;
-	t_tuples	*position;
-	t_tuples	*direction;
-	t_tuples	*normalized_dir;
+
 	int			pixel_index;
 	t_ray		*ray;
 	int x, y;
@@ -32,34 +30,15 @@ void	ray_tracing(void *param)
 	// Cast rays for each pixel
 	for (y = 0; y < canvas_pixels; y++)
 	{
-		// Convert canvas y to world y (flip coordinate)
 		world_y = half - pixel_size * y;
 		for (x = 0; x < canvas_pixels; x++)
 		{
-			// Convert canvas x to world x
 			world_x = -half + pixel_size * x;
-			
-			// Target point on the wall
-			position = init_point(world_x, world_y, wall_z);
-			
-			
-			// Direction from ray origin to wall point
-			direction = ftm_tup_subtract(position, ray_origin);
-			normalized_dir = ftm_tup_norm(direction);
-			ray = init_ray(ray_origin, normalized_dir);
-
-
-			// Test intersection with sphere
+			ray = setup_shooting_ray(ray_origin, world_x, world_y, wall_z);
 			pixel_index = y * canvas_pixels + x;
 			paint_pixel(scene, ray, pixel_index);
-
-			free(position);
-			free(direction);
-			free(normalized_dir);
-			free_ray(ray);
 		}
 	}
-	free(ray_origin);
 }
 
 void	paint_pixel(t_scene *scene, t_ray *ray, int pixel_index)
@@ -77,4 +56,18 @@ void	paint_pixel(t_scene *scene, t_ray *ray, int pixel_index)
 		else
 			pixels[pixel_index] = get_rgba(0, 0, 0, 255);
 	}
+}
+
+t_ray	*setup_shooting_ray(t_tuples *ray_origin, double world_x, double world_y, double wall_z)
+{	
+	t_tuples	*position;
+	t_tuples	*direction;
+	t_tuples	*normalized_dir;
+	t_ray	*ray;
+
+	position = init_point(world_x, world_y, wall_z);
+	direction = ftm_tup_subtract(position, ray_origin);
+	normalized_dir = ftm_tup_norm(direction);
+	ray = init_ray(ray_origin, normalized_dir);
+	return(ray);
 }
