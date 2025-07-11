@@ -26,18 +26,20 @@ void	ray_tracing(void *param)
 	pixel_size = wall_size / canvas_pixels;
 	half = wall_size / 2;
 
-
-	// Cast rays for each pixel
-	for (y = 0; y < canvas_pixels; y++)
+	y = 0;
+	while(y < canvas_pixels)
 	{
 		world_y = half - pixel_size * y;
-		for (x = 0; x < canvas_pixels; x++)
+		x = 0;
+		while (x < canvas_pixels)
 		{
 			world_x = -half + pixel_size * x;
 			ray = setup_shooting_ray(ray_origin, world_x, world_y, wall_z);
 			pixel_index = y * canvas_pixels + x;
 			paint_pixel(scene, ray, pixel_index);
+			x++;
 		}
+		y++;
 	}
 }
 
