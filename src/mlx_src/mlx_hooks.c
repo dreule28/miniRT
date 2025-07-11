@@ -33,14 +33,14 @@ void	update_camera(void *param)
 
 	scene = (t_scene *)param;
 	print_terminal_update(scene);
-	if (scene->camera.movement.key_w)
-		scene->camera.pos.y += 0.08;
-	if (scene->camera.movement.key_s)
-		scene->camera.pos.y -= 0.08;
-	if (scene->camera.movement.key_a)
-		scene->camera.pos.x -= 0.08;
-	if (scene->camera.movement.key_d)
-		scene->camera.pos.x += 0.08;
+	// if (scene->camera.movement.key_w)
+	// 	scene->camera.pos.y += 0.08;
+	// if (scene->camera.movement.key_s)
+	// 	scene->camera.pos.y -= 0.08;
+	// if (scene->camera.movement.key_a)
+	// 	scene->camera.pos.x -= 0.08;
+	// if (scene->camera.movement.key_d)
+	// 	scene->camera.pos.x += 0.08;
 }
 
 void	cursor_hook(double xpos, double ypos, void *param)

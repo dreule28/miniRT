@@ -23,7 +23,7 @@ typedef struct s_camera
 	t_tuples		pos;
 	t_tuples		orientation_vector;
 	int				fov;
-	t_movement		movement;
+	// t_movement		movement;
 }					t_camera;
 
 typedef struct s_light
