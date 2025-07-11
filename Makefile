@@ -16,10 +16,14 @@ HEADERS = -I $(LIBFT_DIR)/include -I $(MLX42_DIR)/include/MLX42
 MLX42_DIR = MLX42
 MLX42_LIB = $(MLX42_DIR)/build/libmlx42.a
 ifeq ($(UNAME_S),Linux)
-	LIBS = $(LIBFT) $(MLX42_LIB) -ldl -pthread -lm -lglfw -lGL -lX11
+	LIBS = $(LIBFT) $(MLX42_LIB) -ldl -pthread -lm -lglfw -lGL -lX11 -Iinclude
 else
 	LIBS = $(LIBFT) $(MLX42_LIB) -ldl -pthread -lm -lglfw -framework Cocoa -framework OpenGL -framework IOKit
 endif
+
+#if needed for dorker
+#	dorker apt update
+#	apt install build-essential libx11-dev libglfw3-dev libglfw3 xorg-dev
 
 vpath %.h $(INC_DIRS)
 vpath %.c $(SRC_DIRS)
