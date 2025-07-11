@@ -19,6 +19,7 @@ t_tuples	*get_world_normal(t_m4 *inverse, t_tuples *obj_point)
 	world_normal = ftm_matrix_times_tuple(transpose, object_normal);
 	if (!world_normal)
 		return (NULL);
+	world_normal->w = 0;
 	free_matrix_m4(transpose);
 	free_tuple(object_normal);
 	free_tuple(origin);
@@ -37,6 +38,8 @@ t_tuples	*normal_at(t_sphere *sphere, t_tuples *world_point)
 		return (NULL);
 	object_point = ftm_matrix_times_tuple(inverse, world_point);
 	world_normal = get_world_normal(inverse, object_point);
+	if (!world_normal)
+		return (NULL);
 	normalized = ftm_tup_norm(world_normal);
 	free_tuple(object_point);
 	free_matrix_m4(inverse);
