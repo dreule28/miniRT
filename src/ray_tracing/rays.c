@@ -2,7 +2,7 @@
 
 void	free_ray(t_ray *ray)
 {
-	if (!ray)
+	if (ray)
 		free(ray);
 }
 
@@ -10,7 +10,7 @@ t_ray	*init_ray(t_tuples *origin, t_tuples *direction)
 {
 	t_ray	*ray;
 
-	ray = malloc(sizeof(t_ray));
+	ray = ft_calloc(sizeof(t_ray), 1);
 	if (!ray)
 		return (NULL);
 	ray->origin = origin;
