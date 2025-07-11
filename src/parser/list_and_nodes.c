@@ -4,7 +4,7 @@ t_obj_list	*init_obj_list(void)
 {
 	t_obj_list	*obj_list;
 
-	obj_list = malloc(sizeof(t_obj_list));
+	obj_list = ft_calloc(sizeof(t_obj_list), 1);
 	if (!obj_list)
 		return (NULL);
 	obj_list->head = NULL;
@@ -17,7 +17,7 @@ t_obj_node	*add_obj_node(t_obj_list *obj_list, int obj_type)
 {
 	t_obj_node	*new_node;
 
-	new_node = malloc(sizeof(t_obj_node));
+	new_node = ft_calloc(sizeof(t_obj_node), 1);
 	if (!new_node)
 		return (NULL);
 	new_node->next = NULL;
@@ -38,7 +38,7 @@ t_obj_data	*init_obj_data(int obj_type)
 {
 	t_obj_data	*new_data;
 
-	new_data = malloc(sizeof(t_obj_data));
+	new_data = ft_calloc(sizeof(t_obj_data), 1);
 	if (!new_data)
 		return (NULL);
 	if (obj_type == SPHERE)
@@ -55,7 +55,7 @@ t_light_list	*init_light_list(void)
 {
 	t_light_list	*light_list;
 
-	light_list = malloc(sizeof(t_light_list));
+	light_list = ft_calloc(sizeof(t_light_list), 1);
 	if (!light_list)
 		return (NULL);
 	light_list->head = NULL;
@@ -68,7 +68,7 @@ t_light	*add_light_node(t_light_list *light_list, char *parsed_line)
 {
 	t_light	*new_node;
 
-	new_node = malloc(sizeof(t_light));
+	new_node = ft_calloc(sizeof(t_light), 1);
 	if (!new_node)
 		return (NULL);
 	add_light(new_node, parsed_line);
