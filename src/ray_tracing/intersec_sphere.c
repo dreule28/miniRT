@@ -12,7 +12,6 @@ t_sphere	*ray_hits_sphere(t_scene *scene, t_ray *ray)
 	{
 		if (curr->type == SPHERE)
 		{
-			// Apply transformations if any
 			transformed_ray = ray;
 			if (curr->data->sphere->matrix)
 			{

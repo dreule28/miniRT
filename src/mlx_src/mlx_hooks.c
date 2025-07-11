@@ -7,24 +7,24 @@ void	key_hook(mlx_key_data_t keydata, void *param)
 	scene = (t_scene *)param;
 	if (keydata.key == MLX_KEY_ESCAPE && keydata.action == MLX_PRESS)
 		mlx_close_window(scene->mlx);
-	if (keydata.key == MLX_KEY_W)
-		scene->camera.movement.key_w = (keydata.action != MLX_RELEASE);
-	if (keydata.key == MLX_KEY_S)
-		scene->camera.movement.key_s = (keydata.action != MLX_RELEASE);
-	if (keydata.key == MLX_KEY_A)
-		scene->camera.movement.key_a = (keydata.action != MLX_RELEASE);
-	if (keydata.key == MLX_KEY_D)
-		scene->camera.movement.key_d = (keydata.action != MLX_RELEASE);
+	// if (keydata.key == MLX_KEY_W)
+	// 	scene->camera.movement.key_w = (keydata.action != MLX_RELEASE);
+	// if (keydata.key == MLX_KEY_S)
+	// 	scene->camera.movement.key_s = (keydata.action != MLX_RELEASE);
+	// if (keydata.key == MLX_KEY_A)
+	// 	scene->camera.movement.key_a = (keydata.action != MLX_RELEASE);
+	// if (keydata.key == MLX_KEY_D)
+	// 	scene->camera.movement.key_d = (keydata.action != MLX_RELEASE);
 }
 
 void	mlx_custom_hooks(t_scene *scene)
 {
 	mlx_loop_hook(scene->mlx, &ray_tracing, scene);
 	mlx_key_hook(scene->mlx, &key_hook, scene);
-	mlx_scroll_hook(scene->mlx, &scroll_hook, scene);
-	mlx_loop_hook(scene->mlx, &update_camera, scene);
-	mlx_set_cursor_mode(scene->mlx, MLX_MOUSE_DISABLED);
-	mlx_cursor_hook(scene->mlx, &cursor_hook, scene);
+	// mlx_scroll_hook(scene->mlx, &scroll_hook, scene);
+	// mlx_loop_hook(scene->mlx, &update_camera, scene);
+	// mlx_set_cursor_mode(scene->mlx, MLX_MOUSE_DISABLED);
+	// mlx_cursor_hook(scene->mlx, &cursor_hook, scene);
 }
 
 void	update_camera(void *param)
