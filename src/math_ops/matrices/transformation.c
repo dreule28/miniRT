@@ -8,10 +8,15 @@ t_m4	*ftm_translation(t_m4 *matrix, t_tuples *tuple)
 	return (matrix);
 }
 
-t_m4	*ftm_scaling(t_m4 *matrix, t_tuples *tuple)
+t_m4	*ftm_scaling(t_tuples *tuple)
 {
-	matrix->col0->x = matrix->col0->x * tuple->x;
-	matrix->col1->y = matrix->col1->y * tuple->y;
-	matrix->col2->z = matrix->col2->z * tuple->z;
-	return (matrix);
+	t_m4	*identity_matrix;
+
+	identity_matrix = init_identity();
+	if (!identity_matrix)
+		return (NULL);
+	identity_matrix->col0->x = identity_matrix->col0->x * tuple->x;
+	identity_matrix->col1->y = identity_matrix->col1->y * tuple->y;
+	identity_matrix->col2->z = identity_matrix->col2->z * tuple->z;
+	return (identity_matrix);
 }
