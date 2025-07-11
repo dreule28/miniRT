@@ -6,7 +6,7 @@
 /*   By: dreule <dreule@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 10:37:16 by dreule            #+#    #+#             */
-/*   Updated: 2025/02/04 11:32:33 by dreule           ###   ########.fr       */
+/*   Updated: 2025/07/11 10:36:28 by dreule           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ char	*unint_itoa(unsigned int n)
 	unsigned int	num;
 
 	len = count_digits(n);
-	str = malloc(len + 1);
+	str = ft_calloc(len + 1, 1);
 	if (!str)
 		return (NULL);
 	str[len] = '\0';

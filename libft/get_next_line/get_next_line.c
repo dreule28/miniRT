@@ -6,7 +6,7 @@
 /*   By: dreule <dreule@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 07:59:13 by dreule            #+#    #+#             */
-/*   Updated: 2025/06/10 16:15:10 by dreule           ###   ########.fr       */
+/*   Updated: 2025/07/11 10:45:11 by dreule           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ char	*ft_strdup_gnl(const char *s1)
 		temp++;
 		len++;
 	}
-	store = malloc(len + 1);
+	store = ft_calloc(len + 1, 1);
 	if (!store)
 		return (NULL);
 	while (s1[i] != '\0')
@@ -130,7 +130,7 @@ char	*get_next_line(int fd)
 	}
 	if (leftovers && ft_strchr_gnl(leftovers, '\n'))
 		return (extract_line(&leftovers));
-	buffer = malloc(BUFFER_SIZE + 1);
+	buffer = ft_calloc(BUFFER_SIZE + 1, 1);
 	if (!buffer)
 	{
 		free(leftovers);

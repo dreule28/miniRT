@@ -1,6 +1,7 @@
 NAME = miniRT
 CC = cc
 RM = rm -rf
+UNAME_S := $(shell uname -s)
 
 ################################################################################
 ###############                  DIRECTORIES                      ##############
@@ -14,7 +15,11 @@ SRC_DIRS := src
 HEADERS = -I $(LIBFT_DIR)/include -I $(MLX42_DIR)/include/MLX42
 MLX42_DIR = MLX42
 MLX42_LIB = $(MLX42_DIR)/build/libmlx42.a
-LIBS = $(MLX42_LIB) $(LIBFT) -ldl -pthread -lm -lglfw
+ifeq ($(UNAME_S),Linux)
+	LIBS = $(LIBFT) $(MLX42_LIB) -ldl -pthread -lm -lglfw -lGL -lX11
+else
+	LIBS = $(LIBFT) $(MLX42_LIB) -ldl -pthread -lm -lglfw -framework Cocoa -framework OpenGL -framework IOKit
+endif
 
 vpath %.h $(INC_DIRS)
 vpath %.c $(SRC_DIRS)
@@ -23,13 +28,13 @@ vpath %.c $(SRC_DIRS)
 ###############                  SOURCE FILES                     ##############
 ################################################################################
 
-MATRICES_FILES := add_col.c cmp_col.c init_matrices.c m_cmp.c matrix_multi.c transpose_matrix.c determinant.c m3_sub_matrix.c m4_sub_matrix.c cofo.c inversion.c transformation.c rotate_matrix.c rotate_tuples.c shearing.c identity_matrix.c
+MATRICES_FILES := add_col.c cmp_col.c init_matrices.c m_cmp.c matrix_multi.c transpose_matrix.c determinant.c m3_sub_matrix.c m4_sub_matrix.c cofo.c inversion.c transformation.c rotate_matrix.c rotate_tuples.c shearing.c free_matrices.c
 MATRICES := $(addprefix math_ops/matrices/, $(MATRICES_FILES))
 
 TUPLES_FILES := tuples_func.c more_tuples_func.c tup_func.c custom_math_func.c
 TUPLES := $(addprefix math_ops/tuples/, $(TUPLES_FILES))
 
-RAY_TRACING_FILES := rays.c intersection.c intersec_sphere.c intersec_to_list.c
+RAY_TRACING_FILES := rays.c intersection.c surface_normals.c intersec_sphere.c intersec_to_list.c
 RAY_TRACING := $(addprefix ray_tracing/, $(RAY_TRACING_FILES))
 
 PARSER_FILES := fill_elements.c fill_objects.c initialize_objects.c list_and_nodes.c parser.c inits.c
@@ -58,6 +63,7 @@ COLOR_RESET = \033[0m
 COLOR_GREEN = \033[0;32m
 COLOR_BLUE = \033[0;34m
 COLOR_CYAN = \033[0;36m
+COLOR_YELLOW = \033[0;33m
 
 all: $(NAME)
 
@@ -75,7 +81,7 @@ $(OBJ_DIR):
 	@mkdir -p $(OBJ_DIR)
 
 $(LIBFT):
-	@echo "$(COLOR_GREEN)Compiling libft..$(COLOR_RESET)"
+	@echo "$(COLOR_GREEN)Compiling libft...$(COLOR_RESET)"
 	@$(MAKE) -C $(LIBFT_DIR)
 
 $(MLX42_LIB):
@@ -90,21 +96,18 @@ $(MLX42_LIB):
 	fi
 	@echo "$(COLOR_GREEN)MLX42 ready$(COLOR_RESET)"
 
-%.o: %.c
-	@echo "Compiling $<..."
-	@$(CC) $(CFLAGS) -o $@ -c $< $(HEADERS)
-
 clean:
-	@echo "$(COLOR_GREEN)Cleaning object files...$(COLOR_RESET)"
-	@$(RM) $(OBJS)
+	@echo "$(COLOR_YELLOW)Cleaning object files...$(COLOR_RESET)"
+	@$(RM) $(OBJ_DIR)
 	@$(MAKE) -C $(LIBFT_DIR) clean
 
 fclean: clean
-	@echo "$(COLOR_GREEN)Removing $(NAME)...$(COLOR_RESET)"
-	@$(RM) $(OBJ_DIR)
+	@echo "$(COLOR_YELLOW)Removing $(NAME)...$(COLOR_RESET)"
 	@$(RM) $(NAME)
 	@$(MAKE) -C $(LIBFT_DIR) fclean
-	@echo "$(COLOR_GREEN)Removed files successfully$(COLOR_RESET)"
+	@echo "$(COLOR_YELLOW)Cleaning MLX42 build...$(COLOR_RESET)"
+	@$(RM) $(MLX42_DIR)/build
+	@echo "$(COLOR_YELLOW)All files removed successfully$(COLOR_RESET)"
 
 re: fclean all
 
@@ -115,4 +118,4 @@ help:
 	@echo "  fclean   - Remove all generated files"
 	@echo "  re       - Rebuild miniRT"
 
-.PHONY: all clean fclean re help
+.PHONY: all clean fclean re help clean-mlx rebuild-mlx

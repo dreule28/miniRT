@@ -4,7 +4,7 @@ t_sphere	*init_sphere(void)
 {
 	t_sphere	*sphere;
 
-	sphere = malloc(sizeof(t_sphere));
+	sphere = ft_calloc(sizeof(t_sphere), 1);
 	if (!sphere)
 		return (NULL);
 	sphere->pos.x = 0;
@@ -29,7 +29,7 @@ t_plane	*init_plane(void)
 {
 	t_plane	*plane;
 
-	plane = malloc(sizeof(t_plane));
+	plane = ft_calloc(sizeof(t_plane), 1);
 	if (!plane)
 		return (NULL);
 	plane->pos.x = 0;
@@ -50,7 +50,7 @@ t_cylinder	*init_cylinder(void)
 {
 	t_cylinder	*cylinder;
 
-	cylinder = malloc(sizeof(t_cylinder));
+	cylinder = ft_calloc(sizeof(t_cylinder), 1);
 	if (!cylinder)
 		return (NULL);
 	cylinder->pos.x = 0;

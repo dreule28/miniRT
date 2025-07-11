@@ -6,7 +6,7 @@
 /*   By: dreule <dreule@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 07:59:56 by dreule            #+#    #+#             */
-/*   Updated: 2025/06/10 16:07:49 by dreule           ###   ########.fr       */
+/*   Updated: 2025/07/11 10:44:05 by dreule           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 
 # include <unistd.h>
 # include <stdlib.h>
+# include "../libft.h"
 
 char	*get_next_line(int fd);
 char	*ft_strdup_gnl(const char *s1);

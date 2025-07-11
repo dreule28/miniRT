@@ -6,7 +6,7 @@
 /*   By: dreule <dreule@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 14:17:00 by dreule            #+#    #+#             */
-/*   Updated: 2024/10/17 11:50:23 by dreule           ###   ########.fr       */
+/*   Updated: 2025/07/11 10:41:40 by dreule           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static char	*substr(char const *start, char const *end)
 	char	*word;
 
 	len = end - start;
-	word = malloc(len + 1);
+	word = ft_calloc(len + 1, 1);
 	if (!word)
 		return (NULL);
 	ft_memcpy(word, start, len);
@@ -93,14 +93,14 @@ char	**ft_split(char const *s, char c)
 		return (NULL);
 	if (*s == '\0')
 	{
-		str = malloc(sizeof(char *));
+		str = ft_calloc(sizeof(char *), 1);
 		if (!str)
 			return (NULL);
 		str[0] = NULL;
 		return (str);
 	}
 	word_count = count_words(s, c);
-	str = malloc((word_count + 1) * sizeof(char *));
+	str = ft_calloc((word_count + 1) * sizeof(char *), 1);
 	if (!str)
 		return (NULL);
 	if (!fill_words(str, s, c))

@@ -6,7 +6,7 @@
 /*   By: dreule <dreule@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 09:52:55 by dreule            #+#    #+#             */
-/*   Updated: 2024/10/18 12:39:59 by dreule           ###   ########.fr       */
+/*   Updated: 2025/07/11 10:40:02 by dreule           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 	last_node = NULL;
 	while (lst != NULL)
 	{
-		new_node = malloc(sizeof(t_list));
+		new_node = ft_calloc(sizeof(t_list), 1);
 		if (!new_node)
 		{
 			free_nodes(&new_lst, del);

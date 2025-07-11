@@ -6,7 +6,7 @@
 /*   By: dreule <dreule@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 16:21:35 by dreule            #+#    #+#             */
-/*   Updated: 2025/03/17 15:33:51 by dreule           ###   ########.fr       */
+/*   Updated: 2025/07/11 10:40:37 by dreule           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ char	*ft_strdup(const char *s1)
 		temp++;
 		len++;
 	}
-	store = malloc(len + 1);
+	store = ft_calloc(len + 1, 1);
 	if (!store)
 		return (NULL);
 	while (s1[i] != '\0')

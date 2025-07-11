@@ -7,6 +7,9 @@ double	ftm_m_minor(t_m3 *m3, int col, int row)
 
 	m2 = ftm_m3_subm(m3, col, row);
 	result = ftm_m_dmt(m2);
+	free(m2->col0);
+	free(m2->col1);
+	free(m2);
 	return (result);
 }
 
@@ -19,6 +22,9 @@ double	ftm_m3_cofactor(t_m3 *m3, int col, int row)
 	result = ftm_m_dmt(m2);
 	if ((row + col) % 2 != 0)
 		result = -result;
+	free(m2->col0);
+	free(m2->col1);
+	free(m2);
 	return (result);
 }
 
@@ -31,6 +37,10 @@ double	ftm_m4_cofactor(t_m4 *m4, int col, int row)
 	result = ftm_m3_dmt(m3);
 	if ((row + col) % 2 != 0)
 		result = -result;
+	free(m3->col0);
+	free(m3->col1);
+	free(m3->col2);
+	free(m3);
 	return (result);
 }
 

@@ -3,7 +3,17 @@
 void	free_obj_data(t_obj_data *data, int type)
 {
 	if (type == SPHERE && data->sphere)
+	{
+		if (data->sphere->matrix)
+		{
+			free(data->sphere->matrix->col0);
+			free(data->sphere->matrix->col1);
+			free(data->sphere->matrix->col2);
+			free(data->sphere->matrix->col3);
+			free(data->sphere->matrix);
+		}
 		free(data->sphere);
+	}
 	else if (type == PLANE && data->plane)
 		free(data->plane);
 	else if (type == CYLINDER && data->cylinder)
@@ -21,7 +31,6 @@ void	free_obj_list(t_obj_list *obj_list)
 	{
 		next = curr->next;
 		free_obj_data(curr->data, curr->type);
-		free(curr->t);
 		free(curr);
 		curr = next;
 	}
@@ -72,6 +81,8 @@ void	print_terminal(void)
 int	main(int argc, char **argv)
 {
 	t_scene	*scene;
+	// t_tuples	*normal;
+	// t_sphere	*sphere;
 
 	scene = ft_calloc(sizeof(t_scene), 1);
 	if (!scene)

@@ -6,7 +6,7 @@
 /*   By: dreule <dreule@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 16:57:02 by dreule            #+#    #+#             */
-/*   Updated: 2025/03/17 13:29:19 by dreule           ###   ########.fr       */
+/*   Updated: 2025/07/11 10:41:02 by dreule           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 		return (ft_strdup(""));
 	if (len > str_len - start)
 		len = str_len - start;
-	substr = malloc(sizeof(char) * len +1);
+	substr = ft_calloc(sizeof(char) * len +1, 1);
 	if (!substr)
 		return (NULL);
 	ft_strlcpy(substr, s + start, len + 1);

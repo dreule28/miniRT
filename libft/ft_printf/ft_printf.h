@@ -6,7 +6,7 @@
 /*   By: dreule <dreule@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 16:15:53 by dreule            #+#    #+#             */
-/*   Updated: 2024/11/26 09:06:00 by dreule           ###   ########.fr       */
+/*   Updated: 2025/07/11 10:45:35 by dreule           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <stddef.h>
 # include <stdlib.h>
 # include <unistd.h>
+# include "../libft.h"
 
 int		ft_printf(const char *format, ...);
 int		print_char(int c);

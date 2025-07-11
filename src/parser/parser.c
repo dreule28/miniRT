@@ -45,13 +45,28 @@ bool	check_elements(t_scene *scene, char *parsed_line)
 bool	validate_file(char **argv)
 {
 	int	i;
+	int	last_slash;
+	int	last_dot;
 
 	i = 0;
+	last_slash = -1;
+	last_dot = -1;
 	while (argv[1][i])
+	{
+		if (argv[1][i] == '/')
+			last_slash = i;
+		if (argv[1][i] == '.')
+			last_dot = i;
 		i++;
+	}
 	if (ft_strncmp(&argv[1][i - 3], ".rt", 3))
 	{
-		ft_putstr_fd("Error\nWrong file type\n", 2);
+			ft_putstr_fd("Error\nWrong file type\n", 2);
+		return (false);
+	}
+	if (last_dot - last_slash <= 1)
+	{
+		ft_putstr_fd("Error\nInvalid filename\n", 2);
 		return (false);
 	}
 	return (true);

@@ -6,7 +6,7 @@
 /*   By: dreule <dreule@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 16:03:34 by dreule            #+#    #+#             */
-/*   Updated: 2024/10/15 11:34:12 by dreule           ###   ########.fr       */
+/*   Updated: 2025/07/11 10:40:50 by dreule           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 
 	if (!s || !f)
 		return (NULL);
-	str = malloc(ft_strlen(s) + 1);
+	str = ft_calloc(ft_strlen(s) + 1, 1);
 	if (!str)
 		return (NULL);
 	i = 0;
