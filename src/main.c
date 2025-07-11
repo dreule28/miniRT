@@ -3,7 +3,17 @@
 void	free_obj_data(t_obj_data *data, int type)
 {
 	if (type == SPHERE && data->sphere)
+	{
+		if (data->sphere->matrix)
+		{
+			free(data->sphere->matrix->col0);
+			free(data->sphere->matrix->col1);
+			free(data->sphere->matrix->col2);
+			free(data->sphere->matrix->col3);
+			free(data->sphere->matrix);
+		}
 		free(data->sphere);
+	}
 	else if (type == PLANE && data->plane)
 		free(data->plane);
 	else if (type == CYLINDER && data->cylinder)
@@ -21,7 +31,6 @@ void	free_obj_list(t_obj_list *obj_list)
 	{
 		next = curr->next;
 		free_obj_data(curr->data, curr->type);
-		free(curr->t);
 		free(curr);
 		curr = next;
 	}
@@ -62,19 +71,27 @@ void	print_matrix(t_m4 *m)
 int	main(int argc, char **argv)
 {
 	t_scene	*scene;
+	// t_tuples	*normal;
+	// t_sphere	*sphere;
 
 	scene = ft_calloc(sizeof(t_scene), 1);
 	if (!scene)
 		return (1);
 	if (!parser(scene, argc, argv))
 		return (free(scene), 1);
+	// sphere = scene->obj_list->head->data->sphere;
 
+	// normal = normal_at(sphere , init_point(sqrt(3)/3, sqrt(3)/3, sqrt(3)/3));
+	// if (!normal)
+	// 	return (1);
+	// printf("Sphere\tX: %.2f Y: %.2f Z: %.2f\n", sphere->pos.x, sphere->pos.y, sphere->pos.z);
+	// printf("Normal\tX: %.3f Y: %.3f Z: %.3f\n", normal->x, normal->y, normal->z);
 
-	if(!init_mlx_window(scene))
-		return(1);
-	mlx_custom_hooks(scene);
-	mlx_loop(scene->mlx);
-	mlx_terminate(scene->mlx);
+	// if(!init_mlx_window(scene))
+	// 	return(1);
+	// mlx_custom_hooks(scene);
+	// mlx_loop(scene->mlx);
+	// mlx_terminate(scene->mlx);
 
 	free_obj_list(scene->obj_list);
 	free_light_list(scene->light_list);
