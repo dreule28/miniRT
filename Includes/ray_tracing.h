@@ -39,7 +39,12 @@ void		set_transform(t_sphere *sphere, t_m4 *matrix);
 // rays.c -- END
 
 // intersec_sphere.c -- BEGIN
+bool	setup_intersec_sphere(t_scene *scene, t_obj_node *curr);
 t_sphere	*ray_hits_sphere(t_scene *scene, t_ray *ray);
 // intersec_sphere.c -- END
+
+// intersec_to_list.c -- BEGIN
+bool		set_intersection_to_obj(t_scene *scene, t_obj_node *curr);
+// intersec_to_list.c -- END
 
 #endif

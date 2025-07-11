@@ -29,7 +29,7 @@ MATRICES := $(addprefix math_ops/matrices/, $(MATRICES_FILES))
 TUPLES_FILES := tuples_func.c more_tuples_func.c tup_func.c custom_math_func.c
 TUPLES := $(addprefix math_ops/tuples/, $(TUPLES_FILES))
 
-RAY_TRACING_FILES := rays.c intersection.c intersec_sphere.c
+RAY_TRACING_FILES := rays.c intersection.c intersec_sphere.c intersec_to_list.c
 RAY_TRACING := $(addprefix ray_tracing/, $(RAY_TRACING_FILES))
 
 PARSER_FILES := fill_elements.c fill_objects.c initialize_objects.c list_and_nodes.c parser.c inits.c
