@@ -42,7 +42,7 @@ t_obj_list	*intersect_to_list(t_scene *scene)
 	while (curr)
 	{
 		if (!set_intersection_to_obj(scene, curr))
-			return(NULL);
+			return (NULL);
 		curr = curr->next;
 	}
 	return (scene->obj_list);
