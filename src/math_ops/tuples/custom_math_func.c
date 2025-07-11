@@ -28,6 +28,34 @@ t_tuples	*init_point(double x, double y, double z)
 	return (point);
 }
 
+t_tuples	*copy_vector(t_tuples *tup)
+{
+	t_tuples	*vector;
+
+	vector = ft_calloc(1, sizeof(t_tuples));
+	if (!vector)
+		return (NULL);
+	vector->x = tup->x;
+	vector->y = tup->y;
+	vector->z = tup->z;
+	vector->w = VECTOR;
+	return (vector);
+}
+
+t_tuples	*copy_point(t_tuples *tup)
+{
+	t_tuples	*point;
+
+	point = ft_calloc(1, sizeof(t_tuples));
+	if (!point)
+		return (NULL);
+	point->x = tup->x;
+	point->y = tup->y;
+	point->z = tup->z;
+	point->w = POINT;
+	return (point);
+}
+
 t_rgb	*init_rgb(double r, double g, double b)
 {
 	t_rgb	*rgb;
