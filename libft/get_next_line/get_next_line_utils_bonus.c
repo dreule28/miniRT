@@ -6,7 +6,7 @@
 /*   By: dreule <dreule@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/01 18:46:48 by danielreule       #+#    #+#             */
-/*   Updated: 2024/11/04 13:35:55 by dreule           ###   ########.fr       */
+/*   Updated: 2025/07/11 10:44:54 by dreule           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ char	*ft_strjoin_gnl(char const *s1, char const *s2)
 		return (ft_strdup_gnl(s1));
 	len1 = ft_strlen_gnl(s1);
 	len2 = ft_strlen_gnl(s2);
-	new_str = malloc(len1 + len2 + 1);
+	new_str = ft_calloc(len1 + len2 + 1, 1);
 	if (!new_str)
 		return (NULL);
 	ft_strlcpy_gnl(new_str, s1, len1 + 1);
@@ -88,7 +88,7 @@ char	*ft_substr_gnl(char const *s, unsigned int start, size_t len)
 	substr_len = str_len - start;
 	if (len < substr_len)
 		substr_len = len;
-	substr = malloc(len + 1);
+	substr = ft_calloc(len + 1, 1);
 	if (!substr)
 		return (NULL);
 	ft_strlcpy_gnl(substr, s + start, substr_len + 1);

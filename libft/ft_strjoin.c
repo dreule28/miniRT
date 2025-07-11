@@ -6,7 +6,7 @@
 /*   By: dreule <dreule@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 10:09:49 by dreule            #+#    #+#             */
-/*   Updated: 2024/10/11 14:14:17 by dreule           ###   ########.fr       */
+/*   Updated: 2025/07/11 10:40:44 by dreule           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 
 	len1 = ft_strlen(s1);
 	len2 = ft_strlen(s2);
-	new_str = malloc(ft_strlen(s1) + ft_strlen(s2) + 1);
+	new_str = ft_calloc(ft_strlen(s1) + ft_strlen(s2) + 1, 1);
 	if (!new_str)
 		return (NULL);
 	ft_strlcpy(new_str, s1, len1 + 1);

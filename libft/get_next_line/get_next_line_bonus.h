@@ -6,18 +6,19 @@
 /*   By: dreule <dreule@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/01 18:46:57 by danielreule       #+#    #+#             */
-/*   Updated: 2025/06/10 15:52:56 by dreule           ###   ########.fr       */
+/*   Updated: 2025/07/11 10:44:11 by dreule           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GET_NEXT_LINE_BONUS_H
 # define GET_NEXT_LINE_BONUS_H
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 
+#  define BUFFER_SIZE
 # endif
 
 # include <unistd.h>
 # include <stdlib.h>
+# include "../libft.h"
 
 char	*get_next_line(int fd);
 char	*ft_strdup_gnl(const char *s1);
