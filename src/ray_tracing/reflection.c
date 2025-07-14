@@ -14,3 +14,36 @@ t_tuples	*reflect(t_tuples *in, t_tuples *normal)
 	free(scaled_normal);
 	return (result);
 }
+
+t_light	*point_light(t_tuples position, t_rgb intensity)
+{
+	t_light	*light;
+
+	light = ft_calloc(sizeof(t_light), 1);
+	if (!light)
+		return (NULL);
+	light->pos = position;
+	light->rgb = intensity;
+	light->intensity = 1;
+	light->next = NULL;
+	return (light);
+}
+
+t_material	get_material(void)
+{
+	t_material material;
+
+	material.rgb.r = 1;
+	material.rgb.g = 1;
+	material.rgb.b = 1;
+	material.ambient = 0.1;
+	material.diffuse = 0.9;
+	material.specular = 0.9;
+	material.shininess = 200.0;
+	return (material);
+}
+
+t_rgb	lighting(t_scene *scene, t_tuples *position, t_tuples *eyev, t_tuples *normalv)
+{
+	t_rgb	result;
+}

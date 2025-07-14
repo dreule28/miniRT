@@ -52,49 +52,35 @@ void	free_light_list(t_light_list *light_list)
 	free(light_list);
 }
 
-void	print_matrix(t_m4 *m)
-{
-	if (!m || !m->col0 || !m->col1 || !m->col2 || !m->col3)
-	{
-		printf("Invalid matrix pointer.\n");
-		return;
-	}
-
-	printf("Matrix:\n");
-	printf("| %6.2f %6.2f %6.2f %6.2f |\n", m->col0->x, m->col1->x, m->col2->x, m->col3->x);
-	printf("| %6.2f %6.2f %6.2f %6.2f |\n", m->col0->y, m->col1->y, m->col2->y, m->col3->y);
-	printf("| %6.2f %6.2f %6.2f %6.2f |\n", m->col0->z, m->col1->z, m->col2->z, m->col3->z);
-	printf("| %6.2f %6.2f %6.2f %6.2f |\n", m->col0->w, m->col1->w, m->col2->w, m->col3->w);
-}
-
-void	print_terminal(void)
-{
-	printf("===========================\n");
-	printf("camera pos:\n");
-	printf("x : 0.000000 y : 0.000000 z : 0.000000\n");
-	printf("camera orientation:\n");
-	printf("x : 0.000000 y : 0.000000 z : 0.000000\n");
-	printf("===========================\n");
-	fflush(stdout);
-}
-
 int	main(int argc, char **argv)
 {
-	t_scene	*scene;
-	// t_tuples	*normal;
-	// t_sphere	*sphere;
+	t_scene		*scene;
+	t_material	material;
+	t_light		*light;
+	t_rgb		result;
 
 	scene = ft_calloc(sizeof(t_scene), 1);
 	if (!scene)
 		return (1);
 	if (!parser(scene, argc, argv))
 		return (free(scene), 1);
-	print_terminal();// debug prints
-	if(!init_mlx_window(scene))
-		return(1);
-	mlx_custom_hooks(scene);
-	mlx_loop(scene->mlx);
-	mlx_terminate(scene->mlx);
+
+
+	scene->obj_list->head->data->sphere->material = get_material();
+	scene->light_list->head = point_light(*init_point(0, 0, -10), *init_rgb(1, 1, 1));
+
+	material = scene->obj_list->head->data->sphere->material;
+	light = scene->light_list->head;
+
+	result = lighting(scene, )
+
+
+
+	// if(!init_mlx_window(scene))
+	// 	return(1);
+	// mlx_custom_hooks(scene);
+	// mlx_loop(scene->mlx);
+	// mlx_terminate(scene->mlx);
 	// free_obj_list(scene->obj_list);
 	// free_light_list(scene->light_list);
 	// free(scene);
