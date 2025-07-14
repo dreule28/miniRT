@@ -14,6 +14,14 @@ typedef enum e_obj_type
 	CYLINDER	/* Cylindrical object */
 }	t_obj_type;
 
+typedef struct s_material
+{
+	double	ambient;
+	double	diffuse;
+	double	specular;
+	double	shininess;
+}			t_material;
+
 /* ========================================================================== */
 /*                           3D OBJECT STRUCTURES                            */
 /* ========================================================================== */
@@ -25,6 +33,7 @@ typedef struct s_sphere
 	double		radius;		/* Radius of the sphere */
 	t_rgb		rgb;		/* Color of the sphere */
 	t_m4		*matrix;	/* Transformation matrix */
+	t_material	material;	/* Material of the object*/
 }				t_sphere;
 
 /* Plane object with position, orientation and color */
@@ -33,6 +42,7 @@ typedef struct s_plane
 	t_tuples	pos;		/* Point on the plane */
 	t_tuples	axis;		/* Normal vector defining plane orientation */
 	t_rgb		rgb;		/* Color of the plane */
+	t_material	material;	/* Material of the object*/
 }				t_plane;
 
 /* Cylinder object with position, orientation, dimensions and color */
@@ -43,6 +53,7 @@ typedef struct s_cylinder
 	double		radius;		/* Radius of the cylinder */
 	double		height;		/* Height of the cylinder */
 	t_rgb		rgb;		/* Color of the cylinder */
+	t_material	material;	/* Material of the object*/
 }				t_cylinder;
 
 /* ========================================================================== */
