@@ -29,16 +29,16 @@ void	ray_tracing(void *param)
 
 void	paint_pixel(t_scene *scene, t_ray *ray, int pixel_index)
 {
-	t_sphere	*hit;
+	double	*hit;
 	uint32_t	*pixels;
 
 	pixels = (uint32_t *)scene->img->pixels;
-	hit = ray_hits_sphere(scene, ray);
+	intersect_to_list(scene, ray);
+	hit = hit_obj(scene);
 	if (pixel_index < (int)scene->img->width * (int)scene->img->height)
 	{
 		if (hit)
-			pixels[pixel_index] = get_rgba(hit->rgb.r, hit->rgb.g, hit->rgb.b,
-					255);
+			pixels[pixel_index] = get_rgba(255, 0 ,0 ,255);
 		else
 			pixels[pixel_index] = get_rgba(0, 0, 0, 255);
 	}

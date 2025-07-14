@@ -27,18 +27,18 @@ typedef struct s_ray
 }				t_ray;
 
 // intersec_sphere.c -- BEGIN
-bool		setup_intersec_sphere(t_scene *scene, t_obj_node *curr);
+bool		setup_intersec_sphere(t_scene *scene, t_obj_node *curr, t_ray *ray);
 t_sphere	*ray_hits_sphere(t_scene *scene, t_ray *ray);
 // intersec_sphere.c -- END
 
 // intersec_to_list.c -- BEGIN
-bool		set_intersection_to_obj(t_scene *scene, t_obj_node *curr);
+bool		set_intersection_to_obj(t_scene *scene, t_obj_node *curr, t_ray *ray);
 // intersec_to_list.c -- END
 
 // intersection.c -- BEGIN
 double		discri(t_ray *ray, t_sphere *sphere, double *a, double *b);
 double		*intersect_sphere(t_ray *ray, t_sphere *sphere);
-t_obj_list	*intersect_to_list(t_scene *scene);
+t_obj_list	*intersect_to_list(t_scene *scene, t_ray *ray);
 double		*hit_obj(t_scene *scene);
 // intersection.c -- END
 

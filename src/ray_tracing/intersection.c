@@ -34,14 +34,14 @@ double	*intersect_sphere(t_ray *ray, t_sphere *sphere)
 	return (t);
 }
 
-t_obj_list	*intersect_to_list(t_scene *scene)
+t_obj_list	*intersect_to_list(t_scene *scene, t_ray *ray)
 {
 	t_obj_node	*curr;
 
 	curr = scene->obj_list->head;
 	while (curr)
 	{
-		if (!set_intersection_to_obj(scene, curr))
+		if (!set_intersection_to_obj(scene, curr, ray))
 			return (NULL);
 		curr = curr->next;
 	}
