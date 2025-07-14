@@ -11,22 +11,6 @@ typedef struct s_ambi_light
 	t_rgb			rgb;		/* Color of ambient light */
 }					t_ambi_light;
 
-typedef	struct s_movement
-{
-	bool key_w;
-    bool key_s;
-    bool key_a;
-    bool key_d;
-}					t_movement;
-
-typedef struct s_camera
-{
-	t_tuples		pos;
-	t_tuples		orientation_vector;
-	int				fov;
-	// t_movement		movement;
-}					t_camera;
-
 typedef struct s_light
 {
 	t_tuples		pos;		/* Position of light source */
@@ -43,10 +27,6 @@ typedef struct s_light_list
 	ssize_t	size;		/* Number of lights in the list */
 }			t_light_list;
 
-/* ========================================================================== */
-/*                           CAMERA STRUCTURE                                */
-/* ========================================================================== */
-
 /* Virtual camera defining viewpoint and perspective */
 typedef struct s_camera
 {
@@ -54,10 +34,6 @@ typedef struct s_camera
 	t_tuples		orientation_vector;	/* Direction camera is facing */
 	int				fov;				/* Field of view in degrees */
 }					t_camera;
-
-/* ========================================================================== */
-/*                           MAIN SCENE STRUCTURE                            */
-/* ========================================================================== */
 
 /* Complete scene containing all rendering elements */
 typedef struct s_scene

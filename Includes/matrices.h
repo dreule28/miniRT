@@ -249,7 +249,7 @@ t_m4		*ftm_shearing(t_shear_params *params);
 t_m4		*ftm_translation(t_m4 *matrix, t_tuples *tuple);
 
 /* Applies scaling to transformation matrix */
-t_m4		*ftm_scaling(t_m4 *matrix, t_tuples *tuple);
+t_m4		*ftm_scaling(t_tuples *tuple);
 // transformation.c -- END
 
 //transpose_matrix.c -- BEGIN
