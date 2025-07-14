@@ -48,10 +48,10 @@ void	cursor_hook(double xpos, double ypos, void *param)
 	t_scene		*scene;
 	double		center_x;
 	double		center_y;
-	uint32_t	*pixels;
+	// uint32_t	*pixels;
 
 	scene = (t_scene *)param;
-	pixels = (uint32_t *)scene->img->pixels;
+	// pixels = (uint32_t *)scene->img->pixels;
 	center_x = WIDTH / 2;
 	center_y = HEIGHT / 2;
 	scene->camera.orientation_vector.x += (xpos - center_x) * 0.0001;
@@ -62,11 +62,11 @@ void	cursor_hook(double xpos, double ypos, void *param)
 void	scroll_hook(double xdelta, double ydelta, void *param)
 {
 	t_scene		*scene;
-	uint32_t	*pixels;
+	// uint32_t	*pixels;
 
 	(void)xdelta;
 	scene = (t_scene *)param;
-	pixels = (uint32_t *)scene->img->pixels;
+	// pixels = (uint32_t *)scene->img->pixels;
 	if (ydelta > 0)
 		scene->camera.pos.z += 0.2;
 	else if (ydelta < 0)
