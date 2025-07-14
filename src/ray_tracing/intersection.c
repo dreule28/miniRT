@@ -36,6 +36,24 @@ double	*intersect_sphere(t_ray *ray, t_sphere *sphere)
 	return (t);
 }
 
+t_obj_list	*sort_obj_list(t_obj_list *obj_list)
+{
+	t_obj_node	*curr;
+	t_obj_node	*next;
+
+	curr = obj_list->head;
+	while (curr && curr->next)
+	{
+		next = curr->next;
+		if (curr->t && next->t && curr->t[0] > next->t[0])
+		{
+			
+		}
+		curr = curr->next;
+	}
+	return (obj_list);
+}
+
 t_obj_list	*intersect_to_list(t_scene *scene, t_ray *ray)
 {
 	t_obj_node	*curr;
@@ -47,7 +65,7 @@ t_obj_list	*intersect_to_list(t_scene *scene, t_ray *ray)
 			return (NULL);
 		curr = curr->next;
 	}
-	return (scene->obj_list);
+	return (sort_obj_list(scene->obj_list));
 }
 
 double	*hit_obj(t_scene *scene)

@@ -19,14 +19,6 @@
 # include "matrices.h"
 # include "mlx_cusotm.h"
 
-//Includes -- END
-
-//Structs -- BEGIN
-
-//Structs -- END
-
-//Functions -- BEGIN
-
 //parser-Folder -- BEGIN
 //fill_elements.c -- BEGIN
 void			skip_spaces_or_value(char **parsed_line, int value, int comma);
