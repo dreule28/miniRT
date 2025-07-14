@@ -52,6 +52,9 @@ void		set_transform(t_sphere *sphere, t_m4 *matrix);
 
 // reflection.c -- BEGIN
 t_tuples	*reflect(t_tuples *in, t_tuples *normal);
+t_light		*point_light(t_tuples position, t_rgb intensity);
+t_material	get_material(void);
+t_rgb		lighting(t_scene *scene, t_tuples *position, t_tuples *eyev, t_tuples *normalv);
 // reflection.c -- END
 
 // surface_normals.c -- BEGIN

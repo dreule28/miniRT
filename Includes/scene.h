@@ -14,7 +14,7 @@ typedef struct s_ambi_light
 typedef struct s_light
 {
 	t_tuples		pos;		/* Position of light source */
-	double			brightness;	/* Brightness intensity (0.0 - 1.0) */
+	double			intensity;	/* Brightness intensity (0.0 - 1.0) */
 	t_rgb			rgb;		/* Color of the light */
 	struct s_light	*next;		/* Pointer to next light in list */
 }					t_light;
