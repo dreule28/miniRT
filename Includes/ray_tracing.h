@@ -26,6 +26,14 @@ typedef struct s_ray
 	t_tuples	*direction;		/* Direction vector of the ray */
 }				t_ray;
 
+// intersec_sphere.c -- BEGIN
+bool		setup_intersec_sphere(t_scene *scene, t_obj_node *curr);
+t_sphere	*ray_hits_sphere(t_scene *scene, t_ray *ray);
+// intersec_sphere.c -- END
+
+// intersec_to_list.c -- BEGIN
+bool		set_intersection_to_obj(t_scene *scene, t_obj_node *curr);
+// intersec_to_list.c -- END
 
 // intersection.c -- BEGIN
 double		discri(t_ray *ray, t_sphere *sphere, double *a, double *b);
@@ -42,14 +50,9 @@ t_ray		*transform_ray(t_ray *ray, t_m4 *m4);
 void		set_transform(t_sphere *sphere, t_m4 *matrix);
 // rays.c -- END
 
-// intersec_sphere.c -- BEGIN
-bool	setup_intersec_sphere(t_scene *scene, t_obj_node *curr);
-t_sphere	*ray_hits_sphere(t_scene *scene, t_ray *ray);
-// intersec_sphere.c -- END
-
-// intersec_to_list.c -- BEGIN
-bool		set_intersection_to_obj(t_scene *scene, t_obj_node *curr);
-// intersec_to_list.c -- END
+// reflection.c -- BEGIN
+t_tuples	*reflect(t_tuples *in, t_tuples *normal);
+// reflection.c -- END
 
 // surface_normals.c -- BEGIN
 void		free_tuple(t_tuples *tuple);
