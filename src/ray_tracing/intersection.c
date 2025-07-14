@@ -2,11 +2,13 @@
 
 double	discri(t_ray *ray, t_sphere *sphere, double *a, double *b)
 {
+	t_tuples	*sphere_center;
 	t_tuples	*sphere_to_ray;
 	double		discriminant;
 	double		c;
 
-	sphere_to_ray = ftm_tup_subtract(ray->origin, init_point(0, 0, 0));
+	sphere_center = copy_point(&sphere->pos);
+	sphere_to_ray = ftm_tup_subtract(ray->origin, sphere_center);
 	*a = ftm_tup_dot(ray->direction, ray->direction);
 	*b = 2 * ftm_tup_dot(ray->direction, sphere_to_ray);
 	c = ftm_tup_dot(sphere_to_ray, sphere_to_ray) - (sphere->radius

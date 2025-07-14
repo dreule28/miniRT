@@ -28,7 +28,6 @@ typedef struct s_ray
 
 // intersec_sphere.c -- BEGIN
 bool		setup_intersec_sphere(t_scene *scene, t_obj_node *curr, t_ray *ray);
-t_sphere	*ray_hits_sphere(t_scene *scene, t_ray *ray);
 // intersec_sphere.c -- END
 
 // intersec_to_list.c -- BEGIN
