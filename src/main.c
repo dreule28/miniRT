@@ -55,9 +55,6 @@ void	free_light_list(t_light_list *light_list)
 int	main(int argc, char **argv)
 {
 	t_scene		*scene;
-	t_material	material;
-	t_light		*light;
-	t_rgb		result;
 
 	scene = ft_calloc(sizeof(t_scene), 1);
 	if (!scene)
@@ -66,23 +63,38 @@ int	main(int argc, char **argv)
 		return (free(scene), 1);
 
 
-	scene->obj_list->head->data->sphere->material = get_material();
-	scene->light_list->head = point_light(*init_point(0, 0, -10), *init_rgb(1, 1, 1));
+	t_tuples *position = init_point(0, 0, 0);
+	t_tuples *eyev = init_vector(0, 0, -1);
+	t_tuples *normalv = init_vector(0, 0, -1);
+	scene->light_list->head = point_light(*init_point(0, 0, 10), *init_rgb(1, 1, 1));
+	t_rgb result = lighting(scene, position, eyev, normalv);
 
-	material = scene->obj_list->head->data->sphere->material;
-	light = scene->light_list->head;
-
-	result = lighting(scene, )
+	printf("R: %.1f G: %.1f B: %.1f\n", result.r, result.g, result.b);
 
 
+	// printf("About to init MLX window...\n");
+	// fflush(stdout);
 
 	// if(!init_mlx_window(scene))
-	// 	return(1);
+	// {
+	//     printf("MLX window init failed\n");
+	//     return(1);
+	// }
+
+	// printf("MLX window init successful\n");
+	// printf("About to set custom hooks...\n");
+	// fflush(stdout);
+
 	// mlx_custom_hooks(scene);
+
+	// printf("Custom hooks set, starting MLX loop...\n");
+	// fflush(stdout);
+
 	// mlx_loop(scene->mlx);
+
 	// mlx_terminate(scene->mlx);
-	// free_obj_list(scene->obj_list);
-	// free_light_list(scene->light_list);
-	// free(scene);
+	free_obj_list(scene->obj_list);
+	free_light_list(scene->light_list);
+	free(scene);
 	return(0);
 }
