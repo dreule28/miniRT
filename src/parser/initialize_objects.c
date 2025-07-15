@@ -12,9 +12,9 @@ t_sphere	*init_sphere(void)
 	sphere->pos.z = 0;
 	sphere->pos.w = 0;
 	sphere->radius = 0;
-	sphere->rgb.r = 0;
-	sphere->rgb.g = 0;
-	sphere->rgb.b = 0;
+	sphere->material.rgb.r = 0;
+	sphere->material.rgb.g = 0;
+	sphere->material.rgb.b = 0;
 	sphere->matrix = init_m4();
 	if (!sphere->matrix)
 		return (free(sphere), NULL);
@@ -40,9 +40,9 @@ t_plane	*init_plane(void)
 	plane->axis.y = 0;
 	plane->axis.z = 0;
 	plane->axis.w = 0;
-	plane->rgb.r = 0;
-	plane->rgb.g = 0;
-	plane->rgb.b = 0;
+	plane->material.rgb.r = 0;
+	plane->material.rgb.g = 0;
+	plane->material.rgb.b = 0;
 	return (plane);
 }
 
@@ -63,8 +63,8 @@ t_cylinder	*init_cylinder(void)
 	cylinder->axis.w = 0;
 	cylinder->radius = 0;
 	cylinder->height = 0;
-	cylinder->rgb.r = 0;
-	cylinder->rgb.g = 0;
-	cylinder->rgb.b = 0;
+	cylinder->material.rgb.r = 0;
+	cylinder->material.rgb.g = 0;
+	cylinder->material.rgb.b = 0;
 	return (cylinder);
 }

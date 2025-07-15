@@ -50,6 +50,7 @@ void	search_for_objects(t_scene *scene, char *parsed_line)
 	if (!ft_strncmp(parsed_line, "cy", 2))
 	{
 		new_node = add_obj_node(scene->obj_list, CYLINDER);
+		new_node->data->cylinder->material = get_material();
 		add_cylinder(new_node, parsed_line);
 	}
 }
