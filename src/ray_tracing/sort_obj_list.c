@@ -28,8 +28,8 @@ void	swap_nodes(t_obj_list *obj_list, t_obj_node *prev, t_obj_node *curr,
 
 void	swap_pointers(t_obj_node **curr, t_obj_node **prev)
 {
-    *prev = *curr;
-    *curr = (*curr)->next;
+	*prev = *curr;
+	*curr = (*curr)->next;
 }
 
 t_obj_list	*sort_obj_list(t_obj_list *obj_list)
