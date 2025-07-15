@@ -73,7 +73,7 @@ t_material	get_material(void);
 bool		should_swap_nodes(t_obj_node *curr, t_obj_node *next);
 void		swap_nodes(t_obj_list *obj_list, t_obj_node *prev,
 				t_obj_node *curr, t_obj_node *next);
-void		swap_pointers(t_obj_node *curr, t_obj_node *prev);
+void		swap_pointers(t_obj_node **curr, t_obj_node **prev);
 t_obj_list	*sort_obj_list(t_obj_list *obj_list);
 	// sort_obj_list.c -- END
 

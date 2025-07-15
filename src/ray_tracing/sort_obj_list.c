@@ -26,10 +26,10 @@ void	swap_nodes(t_obj_list *obj_list, t_obj_node *prev, t_obj_node *curr,
 		obj_list->tail = curr;
 }
 
-void	swap_pointers(t_obj_node *curr, t_obj_node *prev)
+void	swap_pointers(t_obj_node **curr, t_obj_node **prev)
 {
-	prev = curr;
-	curr = curr->next;
+    *prev = *curr;
+    *curr = (*curr)->next;
 }
 
 t_obj_list	*sort_obj_list(t_obj_list *obj_list)
@@ -55,7 +55,7 @@ t_obj_list	*sort_obj_list(t_obj_list *obj_list)
 				prev = next;
 			}
 			else
-				swap_pointers(curr, prev);
+				swap_pointers(&curr, &prev);
 		}
 	}
 	return (obj_list);
