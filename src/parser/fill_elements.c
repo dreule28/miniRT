@@ -66,9 +66,9 @@ void	add_light(t_light *light, char *parsed_line)
 	light->intensity = ft_atof(parsed_line);
 	skip_spaces_or_value(&parsed_line, 0, 0);
 	skip_spaces_or_value(&parsed_line, 1, 0);
-	light->rgb.r = ft_atof(parsed_line) / 255.0;
+	light->rgb.r = ft_atof(parsed_line);
 	skip_spaces_or_value(&parsed_line, 0, 1);
-	light->rgb.g = ft_atof(parsed_line) / 255.0;
+	light->rgb.g = ft_atof(parsed_line);
 	skip_spaces_or_value(&parsed_line, 0, 1);
-	light->rgb.b = ft_atof(parsed_line) / 255.0;
+	light->rgb.b = ft_atof(parsed_line);
 }
