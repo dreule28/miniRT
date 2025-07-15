@@ -10,7 +10,6 @@ typedef enum e_tuples_enum
 	POINT
 }					t_tuples_enum;
 
-/* 4D tuple structure representing points and vectors in homogeneous coordinates */
 typedef struct s_tuples
 {
 	double	x;		/* X component */
