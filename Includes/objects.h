@@ -32,7 +32,6 @@ typedef struct s_sphere
 {
 	t_tuples	pos;		/* Center position in 3D space */
 	double		radius;		/* Radius of the sphere */
-	t_rgb		rgb;		/* Color of the sphere */
 	t_m4		*matrix;	/* Transformation matrix */
 	t_material	material;	/* Material of the object*/
 }				t_sphere;
@@ -42,7 +41,6 @@ typedef struct s_plane
 {
 	t_tuples	pos;		/* Point on the plane */
 	t_tuples	axis;		/* Normal vector defining plane orientation */
-	t_rgb		rgb;		/* Color of the plane */
 	t_material	material;	/* Material of the object*/
 }				t_plane;
 
@@ -53,7 +51,6 @@ typedef struct s_cylinder
 	t_tuples	axis;		/* Direction vector of cylinder axis */
 	double		radius;		/* Radius of the cylinder */
 	double		height;		/* Height of the cylinder */
-	t_rgb		rgb;		/* Color of the cylinder */
 	t_material	material;	/* Material of the object*/
 }				t_cylinder;
 

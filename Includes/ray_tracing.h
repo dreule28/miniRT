@@ -31,7 +31,8 @@ bool		setup_intersec_sphere(t_scene *scene, t_obj_node *curr, t_ray *ray);
 // intersec_sphere.c -- END
 
 // intersec_to_list.c -- BEGIN
-bool		set_intersection_to_obj(t_scene *scene, t_obj_node *curr, t_ray *ray);
+bool		set_intersection_to_obj(t_scene *scene, t_obj_node *curr,
+				t_ray *ray);
 // intersec_to_list.c -- END
 
 // intersection.c -- BEGIN
@@ -40,6 +41,15 @@ double		*intersect_sphere(t_ray *ray, t_sphere *sphere);
 t_obj_list	*intersect_to_list(t_scene *scene, t_ray *ray);
 double		*hit_obj(t_scene *scene);
 // intersection.c -- END
+
+// lighting.c -- BEGIN
+t_rgb		calculate_lighting_components(t_material material, t_light *light,
+				double light_dot_normal);
+t_rgb		calculate_specular(t_scene *scene, t_tuples *lightv, t_tuples *eyev,
+				t_tuples *normalv);
+t_rgb		lighting(t_scene *scene, t_tuples *point, t_tuples *eyev,
+				t_tuples *normalv);
+// lighting.c -- END
 
 // rays.c -- BEGIN
 void		free_ray(t_ray *ray);
@@ -53,7 +63,6 @@ void		set_transform(t_sphere *sphere, t_m4 *matrix);
 t_tuples	*reflect(t_tuples *in, t_tuples *normal);
 t_light		*point_light(t_tuples position, t_rgb intensity);
 t_material	get_material(void);
-t_rgb		lighting(t_scene *scene, t_tuples *position, t_tuples *eyev, t_tuples *normalv);
 // reflection.c -- END
 
 // surface_normals.c -- BEGIN

@@ -54,6 +54,8 @@ t_tuples			*ftm_tup_negate(t_tuples *tuples);
 /* Multiplies tuple by scalar value */
 t_tuples			*ftm_tup_mult(t_tuples *tuples, double multiplier);
 
+t_rgb				*ftm_rgb_mult(t_rgb *rgb, double value);
+
 /* Divides tuple by scalar value */
 t_tuples			*ftm_tup_divied(t_tuples *tuples, double divider);
 

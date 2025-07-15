@@ -5,7 +5,6 @@
 # include "scene.h"
 # include "../MLX42/include/MLX42/MLX42.h"
 
-t_sphere	*ray_hits_sphere(t_scene *scene, t_ray *ray);
 
 // src/mlx_src/ray_tracing_loop.c -- BEGIN
 void	ray_tracing(void *param);

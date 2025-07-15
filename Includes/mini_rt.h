@@ -71,6 +71,11 @@ void			search_for_objects(t_scene *scene, char *parsed_line);
 //inits.c -- END
 //parser.c -- BEGIN
 //parser-Folder -- END
+//main.c -- BEGIN
+void	free_obj_data(t_obj_data *data, int type);
+void	free_obj_list(t_obj_list *obj_list);
+void	free_light_list(t_light_list *light_list);
+//main.c -- END
 //Functions -- END
 
 #endif
