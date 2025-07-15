@@ -47,7 +47,7 @@ t_obj_list	*intersect_to_list(t_scene *scene, t_ray *ray)
 			return (NULL);
 		curr = curr->next;
 	}
-	return (scene->obj_list);
+	return (sort_obj_list(scene->obj_list));
 }
 
 double	*hit_obj(t_scene *scene)

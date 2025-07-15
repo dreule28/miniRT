@@ -1,14 +1,12 @@
 #include "mini_rt.h"
 
-void	ray_tracing(void *param)
+void	ray_tracing(t_scene *scene)
 {
-	t_scene		*scene;
 	t_tuples	*window_cord;
 	t_tuples	*world_cord;
 	double		pixel_size;
 	double		half;
 
-	scene = (t_scene *)param;
 	window_cord = init_point(0, 0, HEIGHT * 0.1);
 	world_cord = init_point(0, 0, 0);
 	pixel_size = WIDTH * 0.07 / HEIGHT;
@@ -34,6 +32,7 @@ void	paint_pixel(t_scene *scene, t_ray *ray, int pixel_index)
 
 	pixels = (uint32_t *)scene->img->pixels;
 	intersect_to_list(scene, ray);
+	// print_obj_list(scene->obj_list);
 	hit = hit_obj(scene);
 	if (pixel_index < (int)scene->img->width * (int)scene->img->height)
 	{
@@ -73,5 +72,4 @@ void	calculate_ray(t_scene *scene, t_tuples *window_cord,
 			window_cord->z);
 	pixel_index = window_cord->y * HEIGHT + window_cord->x;
 	paint_pixel(scene, ray, pixel_index);
-	// free_ray(ray);
 }
