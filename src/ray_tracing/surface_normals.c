@@ -40,6 +40,7 @@ t_tuples	*normal_at(t_sphere *sphere, t_tuples *world_point)
 	world_normal = get_world_normal(inverse, object_point);
 	if (!world_normal)
 		return (NULL);
+	world_normal->w = VECTOR;
 	normalized = ftm_tup_norm(world_normal);
 	free_tuple(object_point);
 	free_matrix_m4(inverse);
