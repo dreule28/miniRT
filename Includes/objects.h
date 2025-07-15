@@ -11,7 +11,7 @@ typedef enum e_obj_type
 {
 	SPHERE,		/* Spherical object */
 	PLANE,		/* Infinite plane */
-	CYLINDER	/* Cylindrical object */
+	CYLINDER
 }	t_obj_type;
 
 typedef struct s_material
