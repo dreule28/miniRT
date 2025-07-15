@@ -7,7 +7,7 @@
 typedef enum e_tuples_enum
 {
 	VECTOR,		/* Represents direction and magnitude (w = 0) */
-	POINT		/* Represents position in space (w = 1) */
+	POINT
 }					t_tuples_enum;
 
 /* 4D tuple structure representing points and vectors in homogeneous coordinates */
@@ -28,10 +28,7 @@ typedef struct s_rgb
 }			t_rgb;
 
 // ray_tracing/custom_math_func.c
-/* Creates a new vector with given x, y, z components (w = 0) */
 t_tuples			*init_vector(double x, double y, double z);
-
-/* Creates a new point with given x, y, z components (w = 1) */
 t_tuples			*init_point(double x, double y, double z);
 t_tuples			*copy_vector(t_tuples *tup);
 t_tuples			*copy_point(t_tuples *tup);
