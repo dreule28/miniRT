@@ -1,46 +1,51 @@
 #include "mini_rt.h"
 
-void	ray_tracing(t_scene *scene)
+void	render_rows(t_scene *scene, t_tuples *origin,
+	t_render_params *params)
 {
-	t_tuples	*window_cord;
-	t_tuples	*world_cord;
-	double		pixel_size;
-	double		half;
+	int		y;
+	double	world_y;
 
-	window_cord = init_point(0, 0, HEIGHT * 0.1);
-	world_cord = init_point(0, 0, 0);
-	pixel_size = WIDTH * 0.07 / HEIGHT;
-	half = WIDTH * 0.07 / 2;
-	while (window_cord->y < HEIGHT)
+	y = 0;
+	while (y < HEIGHT)
 	{
-		world_cord->y = half - pixel_size * window_cord->y;
-		window_cord->x = 0;
-		while (window_cord->x < WIDTH)
-		{
-			world_cord->x = -half + pixel_size * window_cord->x;
-			calculate_ray(scene, window_cord, world_cord);
-			window_cord->x++;
-		}
-		window_cord->y++;
+		world_y = params->half - params->pixel_size * y;
+		render_columns(scene, origin, y, params);
+		y++;
 	}
 }
 
-void	paint_pixel(t_scene *scene, t_ray *ray, int pixel_index)
+void	render_columns(t_scene *scene, t_tuples *origin, int y,
+	t_render_params *params)
 {
-	double		*hit;
-	uint32_t	*pixels;
+	int		x;
+	double	world_x;
+	double	world_y;
+	t_ray	*ray;
 
-	pixels = (uint32_t *)scene->img->pixels;
-	intersect_to_list(scene, ray);
-	// print_obj_list(scene->obj_list);
-	hit = hit_obj(scene);
-	if (pixel_index < (int)scene->img->width * (int)scene->img->height)
+	world_y = params->half - params->pixel_size * y;
+	x = 0;
+	while (x < WIDTH)
 	{
-		if (hit)
-			pixels[pixel_index] = get_rgba(255, 0, 0, 255);
-		else
-			pixels[pixel_index] = get_rgba(0, 0, 0, 255);
+		world_x = -params->half + params->pixel_size * x;
+		ray = setup_shooting_ray(origin, world_x, world_y, params->wall_z);
+		paint_pixel(scene, ray, y * WIDTH + x);
+		free_ray(ray);
+		x++;
 	}
+}
+
+void	ray_tracing(t_scene *scene)
+{
+	t_render_params	params;
+	t_tuples		*origin;
+
+	params.wall_z = 10.0;
+	params.pixel_size = 7.0 / (double)HEIGHT;
+	params.half = 7.0 / 2.0;
+	origin = copy_point(&scene->camera.pos);
+	render_rows(scene, origin, &params);
+	free_tuple(origin);
 }
 
 t_ray	*setup_shooting_ray(t_tuples *ray_origin, double world_x,
