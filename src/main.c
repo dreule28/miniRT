@@ -78,21 +78,74 @@ void	print_terminal(void)
 	fflush(stdout);
 }
 
+void	print_obj_list(t_obj_list *obj_list)
+{
+    t_obj_node	*curr;
+    int			index;
+
+    if (!obj_list)
+    {
+        printf("Object list is NULL\n");
+        return;
+    }
+    
+    printf("Object List (size: %zd):\n", obj_list->size);
+    printf("Head: %p, Tail: %p\n", (void*)obj_list->head, (void*)obj_list->tail);
+    
+    if (!obj_list->head)
+    {
+        printf("List is empty\n");
+        return;
+    }
+    
+    curr = obj_list->head;
+    index = 0;
+    
+    while (curr)
+    {
+        printf("Node %d: ", index);
+        printf("Address: %p, ", (void*)curr);
+        printf("Type: %d, ", curr->type);
+        
+        if (curr->t)
+        {
+            printf("t[0]: %.6f, t[1]: %.6f, ", curr->t[0], curr->t[1]);
+        }
+        else
+        {
+            printf("t: NULL, ");
+        }
+        
+        printf("Next: %p\n", (void*)curr->next);
+        
+        curr = curr->next;
+        index++;
+        
+        // Safety check to prevent infinite loops
+        if (index > 100)
+        {
+            printf("Warning: Loop detected or list too long, stopping print\n");
+            break;
+        }
+    }
+    printf("--- End of list ---\n\n");
+}
+
+
 int	main(int argc, char **argv)
 {
 	t_scene	*scene;
-	// t_tuples	*normal;
-	// t_sphere	*sphere;
-
+	
 	scene = ft_calloc(sizeof(t_scene), 1);
 	if (!scene)
 		return (1);
 	if (!parser(scene, argc, argv))
 		return (free(scene), 1);
-	print_terminal();// debug prints
+	// print_obj_list(scene->obj_list);
 	if(!init_mlx_window(scene))
 		return(1);
-	mlx_custom_hooks(scene);
+	ray_tracing(scene);
+	mlx_key_hook(scene->mlx, &key_hook, scene);
 	mlx_loop(scene->mlx);
 	mlx_terminate(scene->mlx);
 	// free_obj_list(scene->obj_list);

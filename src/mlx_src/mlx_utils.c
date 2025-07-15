@@ -24,18 +24,6 @@ bool	init_mlx_window(t_scene *scene)
 	return (true);
 }
 
-void	print_terminal_update(t_scene *scene)
-{
-	printf("\033[4A");
-	printf("\r\033[Kx : %.6f y : %.6f z : %.6f\n", scene->camera.pos.x,
-		scene->camera.pos.y, scene->camera.pos.z);
-	printf("camera orientation vecotr");
-	printf("\r\033[Kx : %.6f y : %.6f z : %.6f\n",
-		scene->camera.orientation_vector.x, scene->camera.orientation_vector.y,
-		scene->camera.orientation_vector.z);
-	printf("\033[4B");
-	fflush(stdout);
-}
 
 int	get_rgba(int r, int g, int b, int a)
 {
