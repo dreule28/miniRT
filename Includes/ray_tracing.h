@@ -58,6 +58,7 @@ t_rgb		calculate_specular(t_scene *scene, t_tuples *lightv, t_tuples *eyev,
 				t_tuples *normalv);
 t_rgb		lighting(t_scene *scene, t_tuples *point, t_tuples *eyev,
 				t_tuples *normalv);
+t_rgb		shade_hit(t_scene *scene, t_computations *comps);
 // lighting.c -- END
 
 // rays.c -- BEGIN
