@@ -29,7 +29,7 @@ t_tuples	*ray_position(t_ray *ray, double time)
 	scalar = ftm_tup_mult(ray->direction, time);
 	if (!scalar)
 		return (NULL);
-	pos = ftm_tup_add(pos, scalar);
+	pos = ftm_tup_add(ray->origin, scalar);
 	free(scalar);
 	return (pos);
 }
