@@ -25,4 +25,3 @@ t_tuples	*ftm_tup_cross(t_tuples *tup1, t_tuples *tup2)
 	new_tuples->w = VECTOR;
 	return (new_tuples);
 }
-

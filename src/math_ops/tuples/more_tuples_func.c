@@ -22,6 +22,19 @@ t_tuples	*ftm_tup_mult(t_tuples *tuples, double value)
 	return (new_tuples);
 }
 
+t_rgb	*ftm_rgb_mult(t_rgb *rgb, double value)
+{
+	t_rgb	*new_rgb;
+
+	new_rgb = ft_calloc(sizeof(t_rgb), 1);
+	if (!new_rgb)
+		return (NULL);
+	new_rgb->r = rgb->r * value;
+	new_rgb->g = rgb->g * value;
+	new_rgb->b = rgb->b * value;
+	return (new_rgb);
+}
+
 /**
  * tup_divied - Divides a tuple by a value.
  * @tuples: Pointer to the tuple to be divided.
