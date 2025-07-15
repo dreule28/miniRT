@@ -68,9 +68,10 @@ typedef union u_obj_data
 
 typedef struct s_computations
 {
-	t_tuples	point;
-	t_tuples	eyev;
-	t_tuples	normalv;
+	t_tuples	*point;
+	t_tuples	*eyev;
+	t_tuples	*normalv;
+	bool		inside;
 }					t_computations;
 
 /* Node in linked list of objects */

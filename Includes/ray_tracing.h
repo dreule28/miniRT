@@ -28,6 +28,11 @@ typedef struct s_ray
 
 void		print_obj_list(t_obj_list *obj_list);
 
+
+// comp_to_list.c -- BEGIN
+bool	set_comp_to_obj(t_scene *scene, t_obj_node *curr, t_ray *ray);
+// comp_to_list.c -- END
+
 // intersec_sphere.c -- BEGIN
 bool		setup_intersec_sphere(t_scene *scene, t_obj_node *curr,
 				t_ray *ray);
