@@ -5,28 +5,33 @@ typedef struct s_m2	t_m2;
 typedef struct s_m3	t_m3;
 typedef struct s_m4	t_m4;
 
-/* Physics simulation structure for projectile motion */
+typedef struct s_render_params
+{
+	double	pixel_size;
+	double	half;
+	double	wall_z;
+}			t_render_params;
+
+/* Physics simulation structure for projectile motion*/
 typedef struct s_projectile
 {
-	t_tuples *position; /* Current position in 3D space */
-	t_tuples *velocity; /* Current velocity vector */
+	t_tuples	*position; /* Current position in 3D space */
+	t_tuples	*velocity; /* Current velocity vector */
 }			t_projectile;
 
 /* Environmental forces affecting projectile motion */
 typedef struct s_environment
 {
-	t_tuples *gravity; /* Gravitational force vector */
-	t_tuples *wind;    /* Wind force vector */
+	t_tuples	*gravity;	/* Gravitational force vector */
+	t_tuples	*wind;		/* Wind force vector */
 }			t_environment;
 
 /* Ray structure for ray tracing calculations */
 typedef struct s_ray
 {
-	t_tuples *origin;    /* Starting point of the ray */
-	t_tuples *direction; /* Direction vector of the ray */
+	t_tuples	*origin;	/* Starting point of the ray */
+	t_tuples	*direction;	/* Direction vector of the ray */
 }					t_ray;
-
-void		print_obj_list(t_obj_list *obj_list);
 
 // intersec_sphere.c -- BEGIN
 bool		setup_intersec_sphere(t_scene *scene, t_obj_node *curr,
@@ -75,10 +80,10 @@ void		swap_nodes(t_obj_list *obj_list, t_obj_node *prev,
 				t_obj_node *curr, t_obj_node *next);
 void		swap_pointers(t_obj_node **curr, t_obj_node **prev);
 t_obj_list	*sort_obj_list(t_obj_list *obj_list);
-	// sort_obj_list.c -- END
+// sort_obj_list.c -- END
 
-	// surface_normals.c -- BEGIN
-void 		free_tuple(t_tuples *tuple);
+// surface_normals.c -- BEGIN
+void		free_tuple(t_tuples *tuple);
 t_tuples	*get_world_normal(t_m4 *inverse, t_tuples *obj_point);
 t_tuples	*normal_at(t_sphere *sphere, t_tuples *point);
 // surface_normals.c -- END
