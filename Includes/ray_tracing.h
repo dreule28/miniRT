@@ -33,6 +33,10 @@ typedef struct s_ray
 	t_tuples	*direction;	/* Direction vector of the ray */
 }					t_ray;
 
+// comp_to_list.c -- BEGIN
+bool	set_comp_to_obj(t_scene *scene, t_obj_node *curr, t_ray *ray);
+// comp_to_list.c -- END
+
 // intersec_sphere.c -- BEGIN
 bool		setup_intersec_sphere(t_scene *scene, t_obj_node *curr,
 				t_ray *ray);
@@ -58,6 +62,7 @@ t_rgb		calculate_specular(t_scene *scene, t_tuples *lightv, t_tuples *eyev,
 				t_tuples *normalv);
 t_rgb		lighting(t_scene *scene, t_tuples *point, t_tuples *eyev,
 				t_tuples *normalv);
+t_rgb		shade_hit(t_scene *scene, t_computations *comps);
 // lighting.c -- END
 
 // rays.c -- BEGIN

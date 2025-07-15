@@ -1,7 +1,7 @@
 #include "mini_rt.h"
 
 t_rgb	calculate_lighting_components(t_material material, t_light *light,
-	double light_dot_normal)
+		double light_dot_normal)
 {
 	t_rgb	effective_color;
 	t_rgb	ambient;
@@ -19,13 +19,13 @@ t_rgb	calculate_lighting_components(t_material material, t_light *light,
 	diffuse.r = effective_color.r * material.diffuse * light_dot_normal;
 	diffuse.g = effective_color.g * material.diffuse * light_dot_normal;
 	diffuse.b = effective_color.b * material.diffuse * light_dot_normal;
-	result = *init_rgb(ambient.r + diffuse.r, ambient.g + diffuse.g,
-			ambient.b + diffuse.b);
+	result = *init_rgb(ambient.r + diffuse.r, ambient.g + diffuse.g, ambient.b
+			+ diffuse.b);
 	return (result);
 }
 
 t_rgb	calculate_specular(t_scene *scene, t_tuples *lightv, t_tuples *eyev,
-	t_tuples *normalv)
+		t_tuples *normalv)
 {
 	t_material	material;
 	t_light		*light;
@@ -42,18 +42,18 @@ t_rgb	calculate_specular(t_scene *scene, t_tuples *lightv, t_tuples *eyev,
 	else
 	{
 		factor = pow(reflect_dot_eye, material.shininess);
-		specular.r = light->rgb.r * light->intensity
-			* material.specular * factor;
-		specular.g = light->rgb.g * light->intensity
-			* material.specular * factor;
-		specular.b = light->rgb.b * light->intensity
-			* material.specular * factor;
+		specular.r = light->rgb.r * light->intensity * material.specular
+			* factor;
+		specular.g = light->rgb.g * light->intensity * material.specular
+			* factor;
+		specular.b = light->rgb.b * light->intensity * material.specular
+			* factor;
 	}
 	return (specular);
 }
 
 t_rgb	lighting(t_scene *scene, t_tuples *point, t_tuples *eyev,
-	t_tuples *normalv)
+		t_tuples *normalv)
 {
 	t_material	material;
 	t_light		*light;
@@ -74,5 +74,15 @@ t_rgb	lighting(t_scene *scene, t_tuples *point, t_tuples *eyev,
 		result.b += calculate_specular(scene, lightv, eyev, normalv).b;
 	}
 	free(lightv);
+	return (result);
+}
+
+t_rgb	shade_hit(t_scene *scene, t_computations *comps)
+{
+	t_rgb	result;
+
+	if (!comps || !comps->point || !comps->eyev || !comps->normalv)
+		return (*init_rgb(0, 0, 0));
+	result = lighting(scene, comps->point, comps->eyev, comps->normalv);
 	return (result);
 }
