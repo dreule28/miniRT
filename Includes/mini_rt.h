@@ -17,7 +17,7 @@
 # include "ray_tracing.h"
 # include "custom_math.h"
 # include "matrices.h"
-# include "mlx_cusotm.h"
+# include "mlx_custom.h"
 
 //parser-Folder -- BEGIN
 //fill_elements.c -- BEGIN
@@ -64,9 +64,9 @@ void			search_for_objects(t_scene *scene, char *parsed_line);
 //parser.c -- BEGIN
 //parser-Folder -- END
 //main.c -- BEGIN
-void	free_obj_data(t_obj_data *data, int type);
-void	free_obj_list(t_obj_list *obj_list);
-void	free_light_list(t_light_list *light_list);
+void			free_obj_data(t_obj_data *data, int type);
+void			free_obj_list(t_obj_list *obj_list);
+void			free_light_list(t_light_list *light_list);
 //main.c -- END
 //Functions -- END
 
