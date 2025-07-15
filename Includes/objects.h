@@ -66,12 +66,20 @@ typedef union u_obj_data
 	t_cylinder	*cylinder;	/* Pointer to cylinder data */
 }					t_obj_data;
 
+typedef struct s_computations
+{
+	t_tuples	point;
+	t_tuples	eyev;
+	t_tuples	normalv;
+}					t_computations;
+
 /* Node in linked list of objects */
 typedef struct s_obj_node
 {
 	t_obj_type			type;		/* Type of object stored */
 	t_obj_data			*data;		/* Pointer to object data */
 	double				*t;			/* Intersection parameter values */
+	t_computations		*comp;
 	struct s_obj_node	*next;		/* Pointer to next node */
 }						t_obj_node;
 
