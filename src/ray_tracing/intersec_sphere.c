@@ -21,6 +21,5 @@ bool	setup_intersec_sphere(t_scene *scene, t_obj_node *curr, t_ray *ray)
 	if (transformed_ray != ray)
 		free_ray(transformed_ray);
 	curr->t = t;
-	// free(ray);
 	return (true);
 }

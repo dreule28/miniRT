@@ -24,7 +24,6 @@ bool	init_mlx_window(t_scene *scene)
 	return (true);
 }
 
-
 int	get_rgba(int r, int g, int b, int a)
 {
 	return (a << 24 | b << 16 | g << 8 | r);

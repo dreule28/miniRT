@@ -72,5 +72,4 @@ void	calculate_ray(t_scene *scene, t_tuples *window_cord,
 			window_cord->z);
 	pixel_index = window_cord->y * HEIGHT + window_cord->x;
 	paint_pixel(scene, ray, pixel_index);
-	// free_ray(ray);
 }
