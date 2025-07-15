@@ -44,7 +44,7 @@ RAY_TRACING := $(addprefix ray_tracing/, $(RAY_TRACING_FILES))
 PARSER_FILES := fill_elements.c fill_objects.c initialize_objects.c list_and_nodes.c parser.c inits.c
 PARSER := $(addprefix parser/, $(PARSER_FILES))
 
-MLX_FILES := mlx_hooks.c mlx_utils.c ray_tracing_loop.c
+MLX_FILES := mlx_hooks.c mlx_utils.c ray_tracing_loop.c paint_pixle.c
 MLX := $(addprefix mlx_src/, $(MLX_FILES))
 
 SRC_FILES := main.c
