@@ -1,7 +1,7 @@
 #ifndef MINI_RT_H
 # define MINI_RT_H
-# define HEIGHT 100
-# define WIDTH 100
+# define HEIGHT 125
+# define WIDTH 200
 # define DBL_EPSILON 2.2204460492503131e-16
 
 //Includes -- BEGIN
@@ -23,6 +23,7 @@
 //fill_elements.c -- BEGIN
 void			skip_spaces_or_value(char **parsed_line, int value, int comma);
 void			add_ambient(t_scene *scene, char *parsed_line);
+void			calc_pixel_size(t_camera *camera);
 void			add_camera(t_scene *scene, char *parsed_line);
 void			add_light(t_light *light, char *parsed_line);
 //fill_elements.c -- END

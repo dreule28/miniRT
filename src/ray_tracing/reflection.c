@@ -15,7 +15,7 @@ t_tuples	*reflect(t_tuples *in, t_tuples *normal)
 	return (result);
 }
 
-t_light	*point_light(t_tuples *position, t_rgb *intensity)
+t_light	*point_light(t_tuples position, t_rgb intensity)
 {
 	t_light	*light;
 

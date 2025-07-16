@@ -74,13 +74,9 @@ int	main(int argc, char **argv)
 		return (1);
 	if (!parser(scene, argc, argv))
 		return (free(scene), 1);
-		t_tuples *from = init_point(1, 3, 2);
-		t_tuples *to = init_point(4, -2, 8);
-		t_tuples *up = init_vector(1, 1, 0);
+	printf("pixel_size: %.6f\n", scene->camera.pixel_size);
 	// if (!init_mlx_window(scene))
 	// 	return (1);
-	t_m4 *result = view_transformation(from, to, up);
-	print_matrix(result);
 	// ray_tracing(scene);
 	// mlx_key_hook(scene->mlx, &key_hook, scene);
 	// mlx_loop(scene->mlx);
