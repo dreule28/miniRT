@@ -52,7 +52,6 @@ void	apply_lighting(t_scene *scene, int pixel_index)
 void	paint_pixel(t_scene *scene, t_ray *ray, int pixel_index)
 {
 	uint32_t	*pixels;
-	// double		*hit_t;
 	t_tuples	*normalized;
 
 	pixels = (uint32_t *)scene->img->pixels;
@@ -60,12 +59,8 @@ void	paint_pixel(t_scene *scene, t_ray *ray, int pixel_index)
 	free(ray->direction);
 	ray->direction = normalized;
 	intersect_to_list(scene, ray);
-	// hit_t = hit_obj(scene);
 	if (scene->obj_list->head->t)
-	{
 		apply_lighting(scene, pixel_index);
-		// free(hit_t);
-	}
 	else
 		pixels[pixel_index] = get_rgba(0, 0, 0, 255);
 }

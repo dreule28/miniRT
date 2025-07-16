@@ -33,6 +33,11 @@ typedef struct s_ray
 	t_tuples	*direction;	/* Direction vector of the ray */
 }					t_ray;
 
+// camera.c -- BEGIN
+t_ray	*ray_for_pixel(t_camera *camera, double px, double py);
+void	render(t_scene *scene);
+// camera.c -- BEGIN
+
 // comp_to_list.c -- BEGIN
 bool	set_comp_to_obj(t_obj_node *curr, t_ray *ray);
 // comp_to_list.c -- END

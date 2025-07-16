@@ -74,12 +74,12 @@ int	main(int argc, char **argv)
 		return (1);
 	if (!parser(scene, argc, argv))
 		return (free(scene), 1);
-	printf("pixel_size: %.6f\n", scene->camera.pixel_size);
-	// if (!init_mlx_window(scene))
-	// 	return (1);
-	// ray_tracing(scene);
-	// mlx_key_hook(scene->mlx, &key_hook, scene);
-	// mlx_loop(scene->mlx);
-	// mlx_terminate(scene->mlx);
+	
+	if (!init_mlx_window(scene))
+		return (1);
+	render(scene);
+	mlx_key_hook(scene->mlx, &key_hook, scene);
+	mlx_loop(scene->mlx);
+	mlx_terminate(scene->mlx);
 	return (0);
 }
