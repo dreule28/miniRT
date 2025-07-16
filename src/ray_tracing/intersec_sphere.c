@@ -14,7 +14,7 @@ bool	setup_intersec_sphere(t_scene *scene, t_obj_node *curr, t_ray *ray)
 		if (inv)
 		{
 			transformed_ray = transform_ray(ray, inv);
-			free(inv);
+			free_matrix_m4(inv);
 		}
 	}
 	t = intersect_sphere(transformed_ray, curr->data->sphere);
