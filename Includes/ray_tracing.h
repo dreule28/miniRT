@@ -34,7 +34,7 @@ typedef struct s_ray
 }					t_ray;
 
 // comp_to_list.c -- BEGIN
-bool	set_comp_to_obj(t_scene *scene, t_obj_node *curr, t_ray *ray);
+bool	set_comp_to_obj(t_obj_node *curr, t_ray *ray);
 // comp_to_list.c -- END
 
 // intersec_sphere.c -- BEGIN
@@ -56,12 +56,11 @@ double		*hit_obj(t_scene *scene);
 // intersection.c -- END
 
 // lighting.c -- BEGIN
-t_rgb		calculate_lighting_components(t_material material, t_light *light,
+t_rgb		*calculate_lighting_components(t_material material, t_light *light,
 				double light_dot_normal);
 t_rgb		calculate_specular(t_scene *scene, t_tuples *lightv, t_tuples *eyev,
 				t_tuples *normalv);
-t_rgb		lighting(t_scene *scene, t_tuples *point, t_tuples *eyev,
-				t_tuples *normalv);
+t_rgb		*lighting(t_scene *scene, t_computations *comps, t_light *light);
 t_rgb		shade_hit(t_scene *scene, t_computations *comps);
 // lighting.c -- END
 

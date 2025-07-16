@@ -1,10 +1,9 @@
 #include "mini_rt.h"
 
-bool	set_comp_to_obj(t_scene *scene, t_obj_node *curr, t_ray *ray)
+bool	set_comp_to_obj(t_obj_node *curr, t_ray *ray)
 {
 	double	dot_product;
 
-	(void)scene;
 	if (!curr->t)
 		return (true);
 	curr->comp->point = ray_position(ray, curr->t[0]);
