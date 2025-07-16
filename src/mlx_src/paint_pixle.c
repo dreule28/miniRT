@@ -19,7 +19,7 @@ t_rgb	*get_shaded(t_scene *scene)
 	t_rgb			*shaded;
 	t_rgb			*temp;
 	t_light			*curr;
-	
+
 	shaded = init_rgb(0, 0, 0);
 	curr = scene->light_list->head;
 	comps = scene->obj_list->head->comp;
