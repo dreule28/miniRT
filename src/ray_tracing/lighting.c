@@ -53,6 +53,21 @@ t_rgb	calculate_specular(t_scene *scene, t_tuples *lightv, t_tuples *eyev,
 	return (specular);
 }
 
+t_material	get_obj_mat(t_scene *scene)
+{
+	t_material mat;
+
+	if(scene->obj_list->head->type == SPHERE)
+	{
+		mat = scene->obj_list->head->data->sphere->material;
+		if(scene->obj_list->head->comp->inside)
+			mat.ambient = 1.0;
+	}
+	else
+		mat = get_material();
+	return(mat);
+}
+
 t_rgb	*lighting(t_scene *scene, t_computations *comps, t_light *light)
 {
 	t_material	material;
@@ -60,7 +75,7 @@ t_rgb	*lighting(t_scene *scene, t_computations *comps, t_light *light)
 	double		light_dot_normal;
 	t_rgb		*result;
 
-	material = scene->obj_list->head->data->sphere->material;
+	material = get_obj_mat(scene);
 	lightv = ftm_tup_subtract(&light->pos, comps->point);
 	lightv = ftm_tup_norm(lightv);
 	light_dot_normal = ftm_tup_dot(lightv, comps->normalv);
@@ -78,12 +93,4 @@ t_rgb	*lighting(t_scene *scene, t_computations *comps, t_light *light)
 	return (result);
 }
 
-// t_rgb	*shade_hit(t_scene *scene, t_computations *comps)
-// {
-// 	t_rgb	*result;
 
-// 	if (!comps || !comps->point || !comps->eyev || !comps->normalv)
-// 		return (init_rgb(0, 0, 0));
-// 	// result = lighting(scene, comps->point, comps->eyev, comps->normalv);
-// 	return (result);
-// }
