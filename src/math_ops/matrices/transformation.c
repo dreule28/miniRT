@@ -1,7 +1,12 @@
 #include "mini_rt.h"
 
-t_m4	*ftm_translation(t_m4 *matrix, t_tuples *tuple)
+t_m4	*ftm_translation(t_tuples *tuple)
 {
+	t_m4	*matrix;
+
+	matrix = init_identity();
+	if (!matrix)
+		return (NULL);
 	if (matrix->col3)
 		free(matrix->col3);
 	matrix->col3 = assign_m4_col(tuple->x, tuple->y, tuple->z, 1);
