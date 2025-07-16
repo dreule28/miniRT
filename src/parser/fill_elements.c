@@ -27,28 +27,28 @@ void	add_ambient(t_scene *scene, char *parsed_line)
 	skip_spaces_or_value(&parsed_line, 0, 0);
 	scene->ambi_light.ratio = ft_atof(parsed_line);
 	skip_spaces_or_value(&parsed_line, 1, 0);
-	scene->ambi_light.rgb.r = ft_atof(parsed_line);
+	scene->ambi_light.rgb->r = ft_atof(parsed_line);
 	skip_spaces_or_value(&parsed_line, 0, 1);
-	scene->ambi_light.rgb.g = ft_atof(parsed_line);
+	scene->ambi_light.rgb->g = ft_atof(parsed_line);
 	skip_spaces_or_value(&parsed_line, 0, 1);
-	scene->ambi_light.rgb.b = ft_atof(parsed_line);
+	scene->ambi_light.rgb->b = ft_atof(parsed_line);
 }
 
 void	add_camera(t_scene *scene, char *parsed_line)
 {
 	skip_spaces_or_value(&parsed_line, 1, 0);
 	skip_spaces_or_value(&parsed_line, 0, 0);
-	scene->camera.pos.x = ft_atof(parsed_line);
+	scene->camera.pos->x = ft_atof(parsed_line);
 	skip_spaces_or_value(&parsed_line, 0, 1);
-	scene->camera.pos.y = ft_atof(parsed_line);
+	scene->camera.pos->y = ft_atof(parsed_line);
 	skip_spaces_or_value(&parsed_line, 0, 1);
-	scene->camera.pos.z = ft_atof(parsed_line);
+	scene->camera.pos->z = ft_atof(parsed_line);
 	skip_spaces_or_value(&parsed_line, 1, 0);
-	scene->camera.orientation_vector.x = ft_atof(parsed_line);
+	scene->camera.orientation_vector->x = ft_atof(parsed_line);
 	skip_spaces_or_value(&parsed_line, 0, 1);
-	scene->camera.orientation_vector.y = ft_atof(parsed_line);
+	scene->camera.orientation_vector->y = ft_atof(parsed_line);
 	skip_spaces_or_value(&parsed_line, 0, 1);
-	scene->camera.orientation_vector.z = ft_atof(parsed_line);
+	scene->camera.orientation_vector->z = ft_atof(parsed_line);
 	skip_spaces_or_value(&parsed_line, 1, 0);
 	scene->camera.fov = ft_atoi(parsed_line);
 }
@@ -57,18 +57,18 @@ void	add_light(t_light *light, char *parsed_line)
 {
 	skip_spaces_or_value(&parsed_line, 1, 0);
 	skip_spaces_or_value(&parsed_line, 0, 0);
-	light->pos.x = ft_atof(parsed_line);
+	light->pos->x = ft_atof(parsed_line);
 	skip_spaces_or_value(&parsed_line, 0, 1);
-	light->pos.y = ft_atof(parsed_line);
+	light->pos->y = ft_atof(parsed_line);
 	skip_spaces_or_value(&parsed_line, 0, 1);
-	light->pos.z = ft_atof(parsed_line);
+	light->pos->z = ft_atof(parsed_line);
 	skip_spaces_or_value(&parsed_line, 1, 0);
 	light->intensity = ft_atof(parsed_line);
 	skip_spaces_or_value(&parsed_line, 0, 0);
 	skip_spaces_or_value(&parsed_line, 1, 0);
-	light->rgb.r = ft_atof(parsed_line);
+	light->rgb->r = ft_atof(parsed_line);
 	skip_spaces_or_value(&parsed_line, 0, 1);
-	light->rgb.g = ft_atof(parsed_line);
+	light->rgb->g = ft_atof(parsed_line);
 	skip_spaces_or_value(&parsed_line, 0, 1);
-	light->rgb.b = ft_atof(parsed_line);
+	light->rgb->b = ft_atof(parsed_line);
 }

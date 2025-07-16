@@ -9,9 +9,9 @@ t_rgb	*calculate_lighting_components(t_material material, t_light *light,
 	t_rgb	*result;
 
 	ambient = init_rgb(0, 0, 0);
-	effective_color.r = material.rgb.r * light->rgb.r * light->intensity;
-	effective_color.g = material.rgb.g * light->rgb.g * light->intensity;
-	effective_color.b = material.rgb.b * light->rgb.b * light->intensity;
+	effective_color.r = material.rgb.r * light->rgb->r * light->intensity;
+	effective_color.g = material.rgb.g * light->rgb->g * light->intensity;
+	effective_color.b = material.rgb.b * light->rgb->b * light->intensity;
 	ambient->r = effective_color.r * material.ambient;
 	ambient->g = effective_color.g * material.ambient;
 	ambient->b = effective_color.b * material.ambient;
@@ -43,11 +43,11 @@ t_rgb	calculate_specular(t_scene *scene, t_tuples *lightv, t_tuples *eyev,
 	else
 	{
 		factor = pow(reflect_dot_eye, material.shininess);
-		specular.r = light->rgb.r * light->intensity * material.specular
+		specular.r = light->rgb->r * light->intensity * material.specular
 			* factor;
-		specular.g = light->rgb.g * light->intensity * material.specular
+		specular.g = light->rgb->g * light->intensity * material.specular
 			* factor;
-		specular.b = light->rgb.b * light->intensity * material.specular
+		specular.b = light->rgb->b * light->intensity * material.specular
 			* factor;
 	}
 	return (specular);
@@ -76,7 +76,7 @@ t_rgb	*lighting(t_scene *scene, t_computations *comps, t_light *light)
 	t_rgb		*result;
 
 	material = get_obj_mat(scene);
-	lightv = ftm_tup_subtract(&light->pos, comps->point);
+	lightv = ftm_tup_subtract(light->pos, comps->point);
 	lightv = ftm_tup_norm(lightv);
 	light_dot_normal = ftm_tup_dot(lightv, comps->normalv);
 	result = calculate_lighting_components(material, light, light_dot_normal);

@@ -43,7 +43,7 @@ void	ray_tracing(t_scene *scene)
 	params.wall_z = 10.0;
 	params.pixel_size = 7.0 / (double)HEIGHT;
 	params.half = 7.0 / 2.0;
-	origin = copy_point(&scene->camera.pos);
+	origin = copy_point(scene->camera.pos);
 	render_rows(scene, origin, &params);
 	free_tuple(origin);
 }
@@ -72,7 +72,7 @@ void	calculate_ray(t_scene *scene, t_tuples *window_cord,
 	t_ray		*ray;
 	int			pixel_index;
 
-	ray_origin = copy_point(&scene->camera.pos);
+	ray_origin = copy_point(scene->camera.pos);
 	ray = setup_shooting_ray(ray_origin, world_cord->x, world_cord->y,
 			window_cord->z);
 	pixel_index = window_cord->y * HEIGHT + window_cord->x;

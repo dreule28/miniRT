@@ -74,7 +74,7 @@ void		set_transform(t_sphere *sphere, t_m4 *matrix);
 
 // reflection.c -- BEGIN
 t_tuples	*reflect(t_tuples *in, t_tuples *normal);
-t_light		*point_light(t_tuples position, t_rgb intensity);
+t_light		*point_light(t_tuples *position, t_rgb *intensity);
 t_material	get_material(void);
 // reflection.c -- END
 

@@ -8,14 +8,14 @@
 typedef struct s_ambi_light
 {
 	double			ratio;		/* Intensity ratio (0.0 - 1.0) */
-	t_rgb			rgb;		/* Color of ambient light */
+	t_rgb			*rgb;		/* Color of ambient light */
 }					t_ambi_light;
 
 typedef struct s_light
 {
-	t_tuples		pos;		/* Position of light source */
+	t_tuples		*pos;		/* Position of light source */
 	double			intensity;	/* Brightness intensity (0.0 - 1.0) */
-	t_rgb			rgb;		/* Color of the light */
+	t_rgb			*rgb;		/* Color of the light */
 	struct s_light	*next;		/* Pointer to next light in list */
 }					t_light;
 
@@ -30,8 +30,8 @@ typedef struct s_light_list
 /* Virtual camera defining viewpoint and perspective */
 typedef struct s_camera
 {
-	t_tuples		pos;				/* Camera position in 3D space */
-	t_tuples		orientation_vector;	/* Direction camera is facing */
+	t_tuples		*pos;				/* Camera position in 3D space */
+	t_tuples		*orientation_vector;	/* Direction camera is facing */
 	int				fov;				/* Field of view in degrees */
 }					t_camera;
 
