@@ -92,4 +92,8 @@ t_tuples	*get_world_normal(t_m4 *inverse, t_tuples *obj_point);
 t_tuples	*normal_at(t_sphere *sphere, t_tuples *point);
 // surface_normals.c -- END
 
+// view_tranformation.c -- BEGIN
+t_m4	*view_transformation(t_tuples *from, t_tuples *to, t_tuples *up);
+t_m4	*create_view_matrix(t_tuples *left, t_tuples *forward, t_tuples *true_up);
+// view_tranformation.c -- END
 #endif
