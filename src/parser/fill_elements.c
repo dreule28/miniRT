@@ -71,9 +71,16 @@ void	add_camera(t_scene *scene, char *parsed_line)
 	scene->camera.orientation_vector.z = ft_atof(parsed_line);
 	skip_spaces_or_value(&parsed_line, 1, 0);
 	scene->camera.fov = M_PI / 2;
-	scene->camera.vsize = WIDTH;
-	scene->camera.hsize = HEIGHT;
-	scene->camera.matrix = init_identity();
+	scene->camera.vsize = HEIGHT;
+	scene->camera.hsize = WIDTH;
+	t_tuples *from, *to, *up;
+	from = init_point(scene->camera.pos.x, scene->camera.pos.y, scene->camera.pos.z);
+    to = init_point(scene->camera.pos.x + scene->camera.orientation_vector.x,
+                    scene->camera.pos.y + scene->camera.orientation_vector.y,
+                    scene->camera.pos.z + scene->camera.orientation_vector.z);
+    up = init_vector(0, 1, 0);
+    
+    scene->camera.matrix = view_transformation(from, to, up);
 	scene->camera.half_height = 0;
 	scene->camera.half_width = 0;
 	calc_pixel_size(&scene->camera);

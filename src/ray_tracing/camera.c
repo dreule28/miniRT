@@ -23,24 +23,22 @@ t_ray	*ray_for_pixel(t_camera *camera, double px, double py)
 }
 
 
-void	render(t_scene *scene)
+void render(t_scene *scene)
 {
-	t_ray	*ray;
-	int		y;
-	int		x;
+    t_ray *ray;
+    int y, x;
 
-	y = 0;
-	while (y < scene->camera.vsize)
-	{
-		x = 0;
-		while (x < scene->camera.hsize)
-		{
+    y = 0;
+    while (y < scene->camera.vsize)
+    {
+        x = 0;
+        while (x < scene->camera.hsize)
+        {
 			ray = ray_for_pixel(&scene->camera, x, y);
-			paint_pixel(scene, ray, y * scene->camera.hsize + x);
-			free_tuple(ray->origin);
-			free_tuple(ray->direction);
-			x++;
-		}
-		y++;
-	}
+            paint_pixel(scene, ray, y * scene->camera.hsize + x);
+            free_ray(ray);
+            x++;
+        }
+        y++;
+    }
 }
