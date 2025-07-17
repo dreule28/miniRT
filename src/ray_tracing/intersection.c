@@ -43,7 +43,7 @@ t_obj_list	*intersect_to_list(t_scene *scene, t_ray *ray)
 	curr = scene->obj_list->head;
 	while (curr)
 	{
-		if (!set_intersection_to_obj(scene, curr, ray))
+		if (!intersec_to_obj(scene, curr, ray))
 			return (NULL);
 		if (!set_comp_to_obj(curr, ray))
 			return (NULL);

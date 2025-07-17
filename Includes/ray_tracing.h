@@ -47,8 +47,8 @@ double	*intersect_plane(t_ray *ray, t_plane *plane);
 // comp_to_list.c -- END
 
 // intersec_sphere.c -- BEGIN
-bool		setup_intersec_sphere(t_scene *scene, t_obj_node *curr,
-				t_ray *ray);
+double 		*intersect_shape(t_obj_node *curr, t_ray *ray);
+bool		intersec_to_obj(t_scene *scene, t_obj_node *curr, t_ray *ray);
 bool		setup_intersec_plane(t_scene *scene, t_obj_node *curr, t_ray *ray);
 
 // intersec_sphere.c -- END
