@@ -1,40 +1,5 @@
 #include "mini_rt.h"
 
-void	render_rows(t_scene *scene, t_tuples *origin,
-	t_render_params *params)
-{
-	int		y;
-	double	world_y;
-
-	y = 0;
-	while (y < HEIGHT)
-	{
-		world_y = params->half - params->pixel_size * y;
-		render_columns(scene, origin, y, params);
-		y++;
-	}
-}
-
-void	render_columns(t_scene *scene, t_tuples *origin, int y,
-	t_render_params *params)
-{
-	int		x;
-	double	world_x;
-	double	world_y;
-	t_ray	*ray;
-
-	world_y = params->half - params->pixel_size * y;
-	x = 0;
-	while (x < WIDTH)
-	{
-		world_x = -params->half + params->pixel_size * x;
-		ray = setup_shooting_ray(origin, world_x, world_y, params->wall_z);
-		paint_pixel(scene, ray, y * WIDTH + x);
-		free_ray(ray);
-		x++;
-	}
-}
-
 t_ray	*setup_shooting_ray(t_tuples *ray_origin, double world_x,
 		double world_y, double wall_z)
 {

@@ -72,6 +72,7 @@ typedef struct s_computations
 	t_tuples	*eyev;
 	t_tuples	*normalv;
 	bool		inside;
+	bool		in_shadow;
 }					t_computations;
 
 /* Node in linked list of objects */
