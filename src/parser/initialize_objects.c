@@ -15,13 +15,6 @@ t_sphere	*init_sphere(void)
 	sphere->material.rgb.r = 0;
 	sphere->material.rgb.g = 0;
 	sphere->material.rgb.b = 0;
-	sphere->matrix = init_m4();
-	if (!sphere->matrix)
-		return (free(sphere), NULL);
-	sphere->matrix->col0 = assign_m4_col(1, 0, 0, 0);
-	sphere->matrix->col1 = assign_m4_col(0, 1, 0, 0);
-	sphere->matrix->col2 = assign_m4_col(0, 0, 1, 0);
-	sphere->matrix->col3 = assign_m4_col(0, 0, 0, 1);
 	return (sphere);
 }
 

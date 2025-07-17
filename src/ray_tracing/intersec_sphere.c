@@ -8,9 +8,9 @@ bool	setup_intersec_sphere(t_scene *scene, t_obj_node *curr, t_ray *ray)
 
 	(void)scene;
 	transformed_ray = ray;
-	if (curr->data->sphere->matrix)
+	if (curr->matrix)
 	{
-		inv = ftm_m4_inversion(curr->data->sphere->matrix);
+		inv = ftm_m4_inversion(curr->matrix);
 		if (inv)
 		{
 			transformed_ray = transform_ray(ray, inv);
@@ -32,9 +32,9 @@ bool	setup_intersec_plane(t_scene *scene, t_obj_node *curr, t_ray *ray)
 
 	(void)scene;
 	transformed_ray = ray;
-	if (curr->data->plane->matrix)
+	if (curr->matrix)
 	{
-		inv = ftm_m4_inversion(curr->data->plane->matrix);
+		inv = ftm_m4_inversion(curr->matrix);
 		if (inv)
 		{
 			transformed_ray = transform_ray(ray, inv);

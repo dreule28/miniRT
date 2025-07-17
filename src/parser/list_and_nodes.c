@@ -22,6 +22,7 @@ t_obj_node	*add_obj_node(t_obj_list *obj_list, int obj_type)
 		return (NULL);
 	new_node->next = NULL;
 	new_node->type = obj_type;
+	new_node->matrix = init_identity();
 	new_node->data = init_obj_data(obj_type);
 	if (!new_node->data)
 		return (free(new_node), NULL);

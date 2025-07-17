@@ -79,7 +79,7 @@ void		free_ray(t_ray *ray);
 t_ray		*init_ray(t_tuples *origin, t_tuples *direction);
 t_tuples	*ray_position(t_ray *ray, double time);
 t_ray		*transform_ray(t_ray *ray, t_m4 *m4);
-void		set_transform(t_sphere *sphere, t_m4 *matrix);
+void		set_transform(t_obj_node *curr, t_m4 *translation_matrix);
 // rays.c -- END
 
 // reflection.c -- BEGIN
@@ -99,7 +99,7 @@ t_obj_list	*sort_obj_list(t_obj_list *obj_list);
 // surface_normals.c -- BEGIN
 void		free_tuple(t_tuples *tuple);
 t_tuples	*get_world_normal(t_m4 *inverse, t_tuples *obj_point);
-t_tuples	*normal_at(t_sphere *sphere, t_tuples *point);
+t_tuples	*normal_at(t_obj_node *curr, t_tuples *world_point);
 // surface_normals.c -- END
 
 // view_tranformation.c -- BEGIN

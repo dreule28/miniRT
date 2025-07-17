@@ -14,7 +14,7 @@ bool	set_comp_to_obj(t_obj_node *curr, t_ray *ray)
 		return (false);
 	if (curr->type == SPHERE)
 	{
-		curr->comp->normalv = normal_at(curr->data->sphere, curr->comp->point);
+		curr->comp->normalv = normal_at(curr, curr->comp->point);
 		if (!curr->comp->normalv)
 			return (false);
 	}

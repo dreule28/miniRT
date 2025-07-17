@@ -26,14 +26,14 @@ t_tuples	*get_world_normal(t_m4 *inverse, t_tuples *obj_point)
 	return (world_normal);
 }
 
-t_tuples	*normal_at(t_sphere *sphere, t_tuples *world_point)
+t_tuples	*normal_at(t_obj_node *curr, t_tuples *world_point)
 {
 	t_m4		*inverse;
 	t_tuples	*object_point;
 	t_tuples	*world_normal;
 	t_tuples	*normalized;
 
-	inverse = ftm_m4_inversion(sphere->matrix);
+	inverse = ftm_m4_inversion(curr->matrix);
 	if (!inverse)
 		return (NULL);
 	object_point = ftm_matrix_times_tuple(inverse, world_point);
