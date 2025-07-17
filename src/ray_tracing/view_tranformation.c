@@ -1,21 +1,5 @@
 #include "mini_rt.h"
 
-void print_tuples(t_tuples *tuples)
-{
-    if (!tuples)
-    {
-        printf("NULL tuple\n");
-        return;
-    }
-    
-    if (tuples->w == POINT)
-        printf("Point: (%.5f, %.5f, %.5f)\n", tuples->x, tuples->y, tuples->z);
-    else if (tuples->w == VECTOR)
-        printf("Vector: (%.5f, %.5f, %.5f)\n", tuples->x, tuples->y, tuples->z);
-    else
-        printf("Tuple: (%.5f, %.5f, %.5f, %.5f)\n", tuples->x, tuples->y, tuples->z, tuples->w);
-}
-
 t_m4	*view_transformation(t_tuples *from, t_tuples *to, t_tuples *up)
 {
 	t_tuples	*forward;
@@ -37,7 +21,8 @@ t_m4	*view_transformation(t_tuples *from, t_tuples *to, t_tuples *up)
 	return (ftm_matrix_mult(orientation, ftm_translation(from)));
 }
 
-t_m4	*create_view_matrix(t_tuples *left, t_tuples *forward, t_tuples *true_up)
+t_m4	*create_view_matrix(t_tuples *left, t_tuples *forward,
+	t_tuples *true_up)
 {
 	t_m4	*orientation;
 
@@ -46,5 +31,5 @@ t_m4	*create_view_matrix(t_tuples *left, t_tuples *forward, t_tuples *true_up)
 	orientation->col1 = assign_m4_col(left->y, true_up->y, -forward->y, 0.0);
 	orientation->col2 = assign_m4_col(left->z, true_up->z, -forward->z, 0.0);
 	orientation->col3 = assign_m4_col(0.0, 0.0, 0.0, 1.0);
-	return(orientation);
+	return (orientation);
 }

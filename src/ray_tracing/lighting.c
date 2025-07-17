@@ -55,17 +55,17 @@ t_rgb	calculate_specular(t_scene *scene, t_tuples *lightv, t_tuples *eyev,
 
 t_material	get_obj_mat(t_scene *scene)
 {
-	t_material mat;
+	t_material	mat;
 
-	if(scene->obj_list->head->type == SPHERE)
+	if (scene->obj_list->head->type == SPHERE)
 	{
 		mat = scene->obj_list->head->data->sphere->material;
-		if(scene->obj_list->head->comp->inside)
+		if (scene->obj_list->head->comp->inside)
 			mat.ambient = 1.0;
 	}
 	else
 		mat = get_material();
-	return(mat);
+	return (mat);
 }
 
 t_rgb	*lighting(t_scene *scene, t_computations *comps, t_light *light)
@@ -92,5 +92,3 @@ t_rgb	*lighting(t_scene *scene, t_computations *comps, t_light *light)
 	free(lightv);
 	return (result);
 }
-
-

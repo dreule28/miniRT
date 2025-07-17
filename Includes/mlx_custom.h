@@ -24,7 +24,6 @@ void	paint_pixel(t_scene *scene, t_ray *ray, int pixel_index);
 void	render_rows(t_scene *scene, t_tuples *origin, t_render_params *params);
 void	render_columns(t_scene *scene, t_tuples *origin, int y,
 			t_render_params *params);
-void	ray_tracing(t_scene *scene);
 t_ray	*setup_shooting_ray(t_tuples *ray_origin, double world_x,
 			double world_y, double wall_z);
 void	calculate_ray(t_scene *scene, t_tuples *window_cord,

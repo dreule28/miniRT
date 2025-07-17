@@ -69,7 +69,6 @@ t_rgb		*calculate_lighting_components(t_material material, t_light *light,
 t_rgb		calculate_specular(t_scene *scene, t_tuples *lightv, t_tuples *eyev,
 				t_tuples *normalv);
 t_rgb		*lighting(t_scene *scene, t_computations *comps, t_light *light);
-t_rgb		shade_hit(t_scene *scene, t_computations *comps);
 // lighting.c -- END
 
 // rays.c -- BEGIN
@@ -101,7 +100,8 @@ t_tuples	*normal_at(t_sphere *sphere, t_tuples *point);
 // surface_normals.c -- END
 
 // view_tranformation.c -- BEGIN
-t_m4	*view_transformation(t_tuples *from, t_tuples *to, t_tuples *up);
-t_m4	*create_view_matrix(t_tuples *left, t_tuples *forward, t_tuples *true_up);
+t_m4		*view_transformation(t_tuples *from, t_tuples *to, t_tuples *up);
+t_m4		*create_view_matrix(t_tuples *left, t_tuples *forward,
+				t_tuples *true_up);
 // view_tranformation.c -- END
 #endif

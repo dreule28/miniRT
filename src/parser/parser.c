@@ -60,15 +60,9 @@ bool	validate_file(char **argv)
 		i++;
 	}
 	if (ft_strncmp(&argv[1][i - 3], ".rt", 3))
-	{
-			ft_putstr_fd("Error\nWrong file type\n", 2);
-		return (false);
-	}
+		return (ft_putstr_fd("Error\nWrong file type\n", 2), false);
 	if (last_dot - last_slash <= 1)
-	{
-		ft_putstr_fd("Error\nInvalid filename\n", 2);
-		return (false);
-	}
+		return (ft_putstr_fd("Error\nInvalid filename\n", 2), false);
 	return (true);
 }
 

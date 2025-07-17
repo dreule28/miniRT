@@ -35,19 +35,6 @@ void	render_columns(t_scene *scene, t_tuples *origin, int y,
 	}
 }
 
-void	ray_tracing(t_scene *scene)
-{
-	// t_render_params	params;
-	// t_tuples		*origin;
-
-	// params.wall_z = 10.0;
-	// params.pixel_size = 7.0 / (double)HEIGHT;
-	// params.half = 7.0 / 2.0;
-	// origin = copy_point(&scene->camera.pos);
-	render(scene);
-	// free_tuple(origin);
-}
-
 t_ray	*setup_shooting_ray(t_tuples *ray_origin, double world_x,
 		double world_y, double wall_z)
 {
