@@ -23,3 +23,27 @@ bool	setup_intersec_sphere(t_scene *scene, t_obj_node *curr, t_ray *ray)
 	curr->t = t;
 	return (true);
 }
+
+bool	setup_intersec_plane(t_scene *scene, t_obj_node *curr, t_ray *ray)
+{
+	double	*t;
+	t_ray	*transformed_ray;
+	t_m4	*inv;
+
+	(void)scene;
+	transformed_ray = ray;
+	if (curr->data->plane->matrix)
+	{
+		inv = ftm_m4_inversion(curr->data->plane->matrix);
+		if (inv)
+		{
+			transformed_ray = transform_ray(ray, inv);
+			free_matrix_m4(inv);
+		}
+	}
+	t = intersect_plane(transformed_ray, curr->data->plane);
+	if (transformed_ray != ray)
+		free_ray(transformed_ray);
+	curr->t = t;
+	return (true);
+}

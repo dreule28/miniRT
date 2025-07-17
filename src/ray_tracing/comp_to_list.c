@@ -28,3 +28,10 @@ bool	set_comp_to_obj(t_obj_node *curr, t_ray *ray)
 		curr->comp->inside = false;
 	return (true);
 }
+
+double	*intersect_plane(t_ray *ray, t_plane *plane)
+{
+	(void)ray;
+	(void)plane;
+	return(NULL);
+}

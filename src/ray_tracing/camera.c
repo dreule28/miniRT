@@ -68,3 +68,4 @@ t_m4	*init_view_transformation(t_scene *scene)
 	result = view_transformation(from, to, up);
 	return (result);
 }
+

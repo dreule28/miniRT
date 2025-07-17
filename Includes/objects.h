@@ -41,6 +41,7 @@ typedef struct s_plane
 {
 	t_tuples	pos;		/* Point on the plane */
 	t_tuples	axis;		/* Normal vector defining plane orientation */
+	t_m4		*matrix;
 	t_material	material;	/* Material of the object*/
 }				t_plane;
 
