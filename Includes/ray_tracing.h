@@ -87,6 +87,11 @@ t_light		*point_light(t_tuples position, t_rgb intensity);
 t_material	get_material(void);
 // reflection.c -- END
 
+// shadows.c -- BEGIN
+bool		is_shadowed(t_scene *scene, t_tuples *point);
+// shadows.c -- END
+
+
 // sort_obj_list.c -- BEGIN
 bool		should_swap_nodes(t_obj_node *curr, t_obj_node *next);
 void		swap_nodes(t_obj_list *obj_list, t_obj_node *prev,
