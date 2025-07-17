@@ -28,7 +28,7 @@ bool	intersec_to_obj(t_scene *scene, t_obj_node *curr, t_ray *ray)
 			free_matrix_m4(inv);
 		}
 	}
-	t = intersect_shape(curr, ray);
+	t = intersect_shape(curr, transformed_ray);
 	if (transformed_ray != ray)
 		free_ray(transformed_ray);
 	curr->t = t;
