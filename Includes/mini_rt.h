@@ -1,8 +1,9 @@
 #ifndef MINI_RT_H
 # define MINI_RT_H
-# define WIDTH 250
-# define HEIGHT 250
+# define WIDTH 100
+# define HEIGHT 100
 # define DBL_EPSILON 2.2204460492503131e-16
+# define EPSILON 1e-5
 
 //Includes -- BEGIN
 # include <stdio.h>

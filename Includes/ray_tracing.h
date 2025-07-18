@@ -88,6 +88,7 @@ t_material	get_material(void);
 // reflection.c -- END
 
 // shadows.c -- BEGIN
+t_rgb		*shade_hit(t_scene *scene, t_computations *comps, t_light *curr);
 bool		is_shadowed(t_scene *scene, t_tuples *point);
 // shadows.c -- END
 
