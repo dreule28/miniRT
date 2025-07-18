@@ -16,7 +16,8 @@ int		get_rgba(int r, int g, int b, int a);
 // src/mlx_src/mlx_utils.c -- END
 
 // paint_pixle.c -- BEGIN
-void	apply_lighting(t_scene *scene, int pixel_index);
+void	apply_lighting_with_shadows(t_scene *scene, int pixel_index,
+			t_computations *comps);
 void	paint_pixel(t_scene *scene, t_ray *ray, int pixel_index);
 // paint_pixle.c -- END
 

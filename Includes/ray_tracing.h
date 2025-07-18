@@ -42,6 +42,8 @@ t_m4		*init_view_transformation(t_scene *scene);
 // camera.c -- BEGIN
 
 // comp_to_list.c -- BEGIN
+void		set_dot_product(t_obj_node *curr);
+void		set_epsilon_offset(t_obj_node *curr);
 bool		set_comp_to_obj(t_obj_node *curr, t_ray *ray);
 // comp_to_list.c -- END
 
@@ -85,13 +87,18 @@ void		set_transform(t_sphere *sphere, t_m4 *matrix);
 t_tuples	*reflect(t_tuples *in, t_tuples *normal);
 t_light		*point_light(t_tuples position, t_rgb intensity);
 t_material	get_material(void);
+t_rgb		*shade_hit(t_scene *scene, t_computations *comps, t_light *curr);
 // reflection.c -- END
 
 // shadows.c -- BEGIN
 t_rgb		*shade_hit(t_scene *scene, t_computations *comps, t_light *curr);
+double		*get_transformed_intersection(t_obj_node *curr, t_ray *ray);
+bool		check_shadow_intersection(double *t, double distance,
+				double *min_t);
+bool		check_objects_for_shadow(t_scene *scene, t_ray *ray,
+				double distance);
 bool		is_shadowed(t_scene *scene, t_tuples *point);
 // shadows.c -- END
-
 
 // sort_obj_list.c -- BEGIN
 bool		should_swap_nodes(t_obj_node *curr, t_obj_node *next);
