@@ -74,6 +74,13 @@ t_rgb		calculate_specular(t_scene *scene, t_tuples *lightv, t_tuples *eyev,
 t_rgb		*lighting(t_scene *scene, t_computations *comps, t_light *light);
 // lighting.c -- END
 
+// local_normal_at.c -- BEGIN
+t_tuples	*local_normal_at(t_obj_node *curr, t_tuples *object_point);
+t_tuples	*local_sphere(t_obj_node *curr, t_tuples *object_point);
+t_tuples	*local_plane(t_obj_node *curr, t_tuples *object_point);
+
+// local_normal_at.c -- END
+
 // rays.c -- BEGIN
 void		free_ray(t_ray *ray);
 t_ray		*init_ray(t_tuples *origin, t_tuples *direction);
