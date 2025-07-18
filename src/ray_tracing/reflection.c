@@ -42,3 +42,9 @@ t_material	get_material(void)
 	material.shininess = 200.0;
 	return (material);
 }
+
+t_rgb	*shade_hit(t_scene *scene, t_computations *comps, t_light *curr)
+{
+	comps->in_shadow = is_shadowed(scene, comps->over_point);
+	return (lighting(scene, comps, curr));
+}
