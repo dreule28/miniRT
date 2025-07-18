@@ -2,7 +2,8 @@
 
 bool	set_comp_to_obj(t_obj_node *curr, t_ray *ray)
 {
-	double	dot_product;
+	double		dot_product;
+	t_tuples	*epsilon_offset;
 
 	if (!curr->t)
 		return (true);
@@ -26,5 +27,8 @@ bool	set_comp_to_obj(t_obj_node *curr, t_ray *ray)
 	}
 	else
 		curr->comp->inside = false;
+	epsilon_offset = ftm_tup_mult(curr->comp->normalv, DBL_EPSILON);
+	curr->comp->over_point = ftm_tup_add(curr->comp->point, epsilon_offset);
+	free(epsilon_offset);
 	return (true);
 }

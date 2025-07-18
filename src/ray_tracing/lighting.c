@@ -91,7 +91,7 @@ t_rgb	*lighting(t_scene *scene, t_computations *comps, t_light *light)
 	t_rgb		*result;
 
 	material = get_obj_mat(scene);
-	lightv = ftm_tup_subtract(&light->pos, comps->point);
+	lightv = ftm_tup_subtract(&light->pos, comps->over_point);
 	lightv = ftm_tup_norm(lightv);
 	light_dot_normal = ftm_tup_dot(lightv, comps->normalv);
 	if (comps->in_shadow)

@@ -1,5 +1,11 @@
 #include "mini_rt.h"
 
+t_rgb	*shade_hit(t_scene *scene, t_computations *comps, t_light *curr)
+{
+	comps->in_shadow = is_shadowed(scene, comps->over_point);
+	return (lighting(scene, comps, curr));
+}
+
 bool	is_shadowed(t_scene *scene, t_tuples *point)
 {
 	t_tuples	*distance_v;
