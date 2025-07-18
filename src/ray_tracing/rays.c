@@ -3,7 +3,13 @@
 void	free_ray(t_ray *ray)
 {
 	if (ray)
+	{
+		if (ray->direction)
+			free_tuple(ray->direction);
+		if (ray->origin)
+			free_tuple(ray->origin);
 		free(ray);
+	}
 }
 
 t_ray	*init_ray(t_tuples *origin, t_tuples *direction)
