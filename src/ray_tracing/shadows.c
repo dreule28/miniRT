@@ -21,16 +21,16 @@ double	*get_transformed_intersection(t_obj_node *curr, t_ray *ray)
 	double	*t;
 
 	transformed_ray = ray;
-	if (curr->data->sphere->matrix)
+	if (curr->matrix)
 	{
-		inv = ftm_m4_inversion(curr->data->sphere->matrix);
+		inv = ftm_m4_inversion(curr->matrix);
 		if (inv)
 		{
 			transformed_ray = transform_ray(ray, inv);
 			free_matrix_m4(inv);
 		}
 	}
-	t = intersect_sphere(transformed_ray, curr->data->sphere);
+	t = intersect_shape(curr, transformed_ray);
 	if (transformed_ray != ray)
 		free_ray(transformed_ray);
 	return (t);

@@ -83,25 +83,15 @@ int	main(int argc, char **argv)
 	if (!parser(scene, argc, argv))
 		return (free(scene), 1);
 
-	// generate_scene(scene);
-
-	t_computations	*comps;
-	t_rgb			*res;
-	comps = ft_calloc(sizeof(t_computations), 1);
-	comps->eyev = init_vector(0, 0, -1);
-	comps->normalv = init_vector(0, 0, -1);
-	comps->in_shadow = true;
-	comps->point = &scene->light_list->head->pos;
-
-	res = lighting(scene, comps, scene->light_list->head);
-	printf("R: %.1f G: %.1f B: %.1f\n", res->r, res->g, res->b);
+	generate_scene(scene);
 
 
-	// if (!init_mlx_window(scene))
-	// 	return (1);
-	// render(scene);
-	// mlx_key_hook(scene->mlx, &key_hook, scene);
-	// mlx_loop(scene->mlx);
-	// mlx_terminate(scene->mlx);
+
+	if (!init_mlx_window(scene))
+		return (1);
+	render(scene);
+	mlx_key_hook(scene->mlx, &key_hook, scene);
+	mlx_loop(scene->mlx);
+	mlx_terminate(scene->mlx);
 	return (0);
 }
