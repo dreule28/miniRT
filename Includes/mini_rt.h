@@ -1,7 +1,7 @@
 #ifndef MINI_RT_H
 # define MINI_RT_H
-# define WIDTH 800
-# define HEIGHT 400
+# define WIDTH 1980
+# define HEIGHT 1080
 # define DBL_EPSILON 2.2204460492503131e-16
 
 //Includes -- BEGIN
@@ -62,6 +62,7 @@ t_obj_data		*init_plane_data(t_obj_data *data);
 t_obj_data		*init_cylinder_data(t_obj_data *data);
 void			search_for_objects(t_scene *scene, char *parsed_line);
 //inits.c -- END
+
 //parser.c -- BEGIN
 //parser-Folder -- END
 //main.c -- BEGIN

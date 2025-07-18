@@ -12,7 +12,7 @@ bool	set_comp_to_obj(t_obj_node *curr, t_ray *ray)
 	curr->comp->eyev = ftm_tup_negate(ray->direction);
 	if (!curr->comp->eyev)
 		return (false);
-	if (curr->type == SPHERE)
+	if (curr->type == SPHERE || curr->type == PLANE)
 	{
 		curr->comp->normalv = normal_at(curr, curr->comp->point);
 		if (!curr->comp->normalv)
@@ -56,6 +56,8 @@ double *intersect_plane(t_ray *ray, t_plane *plane)
 	if(fabs(ray->direction->y) < DBL_EPSILON)
 		return(NULL);
 	intersec = -ray->origin->y / ray->direction->y;
+	if (intersec <= 0)
+        return(NULL);
 	t = ft_calloc(sizeof(double), 2);
 	if(!t)
 		return(NULL);

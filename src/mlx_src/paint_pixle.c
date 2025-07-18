@@ -59,7 +59,7 @@ void	paint_pixel(t_scene *scene, t_ray *ray, int pixel_index)
 	free(ray->direction);
 	ray->direction = normalized;
 	intersect_to_list(scene, ray);
-	if (scene->obj_list->head->t)
+	if (scene->obj_list->head->t && scene->obj_list->head->t[0] > 0)
 		apply_lighting(scene, pixel_index);
 	else
 		pixels[pixel_index] = get_rgba(0, 0, 0, 255);
