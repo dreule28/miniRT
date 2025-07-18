@@ -50,6 +50,7 @@ void	generate_scene(t_scene *scene)
 	t_obj_node	*fourth	= scene->obj_list->head->next->next->next;
 	t_obj_node	*fifth	= scene->obj_list->head->next->next->next->next;
 	t_obj_node	*sixth	= scene->obj_list->tail;
+
 	// First Sphere
 	first->matrix = ftm_scaling(init_point(10, 0.01, 10));
 	first->data->sphere->material = get_material();
@@ -114,7 +115,7 @@ int	main(int argc, char **argv)
 	if (!parser(scene, argc, argv))
 		return (free(scene), 1);
 
-	// generate_scene(scene);
+	generate_scene(scene);
 
 	if (!init_mlx_window(scene))
 		return (1);
