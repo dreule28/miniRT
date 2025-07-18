@@ -52,15 +52,15 @@ t_ray	*transform_ray(t_ray *ray, t_m4 *m4)
 	return (new_ray);
 }
 
-void	set_transform(t_sphere *sphere, t_m4 *translation_matrix)
+void	set_transform(t_obj_node *curr, t_m4 *translation_matrix)
 {
-	if (sphere->matrix)
+	if (curr->matrix)
 	{
-		free(sphere->matrix->col0);
-		free(sphere->matrix->col1);
-		free(sphere->matrix->col2);
-		free(sphere->matrix->col3);
-		free(sphere->matrix);
+		free(curr->matrix->col0);
+		free(curr->matrix->col1);
+		free(curr->matrix->col2);
+		free(curr->matrix->col3);
+		free(curr->matrix);
 	}
-	sphere->matrix = translation_matrix;
+	curr->matrix = translation_matrix;
 }

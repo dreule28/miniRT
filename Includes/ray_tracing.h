@@ -45,11 +45,16 @@ t_m4		*init_view_transformation(t_scene *scene);
 void		set_dot_product(t_obj_node *curr);
 void		set_epsilon_offset(t_obj_node *curr);
 bool		set_comp_to_obj(t_obj_node *curr, t_ray *ray);
+double *intersect_plane(t_ray *ray, t_plane *plane);
+
+
 // comp_to_list.c -- END
 
 // intersec_sphere.c -- BEGIN
-bool		setup_intersec_sphere(t_scene *scene, t_obj_node *curr,
-				t_ray *ray);
+bool		intersec_to_obj(t_scene *scene, t_obj_node *curr, t_ray *ray);
+
+bool		setup_intersec_plane(t_scene *scene, t_obj_node *curr, t_ray *ray);
+
 // intersec_sphere.c -- END
 
 // intersec_to_list.c -- BEGIN
@@ -75,12 +80,19 @@ t_rgb		*ambient_comp(t_tuples **lightv, t_material material,
 t_rgb		*lighting(t_scene *scene, t_computations *comps, t_light *light);
 // lighting.c -- END
 
+// local_normal_at.c -- BEGIN
+t_tuples	*local_normal_at(t_obj_node *curr, t_tuples *object_point);
+t_tuples	*local_sphere(t_obj_node *curr, t_tuples *object_point);
+t_tuples	*local_plane(t_obj_node *curr, t_tuples *object_point);
+
+// local_normal_at.c -- END
+
 // rays.c -- BEGIN
 void		free_ray(t_ray *ray);
 t_ray		*init_ray(t_tuples *origin, t_tuples *direction);
 t_tuples	*ray_position(t_ray *ray, double time);
 t_ray		*transform_ray(t_ray *ray, t_m4 *m4);
-void		set_transform(t_sphere *sphere, t_m4 *matrix);
+void		set_transform(t_obj_node *curr, t_m4 *translation_matrix);
 // rays.c -- END
 
 // reflection.c -- BEGIN
@@ -110,8 +122,8 @@ t_obj_list	*sort_obj_list(t_obj_list *obj_list);
 
 // surface_normals.c -- BEGIN
 void		free_tuple(t_tuples *tuple);
-t_tuples	*get_world_normal(t_m4 *inverse, t_tuples *obj_point);
-t_tuples	*normal_at(t_sphere *sphere, t_tuples *point);
+t_tuples	*get_world_normal(t_obj_node *curr, t_m4 *inverse, t_tuples *obj_point);
+t_tuples	*normal_at(t_obj_node *curr, t_tuples *world_point);
 // surface_normals.c -- END
 
 // view_tranformation.c -- BEGIN

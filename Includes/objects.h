@@ -32,7 +32,6 @@ typedef struct s_sphere
 {
 	t_tuples	pos;		/* Center position in 3D space */
 	double		radius;		/* Radius of the sphere */
-	t_m4		*matrix;	/* Transformation matrix */
 	t_material	material;	/* Material of the object*/
 }				t_sphere;
 
@@ -82,6 +81,7 @@ typedef struct s_obj_node
 	t_obj_type			type;		/* Type of object stored */
 	t_obj_data			*data;		/* Pointer to object data */
 	double				*t;			/* Intersection parameter values */
+	t_m4				*matrix;
 	t_computations		*comp;
 	struct s_obj_node	*next;		/* Pointer to next node */
 }						t_obj_node;
