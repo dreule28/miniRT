@@ -21,6 +21,7 @@ typedef struct s_material
 	double	diffuse; /* Diffuse reflection coefficient (0.0 to 1.0) */
 	double	specular; /* Specular reflection coefficient (0.0 to 1.0) */
 	double	shininess; /* Shininess factor for specular highlights */
+	double	reflective;
 }			t_material;
 
 /* ========================================================================== */
@@ -32,7 +33,7 @@ typedef struct s_sphere
 {
 	t_tuples	pos;		/* Center position in 3D space */
 	double		radius;		/* Radius of the sphere */
-	t_material	material;	/* Material of the object*/
+	t_rgb		rgb;
 }				t_sphere;
 
 /* Plane object with position, orientation and color */
@@ -40,7 +41,7 @@ typedef struct s_plane
 {
 	t_tuples	pos;		/* Point on the plane */
 	t_tuples	axis;		/* Normal vector defining plane orientation */
-	t_material	material;	/* Material of the object*/
+	t_rgb		rgb;
 }				t_plane;
 
 /* Cylinder object with position, orientation, dimensions and color */
@@ -50,7 +51,7 @@ typedef struct s_cylinder
 	t_tuples	axis;		/* Direction vector of cylinder axis */
 	double		radius;		/* Radius of the cylinder */
 	double		height;		/* Height of the cylinder */
-	t_material	material;	/* Material of the object*/
+	t_rgb		rgb;
 }				t_cylinder;
 
 /* ========================================================================== */
@@ -71,6 +72,7 @@ typedef struct s_computations
 	t_tuples	*eyev;
 	t_tuples	*normalv;
 	t_tuples	*over_point;
+	t_tuples	*reflectv;
 	bool		inside;
 	bool		in_shadow;
 }					t_computations;
@@ -83,6 +85,7 @@ typedef struct s_obj_node
 	double				*t;			/* Intersection parameter values */
 	t_m4				*matrix;
 	t_computations		*comp;
+	t_material			material;	/* Material of the object*/
 	struct s_obj_node	*next;		/* Pointer to next node */
 }						t_obj_node;
 
