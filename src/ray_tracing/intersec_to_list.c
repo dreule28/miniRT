@@ -1,6 +1,6 @@
 #include "mini_rt.h"
 
-double *intersect_shape(t_obj_node *curr, t_ray *ray)
+double	*intersect_shape(t_obj_node *curr, t_ray *ray)
 {
 	double *intersection;
 

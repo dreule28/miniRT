@@ -34,7 +34,7 @@ t_rgb	calculate_specular(t_scene *scene, t_tuples *lightv, t_tuples *eyev,
 	double		factor;
 	t_rgb		specular;
 
-	material = scene->obj_list->head->data->sphere->material;
+	material = scene->obj_list->head->material;
 	light = scene->light_list->head;
 	reflect_dot_eye = ftm_tup_dot(reflect(ftm_tup_negate(lightv), normalv),
 			eyev);
@@ -59,7 +59,7 @@ t_material	get_obj_mat(t_scene *scene)
 
 	if (scene->obj_list->head->type == SPHERE)
 	{
-		mat = scene->obj_list->head->data->sphere->material;
+		mat = scene->obj_list->head->material;
 		if (scene->obj_list->head->comp->inside)
 			mat.ambient = 1.0;
 	}

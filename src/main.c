@@ -73,6 +73,54 @@ void generate_scene(t_scene *scene)
     scene->camera.matrix = view_transformation(init_point(0, 1.5, -5), init_point(0, 1, 0), init_vector(0, 1, 0));
 }
 
+// Add this debug code to your main() function right before calling reflected_color
+
+// void debug_scene(t_scene *scene)
+// {
+//     printf("=== SCENE DEBUG ===\n");
+
+//     // Check lights
+//     if (!scene->light_list || !scene->light_list->head)
+//     {
+//         printf("ERROR: No lights in scene!\n");
+//         return;
+//     }
+
+//     t_light *light = scene->light_list->head;
+//     int light_count = 0;
+//     while (light)
+//     {
+//         printf("Light %d: pos=(%f,%f,%f), rgb=(%f,%f,%f), intensity=%f\n",
+//             light_count,
+//             light->pos.x, light->pos.y, light->pos.z,
+//             light->rgb.r, light->rgb.g, light->rgb.b,
+//             light->intensity);
+//         light = light->next;
+//         light_count++;
+//     }
+//     printf("Total lights: %d\n", light_count);
+
+//     // Check objects
+//     t_obj_node *obj = scene->obj_list->head;
+//     int obj_count = 0;
+//     while (obj)
+//     {
+//         printf("Object %d: type=%d, material rgb=(%f,%f,%f)\n",
+//             obj_count, obj->type,
+//             obj->material.rgb.r, obj->material.rgb.g, obj->material.rgb.b);
+//         printf("  ambient=%f, diffuse=%f, specular=%f, reflective=%f\n",
+//             obj->material.ambient, obj->material.diffuse,
+//             obj->material.specular, obj->material.reflective);
+//         obj = obj->next;
+//         obj_count++;
+//     }
+//     printf("Total objects: %d\n", obj_count);
+//     printf("=== END DEBUG ===\n");
+// }
+
+// Call this in your main() before the reflection test:
+// debug_scene(scene);
+
 int	main(int argc, char **argv)
 {
 	t_scene	*scene;
@@ -83,15 +131,30 @@ int	main(int argc, char **argv)
 	if (!parser(scene, argc, argv))
 		return (free(scene), 1);
 
-	generate_scene(scene);
+	// generate_scene(scene);
+
+	t_ray	*ray;
+	t_rgb	*color;
+
+
+	// printf("Object type: %d\n", scene->obj_list->head->type);
+	scene->obj_list->head->data->plane->material.reflective = 0.5;
+	scene->obj_list->head->matrix = ftm_translation(init_point(0, -1, 0));
+	ray = init_ray(init_point(0, 0, -3), init_vector(0, -sqrt(2)/2, sqrt(2)/2));
+	intersect_to_list(scene, ray);
+	// debug_scene(scene);
+	color = reflected_color(scene, scene->obj_list->head);
+	printf("Color: R=%f, G=%f, B=%f\n", color->r, color->g, color->b);
 
 
 
-	if (!init_mlx_window(scene))
-		return (1);
-	render(scene);
-	mlx_key_hook(scene->mlx, &key_hook, scene);
-	mlx_loop(scene->mlx);
-	mlx_terminate(scene->mlx);
+
+
+	// if (!init_mlx_window(scene))
+	// 	return (1);
+	// render(scene);
+	// mlx_key_hook(scene->mlx, &key_hook, scene);
+	// mlx_loop(scene->mlx);
+	// mlx_terminate(scene->mlx);
 	return (0);
 }

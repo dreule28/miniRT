@@ -39,6 +39,9 @@ bool	set_comp_to_obj(t_obj_node *curr, t_ray *ray)
 		if (!curr->comp->normalv)
 			return (false);
 	}
+	curr->comp->reflectv = reflect(ray->direction, curr->comp->normalv);
+	if (!curr->comp->reflectv)
+		return (false);
 	set_dot_product(curr);
 	set_epsilon_offset(curr);
 	return (true);

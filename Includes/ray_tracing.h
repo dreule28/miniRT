@@ -45,39 +45,29 @@ t_m4		*init_view_transformation(t_scene *scene);
 void		set_dot_product(t_obj_node *curr);
 void		set_epsilon_offset(t_obj_node *curr);
 bool		set_comp_to_obj(t_obj_node *curr, t_ray *ray);
-double *intersect_plane(t_ray *ray, t_plane *plane);
-
-
 // comp_to_list.c -- END
 
-// intersec_sphere.c -- BEGIN
-bool		intersec_to_obj(t_scene *scene, t_obj_node *curr, t_ray *ray);
-double 		*intersect_shape(t_obj_node *curr, t_ray *ray);
-
-bool		setup_intersec_plane(t_scene *scene, t_obj_node *curr, t_ray *ray);
-
-// intersec_sphere.c -- END
-
 // intersec_to_list.c -- BEGIN
-bool		set_intersection_to_obj(t_scene *scene, t_obj_node *curr,
-				t_ray *ray);
+double		*intersect_shape(t_obj_node *curr, t_ray *ray);
+bool		intersec_to_obj(t_scene *scene, t_obj_node *curr, t_ray *ray);
+t_obj_list	*intersect_to_list(t_scene *scene, t_ray *ray);
+t_obj_list	*intersect_to_list(t_scene *scene, t_ray *ray);
+double		discri(t_ray *ray, t_sphere *sphere, double *a, double *b);
 // intersec_to_list.c -- END
 
-// intersection.c -- BEGIN
-double		discri(t_ray *ray, t_sphere *sphere, double *a, double *b);
+//intersect_obj.c -- BEGIN
 double		*intersect_sphere(t_ray *ray, t_sphere *sphere);
-t_obj_list	*sort_obj_list(t_obj_list *obj_list);
-t_obj_list	*intersect_to_list(t_scene *scene, t_ray *ray);
-double		*hit_obj(t_scene *scene);
-// intersection.c -- END
+double		*intersect_plane(t_ray *ray, t_plane *plane);
+//intersect_obj.c -- END
 
 // lighting.c -- BEGIN
 t_rgb		*calculate_lighting_components(t_material material, t_light *light,
-				double light_dot_normal);
+	double light_dot_normal);
 t_rgb		calculate_specular(t_scene *scene, t_tuples *lightv, t_tuples *eyev,
-				t_tuples *normalv);
+	t_tuples *normalv);
+t_material	get_obj_mat(t_scene *scene);
 t_rgb		*ambient_comp(t_tuples **lightv, t_material material,
-				t_light *light);
+	t_light *light);
 t_rgb		*lighting(t_scene *scene, t_computations *comps, t_light *light);
 // lighting.c -- END
 
@@ -85,7 +75,6 @@ t_rgb		*lighting(t_scene *scene, t_computations *comps, t_light *light);
 t_tuples	*local_normal_at(t_obj_node *curr, t_tuples *object_point);
 t_tuples	*local_sphere(t_obj_node *curr, t_tuples *object_point);
 t_tuples	*local_plane(t_obj_node *curr, t_tuples *object_point);
-
 // local_normal_at.c -- END
 
 // rays.c -- BEGIN
@@ -101,10 +90,11 @@ t_tuples	*reflect(t_tuples *in, t_tuples *normal);
 t_light		*point_light(t_tuples position, t_rgb intensity);
 t_material	get_material(void);
 t_rgb		*shade_hit(t_scene *scene, t_computations *comps, t_light *curr);
+t_rgb		*reflected_color(t_scene *scene, t_obj_node *curr);
 // reflection.c -- END
 
 // shadows.c -- BEGIN
-t_rgb		*shade_hit(t_scene *scene, t_computations *comps, t_light *curr);
+t_ray	*get_shadow_ray(t_scene *scene, t_tuples *point, double *distance);
 double		*get_transformed_intersection(t_obj_node *curr, t_ray *ray);
 bool		check_shadow_intersection(double *t, double distance,
 				double *min_t);
@@ -123,7 +113,6 @@ t_obj_list	*sort_obj_list(t_obj_list *obj_list);
 
 // surface_normals.c -- BEGIN
 void		free_tuple(t_tuples *tuple);
-t_tuples	*get_world_normal(t_obj_node *curr, t_m4 *inverse, t_tuples *obj_point);
 t_tuples	*normal_at(t_obj_node *curr, t_tuples *world_point);
 // surface_normals.c -- END
 
