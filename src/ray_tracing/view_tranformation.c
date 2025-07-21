@@ -22,7 +22,7 @@ t_m4	*view_transformation(t_tuples *from, t_tuples *to, t_tuples *up)
 }
 
 t_m4	*create_view_matrix(t_tuples *left, t_tuples *forward,
-	t_tuples *true_up)
+		t_tuples *true_up)
 {
 	t_m4	*orientation;
 

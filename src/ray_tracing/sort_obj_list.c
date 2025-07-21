@@ -1,26 +1,27 @@
 #include "mini_rt.h"
 
-bool should_swap_nodes(t_obj_node *curr, t_obj_node *next)
+bool	should_swap_nodes(t_obj_node *curr, t_obj_node *next)
 {
-    bool curr_valid = curr->t && curr->t[0] > 0;
-    bool next_valid = next->t && next->t[0] > 0;
+	bool	curr_valid;
+	bool	next_valid;
 
-    if (!curr_valid && next_valid)
-        return (true);
-    if (curr_valid && !next_valid)
-        return (false);
-    if (!curr_valid && !next_valid)
-        return (false);
-    if (curr_valid && next_valid)
-    {
-        // Prioritize spheres over planes if they are closer
-        if (curr->type == PLANE && next->type == SPHERE)
-            return (true);
-        if (curr->type == SPHERE && next->type == PLANE)
-            return (false);
-        return (curr->t[0] > next->t[0]);
-    }
-    return (false);
+	curr_valid = curr->t && curr->t[0] > 0;
+	next_valid = next->t && next->t[0] > 0;
+	if (!curr_valid && next_valid)
+		return (true);
+	if (curr_valid && !next_valid)
+		return (false);
+	if (!curr_valid && !next_valid)
+		return (false);
+	if (curr_valid && next_valid)
+	{
+		if (curr->type == PLANE && next->type == SPHERE)
+			return (true);
+		if (curr->type == SPHERE && next->type == PLANE)
+			return (false);
+		return (curr->t[0] > next->t[0]);
+	}
+	return (false);
 }
 
 void	swap_nodes(t_obj_list *obj_list, t_obj_node *prev, t_obj_node *curr,
