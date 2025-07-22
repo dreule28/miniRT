@@ -44,10 +44,9 @@ void	free_light_list(t_light_list *light_list)
 
 void generate_scene(t_scene *scene)
 {
-	// t_obj_node *one = scene->obj_list->head;
-    t_obj_node *first = scene->obj_list->head->next;
-    t_obj_node *second = scene->obj_list->head->next->next;
-    t_obj_node *third = scene->obj_list->tail;
+    t_obj_node *first = scene->obj_list->head;
+    t_obj_node *second = scene->obj_list->head->next;
+    t_obj_node *third = scene->obj_list->head->next->next;
 
     // First Sphere - move higher above the plane
     first->matrix = ftm_translation(init_point(-0.5, 1.0, 0.5));
