@@ -73,53 +73,44 @@ void generate_scene(t_scene *scene)
     scene->camera.matrix = view_transformation(init_point(0, 1.5, -5), init_point(0, 1, 0), init_vector(0, 1, 0));
 }
 
-// Add this debug code to your main() function right before calling reflected_color
+void	default_world(t_scene *scene)
+{
+	// The test expects to START with just two spheres, then ADD a plane
+	// But your parsed scene has a plane first, so we need to work around this
 
-// void debug_scene(t_scene *scene)
-// {
-//     printf("=== SCENE DEBUG ===\n");
+	t_obj_node	*plane_node = scene->obj_list->head;        // This is your plane from parser
+	t_obj_node	*first_sphere = scene->obj_list->head->next; // First sphere
+	t_obj_node	*second_sphere = scene->obj_list->head->next->next; // Second sphere
 
-//     // Check lights
-//     if (!scene->light_list || !scene->light_list->head)
-//     {
-//         printf("ERROR: No lights in scene!\n");
-//         return;
-//     }
+	// Light at (-10, 10, -10)
+	scene->light_list->head = point_light(*init_point(-10, 10, -10), *init_rgb(1, 1, 1));
 
-//     t_light *light = scene->light_list->head;
-//     int light_count = 0;
-//     while (light)
-//     {
-//         printf("Light %d: pos=(%f,%f,%f), rgb=(%f,%f,%f), intensity=%f\n",
-//             light_count,
-//             light->pos.x, light->pos.y, light->pos.z,
-//             light->rgb.r, light->rgb.g, light->rgb.b,
-//             light->intensity);
-//         light = light->next;
-//         light_count++;
-//     }
-//     printf("Total lights: %d\n", light_count);
+	// Set up the plane (which should be reflective for the test)
+	plane_node->data->plane->material.reflective = 0.5;
+	// The plane should be at y = -1 (below the spheres)
+	plane_node->matrix = ftm_translation(init_point(0, -1, 0));
 
-//     // Check objects
-//     t_obj_node *obj = scene->obj_list->head;
-//     int obj_count = 0;
-//     while (obj)
-//     {
-//         printf("Object %d: type=%d, material rgb=(%f,%f,%f)\n",
-//             obj_count, obj->type,
-//             obj->material.rgb.r, obj->material.rgb.g, obj->material.rgb.b);
-//         printf("  ambient=%f, diffuse=%f, specular=%f, reflective=%f\n",
-//             obj->material.ambient, obj->material.diffuse,
-//             obj->material.specular, obj->material.reflective);
-//         obj = obj->next;
-//         obj_count++;
-//     }
-//     printf("Total objects: %d\n", obj_count);
-//     printf("=== END DEBUG ===\n");
-// }
+	// First sphere (outer) - this is what the reflected ray should hit
+	first_sphere->data->sphere->material.rgb = *init_rgb(0.8, 1.0, 0.6);
+	first_sphere->data->sphere->material.diffuse = 0.7;
+	first_sphere->data->sphere->material.specular = 0.2;
+	first_sphere->data->sphere->material.ambient = 0.1;
+	first_sphere->data->sphere->material.shininess = 200.0;
+	first_sphere->data->sphere->material.reflective = 0;
+	first_sphere->data->sphere->pos.x = 0;
+	first_sphere->data->sphere->pos.y = 0;
+	first_sphere->data->sphere->pos.z = 0;
+	first_sphere->data->sphere->radius = 1.0;
+	// first_sphere->matrix = NULL; // No transformation (unit sphere at origin)
 
-// Call this in your main() before the reflection test:
-// debug_scene(scene);
+	// Second sphere (inner) - scaled to 0.5 radius
+	second_sphere->data->sphere->material = get_material(); // Default material
+	second_sphere->data->sphere->pos.x = 0;
+	second_sphere->data->sphere->pos.y = 0;
+	second_sphere->data->sphere->pos.z = 0;
+	second_sphere->data->sphere->radius = 1.0; // Will be scaled by matrix
+	second_sphere->matrix = ftm_scaling(init_point(0.5, 0.5, 0.5));
+}
 
 int	main(int argc, char **argv)
 {
@@ -136,16 +127,16 @@ int	main(int argc, char **argv)
 	t_ray	*ray;
 	t_rgb	*color;
 
+	default_world(scene);
 
-	// printf("Object type: %d\n", scene->obj_list->head->type);
-	scene->obj_list->head->data->plane->material.reflective = 0.5;
 	scene->obj_list->head->matrix = ftm_translation(init_point(0, -1, 0));
 	ray = init_ray(init_point(0, 0, -3), init_vector(0, -sqrt(2)/2, sqrt(2)/2));
 	intersect_to_list(scene, ray);
+	// printf("Intersection t value: %f\n", scene->obj_list->head->t[0]);
 	// debug_scene(scene);
 	color = reflected_color(scene, scene->obj_list->head);
 	printf("Color: R=%f, G=%f, B=%f\n", color->r, color->g, color->b);
-
+	printf("Expected: R=0.19032, G=0.2379, B=0.14274\n");
 
 
 
