@@ -72,10 +72,19 @@ void generate_scene(t_scene *scene)
     third->data->sphere->material.specular = 0.3;
 
 	one->matrix = ftm_translation(init_point(0, 0, 0));
-	two->matrix = ftm_matrix_mult(ftm_rotate_x(M_PI_2), ftm_translation(init_point(0, 0, -8)));
+	// two->data->plane->material.specular = 0.0;
+	one->data->plane->material.specular = 0.0;
+	one->data->plane->material.shininess = 0.0;
+	one->data->plane->material.ambient = 1000;
 
-    scene->camera.fov = M_PI/3;
-    scene->camera.matrix = view_transformation(init_point(0, 1.6, -30), init_point(0, 1, 0), init_vector(0, 1, 0));
+
+	two->matrix = ftm_matrix_mult(ftm_translation(init_point(0, 0, 2)), ftm_rotate_x(M_PI_2));
+	two->data->plane->material.specular = 0.0;
+	two->data->plane->material.shininess = 0.0;
+	two->data->plane->material.ambient = 1000000000;
+    
+	scene->camera.fov = M_PI/3;
+    scene->camera.matrix = view_transformation(init_point(0, 5, -5), init_point(0, 1, 0), init_vector(0, 1, 0));
 }
 
 int	main(int argc, char **argv)
