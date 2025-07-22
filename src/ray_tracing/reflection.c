@@ -50,67 +50,25 @@ t_rgb	*shade_hit(t_scene *scene, t_computations *comps, t_light *curr)
 	return (lighting(scene, comps, curr));
 }
 
-t_material *get_object_material(t_obj_node *curr)
-{
-    if (curr->type == SPHERE)
-        return &curr->data->sphere->material;
-    else if (curr->type == PLANE)
-        return &curr->data->plane->material;
-    else if (curr->type == CYLINDER)
-        return &curr->data->cylinder->material;
-    return NULL;
-}
-
-t_rgb	*reflected_color(t_scene *scene, t_obj_node *curr)
+t_rgb	*reflected_color(t_scene *scene)
 {
 	t_rgb		*color;
 	t_ray		*reflected_ray;
 	t_rgb		*finale_reflected;
-	t_material	*material;
-	t_obj_node	*hit_obj;
+	t_material	material;
 
-	material = &curr->d;
-	if (material->reflective == 0)
-	{
-		printf("reflective is zero\n");
+	material = scene->obj_list->head->data->plane->material;
+	if (material.reflective == 0)
 		return (init_rgb(0, 0, 0));
-	}
-	// Debug: print reflection ray info
-	printf("Reflection ray origin: (%f, %f, %f)\n", curr->comp->over_point->x, curr->comp->over_point->y, curr->comp->over_point->z);
-	printf("Reflection ray direction: (%f, %f, %f)\n", curr->comp->reflectv->x, curr->comp->reflectv->y, curr->comp->reflectv->z);
-
 	reflected_ray = init_ray(curr->comp->over_point, curr->comp->reflectv);
-
 	intersect_to_list(scene, reflected_ray);
 	if (!scene->obj_list->head || !scene->obj_list->head->t)
 	{
-		printf("No intersections found for reflected ray\n");
 		free_ray(reflected_ray);
 		return (init_rgb(0, 0, 0));
 	}
-	hit_obj = scene->obj_list->head;
-	double closest_t = (hit_obj->t[0] > 0) ? hit_obj->t[0] : hit_obj->t[1];
-	if (closest_t <= 0)
-	{
-		printf("All intersections behind ray origin\n");
-		free_ray(reflected_ray);
-		return (init_rgb(0, 0, 0));
-	}
-	printf("Reflected ray hit object at t = %f\n", scene->obj_list->head->t[0]);
-		// Debug: check if the hit object has proper material and lighting setup
-	// printf("Hit object material - ambient: %f, diffuse: %f, specular: %f\n", hit_obj->material.ambient, hit_obj->material.diffuse, hit_obj->material.specular);
-	// printf("Hit object RGB: (%f, %f, %f)\n", hit_obj->material.rgb.r, hit_obj->material.rgb.g, hit_obj->material.rgb.b);
-
-	t_obj_list *original_list = scene->obj_list;
-
 	color = get_shaded_with_shadows(scene, scene->obj_list->head);
-
-	scene->obj_list = original_list;
-	printf("Shaded color: R=%f, G=%f, B=%f\n", color->r, color->g, color->b);
-	printf("Reflective value: %f\n", material->reflective);
-	finale_reflected = ftm_rgb_mult(color, material->reflective);
-	printf("Final reflected color: R=%f, G=%f, B=%f\n",
-		finale_reflected->r, finale_reflected->g, finale_reflected->b);
+	finale_reflected = ftm_rgb_mult(color, material.reflective);
 	free_ray(reflected_ray);
 	free(color);
 	return (finale_reflected);
