@@ -47,8 +47,10 @@ void generate_scene(t_scene *scene)
     t_obj_node *first = scene->obj_list->head;
     t_obj_node *second = scene->obj_list->head->next;
     t_obj_node *third = scene->obj_list->head->next->next;
-
-    // First Sphere - move higher above the plane
+	t_obj_node *one = scene->obj_list->head->next->next->next;
+    t_obj_node *two = scene->obj_list->tail;
+	
+	// First Sphere - move higher above the plane
     first->matrix = ftm_translation(init_point(-0.5, 1.0, 0.5));
     first->data->sphere->material = get_material();
     first->data->sphere->material.rgb = *init_rgb(0.1, 1, 0.5);
@@ -69,10 +71,11 @@ void generate_scene(t_scene *scene)
     third->data->sphere->material.diffuse = 0.7;
     third->data->sphere->material.specular = 0.3;
 
-	// one->matrix = ftm_translation(init_point(0, 0 ,0));
+	one->matrix = ftm_translation(init_point(0, 0, 0));
+	two->matrix = ftm_matrix_mult(ftm_rotate_x(M_PI_2), ftm_translation(init_point(0, 0, -8)));
 
     scene->camera.fov = M_PI/3;
-    scene->camera.matrix = view_transformation(init_point(0, 1.5, -5), init_point(0, 1, 0), init_vector(0, 1, 0));
+    scene->camera.matrix = view_transformation(init_point(0, 1.6, -30), init_point(0, 1, 0), init_vector(0, 1, 0));
 }
 
 int	main(int argc, char **argv)
@@ -84,11 +87,7 @@ int	main(int argc, char **argv)
 		return (1);
 	if (!parser(scene, argc, argv))
 		return (free(scene), 1);
-
 	generate_scene(scene);
-
-
-
 	if (!init_mlx_window(scene))
 		return (1);
 	render(scene);

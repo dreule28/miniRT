@@ -75,7 +75,15 @@ void	paint_pixel(t_scene *scene, t_ray *ray, int pixel_index)
 	ray->direction = normalized;
 	intersect_to_list(scene, ray);
 	if (scene->obj_list->head->t)
-		apply_lighting_with_shadows(scene, pixel_index, comps);
-	else
-		pixels[pixel_index] = get_rgba(0, 0, 0, 255);
+    {
+        if (!set_comp_to_obj(scene->obj_list->head, ray))
+        {
+            pixels[pixel_index] = get_rgba(0, 0, 0, 255);
+            return;
+        }
+        comps = scene->obj_list->head->comp;
+        apply_lighting_with_shadows(scene, pixel_index, comps);
+    }
+    else
+        pixels[pixel_index] = get_rgba(0, 0, 0, 255);
 }
