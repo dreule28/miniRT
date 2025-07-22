@@ -44,9 +44,10 @@ void	free_light_list(t_light_list *light_list)
 
 void generate_scene(t_scene *scene)
 {
-    t_obj_node *first = scene->obj_list->head;
-    t_obj_node *second = scene->obj_list->head->next;
-    t_obj_node *third = scene->obj_list->head->next->next;
+	// t_obj_node *one = scene->obj_list->head;
+    t_obj_node *first = scene->obj_list->head->next;
+    t_obj_node *second = scene->obj_list->head->next->next;
+    t_obj_node *third = scene->obj_list->tail;
 
     // First Sphere - move higher above the plane
     first->matrix = ftm_translation(init_point(-0.5, 1.0, 0.5));
@@ -68,6 +69,8 @@ void generate_scene(t_scene *scene)
     third->data->sphere->material.rgb = *init_rgb(1, 0.8, 0.1);
     third->data->sphere->material.diffuse = 0.7;
     third->data->sphere->material.specular = 0.3;
+
+	// one->matrix = ftm_translation(init_point(0, 0 ,0));
 
     scene->camera.fov = M_PI/3;
     scene->camera.matrix = view_transformation(init_point(0, 1.5, -5), init_point(0, 1, 0), init_vector(0, 1, 0));

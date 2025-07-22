@@ -14,13 +14,7 @@ bool	should_swap_nodes(t_obj_node *curr, t_obj_node *next)
 	if (!curr_valid && !next_valid)
 		return (false);
 	if (curr_valid && next_valid)
-	{
-		if (curr->type == PLANE && next->type == SPHERE)
-			return (true);
-		if (curr->type == SPHERE && next->type == PLANE)
-			return (false);
 		return (curr->t[0] > next->t[0]);
-	}
 	return (false);
 }
 
