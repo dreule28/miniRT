@@ -50,7 +50,7 @@ t_rgb	*shade_hit(t_scene *scene, t_computations *comps, t_light *curr)
 	return (lighting(scene, comps, curr));
 }
 
-t_rgb	*reflected_color(t_scene *scene)
+t_rgb	*reflected_color(t_scene *scene, t_obj_node *curr)
 {
 	t_rgb		*color;
 	t_ray		*reflected_ray;
