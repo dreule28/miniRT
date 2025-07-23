@@ -34,12 +34,12 @@ t_rgb	*get_shaded(t_scene *scene)
 }
 
 void	apply_lighting_with_shadows(t_scene *scene, int pixel_index,
-			t_computations *comps)
+		t_computations *comps)
 {
-	uint32_t		*pixels;
-	t_rgb			*shaded;
-	t_rgb			*temp;
-	t_light			*curr;
+	uint32_t	*pixels;
+	t_rgb		*shaded;
+	t_rgb		*temp;
+	t_light		*curr;
 
 	pixels = (uint32_t *)scene->img->pixels;
 	shaded = init_rgb(0, 0, 0);
@@ -57,8 +57,8 @@ void	apply_lighting_with_shadows(t_scene *scene, int pixel_index,
 		shaded->g = 1.0;
 	if (shaded->b > 1.0)
 		shaded->b = 1.0;
-	pixels[pixel_index] = get_rgba((int)(shaded->r * 255),
-			(int)(shaded->g * 255), (int)(shaded->b * 255), 255);
+	pixels[pixel_index] = get_rgba((int)(shaded->r * 255), (int)(shaded->g
+				* 255), (int)(shaded->b * 255), 255);
 	free(shaded);
 }
 
@@ -75,15 +75,15 @@ void	paint_pixel(t_scene *scene, t_ray *ray, int pixel_index)
 	ray->direction = normalized;
 	intersect_to_list(scene, ray);
 	if (scene->obj_list->head->t)
-    {
-        if (!set_comp_to_obj(scene->obj_list->head, ray))
-        {
-            pixels[pixel_index] = get_rgba(0, 0, 0, 255);
-            return;
-        }
-        comps = scene->obj_list->head->comp;
-        apply_lighting_with_shadows(scene, pixel_index, comps);
-    }
-    else
-        pixels[pixel_index] = get_rgba(0, 0, 0, 255);
+	{
+		if (!set_comp_to_obj(scene->obj_list->head, ray))
+		{
+			pixels[pixel_index] = get_rgba(0, 0, 0, 255);
+			return ;
+		}
+		comps = scene->obj_list->head->comp;
+		apply_lighting_with_shadows(scene, pixel_index, comps);
+	}
+	else
+		pixels[pixel_index] = get_rgba(0, 0, 0, 255);
 }

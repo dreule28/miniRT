@@ -5,8 +5,8 @@ bool	should_swap_nodes(t_obj_node *curr, t_obj_node *next)
 	bool	curr_valid;
 	bool	next_valid;
 
-	curr_valid = curr->t && curr->t[0] > 0;
-	next_valid = next->t && next->t[0] > 0;
+	curr_valid = curr->t &&	curr->t[0] > 0;
+	next_valid = next->t &&	next->t[0] > 0;
 	if (!curr_valid && next_valid)
 		return (true);
 	if (curr_valid && !next_valid)

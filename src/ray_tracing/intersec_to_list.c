@@ -1,14 +1,14 @@
 #include "mini_rt.h"
 
-double *intersect_shape(t_obj_node *curr, t_ray *ray)
+double	*intersect_shape(t_obj_node *curr, t_ray *ray)
 {
-	double *intersection;
+	double	*intersection;
 
-	if(curr->type == SPHERE)
+	if (curr->type == SPHERE)
 		intersection = intersect_sphere(ray, curr->data->sphere);
-	if(curr->type == PLANE)
+	if (curr->type == PLANE)
 		intersection = intersect_plane(ray, curr->data->plane);
-	return(intersection);
+	return (intersection);
 }
 
 bool	intersec_to_obj(t_scene *scene, t_obj_node *curr, t_ray *ray)
@@ -34,7 +34,6 @@ bool	intersec_to_obj(t_scene *scene, t_obj_node *curr, t_ray *ray)
 	curr->t = t;
 	return (true);
 }
-
 
 t_obj_list	*intersect_to_list(t_scene *scene, t_ray *ray)
 {
@@ -69,4 +68,3 @@ double	discri(t_ray *ray, t_sphere *sphere, double *a, double *b)
 	free(sphere_to_ray);
 	return (discriminant);
 }
-

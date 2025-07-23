@@ -50,21 +50,18 @@ void generate_scene(t_scene *scene)
 	t_obj_node *one = scene->obj_list->head->next->next->next;
     t_obj_node *two = scene->obj_list->tail;
 	
-	// First Sphere - move higher above the plane
     first->matrix = ftm_translation(init_point(-0.5, 1.0, 0.5));
     first->data->sphere->material = get_material();
     first->data->sphere->material.rgb = *init_rgb(0.1, 1, 0.5);
     first->data->sphere->material.diffuse = 0.7;
     first->data->sphere->material.specular = 0.1;
 
-    // Second Sphere - move higher above the plane
     second->matrix = ftm_matrix_mult(ftm_translation(init_point(1.5, 0.5, -0.5)), ftm_scaling(init_point(0.5, 0.5, 0.5)));
     second->data->sphere->material = get_material();
     second->data->sphere->material.rgb = *init_rgb(0.5, 1, 0.1);
     second->data->sphere->material.diffuse = 0.7;
     second->data->sphere->material.specular = 0.1;
 
-    // Third Sphere - move higher above the plane
     third->matrix = ftm_matrix_mult(ftm_translation(init_point(-1.5, 0.33, -0.75)), ftm_scaling(init_point(0.33, 0.33, 0.33)));
     third->data->sphere->material = get_material();
     third->data->sphere->material.rgb = *init_rgb(1, 0.8, 0.1);
@@ -72,13 +69,13 @@ void generate_scene(t_scene *scene)
     third->data->sphere->material.specular = 0.1;
 
 	one->matrix = ftm_translation(init_point(0, 0, 0));
-	one->data->plane->material.ambient = 0.2;   // Not 1000000000!
+	one->data->plane->material.ambient = 0.2;
     one->data->plane->material.diffuse = 0.8;
     one->data->plane->material.specular = 0.1;
     one->data->plane->material.shininess = 10.0;
 
 	two->matrix = ftm_matrix_mult(ftm_translation(init_point(0, 0, 2)), ftm_rotate_x(M_PI_2));
-	two->data->plane->material.ambient = 0.2;   // Not 1000000000!
+	two->data->plane->material.ambient = 0.2;
     two->data->plane->material.diffuse = 0.8;
     two->data->plane->material.specular = 0.1;
     two->data->plane->material.shininess = 10.0;
