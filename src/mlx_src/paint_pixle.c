@@ -13,7 +13,8 @@ t_rgb	*ftm_rgb_add(t_rgb *color1, t_rgb *color2)
 	return (new_rgb);
 }
 
-t_rgb	*get_shaded_with_shadows(t_scene *scene, t_obj_node *obj_node)
+t_rgb	*get_shaded_with_shadows(t_scene *scene, t_obj_node *obj_node,
+			int remaining)
 {
 	t_computations	*comps;
 	t_rgb			*shaded;
@@ -25,7 +26,7 @@ t_rgb	*get_shaded_with_shadows(t_scene *scene, t_obj_node *obj_node)
 	comps = obj_node->comp;
 	while (curr)
 	{
-		temp = shade_hit(scene, comps, curr);
+		temp = shade_hit(scene, comps, curr, remaining);
 		shaded = ftm_rgb_add(temp, shaded);
 		free(temp);
 		curr = curr->next;
@@ -52,7 +53,7 @@ void	apply_lighting_with_shadows(t_scene *scene, int pixel_index,
 	curr = scene->light_list->head;
 	while (curr)
 	{
-		temp = shade_hit(scene, comps, curr);
+		temp = shade_hit(scene, comps, curr, 0);
 		shaded = ftm_rgb_add(temp, shaded);
 		free(temp);
 		curr = curr->next;

@@ -132,11 +132,10 @@ int	main(int argc, char **argv)
 	scene->obj_list->head->matrix = ftm_translation(init_point(0, -1, 0));
 	ray = init_ray(init_point(0, 0, -3), init_vector(0, -sqrt(2)/2, sqrt(2)/2));
 	intersect_to_list(scene, ray);
-	// printf("Intersection t value: %f\n", scene->obj_list->head->t[0]);
 	// debug_scene(scene);
-	color = reflected_color(scene, scene->obj_list->head);
+	// color = reflected_color(scene, scene->obj_list->head->comp, 1);
+	color = shade_hit(scene, scene->obj_list->head->comp, scene->light_list->head, 4);
 	printf("Color: R=%f, G=%f, B=%f\n", color->r, color->g, color->b);
-	printf("Expected: R=0.19032, G=0.2379, B=0.14274\n");
 
 
 

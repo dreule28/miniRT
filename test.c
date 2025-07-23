@@ -1,75 +1,122 @@
-// Fixed reflection.c with proper state management and debugging
-
 #include "mini_rt.h"
 
-t_rgb	*reflected_color(t_scene *scene, t_obj_node *curr)
+t_rgb	*calculate_lighting_components(t_material material, t_light *light,
+		double light_dot_normal)
 {
-	t_rgb		*color;
-	t_ray		*reflected_ray;
-	t_rgb		*finale_reflected;
-	t_material	*material;
-	t_obj_list	*new_list;
-	t_obj_node	*hit_obj;
+	t_rgb	effective_color;
+	t_rgb	*ambient;
+	t_rgb	diffuse;
+	t_rgb	*result;
 
-	material = &curr->material;
-	if (material->reflective == 0)
+	ambient = init_rgb(0, 0, 0);
+	effective_color.r = material.rgb.r * light->rgb.r * light->intensity;
+	effective_color.g = material.rgb.g * light->rgb.g * light->intensity;
+	effective_color.b = material.rgb.b * light->rgb.b * light->intensity;
+	ambient->r = effective_color.r * material.ambient;
+	ambient->g = effective_color.g * material.ambient;
+	ambient->b = effective_color.b * material.ambient;
+	if (light_dot_normal < 0)
+		return (ambient);
+	diffuse.r = effective_color.r * material.diffuse * light_dot_normal;
+	diffuse.g = effective_color.g * material.diffuse * light_dot_normal;
+	diffuse.b = effective_color.b * material.diffuse * light_dot_normal;
+	result = init_rgb(ambient->r + diffuse.r, ambient->g + diffuse.g, ambient->b
+			+ diffuse.b);
+	return (result);
+}
+
+t_rgb	calculate_specular(t_material material, t_light *light, t_tuples *lightv,
+		t_tuples *eyev, t_tuples *normalv)
+{
+	double		reflect_dot_eye;
+	double		factor;
+	t_rgb		specular;
+	t_tuples	*reflect_vec;
+
+	reflect_vec = reflect(ftm_tup_negate(lightv), normalv);
+	reflect_dot_eye = ftm_tup_dot(reflect_vec, eyev);
+	free(reflect_vec);
+
+	if (reflect_dot_eye <= 0)
+		specular = *init_rgb(0, 0, 0);
+	else
 	{
-		printf("reflective is zero\n");
-		return (init_rgb(0, 0, 0));
+		factor = pow(reflect_dot_eye, material.shininess);
+		specular.r = light->rgb.r * light->intensity * material.specular * factor;
+		specular.g = light->rgb.g * light->intensity * material.specular * factor;
+		specular.b = light->rgb.b * light->intensity * material.specular * factor;
 	}
+	return (specular);
+}
 
-	// Debug: print reflection ray info
-	printf("Reflection ray origin: (%f, %f, %f)\n",
-		curr->comp->over_point->x, curr->comp->over_point->y, curr->comp->over_point->z);
-	printf("Reflection ray direction: (%f, %f, %f)\n",
-		curr->comp->reflectv->x, curr->comp->reflectv->y, curr->comp->reflectv->z);
+// Helper function to get material from computations
+t_material	get_material_from_computations(t_scene *scene, t_computations *comps)
+{
+	t_obj_node	*curr;
 
-	reflected_ray = init_ray(curr->comp->over_point, curr->comp->reflectv);
-
-	// Intersect with all objects to find what the reflected ray hits
-	intersect_to_list(scene, reflected_ray);
-	if (!scene->obj_list->head || !scene->obj_list->head->t)
+	// Search for the object that owns these computations
+	curr = scene->obj_list->head;
+	while (curr)
 	{
-		printf("No intersections found for reflected ray\n");
-		free_ray(reflected_ray);
-		return (init_rgb(0, 0, 0));
+		if (curr->comp == comps)
+		{
+			if (curr->type == SPHERE)
+			{
+				t_material mat = curr->data->sphere->material;
+				if (comps->inside)
+					mat.ambient = 1.0;
+				return (mat);
+			}
+			else if (curr->type == PLANE)
+				return (curr->data->plane->material);
+			else if (curr->type == CYLINDER)
+				return (curr->data->cylinder->material);
+		}
+		curr = curr->next;
 	}
+	return (get_material()); // fallback
+}
 
-	// Find the closest valid hit
-	hit_obj = scene->obj_list->head;
-	double closest_t = (hit_obj->t[0] > 0) ? hit_obj->t[0] : hit_obj->t[1];
-	if (closest_t <= 0)
+t_rgb	*ambient_comp(t_tuples **lightv, t_material material, t_light *light)
+{
+	t_rgb	effective_color;
+	t_rgb	*result;
+
+	effective_color.r = material.rgb.r * light->rgb.r * light->intensity;
+	effective_color.g = material.rgb.g * light->rgb.g * light->intensity;
+	effective_color.b = material.rgb.b * light->rgb.b * light->intensity;
+	result = init_rgb(effective_color.r * material.ambient,
+			effective_color.g * material.ambient,
+			effective_color.b * material.ambient);
+	free((*lightv));
+	return (result);
+}
+
+t_rgb	*lighting(t_scene *scene, t_computations *comps, t_light *light)
+{
+	t_material	material;
+	t_tuples	*lightv;
+	double		light_dot_normal;
+	t_rgb		*result;
+	t_rgb		specular;
+
+	material = get_material_from_computations(scene, comps);
+	lightv = ftm_tup_subtract(&light->pos, comps->over_point);
+	lightv = ftm_tup_norm(lightv);
+	light_dot_normal = ftm_tup_dot(lightv, comps->normalv);
+
+	if (comps->in_shadow)
+		return (ambient_comp(&lightv, material, light));
+
+	result = calculate_lighting_components(material, light, light_dot_normal);
+
+	if (light_dot_normal >= 0)
 	{
-		printf("All intersections behind ray origin\n");
-		free_ray(reflected_ray);
-		return (init_rgb(0, 0, 0));
+		specular = calculate_specular(material, light, lightv, comps->eyev, comps->normalv);
+		result->r += specular.r;
+		result->g += specular.g;
+		result->b += specular.b;
 	}
-
-	printf("Reflected ray hit object at t = %f\n", closest_t);
-
-	// Debug: check if the hit object has proper material and lighting setup
-	printf("Hit object material - ambient: %f, diffuse: %f, specular: %f\n",
-		hit_obj->material.ambient, hit_obj->material.diffuse, hit_obj->material.specular);
-	printf("Hit object RGB: (%f, %f, %f)\n",
-		hit_obj->material.rgb.r, hit_obj->material.rgb.g, hit_obj->material.rgb.b);
-
-	// Temporarily replace the scene's object list for lighting calculation
-	t_obj_list *original_list = scene->obj_list;
-	scene->obj_list = new_list;
-
-	color = get_shaded_with_shadows(scene, hit_obj);
-
-	// Restore original list
-	scene->obj_list = original_list;
-
-	printf("Shaded color: R=%f, G=%f, B=%f\n", color->r, color->g, color->b);
-	printf("Reflective value: %f\n", material->reflective);
-
-	finale_reflected = ftm_rgb_mult(color, material->reflective);
-	printf("Final reflected color: R=%f, G=%f, B=%f\n",
-		finale_reflected->r, finale_reflected->g, finale_reflected->b);
-
-	free_ray(reflected_ray);
-	free(color);
-	return (finale_reflected);
+	free(lightv);
+	return (result);
 }

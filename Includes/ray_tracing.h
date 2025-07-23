@@ -89,8 +89,9 @@ void		set_transform(t_obj_node *curr, t_m4 *translation_matrix);
 t_tuples	*reflect(t_tuples *in, t_tuples *normal);
 t_light		*point_light(t_tuples position, t_rgb intensity);
 t_material	get_material(void);
-t_rgb		*shade_hit(t_scene *scene, t_computations *comps, t_light *curr);
-t_rgb		*reflected_color(t_scene *scene, t_obj_node *curr);
+t_material	get_material_from_comps(t_computations *comps, t_scene *scene);
+t_rgb	*shade_hit(t_scene *scene, t_computations *, t_light *curr, int remaining);
+t_rgb	*reflected_color(t_scene *scene, t_computations *comps, int remaining);
 // reflection.c -- END
 
 // shadows.c -- BEGIN

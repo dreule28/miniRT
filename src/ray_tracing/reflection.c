@@ -44,30 +44,42 @@ t_material	get_material(void)
 	return (material);
 }
 
-t_rgb	*shade_hit(t_scene *scene, t_computations *comps, t_light *curr)
+t_rgb	*shade_hit(t_scene *scene, t_computations *comps, t_light *curr,
+			int remaining)
 {
+	t_rgb	*surface;
+	t_rgb	*reflected;
+	t_rgb	*result;
+
 	comps->in_shadow = is_shadowed(scene, comps->over_point);
-	return (lighting(scene, comps, curr));
+	surface = lighting(scene, comps, curr);
+	reflected = reflected_color(scene, comps, remaining);
+	result = ftm_rgb_add(surface, reflected);
+	free(surface);
+	free(reflected);
+	return (result);
 }
 
-t_rgb	*reflected_color(t_scene *scene, t_obj_node *curr)
+t_rgb	*reflected_color(t_scene *scene, t_computations *comps, int remaining)
 {
 	t_rgb		*color;
 	t_ray		*reflected_ray;
 	t_rgb		*finale_reflected;
 	t_material	material;
 
-	material = scene->obj_list->head->data->plane->material;
+	if (remaining <= 0)
+		return (init_rgb(0, 0, 0));
+	material = get_material_from_comps(comps, scene);
 	if (material.reflective == 0)
 		return (init_rgb(0, 0, 0));
-	reflected_ray = init_ray(curr->comp->over_point, curr->comp->reflectv);
+	reflected_ray = init_ray(comps->over_point, comps->reflectv);
 	intersect_to_list(scene, reflected_ray);
 	if (!scene->obj_list->head || !scene->obj_list->head->t)
 	{
 		free_ray(reflected_ray);
 		return (init_rgb(0, 0, 0));
 	}
-	color = get_shaded_with_shadows(scene, scene->obj_list->head);
+	color = get_shaded_with_shadows(scene, scene->obj_list->head, remaining - 1);
 	finale_reflected = ftm_rgb_mult(color, material.reflective);
 	free_ray(reflected_ray);
 	free(color);
