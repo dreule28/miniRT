@@ -97,10 +97,8 @@ t_rgb	*reflected_color(t_scene *scene, t_computations *comps, int remaining);
 // shadows.c -- BEGIN
 t_ray	*get_shadow_ray(t_scene *scene, t_tuples *point, double *distance);
 double		*get_transformed_intersection(t_obj_node *curr, t_ray *ray);
-bool		check_shadow_intersection(double *t, double distance,
-				double *min_t);
-bool		check_objects_for_shadow(t_scene *scene, t_ray *ray,
-				double distance);
+bool		check_shadow_intersection(double *t, double distance,double *min_t);
+bool		check_objects_for_shadow(t_scene *scene, t_ray *ray,double distance);
 bool		is_shadowed(t_scene *scene, t_tuples *point);
 // shadows.c -- END
 
