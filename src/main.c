@@ -47,8 +47,9 @@ void generate_scene(t_scene *scene)
     t_obj_node *first = scene->obj_list->head;
     t_obj_node *second = scene->obj_list->head->next;
     t_obj_node *third = scene->obj_list->head->next->next;
-
-    // First Sphere - move higher above the plane
+	t_obj_node *one = scene->obj_list->head->next->next->next;
+    t_obj_node *two = scene->obj_list->tail;
+	
     first->matrix = ftm_translation(init_point(-0.5, 1.0, 0.5));
     first->data->sphere->material = get_material();
     first->data->sphere->material.rgb = *init_rgb(0.1, 1, 0.5);
@@ -65,10 +66,23 @@ void generate_scene(t_scene *scene)
     third->data->sphere->material = get_material();
     third->data->sphere->material.rgb = *init_rgb(1, 0.8, 0.1);
     third->data->sphere->material.diffuse = 0.7;
-    third->data->sphere->material.specular = 0.3;
+    third->data->sphere->material.specular = 0.1;
 
-    scene->camera.fov = M_PI/3;
-    scene->camera.matrix = view_transformation(init_point(0, 1.5, -5), init_point(0, 1, 0), init_vector(0, 1, 0));
+	one->matrix = ftm_translation(init_point(0, 0, 0));
+	one->data->plane->material.ambient = 0.2;
+    one->data->plane->material.diffuse = 0.8;
+    one->data->plane->material.specular = 0.1;
+    one->data->plane->material.shininess = 10.0;
+
+	two->matrix = ftm_matrix_mult(ftm_translation(init_point(0, 0, 2)), ftm_rotate_x(M_PI_2));
+	two->data->plane->material.ambient = 0.2;
+    two->data->plane->material.diffuse = 0.8;
+    two->data->plane->material.specular = 0.1;
+    two->data->plane->material.shininess = 10.0;
+    
+    
+	scene->camera.fov = M_PI/3;
+    scene->camera.matrix = view_transformation(init_point(0, 5, -25), init_point(0, 1, 0), init_vector(0, 1, 0));
 }
 
 void	default_world(t_scene *scene)
@@ -120,29 +134,29 @@ int	main(int argc, char **argv)
 	if (!parser(scene, argc, argv))
 		return (free(scene), 1);
 
-	// generate_scene(scene);
+	generate_scene(scene);
 
-	t_ray	*ray;
-	t_rgb	*color;
+	// t_ray	*ray;
+	// t_rgb	*color;
 
-	default_world(scene);
+	// default_world(scene);
 
-	scene->obj_list->head->matrix = ftm_translation(init_point(0, -1, 0));
-	ray = init_ray(init_point(0, 0, -3), init_vector(0, -sqrt(2)/2, sqrt(2)/2));
-	intersect_to_list(scene, ray);
-	// debug_scene(scene);
+	// scene->obj_list->head->matrix = ftm_translation(init_point(0, -1, 0));
+	// ray = init_ray(init_point(0, 0, -3), init_vector(0, -sqrt(2)/2, sqrt(2)/2));
+	// intersect_to_list(scene, ray);
+	// // debug_scene(scene);
 	// color = reflected_color(scene, scene->obj_list->head->comp, 1);
-	color = shade_hit(scene, scene->obj_list->head->comp, scene->light_list->head, 4);
-	printf("Color: R=%f, G=%f, B=%f\n", color->r, color->g, color->b);
+	// color = shade_hit(scene, scene->obj_list->head->comp, scene->light_list->head, 4);
+	// printf("Color: R=%f, G=%f, B=%f\n", color->r, color->g, color->b);
 
 
 
 
-	// if (!init_mlx_window(scene))
-	// 	return (1);
-	// render(scene);
-	// mlx_key_hook(scene->mlx, &key_hook, scene);
-	// mlx_loop(scene->mlx);
-	// mlx_terminate(scene->mlx);
+	if (!init_mlx_window(scene))
+		return (1);
+	render(scene);
+	mlx_key_hook(scene->mlx, &key_hook, scene);
+	mlx_loop(scene->mlx);
+	mlx_terminate(scene->mlx);
 	return (0);
 }
