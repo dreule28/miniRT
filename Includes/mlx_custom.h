@@ -16,6 +16,9 @@ int		get_rgba(int r, int g, int b, int a);
 // src/mlx_src/mlx_utils.c -- END
 
 // paint_pixle.c -- BEGIN
+t_rgb	*ftm_rgb_add(t_rgb *color1, t_rgb *color2);
+t_rgb	*get_shaded_with_shadows(t_scene *scene, t_obj_node *obj_node,
+			int remaining);
 void	apply_lighting_with_shadows(t_scene *scene, int pixel_index,
 			t_computations *comps);
 void	paint_pixel(t_scene *scene, t_ray *ray, int pixel_index);

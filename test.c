@@ -25,70 +25,56 @@ t_rgb	*calculate_lighting_components(t_material material, t_light *light,
 	return (result);
 }
 
-t_material	get_obj_mat(t_scene *scene)
+t_rgb	calculate_specular(t_material material, t_light *light, t_tuples *lightv,
+		t_tuples *eyev, t_tuples *normalv)
 {
-	t_material	mat;
-
-	if (scene->obj_list->head->type == SPHERE)
-	{
-		mat = scene->obj_list->head->data->sphere->material;
-		if (scene->obj_list->head->comp->inside)
-			mat.ambient = 1.0;
-	}
-	else if (scene->obj_list->head->type == PLANE)
-		mat = scene->obj_list->head->data->plane->material;
-	else
-		mat = get_material();
-	return (mat);
-}
-
-t_rgb	calculate_specular(t_scene *scene, t_tuples *lightv, t_tuples *eyev,
-		t_tuples *normalv)
-{
-	t_material	material;
-	t_light		*light;
 	double		reflect_dot_eye;
 	double		factor;
 	t_rgb		specular;
+	t_tuples	*reflect_vec;
 
-	material = get_obj_mat(scene);
-	light = scene->light_list->head;
-	reflect_dot_eye = ftm_tup_dot(reflect(ftm_tup_negate(lightv), normalv),
-			eyev);
+	reflect_vec = reflect(ftm_tup_negate(lightv), normalv);
+	reflect_dot_eye = ftm_tup_dot(reflect_vec, eyev);
+	free(reflect_vec);
+
 	if (reflect_dot_eye <= 0)
 		specular = *init_rgb(0, 0, 0);
 	else
 	{
 		factor = pow(reflect_dot_eye, material.shininess);
-		specular.r = light->rgb.r * light->intensity * material.specular
-			* factor;
-		specular.g = light->rgb.g * light->intensity * material.specular
-			* factor;
-		specular.b = light->rgb.b * light->intensity * material.specular
-			* factor;
+		specular.r = light->rgb.r * light->intensity * material.specular * factor;
+		specular.g = light->rgb.g * light->intensity * material.specular * factor;
+		specular.b = light->rgb.b * light->intensity * material.specular * factor;
 	}
 	return (specular);
 }
 
-t_material	get_material_from_comps(t_computations *comps, t_scene *scene)
+// Helper function to get material from computations
+t_material	get_material_from_computations(t_scene *scene, t_computations *comps)
 {
 	t_obj_node	*curr;
 
+	// Search for the object that owns these computations
 	curr = scene->obj_list->head;
 	while (curr)
 	{
 		if (curr->comp == comps)
 		{
-			if (curr->type == PLANE)
+			if (curr->type == SPHERE)
+			{
+				t_material mat = curr->data->sphere->material;
+				if (comps->inside)
+					mat.ambient = 1.0;
+				return (mat);
+			}
+			else if (curr->type == PLANE)
 				return (curr->data->plane->material);
-			else if (curr->type == SPHERE)
-				return (curr->data->sphere->material);
 			else if (curr->type == CYLINDER)
 				return (curr->data->cylinder->material);
 		}
 		curr = curr->next;
 	}
-	return (get_material());
+	return (get_material()); // fallback
 }
 
 t_rgb	*ambient_comp(t_tuples **lightv, t_material material, t_light *light)
@@ -112,22 +98,24 @@ t_rgb	*lighting(t_scene *scene, t_computations *comps, t_light *light)
 	t_tuples	*lightv;
 	double		light_dot_normal;
 	t_rgb		*result;
+	t_rgb		specular;
 
-	material = get_material_from_comps(comps, scene);
+	material = get_material_from_computations(scene, comps);
 	lightv = ftm_tup_subtract(&light->pos, comps->over_point);
 	lightv = ftm_tup_norm(lightv);
 	light_dot_normal = ftm_tup_dot(lightv, comps->normalv);
+
 	if (comps->in_shadow)
 		return (ambient_comp(&lightv, material, light));
+
 	result = calculate_lighting_components(material, light, light_dot_normal);
+
 	if (light_dot_normal >= 0)
 	{
-		result->r += calculate_specular(scene, lightv, comps->eyev,
-				comps->normalv).r;
-		result->g += calculate_specular(scene, lightv, comps->eyev,
-				comps->normalv).g;
-		result->b += calculate_specular(scene, lightv, comps->eyev,
-				comps->normalv).b;
+		specular = calculate_specular(material, light, lightv, comps->eyev, comps->normalv);
+		result->r += specular.r;
+		result->g += specular.g;
+		result->b += specular.b;
 	}
 	free(lightv);
 	return (result);

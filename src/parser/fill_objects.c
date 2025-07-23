@@ -16,7 +16,6 @@ void	add_plane(t_obj_node *obj_node, char *parsed_line)
 	skip_spaces_or_value(&parsed_line, 0, 1);
 	obj_node->data->plane->axis.z = ft_atof(parsed_line);
 	skip_spaces_or_value(&parsed_line, 1, 0);
-	obj_node->data->plane->material = get_material();
 	obj_node->data->plane->material.rgb.r = ft_atof(parsed_line);
 	skip_spaces_or_value(&parsed_line, 0, 1);
 	obj_node->data->plane->material.rgb.g = ft_atof(parsed_line);
@@ -67,7 +66,6 @@ void	add_sphere(t_obj_node *obj_node, char *parsed_line)
 	obj_node->data->sphere->radius = ft_atof(parsed_line);
 	skip_spaces_or_value(&parsed_line, 0, 0);
 	skip_spaces_or_value(&parsed_line, 1, 0);
-	obj_node->data->sphere->material = get_material();
 	obj_node->data->sphere->material.rgb.r = ft_atof(parsed_line);
 	skip_spaces_or_value(&parsed_line, 0, 1);
 	obj_node->data->sphere->material.rgb.g = ft_atof(parsed_line);

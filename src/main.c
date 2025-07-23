@@ -47,9 +47,8 @@ void generate_scene(t_scene *scene)
     t_obj_node *first = scene->obj_list->head;
     t_obj_node *second = scene->obj_list->head->next;
     t_obj_node *third = scene->obj_list->head->next->next;
-	t_obj_node *one = scene->obj_list->head->next->next->next;
-    t_obj_node *two = scene->obj_list->tail;
-	
+
+    // First Sphere - move higher above the plane
     first->matrix = ftm_translation(init_point(-0.5, 1.0, 0.5));
     first->data->sphere->material = get_material();
     first->data->sphere->material.rgb = *init_rgb(0.1, 1, 0.5);
@@ -66,23 +65,49 @@ void generate_scene(t_scene *scene)
     third->data->sphere->material = get_material();
     third->data->sphere->material.rgb = *init_rgb(1, 0.8, 0.1);
     third->data->sphere->material.diffuse = 0.7;
-    third->data->sphere->material.specular = 0.1;
+    third->data->sphere->material.specular = 0.3;
 
-	one->matrix = ftm_translation(init_point(0, 0, 0));
-	one->data->plane->material.ambient = 0.2;
-    one->data->plane->material.diffuse = 0.8;
-    one->data->plane->material.specular = 0.1;
-    one->data->plane->material.shininess = 10.0;
+    scene->camera.fov = M_PI/3;
+    scene->camera.matrix = view_transformation(init_point(0, 1.5, -5), init_point(0, 1, 0), init_vector(0, 1, 0));
+}
 
-	two->matrix = ftm_matrix_mult(ftm_translation(init_point(0, 0, 2)), ftm_rotate_x(M_PI_2));
-	two->data->plane->material.ambient = 0.2;
-    two->data->plane->material.diffuse = 0.8;
-    two->data->plane->material.specular = 0.1;
-    two->data->plane->material.shininess = 10.0;
-    
-    
-	scene->camera.fov = M_PI/3;
-    scene->camera.matrix = view_transformation(init_point(0, 5, -25), init_point(0, 1, 0), init_vector(0, 1, 0));
+void	default_world(t_scene *scene)
+{
+	// The test expects to START with just two spheres, then ADD a plane
+	// But your parsed scene has a plane first, so we need to work around this
+
+	t_obj_node	*plane_node = scene->obj_list->head;        // This is your plane from parser
+	t_obj_node	*first_sphere = scene->obj_list->head->next; // First sphere
+	t_obj_node	*second_sphere = scene->obj_list->head->next->next; // Second sphere
+
+	// Light at (-10, 10, -10)
+	scene->light_list->head = point_light(*init_point(-10, 10, -10), *init_rgb(1, 1, 1));
+
+	// Set up the plane (which should be reflective for the test)
+	plane_node->data->plane->material.reflective = 0.5;
+	// The plane should be at y = -1 (below the spheres)
+	plane_node->matrix = ftm_translation(init_point(0, -1, 0));
+
+	// First sphere (outer) - this is what the reflected ray should hit
+	first_sphere->data->sphere->material.rgb = *init_rgb(0.8, 1.0, 0.6);
+	first_sphere->data->sphere->material.diffuse = 0.7;
+	first_sphere->data->sphere->material.specular = 0.2;
+	first_sphere->data->sphere->material.ambient = 0.1;
+	first_sphere->data->sphere->material.shininess = 200.0;
+	first_sphere->data->sphere->material.reflective = 0;
+	first_sphere->data->sphere->pos.x = 0;
+	first_sphere->data->sphere->pos.y = 0;
+	first_sphere->data->sphere->pos.z = 0;
+	first_sphere->data->sphere->radius = 1.0;
+	// first_sphere->matrix = NULL; // No transformation (unit sphere at origin)
+
+	// Second sphere (inner) - scaled to 0.5 radius
+	second_sphere->data->sphere->material = get_material(); // Default material
+	second_sphere->data->sphere->pos.x = 0;
+	second_sphere->data->sphere->pos.y = 0;
+	second_sphere->data->sphere->pos.z = 0;
+	second_sphere->data->sphere->radius = 1.0; // Will be scaled by matrix
+	second_sphere->matrix = ftm_scaling(init_point(0.5, 0.5, 0.5));
 }
 
 int	main(int argc, char **argv)
@@ -94,12 +119,30 @@ int	main(int argc, char **argv)
 		return (1);
 	if (!parser(scene, argc, argv))
 		return (free(scene), 1);
-	generate_scene(scene);
-	if (!init_mlx_window(scene))
-		return (1);
-	render(scene);
-	mlx_key_hook(scene->mlx, &key_hook, scene);
-	mlx_loop(scene->mlx);
-	mlx_terminate(scene->mlx);
+
+	// generate_scene(scene);
+
+	t_ray	*ray;
+	t_rgb	*color;
+
+	default_world(scene);
+
+	scene->obj_list->head->matrix = ftm_translation(init_point(0, -1, 0));
+	ray = init_ray(init_point(0, 0, -3), init_vector(0, -sqrt(2)/2, sqrt(2)/2));
+	intersect_to_list(scene, ray);
+	// debug_scene(scene);
+	// color = reflected_color(scene, scene->obj_list->head->comp, 1);
+	color = shade_hit(scene, scene->obj_list->head->comp, scene->light_list->head, 4);
+	printf("Color: R=%f, G=%f, B=%f\n", color->r, color->g, color->b);
+
+
+
+
+	// if (!init_mlx_window(scene))
+	// 	return (1);
+	// render(scene);
+	// mlx_key_hook(scene->mlx, &key_hook, scene);
+	// mlx_loop(scene->mlx);
+	// mlx_terminate(scene->mlx);
 	return (0);
 }
