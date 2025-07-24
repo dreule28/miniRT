@@ -47,42 +47,58 @@ void generate_scene(t_scene *scene)
     t_obj_node *first = scene->obj_list->head;
     t_obj_node *second = scene->obj_list->head->next;
     t_obj_node *third = scene->obj_list->head->next->next;
-	t_obj_node *one = scene->obj_list->head->next->next->next;
-    t_obj_node *two = scene->obj_list->tail;
-	
+    t_obj_node *one = scene->obj_list->head->next->next->next;
+    t_obj_node *two = scene->obj_list->head->next->next->next->next;
+    t_obj_node *three = scene->obj_list->tail;
+    
+    // First sphere - WHITE
     first->matrix = ftm_translation(init_point(-0.5, 1.0, 0.5));
     first->data->sphere->material = get_material();
-    first->data->sphere->material.rgb = *init_rgb(0.1, 1, 0.5);
+    first->data->sphere->material.rgb = *init_rgb(1.0, 1.0, 1.0);  // Pure white
     first->data->sphere->material.diffuse = 0.7;
     first->data->sphere->material.specular = 0.1;
+    first->data->sphere->material.ambient = 0.2;  // Add ambient for better visibility
 
-    second->matrix = ftm_matrix_mult(ftm_translation(init_point(1.5, 0.5, -0.5)), ftm_scaling(init_point(0.5, 0.5, 0.5)));
+    // Second sphere - BEIGE
+    second->matrix = ftm_matrix_mult(ftm_translation(init_point(1.5, 0.33, -0.5)), ftm_scaling(init_point(0.33, 0.33, 0.33)));
     second->data->sphere->material = get_material();
-    second->data->sphere->material.rgb = *init_rgb(0.5, 1, 0.1);
+    second->data->sphere->material.rgb = *init_rgb(0.9, 0.8, 0.6);  // Beige color
     second->data->sphere->material.diffuse = 0.7;
     second->data->sphere->material.specular = 0.1;
+    second->data->sphere->material.ambient = 0.2;
 
+    // Third sphere - BLACK
     third->matrix = ftm_matrix_mult(ftm_translation(init_point(-1.5, 0.33, -0.75)), ftm_scaling(init_point(0.33, 0.33, 0.33)));
     third->data->sphere->material = get_material();
-    third->data->sphere->material.rgb = *init_rgb(1, 0.8, 0.1);
+    third->data->sphere->material.rgb = *init_rgb(0.1, 0.1, 0.1);  // Dark gray (pure black would be invisible)
     third->data->sphere->material.diffuse = 0.7;
-    third->data->sphere->material.specular = 0.1;
+    third->data->sphere->material.specular = 0.3;  // Higher specular for black objects
+    third->data->sphere->material.ambient = 0.1;
 
-	one->matrix = ftm_translation(init_point(0, 0, 0));
-	one->data->plane->material.ambient = 0.2;
+    // ... rest of your plane setup remains the same
+    one->matrix = ftm_translation(init_point(0, 0, 0));
+    one->data->plane->material.ambient = 0.2;
     one->data->plane->material.diffuse = 0.8;
     one->data->plane->material.specular = 0.1;
     one->data->plane->material.shininess = 10.0;
+    one->data->plane->material.rgb = *init_rgb(1, 0, 0.2);
 
-	two->matrix = ftm_matrix_mult(ftm_translation(init_point(0, 0, 2)), ftm_rotate_x(M_PI_2));
-	two->data->plane->material.ambient = 0.2;
+    two->matrix = ftm_matrix_mult(ftm_translation(init_point(0, 0, 3)), ftm_rotate_x(M_PI_2));
+    two->data->plane->material.ambient = 0.2;
     two->data->plane->material.diffuse = 0.8;
     two->data->plane->material.specular = 0.1;
     two->data->plane->material.shininess = 10.0;
+    two->data->plane->material.rgb = *init_rgb(1, 0, 0.2);
+
+    three->matrix = ftm_matrix_mult(ftm_translation(init_point(3, 0, 0)), ftm_rotate_z(M_PI_2));
+    three->data->plane->material.ambient = 0.2;
+    three->data->plane->material.diffuse = 0.8;
+    three->data->plane->material.specular = 0.1;
+    three->data->plane->material.shininess = 10.0;
+    three->data->plane->material.rgb = *init_rgb(1, 0, 0.2);
     
-    
-	scene->camera.fov = M_PI/3;
-    scene->camera.matrix = view_transformation(init_point(0, 5, -25), init_point(0, 1, 0), init_vector(0, 1, 0));
+    scene->camera.fov = M_PI/3;
+    scene->camera.matrix = view_transformation(init_point(0, 1.5, -6), init_point(0, 1, 0), init_vector(0, 1, 0));
 }
 
 void	default_world(t_scene *scene)
