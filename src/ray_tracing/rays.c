@@ -44,6 +44,8 @@ t_ray	*transform_ray(t_ray *ray, t_m4 *m4)
 {
 	t_ray	*new_ray;
 
+	if (!ray || !ray->direction || !ray->origin || !m4)
+		return (NULL);
 	new_ray = ft_calloc(sizeof(t_ray), 1);
 	if (!new_ray)
 		return (NULL);

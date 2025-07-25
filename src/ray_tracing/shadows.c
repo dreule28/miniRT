@@ -6,10 +6,14 @@ t_ray	*get_shadow_ray(t_scene *scene, t_tuples *point, double *distance)
 	t_tuples	*direction;
 	t_ray		*ray;
 
+	if (!scene->obj_list || !scene->light_list->head || !point)
+		return (NULL);
 	distance_v = ftm_tup_subtract(&scene->light_list->head->pos, point);
 	*distance = magnitude_vector(distance_v);
 	direction = ftm_tup_norm(distance_v);
 	ray = init_ray(copy_point(point), direction);
+	if (!ray)
+		return (NULL);
 	free_tuple(distance_v);
 	return (ray);
 }
@@ -27,6 +31,8 @@ double	*get_transformed_intersection(t_obj_node *curr, t_ray *ray)
 		if (inv)
 		{
 			transformed_ray = transform_ray(ray, inv);
+			if (!transformed_ray)
+				return (NULL);
 			free_matrix_m4(inv);
 		}
 	}
@@ -81,6 +87,6 @@ bool	is_shadowed(t_scene *scene, t_tuples *point)
 	if (!ray)
 		return (false);
 	shadowed = check_objects_for_shadow(scene, ray, distance);
-	free_ray(ray);
+	// free_ray(ray);
 	return (shadowed);
 }

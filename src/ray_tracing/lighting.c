@@ -113,6 +113,8 @@ t_rgb	*lighting(t_scene *scene, t_computations *comps, t_light *light)
 	double		light_dot_normal;
 	t_rgb		*result;
 
+	if (!light || !comps->over_point)
+		return (NULL);
 	material = get_material_from_comps(comps, scene);
 	lightv = ftm_tup_subtract(&light->pos, comps->over_point);
 	lightv = ftm_tup_norm(lightv);

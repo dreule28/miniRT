@@ -53,8 +53,14 @@ t_rgb	*shade_hit(t_scene *scene, t_computations *comps, t_light *curr,
 
 	comps->in_shadow = is_shadowed(scene, comps->over_point);
 	surface = lighting(scene, comps, curr);
+	if (!surface)
+		return (NULL);
 	reflected = reflected_color(scene, comps, remaining);
+	if (!reflected)
+		return (NULL);
 	result = ftm_rgb_add(surface, reflected);
+	if (!result)
+		return (NULL);
 	free(surface);
 	free(reflected);
 	return (result);

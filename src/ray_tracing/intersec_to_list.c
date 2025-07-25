@@ -25,6 +25,8 @@ bool	intersec_to_obj(t_scene *scene, t_obj_node *curr, t_ray *ray)
 		if (inv)
 		{
 			transformed_ray = transform_ray(ray, inv);
+			if (!transformed_ray)
+				return (false);
 			free_matrix_m4(inv);
 		}
 	}

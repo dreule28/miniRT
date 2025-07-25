@@ -122,27 +122,27 @@ int	main(int argc, char **argv)
 
 	// generate_scene(scene);
 
-	t_ray	*ray;
-	t_rgb	*color;
+	// t_ray	*ray;
+	// t_rgb	*color;
 
 	default_world(scene);
 
-	scene->obj_list->head->matrix = ftm_translation(init_point(0, -1, 0));
-	ray = init_ray(init_point(0, 0, -3), init_vector(0, -sqrt(2)/2, sqrt(2)/2));
-	intersect_to_list(scene, ray);
+	// scene->obj_list->head->matrix = ftm_translation(init_point(0, -1, 0));
+	// ray = init_ray(init_point(0, 0, -3), init_vector(0, -sqrt(2)/2, sqrt(2)/2));
+	// intersect_to_list(scene, ray);
 	// debug_scene(scene);
 	// color = reflected_color(scene, scene->obj_list->head->comp, 1);
-	color = shade_hit(scene, scene->obj_list->head->comp, scene->light_list->head, 4);
-	printf("Color: R=%f, G=%f, B=%f\n", color->r, color->g, color->b);
+	// color = shade_hit(scene, scene->obj_list->head->comp, scene->light_list->head, 4);
+	// printf("Color: R=%f, G=%f, B=%f\n", color->r, color->g, color->b);
 
 
 
 
-	// if (!init_mlx_window(scene))
-	// 	return (1);
-	// render(scene);
-	// mlx_key_hook(scene->mlx, &key_hook, scene);
-	// mlx_loop(scene->mlx);
-	// mlx_terminate(scene->mlx);
+	if (!init_mlx_window(scene))
+		return (1);
+	render(scene);
+	mlx_key_hook(scene->mlx, &key_hook, scene);
+	mlx_loop(scene->mlx);
+	mlx_terminate(scene->mlx);
 	return (0);
 }
