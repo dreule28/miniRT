@@ -14,6 +14,12 @@ typedef enum e_obj_type
 	CYLINDER
 }	t_obj_type;
 
+typedef struct s_pattern
+{
+	t_rgb *color1;
+	t_rgb *color2;
+}			t_pattern;
+
 typedef struct s_material
 {
 	t_rgb	rgb; /* Color information for the material */
@@ -22,6 +28,7 @@ typedef struct s_material
 	double	specular; /* Specular reflection coefficient (0.0 to 1.0) */
 	double	shininess; /* Shininess factor for specular highlights */
 	double	reflective;
+	t_pattern *pattern;
 }			t_material;
 
 /* ========================================================================== */
