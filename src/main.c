@@ -150,22 +150,25 @@ int	main(int argc, char **argv)
 	if (!parser(scene, argc, argv))
 		return (free(scene), 1);
 
-	generate_scene(scene);
+	// generate_scene(scene);
 
-	// t_ray	*ray;
-	// t_rgb	*color;
+	// // t_ray	*ray;
+	// // t_rgb	*color;
 
-	// default_world(scene);
+	default_world(scene);
 
-	// scene->obj_list->head->matrix = ftm_translation(init_point(0, -1, 0));
-	// ray = init_ray(init_point(0, 0, -3), init_vector(0, -sqrt(2)/2, sqrt(2)/2));
-	// intersect_to_list(scene, ray);
-	// // debug_scene(scene);
-	// color = reflected_color(scene, scene->obj_list->head->comp, 1);
-	// color = shade_hit(scene, scene->obj_list->head->comp, scene->light_list->head, 4);
-	// printf("Color: R=%f, G=%f, B=%f\n", color->r, color->g, color->b);
+	// // scene->obj_list->head->matrix = ftm_translation(init_point(0, -1, 0));
+	// // ray = init_ray(init_point(0, 0, -3), init_vector(0, -sqrt(2)/2, sqrt(2)/2));
+	// // intersect_to_list(scene, ray);
+	// // // debug_scene(scene);
+	// // color = reflected_color(scene, scene->obj_list->head->comp, 1);
+	// // color = shade_hit(scene, scene->obj_list->head->comp, scene->light_list->head, 4);
+	// // printf("Color: R=%f, G=%f, B=%f\n", color->r, color->g, color->b);
 
-
+	// t_pattern *test;
+	// test = stripe_pattern(init_rgb(1, 0, 1), init_rgb(0, 2350, 3245));
+	// printf("pattern.color1 : x = %.6f, y = %.6f, z = %.6f\n", test->color1->r, test->color1->g, test->color1->b);
+	// printf("pattern.color2 : x = %.6f, y = %.6f, z = %.6f\n", test->color2->r, test->color2->g, test->color2->b);
 
 
 	if (!init_mlx_window(scene))

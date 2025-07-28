@@ -77,6 +77,10 @@ t_tuples	*local_sphere(t_obj_node *curr, t_tuples *object_point);
 t_tuples	*local_plane(t_obj_node *curr, t_tuples *object_point);
 // local_normal_at.c -- END
 
+// patterns.c -- BEGIN
+t_pattern   *stripe_pattern(t_rgb *color1, t_rgb *color2);
+// patterns.c -- END
+
 // rays.c -- BEGIN
 void		free_ray(t_ray *ray);
 t_ray		*init_ray(t_tuples *origin, t_tuples *direction);
