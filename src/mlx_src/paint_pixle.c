@@ -73,9 +73,8 @@ void	paint_pixel(t_scene *scene, t_ray *ray, int pixel_index)
 {
 	uint32_t		*pixels;
 	t_tuples		*normalized;
-	t_computations	*comps;
+	t_rgb			*color;
 
-	comps = scene->obj_list->head->comp;
 	pixels = (uint32_t *)scene->img->pixels;
 	normalized = ftm_tup_norm(ray->direction);
 	free(ray->direction);
@@ -88,8 +87,10 @@ void	paint_pixel(t_scene *scene, t_ray *ray, int pixel_index)
 			pixels[pixel_index] = get_rgba(0, 0, 0, 255);
 			return ;
 		}
-		comps = scene->obj_list->head->comp;
-		apply_lighting_with_shadows(scene, pixel_index, comps);
+		color = get_shaded_with_shadows(scene, scene->obj_list->head, 4);
+		pixels[pixel_index] = get_rgba((int)(color->r * 255), (int)(color->g
+				* 255), (int)(color->b * 255), 255);
+		free(color);
 	}
 	else
 		pixels[pixel_index] = get_rgba(0, 0, 0, 255);
