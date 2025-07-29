@@ -28,6 +28,8 @@ typedef struct s_material
 	double	specular; /* Specular reflection coefficient (0.0 to 1.0) */
 	double	shininess; /* Shininess factor for specular highlights */
 	double	reflective;
+	double	transparency;
+	double	refractive_index;
 	t_pattern *pattern;
 }			t_material;
 
@@ -80,6 +82,7 @@ typedef struct s_computations
 	t_tuples	*normalv;
 	t_tuples	*over_point;
 	t_tuples	*reflectv;
+	t_tuples	*under_point;
 	bool		inside;
 	bool		in_shadow;
 }					t_computations;
