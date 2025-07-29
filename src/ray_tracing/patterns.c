@@ -12,14 +12,10 @@ t_pattern	*stripe_pattern(t_rgb *color1, t_rgb *color2)
 
 t_rgb	*stripe_at(t_pattern *pattern, t_tuples *point)
 {
-	int floor_x;
+	double floor_x;
 
-	floor_x = (int)floor(point->x);
-
-	if (point->x < 0 && point->x != floor_x)
-		floor_x--;
-
-	if (floor_x % 2 == 0)
+	floor_x = floor(point->x);
+	if (fmod(floor_x, 2) == 0)
 		return (pattern->color1);
 	else
 		return (pattern->color2);

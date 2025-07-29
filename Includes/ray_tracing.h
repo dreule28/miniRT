@@ -62,12 +62,12 @@ double		*intersect_plane(t_ray *ray, t_plane *plane);
 
 // lighting.c -- BEGIN
 t_rgb		*calculate_lighting_components(t_material material, t_light *light,
-	double light_dot_normal);
+	double light_dot_normal, t_computations *comps);
 t_rgb		calculate_specular(t_scene *scene, t_tuples *lightv, t_tuples *eyev,
 	t_tuples *normalv);
 t_material	get_obj_mat(t_scene *scene);
 t_rgb		*ambient_comp(t_tuples **lightv, t_material material,
-	t_light *light);
+	t_light *light, t_computations *comps);
 t_rgb		*lighting(t_scene *scene, t_computations *comps, t_light *light);
 // lighting.c -- END
 
@@ -79,6 +79,7 @@ t_tuples	*local_plane(t_obj_node *curr, t_tuples *object_point);
 
 // patterns.c -- BEGIN
 t_pattern   *stripe_pattern(t_rgb *color1, t_rgb *color2);
+t_rgb	*stripe_at(t_pattern *pattern, t_tuples *point);
 // patterns.c -- END
 
 // rays.c -- BEGIN
