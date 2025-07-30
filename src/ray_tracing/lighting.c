@@ -70,27 +70,6 @@ t_rgb	calculate_specular(t_scene *scene, t_tuples *lightv, t_tuples *eyev,
 	return (specular);
 }
 
-t_material	get_material_from_comps(t_computations *comps, t_scene *scene)
-{
-	t_obj_node	*curr;
-
-	curr = scene->obj_list->head;
-	while (curr)
-	{
-		if (curr->comp == comps)
-		{
-			if (curr->type == PLANE)
-				return (curr->data->plane->material);
-			else if (curr->type == SPHERE)
-				return (curr->data->sphere->material);
-			else if (curr->type == CYLINDER)
-				return (curr->data->cylinder->material);
-		}
-		curr = curr->next;
-	}
-	return (get_material());
-}
-
 t_rgb	*ambient_comp(t_tuples **lightv, t_material material, t_light *light)
 {
 	t_rgb	effective_color;
@@ -115,7 +94,7 @@ t_rgb	*lighting(t_scene *scene, t_computations *comps, t_light *light)
 
 	if (!light || !comps->over_point)
 		return (NULL);
-	material = get_material_from_comps(comps, scene);
+	material = get_material_from_comps(comps, scene->obj_list);
 	lightv = ftm_tup_subtract(&light->pos, comps->over_point);
 	lightv = ftm_tup_norm(lightv);
 	light_dot_normal = ftm_tup_dot(lightv, comps->normalv);
