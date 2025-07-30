@@ -37,36 +37,69 @@ bool	intersec_to_obj(t_scene *scene, t_obj_node *curr, t_ray *ray)
 	return (true);
 }
 
-t_obj_list	*intersect_to_list(t_scene *scene, t_ray *ray)
+void	add_inter_sorted(t_obj_list *list, t_obj_node *new_intersection)
 {
 	t_obj_node	*curr;
 
+	if (!list->head || new_intersection->t[0] < list->head->t[0])
+	{
+		new_intersection->next = list->head;
+		list->head = new_intersection;
+		if (!list->tail)
+			list->tail = new_intersection;
+		return ;
+	}
+	curr = list->head;
+	while (curr->next && curr->next->t[0] < new_intersection->t[0])
+		curr = curr->next;
+	new_intersection->next = curr->next;
+	curr->next = new_intersection;
+	if (!new_intersection->next)
+		list->tail = new_intersection;
+}
+
+void	handle_inter_node(t_obj_list *intersections, t_obj_node *curr)
+{
+	t_obj_node	*inter1;
+	t_obj_node	*inter2;
+
+	if (curr->t[0] > 0)
+	{
+		inter1 = create_inter_node(curr, curr->t[0]);
+		if (inter1)
+			add_inter_sorted(intersections, inter1);
+	}
+	if (curr->t[1] > 0 && fabs(curr->t[1] - curr->t[0]) > DBL_EPSILON)
+	{
+		inter2 = create_inter_node(curr, curr->t[1]);
+		if (inter2)
+			add_inter_sorted(intersections, inter2);
+	}
+}
+
+t_obj_list	*intersect_to_list(t_scene *scene, t_ray *ray)
+{
+	t_obj_node	*curr;
+	t_obj_list	*intersections;
+
 	curr = scene->obj_list->head;
+	intersections = ft_calloc(sizeof(t_obj_list), 1);
+	if (!intersections)
+		return (NULL);
 	while (curr)
 	{
 		if (!intersec_to_obj(scene, curr, ray))
-			return (NULL);
-		if (!set_comp_to_obj(curr, ray))
+			return (free(intersections), NULL);
+		if (curr->t)
+			handle_inter_node(intersections, curr);
+		curr = curr->next;
+	}
+	curr = intersections->head;
+	while (curr)
+	{
+		if (!set_comp_to_obj(curr, ray, intersections))
 			return (NULL);
 		curr = curr->next;
 	}
-	return (sort_obj_list(scene->obj_list));
-}
-
-double	discri(t_ray *ray, t_sphere *sphere, double *a, double *b)
-{
-	t_tuples	*sphere_center;
-	t_tuples	*sphere_to_ray;
-	double		discriminant;
-	double		c;
-
-	sphere_center = copy_point(&sphere->pos);
-	sphere_to_ray = ftm_tup_subtract(ray->origin, sphere_center);
-	*a = ftm_tup_dot(ray->direction, ray->direction);
-	*b = 2 * ftm_tup_dot(ray->direction, sphere_to_ray);
-	c = ftm_tup_dot(sphere_to_ray, sphere_to_ray) - (sphere->radius
-			* sphere->radius);
-	discriminant = *b * *b - 4 * *a * c;
-	free(sphere_to_ray);
-	return (discriminant);
+	return (intersections);
 }
