@@ -85,6 +85,8 @@ typedef struct s_computations
 	t_tuples	*under_point;
 	bool		inside;
 	bool		in_shadow;
+	double		n1;
+	double		n2;
 }					t_computations;
 
 /* Node in linked list of objects */

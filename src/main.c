@@ -50,7 +50,7 @@ void generate_scene(t_scene *scene)
     t_obj_node *one = scene->obj_list->head;
     t_obj_node *two = scene->obj_list->head->next;
     t_obj_node *three = scene->obj_list->head->next->next;
-    
+
     // First sphere - WHITE
     first->matrix = ftm_translation(init_point(-0.5, 1.0, 0.5));
     first->data->sphere->material = get_material();
@@ -99,7 +99,7 @@ void generate_scene(t_scene *scene)
     three->data->plane->material.reflective= 0.5;
 	three->data->plane->material.shininess = 10.0;
     three->data->plane->material.rgb = *init_rgb(1, 0, 0.2);
-    
+
     scene->camera.fov = M_PI/3;
     scene->camera.matrix = view_transformation(init_point(0, 1.5, -6), init_point(0, 1, 0), init_vector(0, 1, 0));
 }
@@ -146,6 +146,37 @@ void	default_world(t_scene *scene)
 	second_sphere->matrix = ftm_scaling(init_point(1, 1, 1));
 }
 
+void	glass_sphere(t_obj_node *obj_node)
+{
+	obj_node->matrix = init_identity();
+	obj_node->data->sphere->material.transparency = 1.0;
+	obj_node->data->sphere->material.refractive_index = 1.5;
+}
+
+void	refrac_scene(t_scene *scene)
+{
+	t_obj_node	*a = scene->obj_list->head;
+	t_obj_node	*b = scene->obj_list->head->next;
+	// t_obj_node	*c = scene->obj_list->tail;
+
+	//Big sphere
+	glass_sphere(a);
+	a->matrix = ftm_translation(init_point(0, 0, 1));
+	a->data->sphere->material.refractive_index = 1.5;
+	a->data->sphere->material.ambient = 1;
+
+	// //Left sphere
+	glass_sphere(b);
+	b->matrix = ftm_translation(init_point(0, 0, -0.25));
+	b->data->sphere->material.transparency = 1.0;
+	b->data->sphere->material.refractive_index = 1.5;
+
+	// //Right sphere
+	// glass_sphere(c);
+	// c->matrix = ftm_translation(init_point(0, 0, 0.25));
+	// c->data->sphere->material.refractive_index = 2.5;
+}
+
 int	main(int argc, char **argv)
 {
 	t_scene	*scene;
@@ -156,29 +187,22 @@ int	main(int argc, char **argv)
 	if (!parser(scene, argc, argv))
 		return (free(scene), 1);
 
-	generate_scene(scene);
-
-	// t_ray	*ray;
-	// t_rgb	*color;
-
 	// default_world(scene);
+	// generate_scene(scene);
 
-	// scene->obj_list->head->matrix = ftm_translation(init_point(0, -1, 0));
-	// ray = init_ray(init_point(0, 0, -3), init_vector(0, -sqrt(2)/2, sqrt(2)/2));
-	// intersect_to_list(scene, ray);
-	// debug_scene(scene);
-	// color = reflected_color(scene, scene->obj_list->head->comp, 1);
-	// color = shade_hit(scene, scene->obj_list->head->comp, scene->light_list->head, 4);
-	// printf("Color: R=%f, G=%f, B=%f\n", color->r, color->g, color->b);
+	refrac_scene(scene);
 
+	t_ray		*ray = init_ray(init_point(0, 0, 0.1), init_vector(0, 1, 0));
+	t_rgb		*color;
+	t_obj_list	*intersections = intersect_to_list(scene, ray);
+	color = refracted_color(intersections->head, intersections, scene, 5);
+	printf("Refracted color: R=%.3f, G=%.3f, B=%.3f\n", color->r, color->g, color->b);
 
-
-
-	if (!init_mlx_window(scene))
-		return (1);
-	render(scene);
-	mlx_key_hook(scene->mlx, &key_hook, scene);
-	mlx_loop(scene->mlx);
-	mlx_terminate(scene->mlx);
+	// if (!init_mlx_window(scene))
+	// 	return (1);
+	// render(scene);
+	// mlx_key_hook(scene->mlx, &key_hook, scene);
+	// mlx_loop(scene->mlx);
+	// mlx_terminate(scene->mlx);
 	return (0);
 }
