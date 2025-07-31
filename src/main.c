@@ -162,15 +162,20 @@ int	main(int argc, char **argv)
 		return (1);
 	if (!parser(scene, argc, argv))
 		return (free(scene), 1);
-
-	generate_scene(scene);
+	// generate_scene(scene);
 	// default_world(scene);
+	t_rgb *c;
+	set_transform(scene->obj_list->head, ftm_scaling(init_point(2,2,2)));
+	scene->obj_list->head->data->sphere->material.pattern = stripe_pattern(init_rgb(1, 1, 1), init_rgb(0,0,0));
+	set_pattern_transform(scene->obj_list->head->data->sphere->material.pattern, ftm_translation(init_point(0.5, 0, 0)));
 
-	if (!init_mlx_window(scene))
-		return (1);
-	render(scene);
-	mlx_key_hook(scene->mlx, &key_hook, scene);
-	mlx_loop(scene->mlx);
-	mlx_terminate(scene->mlx);
+	c = stripe_at_object(scene->obj_list->head->data->sphere->material.pattern, scene->obj_list->head->matrix, init_point(2.5, 0 ,0));
+	printf("c : x = %.6f, y = %.6f, z = %.6f\n", c->r, c->g, c->b);
+	// if (!init_mlx_window(scene))
+	// 	return (1);
+	// render(scene);
+	// mlx_key_hook(scene->mlx, &key_hook, scene);
+	// mlx_loop(scene->mlx);
+	// mlx_terminate(scene->mlx);
 	return (0);
 }

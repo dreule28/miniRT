@@ -18,6 +18,7 @@ typedef struct s_pattern
 {
 	t_rgb *color1;
 	t_rgb *color2;
+	t_m4	*transform;
 }			t_pattern;
 
 typedef struct s_material

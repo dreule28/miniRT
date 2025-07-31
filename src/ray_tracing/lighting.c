@@ -100,15 +100,10 @@ t_rgb	*ambient_comp(t_tuples **lightv, t_material material, t_light *light, t_co
 {
 	t_rgb	effective_color;
 	t_rgb	*result;
-	t_rgb material_col;
 
-	if (material.pattern)
-		material_col = *stripe_at(material.pattern, comps->over_point);
-	else
-		material_col = material.rgb;
-	effective_color.r = material_col.r * light->rgb.r * light->intensity;
-	effective_color.g = material_col.g * light->rgb.g * light->intensity;
-	effective_color.b = material_col.b * light->rgb.b * light->intensity;
+	effective_color.r = material.rgb.r * light->rgb.r * light->intensity;
+	effective_color.g = material.rgb.g * light->rgb.g * light->intensity;
+	effective_color.b = material.rgb.b * light->rgb.b * light->intensity;
 	result = init_rgb(effective_color.r * material.ambient,
 			effective_color.g * material.ambient,
 			effective_color.b * material.ambient);
@@ -129,6 +124,7 @@ t_rgb	*lighting(t_scene *scene, t_computations *comps, t_light *light)
 	lightv = ftm_tup_subtract(&light->pos, comps->over_point);
 	lightv = ftm_tup_norm(lightv);
 	light_dot_normal = ftm_tup_dot(lightv, comps->normalv);
+	if()
 	if (comps->in_shadow)
 		return (ambient_comp(&lightv, material, light, comps));
 	result = calculate_lighting_components(material, light, light_dot_normal, comps);
