@@ -197,24 +197,24 @@ int	main(int argc, char **argv)
 		return (1);
 	if (!parser(scene, argc, argv))
 		return (free(scene), 1);
-	// generate_scene(scene);
+	generate_scene(scene);
 
 	// default_world(scene);
 	// generate_scene(scene);
 
-	refrac_scene(scene);
+	// refrac_scene(scene);
 
-	t_ray		*ray = init_ray(init_point(0, 0, 0.1), init_vector(0, 1, 0));
-	t_rgb		*color;
-	t_obj_list	*intersections = intersect_to_list(scene, ray);
-	color = refracted_color(intersections->head, intersections, scene, 5);
-	printf("Refracted color: R=%.3f, G=%.3f, B=%.3f\n", color->r, color->g, color->b);
+	// t_ray		*ray = init_ray(init_point(0, 0, 0.1), init_vector(0, 1, 0));
+	// t_rgb		*color;
+	// t_obj_list	*intersections = intersect_to_list(scene, ray);
+	// color = refracted_color(intersections->head, intersections, scene, 5);
+	// printf("Refracted color: R=%.3f, G=%.3f, B=%.3f\n", color->r, color->g, color->b);
 
-	// if (!init_mlx_window(scene))
-	// 	return (1);
-	// render(scene);
-	// mlx_key_hook(scene->mlx, &key_hook, scene);
-	// mlx_loop(scene->mlx);
-	// mlx_terminate(scene->mlx);
+	if (!init_mlx_window(scene))
+		return (1);
+	render(scene);
+	mlx_key_hook(scene->mlx, &key_hook, scene);
+	mlx_loop(scene->mlx);
+	mlx_terminate(scene->mlx);
 	return (0);
 }

@@ -69,7 +69,7 @@ t_rgb		calculate_specular(t_scene *scene, t_tuples *lightv, t_tuples *eyev,
 				t_tuples *normalv);
 t_material	get_obj_mat(t_scene *scene);
 t_rgb		*ambient_comp(t_tuples **lightv, t_material material,
-	t_light *light, t_computations *comps);
+	t_light *light);
 t_rgb		*lighting(t_scene *scene, t_computations *comps, t_light *light);
 // lighting.c -- END
 
