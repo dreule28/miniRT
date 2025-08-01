@@ -24,7 +24,7 @@ t_rgb	*stripe_at(t_pattern *pattern, t_tuples *point)
 
 t_rgb	*stripe_at_object(t_pattern *pattern, t_m4 *matrix, t_tuples *world_point)
 {
-	    t_tuples	*object_point;
+	t_tuples	*object_point;
     t_tuples	*pattern_point;
     t_m4		*inv_matrix;
     t_m4		*inv_pattern;
@@ -56,4 +56,17 @@ void    set_pattern_transform(t_pattern *pattern, t_m4 *transformation)
     if (pattern->transform)
         free_matrix_m4(pattern->transform);
     pattern->transform = transformation;
+}
+
+t_pattern *test_pattern(void)
+{
+    t_pattern *new_pattern;
+
+    new_pattern = ft_calloc(sizeof(t_pattern), 1);
+    if (!new_pattern)
+        return (NULL);
+    new_pattern->color1 = NULL;
+    new_pattern->color2 = NULL;
+    new_pattern->transform = init_identity();
+    return(new_pattern);
 }
