@@ -23,7 +23,27 @@ void	set_epsilon_offset(t_obj_node *curr)
 	free(epsilon_offset);
 }
 
-bool	set_comp_to_obj(t_obj_node *curr, t_ray *ray)
+void	set_refraction(t_obj_node *curr, t_obj_list *intersections)
+{
+	if (intersections)
+		calculate_refractive(intersections, curr);
+	else
+	{
+		curr->comp->n1 = 1.0;
+		curr->comp->n2 = 1.0;
+	}
+}
+
+void	set_epsilon_offset_under(t_obj_node *curr)
+{
+	t_tuples	*eps_offset;
+
+	eps_offset = ftm_tup_mult(curr->comp->normalv, DBL_EPSILON);
+	curr->comp->under_point = ftm_tup_subtract(curr->comp->point, eps_offset);
+	free(eps_offset);
+}
+
+bool	set_comp_to_obj(t_obj_node *curr, t_ray *ray, t_obj_list *intersections)
 {
 	if (!curr->t)
 		return (true);
@@ -44,5 +64,7 @@ bool	set_comp_to_obj(t_obj_node *curr, t_ray *ray)
 		return (false);
 	set_dot_product(curr);
 	set_epsilon_offset(curr);
+	set_epsilon_offset_under(curr);
+	set_refraction(curr, intersections);
 	return (true);
 }

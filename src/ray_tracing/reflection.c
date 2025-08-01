@@ -41,6 +41,8 @@ t_material	get_material(void)
 	material.specular = 0.9;
 	material.shininess = 200.0;
 	material.reflective = 0;
+	material.transparency = 0.0;
+	material.refractive_index = 1.0;
 	return (material);
 }
 
@@ -75,7 +77,7 @@ t_rgb	*reflected_color(t_scene *scene, t_computations *comps, int remaining)
 
 	if (remaining <= 0)
 		return (init_rgb(0, 0, 0));
-	material = get_material_from_comps(comps, scene);
+	material = get_material_from_comps(comps, scene->obj_list);
 	if (material.reflective == 0)
 		return (init_rgb(0, 0, 0));
 	reflected_ray = init_ray(comps->over_point, comps->reflectv);
