@@ -57,10 +57,10 @@ void generate_scene(t_scene *scene)
     first->data->sphere->material.rgb = *init_rgb(1.0, 1.0, 1.0);  // Pure white
     first->data->sphere->material.diffuse = 0.7;
     first->data->sphere->material.specular = 0.1;
-    first->data->sphere->material.ambient = 0.2;  // Add ambient for better visibility
-	first->data->sphere->material.reflective= 0.3;
-	first->data->sphere->material.pattern = stripe_pattern(init_rgb(0, 0, 0), init_rgb(1, 1 ,1));
-	first->data->sphere->material.pattern->transform = ftm_scaling(init_point(0.05, 0.05, 0.05));
+    first->data->sphere->material.ambient = 0.2;
+	first->data->sphere->material.reflective= 0.0;
+	first->data->sphere->material.pattern = gradient_pattern(init_rgb(0.8 , 0, 0.2), init_rgb(0.9, 0.8, 0.6));
+	first->data->sphere->material.pattern->transform = ftm_scaling(init_point(2, 2, 2));
 
     // Second sphere - BEIGE
     second->matrix = ftm_matrix_mult(ftm_translation(init_point(1.5, 0.33, -0.5)), ftm_scaling(init_point(0.33, 0.33, 0.33)));
@@ -69,7 +69,7 @@ void generate_scene(t_scene *scene)
     second->data->sphere->material.diffuse = 0.7;
     second->data->sphere->material.specular = 0.1;
     second->data->sphere->material.ambient = 0.2;
-	second->data->sphere->material.reflective= 0.3;
+	second->data->sphere->material.reflective= 0.0;
 	second->data->sphere->material.pattern = stripe_pattern(init_rgb(0, 0, 0), init_rgb(1, 1 ,1));
 	second->data->sphere->material.pattern->transform = ftm_matrix_mult(ftm_scaling(init_point(0.33, 0.33, 0.33)), ftm_rotate_x(M_PI_2));
 
@@ -82,7 +82,7 @@ void generate_scene(t_scene *scene)
     third->data->sphere->material.specular = 0.3;  // Higher specular for black objects
 	third->data->sphere->material.pattern = stripe_pattern(init_rgb(0, 0, 0), init_rgb(1, 1 ,1));
     third->data->sphere->material.ambient = 0.1;
-	third->data->sphere->material.reflective= 0.3;
+	third->data->sphere->material.reflective= 0.0;
 
     // ... rest of your plane setup remains the same
     one->matrix = ftm_translation(init_point(0, 0, 0));
@@ -90,8 +90,9 @@ void generate_scene(t_scene *scene)
     one->data->plane->material.diffuse = 0.8;
     one->data->plane->material.specular = 0.1;
     one->data->plane->material.shininess = 10.0;
-	one->data->plane->material.reflective= 0.3;
-	one->data->plane->material.pattern = stripe_pattern(init_rgb(1, 1, 1), init_rgb(0, 0, 0));
+	one->data->plane->material.reflective= 0.0;
+	one->data->plane->material.pattern = gradient_pattern(init_rgb(0.8 , 0, 0.2), init_rgb(0.9, 0.8, 0.6));
+	one->data->plane->material.pattern->transform = ftm_scaling(init_point(8, 8, 8));
     one->data->plane->material.rgb = *init_rgb(1, 0, 0.2);
 
     two->matrix = ftm_matrix_mult(ftm_translation(init_point(0, 0, 3)), ftm_rotate_x(M_PI_2));
@@ -112,7 +113,7 @@ void generate_scene(t_scene *scene)
     three->data->plane->material.rgb = *init_rgb(1, 0, 0.2);
 
     scene->camera.fov = M_PI/3;
-    scene->camera.matrix = view_transformation(init_point(-5, 1.5, -6), init_point(0, 1, 0), init_vector(0, 1, 0));
+    scene->camera.matrix = view_transformation(init_point(-1, 1.5, -6), init_point(0, 1, 0), init_vector(0, 1, 0));
 }
 
 void	default_world(t_scene *scene)
@@ -197,18 +198,18 @@ int	main(int argc, char **argv)
 		return (1);
 	if (!parser(scene, argc, argv))
 		return (free(scene), 1);
-	// generate_scene(scene);
+	generate_scene(scene);
 
 	// default_world(scene);
 	// generate_scene(scene);
 
 	// refrac_scene(scene);
 
-	// if (!init_mlx_window(scene))
-	// 	return (1);
-	// render(scene);
-	// mlx_key_hook(scene->mlx, &key_hook, scene);
-	// mlx_loop(scene->mlx);
-	// mlx_terminate(scene->mlx);
+	if (!init_mlx_window(scene))
+		return (1);
+	render(scene);
+	mlx_key_hook(scene->mlx, &key_hook, scene);
+	mlx_loop(scene->mlx);
+	mlx_terminate(scene->mlx);
 	return (0);
 }

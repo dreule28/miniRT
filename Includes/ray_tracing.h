@@ -82,6 +82,8 @@ t_tuples	*local_plane(t_obj_node *curr, t_tuples *object_point);
 t_rgb *select_pattern(t_pattern *pattern, t_tuples *pattern_point);
 t_rgb *test_pattern_at(t_pattern *pattern, t_tuples *point);
 t_rgb *pattern_at_shape(t_pattern *pattern, t_obj_node *shape, t_tuples *world_point);
+t_pattern   *gradient_pattern(t_rgb *color1, t_rgb *color2);
+t_rgb   *gradient_at(t_pattern *pattern, t_tuples *point);
 // pattern_utils.c -- END
 
 // patterns.c -- BEGIN
