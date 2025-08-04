@@ -58,7 +58,7 @@ t_rgb	*refracted_color(t_obj_node *obj_node, t_obj_list *obj_list,
 
 	if (refract_intersections->head && refract_intersections->head->t)
 	{
-		if (set_comp_to_obj(refract_intersections->head, refract_ray, refract_intersections))
+		if (set_comp_to_obj(refract_intersections->head, refract_ray))
 		{
 			color = get_shaded_with_shadows(scene, refract_intersections->head, remaining - 1);
 		}

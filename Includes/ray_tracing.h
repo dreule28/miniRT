@@ -44,8 +44,7 @@ t_m4		*init_view_transformation(t_scene *scene);
 // comp_to_list.c -- BEGIN
 void		set_dot_product(t_obj_node *curr);
 void		set_epsilon_offset(t_obj_node *curr);
-bool		set_comp_to_obj(t_obj_node *curr, t_ray *ray,
-				t_obj_list *intersections);
+bool		set_comp_to_obj(t_obj_node *curr, t_ray *ray);
 // comp_to_list.c -- END
 
 // intersec_to_list.c -- BEGIN
