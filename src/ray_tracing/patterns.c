@@ -8,6 +8,7 @@ t_pattern	*stripe_pattern(t_rgb *color1, t_rgb *color2)
 	new_pattern->color1 = color1;
 	new_pattern->color2 = color2;
 	new_pattern->transform = NULL;
+    new_pattern->type = STRIPE_PATTERN;
 	return (new_pattern);
 }
 
@@ -28,6 +29,7 @@ t_rgb	*stripe_at_object(t_pattern *pattern, t_m4 *matrix, t_tuples *world_point)
     t_tuples	*pattern_point;
     t_m4		*inv_matrix;
     t_m4		*inv_pattern;
+    t_rgb       *color;
 
     if (matrix)
     {
@@ -45,10 +47,9 @@ t_rgb	*stripe_at_object(t_pattern *pattern, t_m4 *matrix, t_tuples *world_point)
         free_tuple(object_point);
     }
     else
-    {
 		pattern_point = object_point;
-	}
-	return(stripe_at(pattern, pattern_point));
+    color = select_pattern(pattern, pattern_point);
+	return(color);
 }
 
 void    set_pattern_transform(t_pattern *pattern, t_m4 *transformation)
@@ -67,6 +68,7 @@ t_pattern *test_pattern(void)
         return (NULL);
     new_pattern->color1 = NULL;
     new_pattern->color2 = NULL;
-    new_pattern->transform = init_identity();
+    new_pattern->transform = NULL;
+    new_pattern->type = TEST_PATTERN;
     return(new_pattern);
 }

@@ -14,11 +14,18 @@ typedef enum e_obj_type
 	CYLINDER
 }	t_obj_type;
 
+typedef enum e_pattern_type
+{
+    STRIPE_PATTERN,
+    TEST_PATTERN,
+} t_pattern_type;
+
 typedef struct s_pattern
 {
 	t_rgb *color1;
 	t_rgb *color2;
 	t_m4	*transform;
+	t_pattern_type type;
 }			t_pattern;
 
 typedef struct s_material
