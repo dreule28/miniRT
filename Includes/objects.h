@@ -18,7 +18,9 @@ typedef enum e_pattern_type
 {
     STRIPE_PATTERN,
     TEST_PATTERN,
-	GRADIENT_PATTERN
+	GRADIENT_PATTERN,
+	RING_PATTERN,
+	CHECKERS_PATTERN
 } t_pattern_type;
 
 typedef struct s_pattern

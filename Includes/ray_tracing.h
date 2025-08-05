@@ -84,12 +84,13 @@ t_rgb *test_pattern_at(t_pattern *pattern, t_tuples *point);
 t_rgb *pattern_at_shape(t_pattern *pattern, t_obj_node *shape, t_tuples *world_point);
 t_pattern   *gradient_pattern(t_rgb *color1, t_rgb *color2);
 t_rgb   *gradient_at(t_pattern *pattern, t_tuples *point);
+t_pattern *ring_pattern(t_rgb *color1, t_rgb *color2);
+t_rgb   *ring_at(t_pattern *pattern, t_tuples *point);
 // pattern_utils.c -- END
 
 // patterns.c -- BEGIN
 t_pattern   *stripe_pattern(t_rgb *color1, t_rgb *color2);
 t_rgb	*stripe_at(t_pattern *pattern, t_tuples *point);
-t_rgb	*stripe_at_object(t_pattern *pattern, t_m4 *matrix, t_tuples *world_point);
 void    set_pattern_transform(t_pattern *pattern, t_m4 *transformation);
 t_pattern *test_pattern(void);
 // patterns.c -- END

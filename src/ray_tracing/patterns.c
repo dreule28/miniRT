@@ -23,35 +23,6 @@ t_rgb	*stripe_at(t_pattern *pattern, t_tuples *point)
 		return (pattern->color2);
 }
 
-t_rgb	*stripe_at_object(t_pattern *pattern, t_m4 *matrix, t_tuples *world_point)
-{
-	t_tuples	*object_point;
-    t_tuples	*pattern_point;
-    t_m4		*inv_matrix;
-    t_m4		*inv_pattern;
-    t_rgb       *color;
-
-    if (matrix)
-    {
-        inv_matrix = ftm_m4_inversion(matrix);
-        object_point = ftm_matrix_times_tuple(inv_matrix, world_point);
-        free_matrix_m4(inv_matrix);
-    }
-    else
-        object_point = copy_point(world_point);
-    if (pattern->transform)
-    {
-        inv_pattern = ftm_m4_inversion(pattern->transform);
-        pattern_point = ftm_matrix_times_tuple(inv_pattern, object_point);
-        free_matrix_m4(inv_pattern);
-        free_tuple(object_point);
-    }
-    else
-		pattern_point = object_point;
-    color = select_pattern(pattern, pattern_point);
-	return(color);
-}
-
 void    set_pattern_transform(t_pattern *pattern, t_m4 *transformation)
 {
     if (pattern->transform)
