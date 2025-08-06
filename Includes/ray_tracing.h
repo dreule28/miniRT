@@ -86,6 +86,8 @@ t_pattern   *gradient_pattern(t_rgb *color1, t_rgb *color2);
 t_rgb   *gradient_at(t_pattern *pattern, t_tuples *point);
 t_pattern *ring_pattern(t_rgb *color1, t_rgb *color2);
 t_rgb   *ring_at(t_pattern *pattern, t_tuples *point);
+t_pattern *checkers_pattern(t_rgb *color1, t_rgb *color2);
+t_rgb *checkers_at(t_pattern *pattern, t_tuples *point);
 // pattern_utils.c -- END
 
 // patterns.c -- BEGIN

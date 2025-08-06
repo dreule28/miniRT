@@ -128,5 +128,11 @@ t_pattern   *checkers_pattern(t_rgb *color1, t_rgb *color2)
 
 t_rgb *checkers_at(t_pattern *pattern, t_tuples *point)
 {
+    int sum;
     
+    sum = (int)floor(point->x) + (int)floor(point->y) + (int)floor(point->z);
+    if (sum % 2 == 0)
+        return (pattern->color1);
+    else
+        return (pattern->color2);
 }
