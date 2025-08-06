@@ -59,7 +59,7 @@ void generate_scene(t_scene *scene)
     first->data->sphere->material.specular = 0.1;
     first->data->sphere->material.ambient = 0.2;
 	first->data->sphere->material.reflective= 0.2;
-	first->data->sphere->material.pattern = checkers_pattern(init_rgb(0.8 , 0.0, 0.2), init_rgb(0.9, 0.8, 0.6));
+	first->data->sphere->material.pattern = checkers_pattern(init_rgb(1 , 0.0, 1), init_rgb(0, 1, 1));
 	// first->data->sphere->material.pattern->transform = ftm_matrix_mult(ftm_translation(init_point(0.5, 0, 0)) ,ftm_scaling(init_point(1, 1, 1)));
 	// first->data->sphere->material.pattern->transform = ftm_scaling(init_point(0.5, 1, 1));
     // Second sphere - BEIGE
@@ -91,7 +91,7 @@ void generate_scene(t_scene *scene)
     one->data->plane->material.specular = 0.1;
     one->data->plane->material.shininess = 10.0;
 	one->data->plane->material.reflective= 0.3;
-	one->data->plane->material.pattern = checkers_pattern(init_rgb(0.8 , 0, 0.2), init_rgb(0.9, 0.8, 0.6));
+	one->data->plane->material.pattern = checkers_pattern(init_rgb(1 , 0.0, 1), init_rgb(0, 1, 1));
 	// one->data->plane->material.pattern->transform = ftm_matrix_mult(ftm_translation(init_point(3, 0, 0)) ,ftm_scaling(init_point(10, 10, 10)));
     one->data->plane->material.rgb = *init_rgb(1, 0, 0.2);
 
@@ -111,7 +111,7 @@ void generate_scene(t_scene *scene)
     three->data->plane->material.reflective= 0.2;
 	three->data->plane->material.shininess = 10.0;
     three->data->plane->material.rgb = *init_rgb(1, 0, 0.2);
-	three->data->plane->material.pattern = ring_pattern(init_rgb(1, 1, 1), init_rgb(0, 0, 0));
+	three->data->plane->material.pattern = ring_pattern(init_rgb(1, 1, 1), init_rgb(0, 1, 1));
 
     scene->camera.fov = M_PI/3;
     scene->camera.matrix = view_transformation(init_point(-3.5, 1.5, -6), init_point(0, 1, 0), init_vector(0, 1, 0));

@@ -38,7 +38,7 @@ MATRICES := $(addprefix math_ops/matrices/, $(MATRICES_FILES))
 TUPLES_FILES := tuples_func.c more_tuples_func.c tup_func.c custom_math_func.c
 TUPLES := $(addprefix math_ops/tuples/, $(TUPLES_FILES))
 
-RAY_TRACING_FILES := rays.c surface_normals.c intersect_obj.c intersec_to_list.c reflection.c lighting.c sort_obj_list.c comp_to_list.c view_tranformation.c camera.c shadows.c local_normal_at.c patterns.c utils.c refraction.c refracted_color.c pattern_utils.c
+RAY_TRACING_FILES := rays.c surface_normals.c intersect_obj.c intersec_to_list.c reflection.c lighting.c sort_obj_list.c comp_to_list.c view_tranformation.c camera.c shadows.c local_normal_at.c utils.c refraction.c refracted_color.c
 RAY_TRACING := $(addprefix ray_tracing/, $(RAY_TRACING_FILES))
 
 PARSER_FILES := fill_elements.c fill_objects.c initialize_objects.c list_and_nodes.c parser.c inits.c
@@ -47,8 +47,11 @@ PARSER := $(addprefix parser/, $(PARSER_FILES))
 MLX_FILES := mlx_hooks.c mlx_utils.c ray_tracing_loop.c paint_pixle.c
 MLX := $(addprefix mlx_src/, $(MLX_FILES))
 
+PATTERNS_FILES := patterns.c pattern_utils.c
+PATTERNS := $(addprefix patterns/, $(PATTERNS_FILES))
+
 SRC_FILES := main.c
-SRC := $(addprefix src/, $(SRC_FILES) $(MATRICES) $(TUPLES) $(RAY_TRACING) $(PARSER) $(MLX))
+SRC := $(addprefix src/, $(SRC_FILES) $(MATRICES) $(TUPLES) $(RAY_TRACING) $(PARSER) $(MLX) $(PATTERNS))
 
 ################################################################################
 ###############               OBJECT FILES & RULES                ##############
