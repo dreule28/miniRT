@@ -47,7 +47,7 @@ PARSER := $(addprefix parser/, $(PARSER_FILES))
 MLX_FILES := mlx_hooks.c mlx_utils.c ray_tracing_loop.c paint_pixle.c
 MLX := $(addprefix mlx_src/, $(MLX_FILES))
 
-PATTERNS_FILES := patterns.c pattern_utils.c
+PATTERNS_FILES := patterns.c pattern_utils.c init_patterns.c
 PATTERNS := $(addprefix patterns/, $(PATTERNS_FILES))
 
 SRC_FILES := main.c
