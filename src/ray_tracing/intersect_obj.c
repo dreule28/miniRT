@@ -54,3 +54,37 @@ double	*intersect_plane(t_ray *ray, t_plane *plane)
 	t[1] = intersec;
 	return (t);
 }
+
+void	check_cylinder_height(double *t ,t_ray *ray, t_cylinder *cylinder)
+{
+	double y0;
+	double y1;
+
+	if(t[0] > t[1])
+	{
+		t[0];
+	}
+}
+
+double	*intersect_cylinder(t_ray *ray, t_cylinder *cylinder)
+{
+	double a;
+	double b;
+	double c;
+	double *t;
+	double discri;
+
+	t = ft_calloc(sizeof(double), 2);
+	if(!t)
+		return(NULL);
+	a = ray->direction->x * ray->direction->x + ray->direction->z  * ray->direction->z;
+	b = (2 * ray->origin->x * ray->direction->x) + (2 * ray->origin->z  * ray->direction->z);
+	c = ray->origin->x * ray->origin->x + ray->origin->z  * ray->origin->z - 1;
+	discri = b * b - 4 * a * c;
+	if(discri < 0.0)
+		return(NULL);
+	t[0] = (-b - sqrtf(discri)) / (2 * a);
+	t[1] = (-b + sqrtf(discri)) / (2 * a);
+	check_cylinder_height(t, ray, cylinder);
+	return(t);
+}

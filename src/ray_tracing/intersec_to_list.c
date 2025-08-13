@@ -9,6 +9,8 @@ double *intersect_shape(t_obj_node *curr, t_ray *ray)
 		intersection = intersect_sphere(ray, curr->data->sphere);
 	if(curr->type == PLANE)
 		intersection = intersect_plane(ray, curr->data->plane);
+	if(curr->type == CYLINDER)
+		intersection = intersect_cylinder(ray, curr->data->cylinder);
 	return(intersection);
 }
 

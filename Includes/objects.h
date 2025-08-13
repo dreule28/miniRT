@@ -71,6 +71,8 @@ typedef struct s_cylinder
 	t_tuples	axis;		/* Direction vector of cylinder axis */
 	double		radius;		/* Radius of the cylinder */
 	double		height;		/* Height of the cylinder */
+	double		maximum;
+	double		minimum;
 	t_material	material;	/* Material of the object*/
 }				t_cylinder;
 

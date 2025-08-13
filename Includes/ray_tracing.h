@@ -59,6 +59,7 @@ t_obj_list	*intersect_to_list(t_scene *scene, t_ray *ray);
 double		discri(t_ray *ray, t_sphere *sphere, double *a, double *b);
 double		*intersect_sphere(t_ray *ray, t_sphere *sphere);
 double		*intersect_plane(t_ray *ray, t_plane *plane);
+double	*intersect_cylinder(t_ray *ray, t_cylinder *cylinder);
 //intersect_obj.c -- END
 
 // lighting.c -- BEGIN
@@ -76,6 +77,7 @@ t_rgb		*lighting(t_scene *scene, t_computations *comps, t_light *light);
 t_tuples	*local_normal_at(t_obj_node *curr, t_tuples *object_point);
 t_tuples	*local_sphere(t_obj_node *curr, t_tuples *object_point);
 t_tuples	*local_plane(t_obj_node *curr, t_tuples *object_point);
+t_tuples	*local_cylinder(t_obj_node *curr, t_tuples *object_point);
 // local_normal_at.c -- END
 
 // init_patterns.c -- BEGIN

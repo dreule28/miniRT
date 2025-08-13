@@ -46,10 +46,11 @@ void generate_scene(t_scene *scene)
 {
     t_obj_node *first = scene->obj_list->head->next->next->next;
     t_obj_node *second = scene->obj_list->head->next->next->next->next;
-    t_obj_node *third = scene->obj_list->tail;
+    t_obj_node *third = scene->obj_list->head->next->next->next->next->next;
     t_obj_node *one = scene->obj_list->head;
     t_obj_node *two = scene->obj_list->head->next;
     t_obj_node *three = scene->obj_list->head->next->next;
+	t_obj_node *eins = scene->obj_list->tail;
 
     // First sphere - WHITE
     first->matrix = ftm_translation(init_point(-0.5, 1.0, 0.5));
@@ -59,9 +60,9 @@ void generate_scene(t_scene *scene)
     first->data->sphere->material.specular = 0.1;
     first->data->sphere->material.ambient = 0.2;
 	first->data->sphere->material.reflective= 0.2;
-	first->data->sphere->material.pattern = checkers_pattern(init_rgb(1 , 0.0, 1), init_rgb(0, 1, 1));
-	// first->data->sphere->material.pattern->transform = ftm_matrix_mult(ftm_translation(init_point(0.5, 0, 0)) ,ftm_scaling(init_point(1, 1, 1)));
-	// first->data->sphere->material.pattern->transform = ftm_scaling(init_point(0.5, 1, 1));
+	first->data->sphere->material.pattern = checkers_pattern(init_rgb(0.8 , 0.0, 0.2), init_rgb(0, 0.34, 0.5));
+	first->data->sphere->material.pattern->transform = ftm_matrix_mult(ftm_translation(init_point(0.5, 0, 0)) ,ftm_scaling(init_point(1, 1, 1)));
+	first->data->sphere->material.pattern->transform = ftm_scaling(init_point(0.5, 1, 1));
     // Second sphere - BEIGE
     second->matrix = ftm_matrix_mult(ftm_translation(init_point(1.5, 0.33, -0.5)), ftm_scaling(init_point(0.33, 0.33, 0.33)));
     second->data->sphere->material = get_material();
@@ -71,7 +72,7 @@ void generate_scene(t_scene *scene)
     second->data->sphere->material.ambient = 0.2;
 	second->data->sphere->material.reflective= 0.1;
 	second->data->sphere->material.pattern = stripe_pattern(init_rgb(0, 0, 0), init_rgb(1, 1 ,1));
-	// second->data->sphere->material.pattern->transform = ftm_matrix_mult(ftm_scaling(init_point(0.33, 0.33, 0.33)), ftm_rotate_x(M_PI_2));
+	second->data->sphere->material.pattern->transform = ftm_matrix_mult(ftm_scaling(init_point(0.33, 0.33, 0.33)), ftm_rotate_x(M_PI_2));
 
 
     // Third sphere - BLACK
@@ -91,8 +92,8 @@ void generate_scene(t_scene *scene)
     one->data->plane->material.specular = 0.1;
     one->data->plane->material.shininess = 10.0;
 	one->data->plane->material.reflective= 0.3;
-	one->data->plane->material.pattern = checkers_pattern(init_rgb(1 , 0.0, 1), init_rgb(0, 1, 1));
-	// one->data->plane->material.pattern->transform = ftm_matrix_mult(ftm_translation(init_point(3, 0, 0)) ,ftm_scaling(init_point(10, 10, 10)));
+	one->data->plane->material.pattern = checkers_pattern(init_rgb(1 , 1, 1), init_rgb(0, 0.34, 0.5));
+	one->data->plane->material.pattern->transform = ftm_matrix_mult(ftm_translation(init_point(3, -1, 0)) ,ftm_scaling(init_point(10, 10, 10)));
     one->data->plane->material.rgb = *init_rgb(1, 0, 0.2);
 
     two->matrix = ftm_matrix_mult(ftm_translation(init_point(0, 0, 3)), ftm_rotate_x(M_PI_2));
@@ -111,10 +112,20 @@ void generate_scene(t_scene *scene)
     three->data->plane->material.reflective= 0.2;
 	three->data->plane->material.shininess = 10.0;
     three->data->plane->material.rgb = *init_rgb(1, 0, 0.2);
-	three->data->plane->material.pattern = ring_pattern(init_rgb(1, 1, 1), init_rgb(0, 1, 1));
+	three->data->plane->material.pattern = ring_pattern(init_rgb(1, 1, 1), init_rgb(0, 0.34, 0.5));
 
+	eins->matrix = ftm_translation(init_point(-5, 0,-3));
+	eins->data->cylinder->material.ambient = 0.2;
+    eins->data->cylinder->material.diffuse = 0.8;
+    eins->data->cylinder->material.specular = 0.1;
+    eins->data->cylinder->material.reflective= 0.2;
+	eins->data->cylinder->material.shininess = 10.0;
+    eins->data->cylinder->material.rgb = *init_rgb(1, 0, 0.2);
+	eins->data->cylinder->material.pattern = ring_pattern(init_rgb(1, 1, 1), init_rgb(0, 0.34, 0.5));
+	eins->data->cylinder->minimum = 1;
+	eins->data->cylinder->maximum = 2;
     scene->camera.fov = M_PI/3;
-    scene->camera.matrix = view_transformation(init_point(-3.5, 1.5, -6), init_point(0, 1, 0), init_vector(0, 1, 0));
+    scene->camera.matrix = view_transformation(init_point(-3.5, 1.5, -30), init_point(0, 1, 0), init_vector(0, 1, 0));
 }
 
 void	default_world(t_scene *scene)
@@ -199,12 +210,12 @@ int	main(int argc, char **argv)
 		return (1);
 	if (!parser(scene, argc, argv))
 		return (free(scene), 1);
-	// generate_scene(scene);
-
-	// default_world(scene);
 	generate_scene(scene);
 
-	// refrac_scene(scene);
+	// // default_world(scene);
+	// generate_scene(scene);
+
+	// // refrac_scene(scene);
 
 	if (!init_mlx_window(scene))
 		return (1);
