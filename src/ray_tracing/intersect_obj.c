@@ -59,11 +59,19 @@ void	check_cylinder_height(double *t ,t_ray *ray, t_cylinder *cylinder)
 {
 	double y0;
 	double y1;
+	double tmp;
 
 	if(t[0] > t[1])
 	{
-		t[0];
+		tmp = t[0];
+		t[0] = t[1];
+		t[1] = tmp;
 	}
+	y0 = ray->origin->y + t[0] * ray->direction->y;
+	if(cylinder->minimum < y0 && y0 < cylinder->maximum)
+
+	if(cylinder->minimum < y1 && y1 < cylinder->maximum)
+
 }
 
 double	*intersect_cylinder(t_ray *ray, t_cylinder *cylinder)
