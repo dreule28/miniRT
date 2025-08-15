@@ -1,11 +1,13 @@
 #include "mini_rt.h"
 
-t_ray	*get_shadow_ray(t_light *curr, t_tuples *point, double *distance)
+t_ray	*get_shadow_ray(t_scene *scene, t_tuples *point, double *distance, t_light *curr)
 {
 	t_tuples	*distance_v;
 	t_tuples	*direction;
 	t_ray		*ray;
 
+	if (!scene->obj_list || !scene->light_list->head || !point)
+		return (NULL);
 	distance_v = ftm_tup_subtract(&curr->pos, point);
 	*distance = magnitude_vector(distance_v);
 	direction = ftm_tup_norm(distance_v);
@@ -78,7 +80,7 @@ bool	is_shadowed(t_scene *scene, t_tuples *point, t_light *curr)
 	double	distance;
 	bool	shadowed;
 
-	ray = get_shadow_ray(curr, point, &distance);
+	ray = get_shadow_ray(scene, point, &distance, curr);
 	if (!ray)
 		return (false);
 	shadowed = check_objects_for_shadow(scene, ray, distance);

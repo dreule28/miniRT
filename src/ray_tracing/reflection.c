@@ -84,12 +84,10 @@ t_rgb	*reflected_color(t_scene *scene, t_computations *comps, int remaining)
 	intersect_to_list(scene, reflected_ray);
 	if (!scene->obj_list->head || !scene->obj_list->head->t)
 	{
-		free_ray(reflected_ray);
 		return (init_rgb(0, 0, 0));
 	}
 	color = get_shaded_with_shadows(scene, scene->obj_list->head, remaining - 1);
 	finale_reflected = ftm_rgb_mult(color, material.reflective);
-	free_ray(reflected_ray);
 	free(color);
 	return (finale_reflected);
 }
