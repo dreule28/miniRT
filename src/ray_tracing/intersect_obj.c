@@ -54,3 +54,58 @@ double	*intersect_plane(t_ray *ray, t_plane *plane)
 	t[1] = intersec;
 	return (t);
 }
+
+int	check_cylinder_height(double *t, t_ray *ray, t_cylinder *cylinder)
+{
+    double t0;
+    double t1;
+    double y0;
+    double y1;
+    double tmp;
+    int    count;
+
+    t0 = t[0];
+    t1 = t[1];
+    if (t0 > t1)
+    {
+        tmp = t0;
+        t0 = t1;
+        t1 = tmp;
+    }
+    y0 = ray->origin->y + t0 * ray->direction->y;
+    y1 = ray->origin->y + t1 * ray->direction->y;
+    count = 0;
+    if (cylinder->minimum < y0 && y0 < cylinder->maximum)
+        t[count++] = t0;
+    if (cylinder->minimum < y1 && y1 < cylinder->maximum)
+        t[count++] = t1;
+    if (count == 1)
+        t[1] = t[0];
+    return (count);
+}
+
+double	*intersect_cylinder(t_ray *ray, t_cylinder *cylinder)
+{
+	double a;
+	double b;
+	double c;
+	double *t;
+	double discri;
+	int kept;
+
+	t = ft_calloc(sizeof(double), 2);
+	if(!t)
+		return(NULL);
+	a = ray->direction->x * ray->direction->x + ray->direction->z  * ray->direction->z;
+	b = (2 * ray->origin->x * ray->direction->x) + (2 * ray->origin->z  * ray->direction->z);
+	c = ray->origin->x * ray->origin->x + ray->origin->z  * ray->origin->z - 1;
+	discri = b * b - 4 * a * c;
+	if(discri < 0.0)
+		return(NULL);
+	t[0] = (-b - sqrtf(discri)) / (2 * a);
+	t[1] = (-b + sqrtf(discri)) / (2 * a);
+	kept = check_cylinder_height(t, ray, cylinder);
+	if(kept == 0)
+		return(free(t), NULL);
+	return(t);
+}

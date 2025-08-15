@@ -100,7 +100,7 @@ t_rgb	*lighting(t_scene *scene, t_computations *comps, t_light *light)
 	lightv = ftm_tup_norm(lightv);
 	light_dot_normal = ftm_tup_dot(lightv, comps->normalv);
 	if(material.pattern)
-		material.rgb = *stripe_at_object(material.pattern,scene->obj_list->head->matrix, scene->obj_list->head->comp->over_point);
+		material.rgb = *pattern_at_shape(material.pattern, scene->obj_list->head, scene->obj_list->head->comp->over_point);
 	if (comps->in_shadow)
 		return (ambient_comp(&lightv, material, light));
 	result = calculate_lighting_components(material, light, light_dot_normal, comps);

@@ -14,11 +14,21 @@ typedef enum e_obj_type
 	CYLINDER
 }	t_obj_type;
 
+typedef enum e_pattern_type
+{
+    STRIPE_PATTERN,
+    TEST_PATTERN,
+	GRADIENT_PATTERN,
+	RING_PATTERN,
+	CHECKERS_PATTERN
+} t_pattern_type;
+
 typedef struct s_pattern
 {
 	t_rgb *color1;
 	t_rgb *color2;
 	t_m4	*transform;
+	t_pattern_type type;
 }			t_pattern;
 
 typedef struct s_material
@@ -61,6 +71,9 @@ typedef struct s_cylinder
 	t_tuples	axis;		/* Direction vector of cylinder axis */
 	double		radius;		/* Radius of the cylinder */
 	double		height;		/* Height of the cylinder */
+	double		maximum;
+	double		minimum;
+	bool		closed;
 	t_material	material;	/* Material of the object*/
 }				t_cylinder;
 

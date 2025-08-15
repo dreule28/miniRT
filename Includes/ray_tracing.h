@@ -44,8 +44,7 @@ t_m4		*init_view_transformation(t_scene *scene);
 // comp_to_list.c -- BEGIN
 void		set_dot_product(t_obj_node *curr);
 void		set_epsilon_offset(t_obj_node *curr);
-bool		set_comp_to_obj(t_obj_node *curr, t_ray *ray,
-				t_obj_list *intersections);
+bool		set_comp_to_obj(t_obj_node *curr, t_ray *ray);
 // comp_to_list.c -- END
 
 // intersec_to_list.c -- BEGIN
@@ -60,6 +59,7 @@ t_obj_list	*intersect_to_list(t_scene *scene, t_ray *ray);
 double		discri(t_ray *ray, t_sphere *sphere, double *a, double *b);
 double		*intersect_sphere(t_ray *ray, t_sphere *sphere);
 double		*intersect_plane(t_ray *ray, t_plane *plane);
+double	*intersect_cylinder(t_ray *ray, t_cylinder *cylinder);
 //intersect_obj.c -- END
 
 // lighting.c -- BEGIN
@@ -77,14 +77,29 @@ t_rgb		*lighting(t_scene *scene, t_computations *comps, t_light *light);
 t_tuples	*local_normal_at(t_obj_node *curr, t_tuples *object_point);
 t_tuples	*local_sphere(t_obj_node *curr, t_tuples *object_point);
 t_tuples	*local_plane(t_obj_node *curr, t_tuples *object_point);
+t_tuples	*local_cylinder(t_obj_node *curr, t_tuples *object_point);
 // local_normal_at.c -- END
 
+// init_patterns.c -- BEGIN
+t_pattern	*test_pattern(void);
+t_pattern	*checkers_pattern(t_rgb *color1, t_rgb *color2);
+t_pattern	*ring_pattern(t_rgb *color1, t_rgb *color2);
+t_pattern   *gradient_pattern(t_rgb *color1, t_rgb *color2);
+t_pattern	*stripe_pattern(t_rgb *color1, t_rgb *color2);
+// init_patterns.c -- END
+
+// pattern_utils.c -- BEGIN
+t_rgb		*select_pattern(t_pattern *pattern, t_tuples *pattern_point);
+t_rgb		*pattern_at_shape(t_pattern *pattern, t_obj_node *shape, t_tuples *world_point);
+void	set_pattern_transform(t_pattern *pattern, t_m4 *transformation);
+// pattern_utils.c -- END
+
 // patterns.c -- BEGIN
-t_pattern   *stripe_pattern(t_rgb *color1, t_rgb *color2);
 t_rgb	*stripe_at(t_pattern *pattern, t_tuples *point);
-t_rgb	*stripe_at_object(t_pattern *pattern, t_m4 *matrix, t_tuples *world_point);
-void    set_pattern_transform(t_pattern *pattern, t_m4 *transformation);
-t_pattern *test_pattern(void);
+t_rgb	*gradient_at(t_pattern *pattern, t_tuples *point);
+t_rgb	*ring_at(t_pattern *pattern, t_tuples *point);
+t_rgb	*checkers_at(t_pattern *pattern, t_tuples *point);
+t_rgb	*test_pattern_at(t_pattern *pattern, t_tuples *point);
 // patterns.c -- END
 
 // rays.c -- BEGIN

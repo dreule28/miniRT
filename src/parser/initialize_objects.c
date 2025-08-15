@@ -59,5 +59,7 @@ t_cylinder	*init_cylinder(void)
 	cylinder->material.rgb.r = 0;
 	cylinder->material.rgb.g = 0;
 	cylinder->material.rgb.b = 0;
+	cylinder->maximum = INFINITY;
+	cylinder->minimum = INFINITY;
 	return (cylinder);
 }

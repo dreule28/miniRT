@@ -8,6 +8,8 @@ t_tuples	*local_normal_at(t_obj_node *curr, t_tuples *object_point)
 		local_normal_at = local_sphere(curr, object_point);
 	if (curr->type == PLANE)
 		local_normal_at = local_plane(curr, object_point);
+	if (curr->type == CYLINDER)
+		local_normal_at = local_cylinder(curr, object_point);
 	return (local_normal_at);
 }
 
@@ -28,4 +30,10 @@ t_tuples	*local_plane(t_obj_node *curr, t_tuples *object_point)
 	(void)curr;
 	(void)object_point;
 	return (init_vector(0, 1, 0));
+}
+
+t_tuples	*local_cylinder(t_obj_node *curr, t_tuples *object_point)
+{
+	(void)curr;
+	return(init_vector(object_point->x, 0.0, object_point->z));
 }
