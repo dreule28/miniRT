@@ -114,7 +114,7 @@ void generate_scene(t_scene *scene)
     three->data->plane->material.rgb = *init_rgb(1, 0, 0.2);
 	three->data->plane->material.pattern = ring_pattern(init_rgb(1, 1, 1), init_rgb(0, 0.34, 0.5));
 
-	eins->matrix = ftm_translation(init_point(-5, 0,-3));
+	eins->matrix = ftm_translation(init_point(-5, -1,-3));
 	eins->data->cylinder->material.ambient = 0.2;
     eins->data->cylinder->material.diffuse = 0.8;
     eins->data->cylinder->material.specular = 0.1;
@@ -123,9 +123,9 @@ void generate_scene(t_scene *scene)
     eins->data->cylinder->material.rgb = *init_rgb(1, 0, 0.2);
 	eins->data->cylinder->material.pattern = ring_pattern(init_rgb(1, 1, 1), init_rgb(0, 0.34, 0.5));
 	eins->data->cylinder->minimum = 1;
-	eins->data->cylinder->maximum = 2;
+	eins->data->cylinder->maximum = 5;
     scene->camera.fov = M_PI/3;
-    scene->camera.matrix = view_transformation(init_point(-3.5, 1.5, -30), init_point(0, 1, 0), init_vector(0, 1, 0));
+    scene->camera.matrix = view_transformation(init_point(-3.5, 1.5, -10), init_point(0, 1, 0), init_vector(0, 1, 0));
 }
 
 void	default_world(t_scene *scene)

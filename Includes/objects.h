@@ -73,6 +73,7 @@ typedef struct s_cylinder
 	double		height;		/* Height of the cylinder */
 	double		maximum;
 	double		minimum;
+	bool		closed;
 	t_material	material;	/* Material of the object*/
 }				t_cylinder;
 
