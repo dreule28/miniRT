@@ -124,6 +124,7 @@ void generate_scene(t_scene *scene)
 	eins->data->cylinder->material.pattern = ring_pattern(init_rgb(1, 1, 1), init_rgb(0, 0.34, 0.5));
 	eins->data->cylinder->minimum = 1;
 	eins->data->cylinder->maximum = 5;
+
     scene->camera.fov = M_PI/3;
     scene->camera.matrix = view_transformation(init_point(-3.5, 1.5, -10), init_point(0, 1, 0), init_vector(0, 1, 0));
 }
@@ -216,6 +217,7 @@ int	main(int argc, char **argv)
 	// generate_scene(scene);
 
 	// // refrac_scene(scene);
+
 
 	if (!init_mlx_window(scene))
 		return (1);
