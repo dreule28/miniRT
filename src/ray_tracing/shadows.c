@@ -62,14 +62,11 @@ bool	check_objects_for_shadow(t_scene *scene, t_ray *ray, double distance)
 	curr = scene->obj_list->head;
 	while (curr)
 	{
-		if (curr->type == SPHERE)
-		{
-			t = get_transformed_intersection(curr, ray);
-			if (check_shadow_intersection(t, distance, &min_t))
-				shadowed = true;
-			if (t)
-				free(t);
-		}
+		t = get_transformed_intersection(curr, ray);
+		if (check_shadow_intersection(t, distance, &min_t))
+			shadowed = true;
+		if (t)
+			free(t);
 		curr = curr->next;
 	}
 	return (shadowed);
