@@ -1,6 +1,6 @@
 # AMBIENT LIGHTING
 # ambient_ratio					r,g,b
-A	0.2							253,254,255
+A	0.2							1,1,1
 
 # CAMERA
 #	vpx,y,z		ovx,y,z	fov
@@ -9,16 +9,16 @@ C	0,0,-5	0,0,1	70
 # LIGHT SOURCEz
 #	x,y,z		brightness		r,g,b
 L	-10,10,-10		1				1,1,1
-# L	10,10,-10		1				1,1,1
-# L	10,10,-10	1				1,1,1
+L	10,10,-10		1				255,70,130
+# L	0,10,-10	1				1,1,1
 # L	0,-10,-10	1				1,1,1
 # L	0,0,-10	1				1,1,1
 
 # PLANE
 #	x,y,zpos	x,y,z			r,g,b
 pl	0,0,0		0,0,0			1,0,0
-pl	0,0,0		0,0,0			1,0,0
-pl	0,0,0		0,0,0			1,0,0
+# pl	0,0,0		0,0,0			1,0,0
+# pl	0,0,0		0,0,0			1,0,0
 
 # SPHERE
 #	x,y,z		radius			r,g,b

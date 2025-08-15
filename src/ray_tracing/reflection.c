@@ -53,7 +53,7 @@ t_rgb	*shade_hit(t_scene *scene, t_computations *comps, t_light *curr,
 	t_rgb	*reflected;
 	t_rgb	*result;
 
-	comps->in_shadow = is_shadowed(scene, comps->over_point);
+	comps->in_shadow = is_shadowed(scene, comps->over_point, curr);
 	surface = lighting(scene, comps, curr);
 	if (!surface)
 		return (NULL);

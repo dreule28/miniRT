@@ -32,6 +32,7 @@ void	add_ambient(t_scene *scene, char *parsed_line)
 	scene->ambi_light.rgb.g = ft_atof(parsed_line);
 	skip_spaces_or_value(&parsed_line, 0, 1);
 	scene->ambi_light.rgb.b = ft_atof(parsed_line);
+	normalize_rgb_triplet(&scene->ambi_light.rgb);
 }
 
 void	calc_pixel_size(t_camera *camera)
@@ -97,4 +98,5 @@ void	add_light(t_light *light, char *parsed_line)
 	light->rgb.g = ft_atof(parsed_line);
 	skip_spaces_or_value(&parsed_line, 0, 1);
 	light->rgb.b = ft_atof(parsed_line);
+	normalize_rgb_triplet(&light->rgb);
 }

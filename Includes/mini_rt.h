@@ -1,8 +1,8 @@
 #ifndef MINI_RT_H
 # define MINI_RT_H
-# define WIDTH 200
-# define HEIGHT 200
-# define DBL_EPSILON 1e-5
+# define WIDTH 500
+# define HEIGHT 500
+# define DBL_EPSILON 2.2204460492503131e-16
 # define EPSILON 1e-5
 
 //Includes -- BEGIN
@@ -33,6 +33,7 @@ void			add_light(t_light *light, char *parsed_line);
 void			add_plane(t_obj_node *obj_node, char *parsed_line);
 void			add_cylinder(t_obj_node *obj_node, char *parsed_line);
 void			add_sphere(t_obj_node *obj_node, char *parsed_line);
+void			normalize_rgb_triplet(t_rgb *c);
 //fill_objects.c -- END
 
 //initialize_objects.c -- BEGIN
