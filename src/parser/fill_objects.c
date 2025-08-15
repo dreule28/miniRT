@@ -22,6 +22,7 @@ void	add_plane(t_obj_node *obj_node, char *parsed_line)
 	skip_spaces_or_value(&parsed_line, 0, 1);
 	obj_node->data->plane->material.rgb.b = ft_atof(parsed_line);
 	skip_spaces_or_value(&parsed_line, 0, 1);
+	normalize_rgb_triplet(&obj_node->data->plane->material.rgb);
 }
 
 void	add_cylinder(t_obj_node *obj_node, char *parsed_line)
@@ -51,6 +52,7 @@ void	add_cylinder(t_obj_node *obj_node, char *parsed_line)
 	obj_node->data->cylinder->material.rgb.g = ft_atof(parsed_line);
 	skip_spaces_or_value(&parsed_line, 0, 1);
 	obj_node->data->cylinder->material.rgb.b = ft_atof(parsed_line);
+	normalize_rgb_triplet(&obj_node->data->cylinder->material.rgb);
 }
 
 void	add_sphere(t_obj_node *obj_node, char *parsed_line)
@@ -71,4 +73,27 @@ void	add_sphere(t_obj_node *obj_node, char *parsed_line)
 	obj_node->data->sphere->material.rgb.g = ft_atof(parsed_line);
 	skip_spaces_or_value(&parsed_line, 0, 1);
 	obj_node->data->sphere->material.rgb.b = ft_atof(parsed_line);
+	normalize_rgb_triplet(&obj_node->data->sphere->material.rgb);
+}
+
+void	normalize_rgb_triplet(t_rgb *c)
+{
+	if (c->r > 1.0 || c->g > 1.0 || c->b > 1.0)
+	{
+		c->r /= 255.0;
+		c->g /= 255.0;
+		c->b /= 255.0;
+	}
+	if (c->r < 0.0)
+		c->r = 0.0;
+	if (c->r > 1.0)
+		c->r = 1.0;
+	if (c->g < 0.0)
+		c->g = 0.0;
+	if (c->g > 1.0)
+		c->g = 1.0;
+	if (c->b < 0.0)
+		c->b = 0.0;
+	if (c->b > 1.0)
+		c->b = 1.0;
 }
