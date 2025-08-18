@@ -11,7 +11,8 @@ typedef enum e_obj_type
 {
 	SPHERE,		/* Spherical object */
 	PLANE,		/* Infinite plane */
-	CYLINDER
+	CYLINDER,
+	CUBE
 }	t_obj_type;
 
 typedef enum e_pattern_type
@@ -77,6 +78,14 @@ typedef struct s_cylinder
 	t_material	material;	/* Material of the object*/
 }				t_cylinder;
 
+typedef struct s_cube
+{
+	t_tuples	pos;
+	t_tuples	orientation;
+	t_material	material;
+	t_tuples	scale;
+}				t_cube;
+
 /* ========================================================================== */
 /*                           OBJECT DATA STRUCTURES                          */
 /* ========================================================================== */
@@ -87,6 +96,7 @@ typedef union u_obj_data
 	t_sphere	*sphere;	/* Pointer to sphere data */
 	t_plane		*plane;		/* Pointer to plane data */
 	t_cylinder	*cylinder;	/* Pointer to cylinder data */
+	t_cube		*cube;
 }					t_obj_data;
 
 typedef struct s_computations

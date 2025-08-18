@@ -12,19 +12,15 @@ typedef struct s_render_params
 	double	wall_z;
 }			t_render_params;
 
-/* Physics simulation structure for projectile motion*/
-typedef struct s_projectile
+typedef struct s_axis_params
 {
-	t_tuples	*position; /* Current position in 3D space */
-	t_tuples	*velocity; /* Current velocity vector */
-}			t_projectile;
-
-/* Environmental forces affecting projectile motion */
-typedef struct s_environment
-{
-	t_tuples	*gravity;	/* Gravitational force vector */
-	t_tuples	*wind;		/* Wind force vector */
-}			t_environment;
+	double	xtmin;
+	double	xtmax;
+	double	ytmin;
+	double	ytmax;
+	double	ztmin;
+	double	ztmax;
+}	t_axis_params;
 
 /* Ray structure for ray tracing calculations */
 typedef struct s_ray
@@ -47,11 +43,15 @@ void		set_epsilon_offset(t_obj_node *curr);
 bool		set_comp_to_obj(t_obj_node *curr, t_ray *ray);
 // comp_to_list.c -- END
 
+// cubes.c -- BEGIN
+double		*local_intersect(t_ray *ray);
+void		check_axis(double origin, double direction, double *tmax,
+				double *tmin);
+// cubes.c -- END
+
 // intersec_to_list.c -- BEGIN
 double		*intersect_shape(t_obj_node *curr, t_ray *ray);
 bool		intersec_to_obj(t_scene *scene, t_obj_node *curr, t_ray *ray);
-void		add_inter_sorted(t_obj_list *list, t_obj_node *new_intersection);
-void		handle_inter_node(t_obj_list *intersections, t_obj_node *curr);
 t_obj_list	*intersect_to_list(t_scene *scene, t_ray *ray);
 // intersec_to_list.c -- END
 
@@ -118,17 +118,6 @@ t_rgb		*shade_hit(t_scene *scene, t_computations *, t_light *curr, int remaining
 t_rgb		*reflected_color(t_scene *scene, t_computations *comps, int remaining);
 // reflection.c -- END
 
-// refracted_color.c -- BEGIN
-t_rgb		*refracted_color(t_obj_node *obj_node, t_obj_list *obj_list,
-					t_scene *scene, int remaining);
-// refracted_color.c -- END
-
-// refraction.c -- BEGIN
-bool		obj_is_in_container(t_obj_node **container, int size, t_obj_node *obj);
-int			remove_object(t_obj_node **container, int size, t_obj_node *obj);
-void		calculate_refractive(t_obj_list *intersections, t_obj_node *hit);
-// refraction.c -- END
-
 // shadows.c -- BEGIN
 t_ray		*get_shadow_ray(t_scene *scene, t_tuples *point, double *distance, t_light *curr);
 double		*get_transformed_intersection(t_obj_node *curr, t_ray *ray);
@@ -152,7 +141,6 @@ t_tuples	*normal_at(t_obj_node *curr, t_tuples *world_point);
 
 // utils.c -- BEGIN
 t_material	get_material_from_comps(t_computations *comps, t_obj_list *obj_list);
-t_obj_node	*create_inter_node(t_obj_node *old_node, double t);
 // utils.c -- END
 
 // view_tranformation.c -- BEGIN
