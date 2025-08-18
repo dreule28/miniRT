@@ -96,13 +96,13 @@ void generate_scene(t_scene *scene)
 	one->data->plane->material.pattern->transform = ftm_matrix_mult(ftm_translation(init_point(3, -1, 0)) ,ftm_scaling(init_point(10, 10, 10)));
     one->data->plane->material.rgb = *init_rgb(1, 0, 0.2);
 
-    // two->matrix = ftm_matrix_mult(ftm_translation(init_point(0, 0, 3)), ftm_rotate_x(M_PI_2));
-    // two->data->plane->material.ambient = 0.2;
-    // two->data->plane->material.diffuse = 0.8;
-    // two->data->plane->material.specular = 0.1;
-	// two->data->plane->material.reflective= 0.5;
-    // two->data->plane->material.shininess = 10.0;
-    // two->data->plane->material.rgb = *init_rgb(1, 0, 0.2);
+    two->matrix = ftm_matrix_mult(ftm_translation(init_point(0, 0, 3)), ftm_rotate_x(M_PI_2));
+    two->data->plane->material.ambient = 0.2;
+    two->data->plane->material.diffuse = 0.8;
+    two->data->plane->material.specular = 0.1;
+	two->data->plane->material.reflective= 0.5;
+    two->data->plane->material.shininess = 10.0;
+    two->data->plane->material.rgb = *init_rgb(1, 0, 0.2);
 
     three->matrix = ftm_matrix_mult(ftm_translation(init_point(3, 0, 0)), ftm_rotate_z(M_PI_2));
     three->data->plane->material.ambient = 0.2;
@@ -125,7 +125,7 @@ void generate_scene(t_scene *scene)
 	eins->data->cylinder->maximum = 5;
 
     scene->camera.fov = M_PI/3;
-    scene->camera.matrix = view_transformation(init_point(-3.5, 1.5, -10), init_point(0, 1, 0), init_vector(0, 1, 0));
+    scene->camera.matrix = view_transformation(init_point(-3.5, 8.5, -10), init_point(0, 1, 0), init_vector(0, 1, 0));
 }
 
 void	default_world(t_scene *scene)
