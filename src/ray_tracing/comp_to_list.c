@@ -23,17 +23,6 @@ void	set_epsilon_offset(t_obj_node *curr)
 	free(epsilon_offset);
 }
 
-void	set_refraction(t_obj_node *curr, t_obj_list *intersections)
-{
-	if (intersections)
-		calculate_refractive(intersections, curr);
-	else
-	{
-		curr->comp->n1 = 1.0;
-		curr->comp->n2 = 1.0;
-	}
-}
-
 bool	set_comp_to_obj(t_obj_node *curr, t_ray *ray)
 {
 	if (!curr->t)

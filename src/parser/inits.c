@@ -54,4 +54,9 @@ void	search_for_objects(t_scene *scene, char *parsed_line)
 		new_node->data->cylinder->material = get_material();
 		add_cylinder(new_node, parsed_line);
 	}
+	if (!ft_strncmp(parsed_line, "cb", 2))
+	{
+		new_node = add_obj_node(scene->obj_list, CUBE);
+		add_cube(new_node, parsed_line);
+	}
 }
