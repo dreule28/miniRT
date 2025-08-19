@@ -33,7 +33,18 @@ t_tuples	*local_plane(void)
 
 t_tuples	*local_cylinder(t_tuples *object_point)
 {
-	return(init_vector(object_point->x, 0.0, object_point->z));
+	double	dist;
+
+	dist = object_point->x * object_point->x + object_point->z
+		* object_point->z;
+	if (curr->data->cylinder->closed && dist < 1.0)
+	{
+		if (object_point->y >= curr->data->cylinder->maximum - EPSILON)
+			return (init_vector(0, 1, 0));
+		if (object_point->y <= curr->data->cylinder->minimum + EPSILON)
+			return (init_vector(0, -1, 0));
+	}
+	return (init_vector(object_point->x, 0.0, object_point->z));
 }
 
 t_tuples	*local_cube(t_tuples *object_point)

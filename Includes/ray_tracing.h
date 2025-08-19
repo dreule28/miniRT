@@ -49,6 +49,14 @@ void		check_axis(double origin, double direction, double *tmax,
 				double *tmin);
 // cubes.c -- END
 
+// cylinder_cal.c --BEGIN
+bool		check_cap(t_ray *ray, double t);
+int			intersect_caps(t_ray *ray, t_cylinder *cylinder, double *out);
+double  	*cylinder_intersec_cal(t_ray *ray);
+int			check_cylinder_height(double *t, t_ray *ray, t_cylinder *cylinder);
+double		*cylinder_cap_cal(t_ray *ray, t_cylinder *cylinder);
+// cylinder_cal.c --END
+
 // intersec_to_list.c -- BEGIN
 double		*intersect_shape(t_obj_node *curr, t_ray *ray);
 bool		intersec_to_obj(t_scene *scene, t_obj_node *curr, t_ray *ray);
@@ -59,7 +67,7 @@ t_obj_list	*intersect_to_list(t_scene *scene, t_ray *ray);
 double		discri(t_ray *ray, t_sphere *sphere, double *a, double *b);
 double		*intersect_sphere(t_ray *ray, t_sphere *sphere);
 double		*intersect_plane(t_ray *ray, t_plane *plane);
-double	*intersect_cylinder(t_ray *ray, t_cylinder *cylinder);
+double		*intersect_cylinder(t_ray *ray, t_cylinder *cylinder);
 //intersect_obj.c -- END
 
 // lighting.c -- BEGIN

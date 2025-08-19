@@ -55,57 +55,48 @@ double	*intersect_plane(t_ray *ray, t_plane *plane)
 	return (t);
 }
 
-int	check_cylinder_height(double *t, t_ray *ray, t_cylinder *cylinder)
-{
-    double t0;
-    double t1;
-    double y0;
-    double y1;
-    double tmp;
-    int    count;
-
-    t0 = t[0];
-    t1 = t[1];
-    if (t0 > t1)
-    {
-        tmp = t0;
-        t0 = t1;
-        t1 = tmp;
-    }
-    y0 = ray->origin->y + t0 * ray->direction->y;
-    y1 = ray->origin->y + t1 * ray->direction->y;
-    count = 0;
-    if (cylinder->minimum < y0 && y0 < cylinder->maximum)
-        t[count++] = t0;
-    if (cylinder->minimum < y1 && y1 < cylinder->maximum)
-        t[count++] = t1;
-    if (count == 1)
-        t[1] = t[0];
-    return (count);
-}
-
 double	*intersect_cylinder(t_ray *ray, t_cylinder *cylinder)
 {
-	double a;
-	double b;
-	double c;
-	double *t;
-	double discri;
-	int kept;
+	double	*t_side;
+	int		side_count;
+	double	caps[2];
+	int		cap_count;
+	double	best_cap;
+	int		i;
+	double	tmp;
 
-	t = ft_calloc(sizeof(double), 2);
-	if(!t)
-		return(NULL);
-	a = ray->direction->x * ray->direction->x + ray->direction->z  * ray->direction->z;
-	b = (2 * ray->origin->x * ray->direction->x) + (2 * ray->origin->z  * ray->direction->z);
-	c = ray->origin->x * ray->origin->x + ray->origin->z  * ray->origin->z - 1;
-	discri = b * b - 4 * a * c;
-	if(discri < 0.0)
-		return(NULL);
-	t[0] = (-b - sqrtf(discri)) / (2 * a);
-	t[1] = (-b + sqrtf(discri)) / (2 * a);
-	kept = check_cylinder_height(t, ray, cylinder);
-	if(kept == 0)
-		return(free(t), NULL);
-	return(t);
+	t_side = cylinder_intersec_cal(ray);
+	side_count = 0;
+	if (t_side)
+		side_count = check_cylinder_height(t_side, ray, cylinder);
+	cap_count = intersect_caps(ray, cylinder, caps);
+	if (side_count == 2)
+		return (t_side);
+	if (side_count == 1)
+	{
+		best_cap = INFINITY;
+		i = 0;
+		while (i < cap_count)
+		{
+			if (caps[i] > 0.0 && caps[i] < best_cap)
+				best_cap = caps[i];
+			i++;
+		}
+		if (best_cap < INFINITY)
+		{
+			t_side[1] = best_cap;
+			if (t_side[0] > t_side[1])
+			{
+				tmp = t_side[0];
+				t_side[0] = t_side[1];
+				t_side[1] = tmp;
+			}
+		}
+		else
+			t_side[1] = t_side[0];
+		return (t_side);
+	}
+	if (t_side)
+		free(t_side);
+	return (cylinder_cap_cal(ray, cylinder));
 }
