@@ -11,6 +11,8 @@ double *intersect_shape(t_obj_node *curr, t_ray *ray)
 		intersection = intersect_plane(ray, curr->data->plane);
 	if(curr->type == CYLINDER)
 		intersection = intersect_cylinder(ray, curr->data->cylinder);
+	if (curr->type == CUBE)
+		intersection = local_intersect(ray);
 	return(intersection);
 }
 

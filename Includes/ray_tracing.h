@@ -75,9 +75,10 @@ t_rgb		*lighting(t_scene *scene, t_computations *comps, t_light *light);
 
 // local_normal_at.c -- BEGIN
 t_tuples	*local_normal_at(t_obj_node *curr, t_tuples *object_point);
-t_tuples	*local_sphere(t_obj_node *curr, t_tuples *object_point);
-t_tuples	*local_plane(t_obj_node *curr, t_tuples *object_point);
-t_tuples	*local_cylinder(t_obj_node *curr, t_tuples *object_point);
+t_tuples	*local_sphere(t_tuples *object_point);
+t_tuples	*local_plane(void);
+t_tuples	*local_cylinder(t_tuples *object_point);
+t_tuples	*local_cube(t_tuples *object_point);
 // local_normal_at.c -- END
 
 // init_patterns.c -- BEGIN

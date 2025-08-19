@@ -33,12 +33,9 @@ bool	set_comp_to_obj(t_obj_node *curr, t_ray *ray)
 	curr->comp->eyev = ftm_tup_negate(ray->direction);
 	if (!curr->comp->eyev)
 		return (false);
-	if (curr->type == SPHERE || curr->type == PLANE || curr->type == CYLINDER)
-	{
-		curr->comp->normalv = normal_at(curr, curr->comp->point);
-		if (!curr->comp->normalv)
-			return (false);
-	}
+	curr->comp->normalv = normal_at(curr, curr->comp->point);
+	if (!curr->comp->normalv)
+		return (false);
 	curr->comp->reflectv = reflect(ray->direction, curr->comp->normalv);
 	if (!curr->comp->reflectv)
 		return (false);

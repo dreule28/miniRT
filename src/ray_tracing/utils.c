@@ -15,6 +15,8 @@ t_material	get_material_from_comps(t_computations *comps, t_obj_list *obj_list)
 				return (curr->data->sphere->material);
 			else if (curr->type == CYLINDER)
 				return (curr->data->cylinder->material);
+			else if (curr->type == CUBE)
+				return (curr->data->cube->material);
 		}
 		curr = curr->next;
 	}

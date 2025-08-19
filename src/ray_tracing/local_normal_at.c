@@ -5,35 +5,46 @@ t_tuples	*local_normal_at(t_obj_node *curr, t_tuples *object_point)
 	t_tuples	*local_normal_at;
 
 	if (curr->type == SPHERE)
-		local_normal_at = local_sphere(curr, object_point);
+		local_normal_at = local_sphere(object_point);
 	if (curr->type == PLANE)
-		local_normal_at = local_plane(curr, object_point);
+		local_normal_at = local_plane();
 	if (curr->type == CYLINDER)
-		local_normal_at = local_cylinder(curr, object_point);
+		local_normal_at = local_cylinder(object_point);
+	if (curr->type == CUBE)
+		local_normal_at = local_cube(object_point);
 	return (local_normal_at);
 }
 
-t_tuples	*local_sphere(t_obj_node *curr, t_tuples *object_point)
+t_tuples	*local_sphere(t_tuples *object_point)
 {
 	t_tuples	*origin;
 	t_tuples	*normal;
 
-	(void)curr;
 	origin = init_point(0, 0, 0);
 	normal = ftm_tup_subtract(object_point, origin);
 	free_tuple(origin);
 	return (normal);
 }
 
-t_tuples	*local_plane(t_obj_node *curr, t_tuples *object_point)
+t_tuples	*local_plane(void)
 {
-	(void)curr;
-	(void)object_point;
 	return (init_vector(0, 1, 0));
 }
 
-t_tuples	*local_cylinder(t_obj_node *curr, t_tuples *object_point)
+t_tuples	*local_cylinder(t_tuples *object_point)
 {
-	(void)curr;
 	return(init_vector(object_point->x, 0.0, object_point->z));
+}
+
+t_tuples	*local_cube(t_tuples *object_point)
+{
+	double	maxc;
+
+	maxc = fmax(fmax(fabs(object_point->x), fabs(object_point->y)),
+			fabs(object_point->z));
+	if (maxc == fabs(object_point->x))
+		return (init_vector(object_point->x, 0, 0));
+	else if (maxc == fabs(object_point->y))
+		return (init_vector(0, object_point->y, 0));
+	return (init_vector(0, 0, object_point->z));
 }

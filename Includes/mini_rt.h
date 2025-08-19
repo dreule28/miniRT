@@ -1,7 +1,7 @@
 #ifndef MINI_RT_H
 # define MINI_RT_H
-# define WIDTH 500
-# define HEIGHT 500
+# define WIDTH 200
+# define HEIGHT 200
 # define DBL_EPSILON 1e-5
 # define EPSILON 1e-5
 
@@ -48,6 +48,14 @@ t_plane			*init_plane(void);
 t_cylinder		*init_cylinder(void);
 //initialize_objects.c -- END
 
+//inits.c -- BEGIN
+bool			init_lists(t_obj_list **obj_list, t_light_list **light_list);
+t_obj_data		*init_sphere_data(t_obj_data *data);
+t_obj_data		*init_plane_data(t_obj_data *data);
+t_obj_data		*init_cylinder_data(t_obj_data *data);
+void			search_for_objects(t_scene *scene, char *parsed_line);
+//inits.c -- END
+
 //list_and_nodes.c -- BEGIN
 t_obj_list		*init_obj_list(void);
 t_obj_node		*add_obj_node(t_obj_list *obj_list, int obj_type);
@@ -63,13 +71,13 @@ bool			check_elements(t_scene *scene, char *parsed_line);
 bool			validate_file(char **argv);
 bool			parser(t_scene *scene, int argc, char **argv);
 
-//inits.c -- BEGIN
-bool			init_lists(t_obj_list **obj_list, t_light_list **light_list);
-t_obj_data		*init_sphere_data(t_obj_data *data);
-t_obj_data		*init_plane_data(t_obj_data *data);
-t_obj_data		*init_cylinder_data(t_obj_data *data);
-void			search_for_objects(t_scene *scene, char *parsed_line);
-//inits.c -- END
+//translator.c -- BEGIN
+t_m4			*ftm_m4_copy(t_m4 *src);
+void			translate_plane(t_obj_node *plane);
+void			translate_sphere(t_obj_node *sphere);
+void			translate_cylinder(t_obj_node *cyl);
+void			translate_cube(t_obj_node *cube);
+//translator.c -- END
 
 //parser.c -- BEGIN
 //parser-Folder -- END
