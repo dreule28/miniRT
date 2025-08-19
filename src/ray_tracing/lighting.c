@@ -38,6 +38,10 @@ t_material	get_obj_mat(t_scene *scene)
 	}
 	else if (scene->obj_list->head->type == PLANE)
 		mat = scene->obj_list->head->data->plane->material;
+	else if (scene->obj_list->head->type == CYLINDER)
+		mat = scene->obj_list->head->data->cylinder->material;
+	else if (scene->obj_list->head->type == CUBE)
+		mat = scene->obj_list->head->data->cube->material;
 	else
 		mat = get_material();
 	return (mat);
