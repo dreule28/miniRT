@@ -103,6 +103,7 @@ void generate_scene(t_scene *scene)
 	two->data->plane->material.reflective= 0.5;
     two->data->plane->material.shininess = 10.0;
     two->data->plane->material.rgb = *init_rgb(1, 0, 0.2);
+	two->data->plane->material.pattern = checkers_pattern(init_rgb(1 , 1, 1), init_rgb(0, 0.34, 0.5));
 
     three->matrix = ftm_matrix_mult(ftm_translation(init_point(3, 0, 0)), ftm_rotate_z(M_PI_2));
     three->data->plane->material.ambient = 0.2;
@@ -119,10 +120,11 @@ void generate_scene(t_scene *scene)
     eins->data->cylinder->material.specular = 0.1;
     eins->data->cylinder->material.reflective= 0.2;
 	eins->data->cylinder->material.shininess = 10.0;
-    eins->data->cylinder->material.rgb = *init_rgb(1, 0, 0.2);
-	eins->data->cylinder->material.pattern = ring_pattern(init_rgb(1, 1, 1), init_rgb(0, 0.34, 0.5));
+    eins->data->cylinder->material.rgb = *init_rgb(1, 1, 1);
+	// eins->data->cylinder->material.pattern = ring_pattern(init_rgb(1, 1, 1), init_rgb(0, 0.34, 0.5));
 	eins->data->cylinder->minimum = 1;
 	eins->data->cylinder->maximum = 5;
+	eins->data->cylinder->closed = true;
 
     scene->camera.fov = M_PI/3;
     scene->camera.matrix = view_transformation(init_point(-3.5, 8.5, -10), init_point(0, 1, 0), init_vector(0, 1, 0));

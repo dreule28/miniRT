@@ -9,7 +9,7 @@ t_tuples	*local_normal_at(t_obj_node *curr, t_tuples *object_point)
 	if (curr->type == PLANE)
 		local_normal_at = local_plane();
 	if (curr->type == CYLINDER)
-		local_normal_at = local_cylinder(object_point);
+		local_normal_at = local_cylinder(curr, object_point);
 	if (curr->type == CUBE)
 		local_normal_at = local_cube(object_point);
 	return (local_normal_at);
@@ -31,7 +31,7 @@ t_tuples	*local_plane(void)
 	return (init_vector(0, 1, 0));
 }
 
-t_tuples	*local_cylinder(t_tuples *object_point)
+t_tuples	*local_cylinder(t_obj_node *curr, t_tuples *object_point)
 {
 	double	dist;
 
