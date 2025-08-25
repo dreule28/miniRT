@@ -71,11 +71,11 @@ bool			validate_file(char **argv);
 bool			parser(t_scene *scene, int argc, char **argv);
 
 //translator.c -- BEGIN
-t_m4			*ftm_m4_copy(t_m4 *src);
 void			translate_plane(t_obj_node *plane);
 void			translate_sphere(t_obj_node *sphere);
 void			translate_cylinder(t_obj_node *cyl);
 void			translate_cube(t_obj_node *cube);
+void			translate_objs(t_scene *scene);
 //translator.c -- END
 
 //parser.c -- BEGIN

@@ -14,6 +14,7 @@ t_obj_data	*init_sphere_data(t_obj_data *data)
 	data->sphere = init_sphere();
 	if (!data->sphere)
 		return (free(data), NULL);
+	data->sphere->material = get_material();
 	return (data);
 }
 
@@ -22,6 +23,7 @@ t_obj_data	*init_plane_data(t_obj_data *data)
 	data->plane = init_plane();
 	if (!data->plane)
 		return (free(data), NULL);
+	data->plane->material = get_material();
 	return (data);
 }
 
@@ -30,6 +32,7 @@ t_obj_data	*init_cylinder_data(t_obj_data *data)
 	data->cylinder = init_cylinder();
 	if (!data->cylinder)
 		return (free(data), NULL);
+	data->cylinder->material = get_material();
 	return (data);
 }
 
@@ -51,7 +54,6 @@ void	search_for_objects(t_scene *scene, char *parsed_line)
 	{
 		new_node = add_obj_node(scene->obj_list, CYLINDER);
 		new_node->data->cylinder->closed = false;
-		new_node->data->cylinder->material = get_material();
 		add_cylinder(new_node, parsed_line);
 	}
 	if (!ft_strncmp(parsed_line, "cb", 2))

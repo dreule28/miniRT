@@ -212,14 +212,7 @@ int	main(int argc, char **argv)
 		return (1);
 	if (!parser(scene, argc, argv))
 		return (free(scene), 1);
-	generate_scene(scene);
-
-	// // default_world(scene);
-	// generate_scene(scene);
-
-	// // refrac_scene(scene);
-
-
+	translate_objs(scene);
 	if (!init_mlx_window(scene))
 		return (1);
 	render(scene);

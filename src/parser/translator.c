@@ -7,9 +7,9 @@ void	translate_sphere(t_obj_node *sphere)
 
 	pos = sphere->data->sphere->pos;
 	radius = sphere->data->sphere->radius;
-	sphere->matrix = ftm_matrix_mult(ftm_translation(pos),
+	sphere->matrix = ftm_matrix_mult(ftm_translation(&pos),
 							ftm_scaling(init_point(radius, radius, radius)));
-	sphere->data->sphere->pos = init_point(0, 0, 0);
+	sphere->data->sphere->pos = *init_point(0, 0, 0);
 	sphere->data->sphere->radius = 1.0;
 }
 
@@ -21,7 +21,7 @@ void	translate_camera(t_camera camera)
 	pos = camera.pos;
 	ov = camera.orientation_vector;
 	camera.fov = M_PI/3;
-	camera.matrix = view_transformation(pos, init_point(0, 1, 0), ov);
+	camera.matrix = view_transformation(&pos, init_point(0, 1, 0), &ov);
 }
 
 void	translate_plane(t_obj_node *plane)
@@ -32,18 +32,18 @@ void	translate_plane(t_obj_node *plane)
 	pos = plane->data->plane->pos;
 	axis = plane->data->plane->axis;
 	if (axis.x != 0)
-		plane->matrix = ftm_matrix_mult(ftm_translation(pos),
+		plane->matrix = ftm_matrix_mult(ftm_translation(&pos),
 						ftm_rotate_x(radians(axis.x * 90)));
 	else if (axis.y != 0)
-		plane->matrix = ftm_matrix_mult(ftm_translation(pos),
+		plane->matrix = ftm_matrix_mult(ftm_translation(&pos),
 						ftm_rotate_y(radians(axis.y * 90)));
 	else if (axis.z != 0)
-		plane->matrix = ftm_matrix_mult(ftm_translation(pos),
+		plane->matrix = ftm_matrix_mult(ftm_translation(&pos),
 						ftm_rotate_z(radians(axis.z * 90)));
 	else
-		plane->matrix = ftm_translation(pos);
-	plane->data->plane->pos = init_point(0, 0, 0);
-	plane->data->plane->axis = init_vector(0, 0, 0);
+		plane->matrix = ftm_translation(&pos);
+	plane->data->plane->pos = *init_point(0, 0, 0);
+	plane->data->plane->axis = *init_vector(0, 0, 0);
 }
 
 void	translate_cylinder(t_obj_node *cylinder)
@@ -59,23 +59,23 @@ void	translate_cylinder(t_obj_node *cylinder)
 	radius = cylinder->data->cylinder->radius;
 	if (axis.x != 0)
 		cylinder->matrix = ftm_matrix_mult(ftm_matrix_mult(
-							ftm_translation(pos), ftm_rotate_x(radians(axis.x * 90))),
+							ftm_translation(&pos), ftm_rotate_x(radians(axis.x * 90))),
 							ftm_scaling(init_point(radius, height, radius)));
 	else if (axis.y != 0)
 		cylinder->matrix = ftm_matrix_mult(ftm_matrix_mult(
-							ftm_translation(pos), ftm_rotate_y(radians(axis.y * 90))),
+							ftm_translation(&pos), ftm_rotate_y(radians(axis.y * 90))),
 							ftm_scaling(init_point(radius, height, radius)));
 	else if (axis.z != 0)
 		cylinder->matrix = ftm_matrix_mult(ftm_matrix_mult(
-							ftm_translation(pos), ftm_rotate_z(radians(axis.z * 90))),
+							ftm_translation(&pos), ftm_rotate_z(radians(axis.z * 90))),
 							ftm_scaling(init_point(radius, height, radius)));
 	else
-		cylinder->matrix = ftm_matrix_mult(ftm_translation(pos),
+		cylinder->matrix = ftm_matrix_mult(ftm_translation(&pos),
 						ftm_scaling(init_point(radius, height, radius)));
 	cylinder->data->cylinder->maximum = 1;
 	cylinder->data->cylinder->minimum = -1;
 	cylinder->data->cylinder->closed = true;
-	cylinder->data->cylinder->pos = init_point(0, 0, 0);
+	cylinder->data->cylinder->pos = *init_point(0, 0, 0);
 }
 
 void	translate_cube(t_obj_node *cube)
@@ -88,21 +88,21 @@ void	translate_cube(t_obj_node *cube)
 	axis = cube->data->cube->orientation;
 	scale = cube->data->cube->scale;
 	if (axis.x != 0)
-		cube->matrix = ftm_matrix_mult(ftm_matrix_mult(ftm_translation(pos),
+		cube->matrix = ftm_matrix_mult(ftm_matrix_mult(ftm_translation(&pos),
 						ftm_rotate_x(radians(axis.x * 90))),
 						ftm_scaling(init_point(scale.x, scale.y, scale.z)));
 	else if (axis.y != 0)
-		cube->matrix = ftm_matrix_mult(ftm_matrix_mult(ftm_translation(pos),
+		cube->matrix = ftm_matrix_mult(ftm_matrix_mult(ftm_translation(&pos),
 						ftm_rotate_y(radians(axis.y * 90))),
 						ftm_scaling(init_point(scale.x, scale.y, scale.z)));
 	else if (axis.z != 0)
-		cube->matrix = ftm_matrix_mult(ftm_matrix_mult(ftm_translation(pos),
+		cube->matrix = ftm_matrix_mult(ftm_matrix_mult(ftm_translation(&pos),
 						ftm_rotate_z(radians(axis.z * 90))),
 						ftm_scaling(init_point(scale.x, scale.y, scale.z)));
 	else
-		cube->matrix = ftm_matrix_mult(ftm_translation(pos),
+		cube->matrix = ftm_matrix_mult(ftm_translation(&pos),
 						ftm_scaling(init_point(scale.x, scale.y, scale.z)));
-	cube->data->cube->scale = init_point(1, 1, 1);
+	cube->data->cube->scale = *init_point(1, 1, 1);
 }
 
 void	translate_objs(t_scene *scene)

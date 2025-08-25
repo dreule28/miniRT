@@ -22,5 +22,6 @@ t_obj_data	*init_cube_data(t_obj_data *data)
 	data->cube = init_cube();
 	if (!data->cube)
 		return (free(data), NULL);
+	data->cube->material = get_material();
 	return (data);
 }
