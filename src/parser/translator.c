@@ -19,8 +19,7 @@ void	translate_camera(t_camera camera)
 	t_tuples	ov;
 
 	pos = camera.pos;
-	ov = camera.orientation_vector;
-	camera.fov = M_PI/3;
+	ov = camera.orientation_vector;;
 	camera.matrix = view_transformation(&pos, init_point(0, 1, 0), &ov);
 }
 
@@ -31,6 +30,8 @@ void	translate_plane(t_obj_node *plane)
 
 	pos = plane->data->plane->pos;
 	axis = plane->data->plane->axis;
+	if(!check_norm_vec(&axis))
+		return ;
 	if (axis.x != 0)
 		plane->matrix = ftm_matrix_mult(ftm_translation(&pos),
 						ftm_rotate_x(radians(axis.x * 90)));

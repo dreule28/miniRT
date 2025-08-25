@@ -70,6 +70,10 @@ bool			check_elements(t_scene *scene, char *parsed_line);
 bool			validate_file(char **argv);
 bool			parser(t_scene *scene, int argc, char **argv);
 
+//translator_utils.c -- BEGIN
+bool	check_norm_vec(t_tuples *vec);
+//translator_utils.c -- END
+
 //translator.c -- BEGIN
 void			translate_plane(t_obj_node *plane);
 void			translate_sphere(t_obj_node *sphere);
