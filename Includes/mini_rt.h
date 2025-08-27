@@ -71,12 +71,13 @@ bool			validate_file(char **argv);
 bool			parser(t_scene *scene, int argc, char **argv);
 
 //translator_utils.c -- BEGIN
-bool	check_norm_vec(t_tuples *vec);
+bool			check_norm_vec(t_tuples *vec);
+void			translate_sphere(t_obj_node *sphere);
+void			translate_camera(t_camera camera);
 //translator_utils.c -- END
 
 //translator.c -- BEGIN
 void			translate_plane(t_obj_node *plane);
-void			translate_sphere(t_obj_node *sphere);
 void			translate_cylinder(t_obj_node *cyl);
 void			translate_cube(t_obj_node *cube);
 void			translate_objs(t_scene *scene);
