@@ -78,6 +78,7 @@ void			translate_camera(t_camera camera);
 
 //translator.c -- BEGIN
 void			translate_plane(t_obj_node *plane);
+void		rotate_cylinder(t_obj_node *cylinder, t_tuples pos, t_tuples axis);
 void			translate_cylinder(t_obj_node *cyl);
 void			translate_cube(t_obj_node *cube);
 void			translate_objs(t_scene *scene);
