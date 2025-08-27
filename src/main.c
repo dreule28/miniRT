@@ -172,36 +172,6 @@ void	default_world(t_scene *scene)
 	second_sphere->matrix = ftm_scaling(init_point(1, 1, 1));
 }
 
-void	glass_sphere(t_obj_node *obj_node)
-{
-	obj_node->matrix = init_identity();
-	obj_node->data->sphere->material.transparency = 1.0;
-	obj_node->data->sphere->material.refractive_index = 1.5;
-}
-
-void	refrac_scene(t_scene *scene)
-{
-	t_obj_node	*a = scene->obj_list->head;
-	t_obj_node	*b = scene->obj_list->head->next;
-	// t_obj_node	*c = scene->obj_list->tail;
-
-	//Big sphere
-	glass_sphere(a);
-	a->matrix = ftm_translation(init_point(0, 0, 1));
-	a->data->sphere->material.refractive_index = 1.5;
-	a->data->sphere->material.ambient = 1;
-
-	// //Left sphere
-	glass_sphere(b);
-	b->matrix = ftm_translation(init_point(0, 0, -0.25));
-	b->data->sphere->material.transparency = 1.0;
-	b->data->sphere->material.refractive_index = 1.5;
-
-	// //Right sphere
-	// glass_sphere(c);
-	// c->matrix = ftm_translation(init_point(0, 0, 0.25));
-	// c->data->sphere->material.refractive_index = 2.5;
-}
 
 int	main(int argc, char **argv)
 {

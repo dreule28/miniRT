@@ -32,15 +32,15 @@ void	translate_plane(t_obj_node *plane)
 	axis = plane->data->plane->axis;
 	if(!check_norm_vec(&axis))
 		return ;
-	if (axis.x != 0)
+	if (axis.z != 0)
 		plane->matrix = ftm_matrix_mult(ftm_translation(&pos),
-						ftm_rotate_x(radians(axis.x * 90)));
+						ftm_rotate_x(radians(axis.z * 90)));
 	else if (axis.y != 0)
 		plane->matrix = ftm_matrix_mult(ftm_translation(&pos),
 						ftm_rotate_y(radians(axis.y * 90)));
-	else if (axis.z != 0)
+	else if (axis.x != 0)
 		plane->matrix = ftm_matrix_mult(ftm_translation(&pos),
-						ftm_rotate_z(radians(axis.z * 90)));
+						ftm_rotate_z(radians(-axis.x * 90)));
 	else
 		plane->matrix = ftm_translation(&pos);
 	plane->data->plane->pos = *init_point(0, 0, 0);
@@ -60,15 +60,15 @@ void	translate_cylinder(t_obj_node *cylinder)
 	radius = cylinder->data->cylinder->radius;
 	if (axis.x != 0)
 		cylinder->matrix = ftm_matrix_mult(ftm_matrix_mult(
-							ftm_translation(&pos), ftm_rotate_x(radians(axis.x * 90))),
+							ftm_translation(&pos), ftm_rotate_z(radians(90))),
 							ftm_scaling(init_point(radius, height, radius)));
 	else if (axis.y != 0)
 		cylinder->matrix = ftm_matrix_mult(ftm_matrix_mult(
-							ftm_translation(&pos), ftm_rotate_y(radians(axis.y * 90))),
+							ftm_translation(&pos), ftm_rotate_y(radians(90))),
 							ftm_scaling(init_point(radius, height, radius)));
 	else if (axis.z != 0)
 		cylinder->matrix = ftm_matrix_mult(ftm_matrix_mult(
-							ftm_translation(&pos), ftm_rotate_z(radians(axis.z * 90))),
+							ftm_translation(&pos), ftm_rotate_x(radians(90))),
 							ftm_scaling(init_point(radius, height, radius)));
 	else
 		cylinder->matrix = ftm_matrix_mult(ftm_translation(&pos),
@@ -78,6 +78,7 @@ void	translate_cylinder(t_obj_node *cylinder)
 	cylinder->data->cylinder->closed = true;
 	cylinder->data->cylinder->pos = *init_point(0, 0, 0);
 }
+
 
 void	translate_cube(t_obj_node *cube)
 {
