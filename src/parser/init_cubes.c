@@ -23,5 +23,6 @@ t_obj_data	*init_cube_data(t_obj_data *data)
 	if (!data->cube)
 		return (free(data), NULL);
 	data->cube->material = get_material();
+	data->cube->material.pattern.has_pattern = false;
 	return (data);
 }

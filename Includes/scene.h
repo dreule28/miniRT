@@ -35,7 +35,7 @@ typedef struct s_camera
 	double			fov;				/* Field of view in degrees */
 	double			hsize;
 	double			vsize;
-	t_m4			*matrix;
+	t_m4			matrix;
 	double			pixel_size;
 	double			half_width;
 	double			half_height;

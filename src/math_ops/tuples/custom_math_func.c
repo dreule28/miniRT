@@ -1,70 +1,40 @@
 #include "mini_rt.h"
 
-t_tuples	*init_vector(double x, double y, double z)
+void	init_vector(t_tuples *vector, double x, double y, double z)
 {
-	t_tuples	*vector;
-
-	vector = ft_calloc(1, sizeof(t_tuples));
-	if (!vector)
-		return (NULL);
 	vector->x = x;
 	vector->y = y;
 	vector->z = z;
 	vector->w = VECTOR;
-	return (vector);
 }
 
-t_tuples	*init_point(double x, double y, double z)
+void	init_point(t_tuples *point, double x, double y, double z)
 {
-	t_tuples	*point;
-
-	point = ft_calloc(1, sizeof(t_tuples));
-	if (!point)
-		return (NULL);
 	point->x = x;
 	point->y = y;
 	point->z = z;
 	point->w = POINT;
-	return (point);
 }
 
-t_tuples	*copy_vector(t_tuples *tup)
+void	copy_vector(t_tuples *new, t_tuples old)
 {
-	t_tuples	*vector;
-
-	vector = ft_calloc(1, sizeof(t_tuples));
-	if (!vector)
-		return (NULL);
-	vector->x = tup->x;
-	vector->y = tup->y;
-	vector->z = tup->z;
-	vector->w = VECTOR;
-	return (vector);
+	new->x = old.x;
+	new->y = old.y;
+	new->z = old.z;
+	new->w = VECTOR;
 }
 
-t_tuples	*copy_point(t_tuples *tup)
+void	copy_point(t_tuples *new, t_tuples old)
 {
-	t_tuples	*point;
-
-	point = ft_calloc(1, sizeof(t_tuples));
-	if (!point)
-		return (NULL);
-	point->x = tup->x;
-	point->y = tup->y;
-	point->z = tup->z;
-	point->w = POINT;
-	return (point);
+	new->x = old.x;
+	new->y = old.y;
+	new->z = old.z;
+	new->w = POINT;
 }
 
-t_rgb	*init_rgb(double r, double g, double b)
+void	init_rgb(t_rgb *rgb, double r, double g, double b)
 {
-	t_rgb	*rgb;
-
-	rgb = ft_calloc(1, sizeof(t_rgb));
-	if (!rgb)
-		return (NULL);
 	rgb->r = r;
 	rgb->g = g;
 	rgb->b = b;
-	return (rgb);
 }

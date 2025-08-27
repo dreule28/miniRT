@@ -74,7 +74,7 @@ void	add_camera(t_scene *scene, char *parsed_line)
 	scene->camera.fov = M_PI / 2;
 	scene->camera.vsize = HEIGHT;
 	scene->camera.hsize = WIDTH;
-	scene->camera.matrix = init_view_transformation(scene);
+	init_view_transformation(&scene->camera.matrix, scene);
 	scene->camera.half_height = 0;
 	scene->camera.half_width = 0;
 	calc_pixel_size(&scene->camera);

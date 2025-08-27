@@ -15,6 +15,7 @@ t_obj_data	*init_sphere_data(t_obj_data *data)
 	if (!data->sphere)
 		return (free(data), NULL);
 	data->sphere->material = get_material();
+	data->sphere->material.pattern.has_pattern = false;
 	return (data);
 }
 
@@ -24,6 +25,7 @@ t_obj_data	*init_plane_data(t_obj_data *data)
 	if (!data->plane)
 		return (free(data), NULL);
 	data->plane->material = get_material();
+	data->plane->material.pattern.has_pattern = false;
 	return (data);
 }
 
@@ -33,6 +35,7 @@ t_obj_data	*init_cylinder_data(t_obj_data *data)
 	if (!data->cylinder)
 		return (free(data), NULL);
 	data->cylinder->material = get_material();
+	data->cylinder->material.pattern.has_pattern = false;
 	return (data);
 }
 

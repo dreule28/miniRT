@@ -1,45 +1,32 @@
 #include "mini_rt.h"
 
-
-double *intersect_shape(t_obj_node *curr, t_ray *ray)
+bool	intersect_shape(t_obj_node *curr, t_ray ray)
 {
-	double *intersection;
-
-	if(curr->type == SPHERE)
-		intersection = intersect_sphere(ray, curr->data->sphere);
-	if(curr->type == PLANE)
-		intersection = intersect_plane(ray, curr->data->plane);
-	if(curr->type == CYLINDER)
-		intersection = intersect_cylinder(ray, curr->data->cylinder);
-	if (curr->type == CUBE)
-		intersection = local_intersect(ray);
-	return(intersection);
-}
-
-bool	intersec_to_obj(t_scene *scene, t_obj_node *curr, t_ray *ray)
-{
-	double	*t;
-	t_ray	*transformed_ray;
-	t_m4	*inv;
-
-	(void)scene;
-	transformed_ray = ray;
-	if (curr->matrix)
-	{
-		inv = ftm_m4_inversion(curr->matrix);
-		if (inv)
-		{
-			transformed_ray = transform_ray(ray, inv);
-			free_matrix_m4(inv);
-		}
+	if(curr->type == SPHERE) {
+		return (intersect_sphere(curr, ray, *curr->data->sphere));
 	}
-	t = intersect_shape(curr, transformed_ray);
-	if (transformed_ray != ray)
-		free_ray(transformed_ray);
-	curr->t = t;
-	return (true);
+	if(curr->type == PLANE) {
+		return (intersect_plane(curr, ray));
+	}
+	if(curr->type == CYLINDER) {
+		return (intersect_cylinder(curr, ray, *curr->data->cylinder));
+	}
+	if (curr->type == CUBE) {
+		return (local_intersect(curr, ray));
+	}
+	return(false);
 }
 
+bool	intersec_to_obj(t_obj_node *curr, t_ray ray)
+{
+	t_ray	transformed_ray;
+	t_m4	inv;
+
+	transformed_ray = ray;
+	ftm_m4_inversion(&inv, curr->matrix);
+	transform_ray(&transformed_ray, ray, inv);
+	return (intersect_shape(curr, transformed_ray));
+}
 
 t_obj_list	*intersect_to_list(t_scene *scene, t_ray *ray)
 {
@@ -48,12 +35,13 @@ t_obj_list	*intersect_to_list(t_scene *scene, t_ray *ray)
 	curr = scene->obj_list->head;
 	while (curr)
 	{
-		if (!intersec_to_obj(scene, curr, ray))
+		if (!intersec_to_obj(curr, *ray)) {
 			return (NULL);
-		if (!set_comp_to_obj(curr, ray))
+		}
+		if (!set_comp_to_obj(curr, ray)) {
 			return (NULL);
+		}
 		curr = curr->next;
 	}
 	return (sort_obj_list(scene->obj_list));
 }
-

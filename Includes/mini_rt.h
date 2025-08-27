@@ -78,6 +78,15 @@ void			translate_cube(t_obj_node *cube);
 void			translate_objs(t_scene *scene);
 //translator.c -- END
 
+// translator_utils.c -- BEGIN
+void			handle_cyl_axis_x(t_tuples axis, t_tuples pos,
+					t_obj_node *cylinder);
+void			handle_cyl_axis_y(t_tuples axis, t_tuples pos,
+					t_obj_node *cylinder);
+void			handle_cyl_axis_z(t_tuples axis, t_tuples pos,
+					t_obj_node *cylinder);
+// translator_utils.c -- END
+
 //parser.c -- BEGIN
 //parser-Folder -- END
 //main.c -- BEGIN

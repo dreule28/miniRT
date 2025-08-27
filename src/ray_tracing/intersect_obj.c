@@ -1,63 +1,64 @@
 #include "mini_rt.h"
 
-double	discri(t_ray *ray, t_sphere *sphere, double *a, double *b)
+double	discri(t_ray ray, t_sphere sphere, double *a, double *b)
 {
-	t_tuples	*sphere_center;
-	t_tuples	*sphere_to_ray;
+	t_tuples	sphere_center;
+	t_tuples	sphere_to_ray;
 	double		discriminant;
 	double		c;
 
-	sphere_center = copy_point(&sphere->pos);
-	sphere_to_ray = ftm_tup_subtract(ray->origin, sphere_center);
-	*a = ftm_tup_dot(ray->direction, ray->direction);
-	*b = 2 * ftm_tup_dot(ray->direction, sphere_to_ray);
-	c = ftm_tup_dot(sphere_to_ray, sphere_to_ray) - (sphere->radius
-			* sphere->radius);
+	copy_point(&sphere_center, sphere.pos);
+	ftm_tup_subtract(&sphere_to_ray, ray.origin, sphere_center);
+	*a = ftm_tup_dot(ray.direction, ray.direction);
+	*b = 2 * ftm_tup_dot(ray.direction, sphere_to_ray);
+	c = ftm_tup_dot(sphere_to_ray, sphere_to_ray) - (sphere.radius
+			* sphere.radius);
 	discriminant = *b * *b - 4 * *a * c;
-	free(sphere_to_ray);
 	return (discriminant);
 }
 
-double	*intersect_sphere(t_ray *ray, t_sphere *sphere)
+bool	intersect_sphere(t_obj_node *node, t_ray ray, t_sphere sphere)
 {
-	double	*t;
 	double	a;
 	double	b;
 	double	discriminant;
 
-	t = ft_calloc(sizeof(double), 2);
-	if (!t)
-		return (NULL);
 	discriminant = discri(ray, sphere, &a, &b);
 	if (discriminant < 0.0)
-		return (free(t), NULL);
-	t[0] = (-b - sqrtf(discriminant)) / (2 * a);
-	t[1] = (-b + sqrtf(discriminant)) / (2 * a);
-	return (t);
+	{
+		node->has_intersection = false;
+		return (false);
+	}
+	node->t[0] = (-b - sqrt(discriminant)) / (2 * a);
+	node->t[1] = (-b + sqrt(discriminant)) / (2 * a);
+	node->has_intersection = true;
+	return (true);
 }
 
-double	*intersect_plane(t_ray *ray, t_plane *plane)
+bool	intersect_plane(t_obj_node *node, t_ray ray)
 {
-	double	*t;
 	double	intersec;
 
-	(void)plane;
-	if (fabs(ray->direction->y) < DBL_EPSILON)
-		return (NULL);
-	intersec = -ray->origin->y / ray->direction->y;
-	if (intersec <= 0)
-		return (NULL);
-	t = ft_calloc(sizeof(double), 2);
-	if (!t)
-		return (NULL);
-	t[0] = intersec;
-	t[1] = intersec;
-	return (t);
+	if (fabs(ray.direction.y) < DBL_EPSILON)
+	{
+		node->has_intersection = false;
+		return (false);
+	}
+	intersec = -ray.origin.y / ray.direction.y;
+	if (intersec <= 0.0)
+	{
+
+		node->has_intersection = false;
+		return (false);
+	}
+	node->t[0] = intersec;
+	node->t[1] = intersec;
+	node->has_intersection = true;
+	return (true);
 }
 
-double	*intersect_cylinder(t_ray *ray, t_cylinder *cylinder)
+bool	intersect_cylinder(t_obj_node *node, t_ray ray, t_cylinder cylinder)
 {
-	double	*t_side;
 	int		side_count;
 	double	caps[2];
 	int		cap_count;
@@ -65,13 +66,22 @@ double	*intersect_cylinder(t_ray *ray, t_cylinder *cylinder)
 	int		i;
 	double	tmp;
 
-	t_side = cylinder_intersec_cal(ray);
-	side_count = 0;
-	if (t_side)
-		side_count = check_cylinder_height(t_side, ray, cylinder);
+	// Calculate side intersections
+	if (!cylinder_intersec_cal(node, ray))
+		side_count = 0;
+	else
+		side_count = check_cylinder_height(node, ray, cylinder);
+
+	// Calculate cap intersections
 	cap_count = intersect_caps(ray, cylinder, caps);
+
 	if (side_count == 2)
-		return (t_side);
+	{
+		node->t[0] = node->t[0];
+		node->t[1] = node->t[1];
+		node->has_intersection = true;
+		return (true);
+	}
 	if (side_count == 1)
 	{
 		best_cap = INFINITY;
@@ -84,19 +94,34 @@ double	*intersect_cylinder(t_ray *ray, t_cylinder *cylinder)
 		}
 		if (best_cap < INFINITY)
 		{
-			t_side[1] = best_cap;
-			if (t_side[0] > t_side[1])
+			node->t[1] = best_cap;
+			// Sort them
+			if (node->t[0] > node->t[1])
 			{
-				tmp = t_side[0];
-				t_side[0] = t_side[1];
-				t_side[1] = tmp;
+				tmp = node->t[0];
+				node->t[0] = node->t[1];
+				node->t[1] = tmp;
 			}
+			node->has_intersection = true;
+			return (true);
 		}
 		else
-			t_side[1] = t_side[0];
-		return (t_side);
+		{
+			node->t[1] = node->t[0];
+			node->has_intersection = true;
+			return (true);
+		}
 	}
-	if (t_side)
-		free(t_side);
-	return (cylinder_cap_cal(ray, cylinder));
+
+	// No side intersections, try caps only
+	if (cap_count > 0)
+	{
+		node->t[0] = caps[0];
+		node->t[1] = caps[1];
+		node->has_intersection = true;
+		return (true);
+	}
+
+	node->has_intersection = false;
+	return (false);
 }

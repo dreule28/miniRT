@@ -1,61 +1,70 @@
 #include "mini_rt.h"
 
-t_tuples	*local_normal_at(t_obj_node *curr, t_tuples *object_point)
+void	local_normal_at(t_tuples *local_normal_at, t_obj_node curr,
+				t_tuples object_point)
 {
-	t_tuples	*local_normal_at;
-
-	if (curr->type == SPHERE)
-		local_normal_at = local_sphere(object_point);
-	if (curr->type == PLANE)
-		local_normal_at = local_plane();
-	if (curr->type == CYLINDER)
-		local_normal_at = local_cylinder(curr, object_point);
-	if (curr->type == CUBE)
-		local_normal_at = local_cube(object_point);
-	return (local_normal_at);
+	if (curr.type == SPHERE)
+		local_sphere(local_normal_at, object_point);
+	if (curr.type == PLANE)
+		local_plane(local_normal_at);
+	if (curr.type == CYLINDER)
+		local_cylinder(local_normal_at, curr, object_point);
+	if (curr.type == CUBE)
+		local_cube(local_normal_at, object_point);
 }
 
-t_tuples	*local_sphere(t_tuples *object_point)
+void	local_sphere(t_tuples *normal, t_tuples object_point)
 {
-	t_tuples	*origin;
-	t_tuples	*normal;
+	t_tuples	origin;
 
-	origin = init_point(0, 0, 0);
-	normal = ftm_tup_subtract(object_point, origin);
-	free_tuple(origin);
-	return (normal);
+	init_point(&origin, 0, 0, 0);
+	ftm_tup_subtract(normal, object_point, origin);
 }
 
-t_tuples	*local_plane(void)
+void	local_plane(t_tuples *local_normal_at)
 {
-	return (init_vector(0, 1, 0));
+	return (init_vector(local_normal_at, 0, 1, 0));
 }
 
-t_tuples	*local_cylinder(t_obj_node *curr, t_tuples *object_point)
+void	local_cylinder(t_tuples *normal, t_obj_node curr, t_tuples object_point)
 {
 	double	dist;
 
-	dist = object_point->x * object_point->x + object_point->z
-		* object_point->z;
-	if (curr->data->cylinder->closed && dist < 1.0)
+	dist = object_point.x * object_point.x + object_point.z
+		* object_point.z;
+	if (curr.data->cylinder->closed && dist < 1.0)
 	{
-		if (object_point->y >= curr->data->cylinder->maximum - EPSILON)
-			return (init_vector(0, 1, 0));
-		if (object_point->y <= curr->data->cylinder->minimum + EPSILON)
-			return (init_vector(0, -1, 0));
+		if (object_point.y >= curr.data->cylinder->maximum - EPSILON)
+		{
+			init_vector(normal, 0, 1, 0);
+			return ;
+		}
+		if (object_point.y <= curr.data->cylinder->minimum + EPSILON)
+		{
+			init_vector(normal, 0, -1, 0);
+			return ;
+		}
 	}
-	return (init_vector(object_point->x, 0.0, object_point->z));
+	init_vector(normal, object_point.x, 0, object_point.z);
+	return ;
 }
 
-t_tuples	*local_cube(t_tuples *object_point)
+void	local_cube(t_tuples *local_normal_at, t_tuples object_point)
 {
 	double	maxc;
 
-	maxc = fmax(fmax(fabs(object_point->x), fabs(object_point->y)),
-			fabs(object_point->z));
-	if (maxc == fabs(object_point->x))
-		return (init_vector(object_point->x, 0, 0));
-	else if (maxc == fabs(object_point->y))
-		return (init_vector(0, object_point->y, 0));
-	return (init_vector(0, 0, object_point->z));
+	maxc = fmax(fmax(fabs(object_point.x), fabs(object_point.y)),
+			fabs(object_point.z));
+	if (maxc == fabs(object_point.x))
+	{
+		init_vector(local_normal_at, object_point.x, 0, 0);
+		return ;
+	}
+	else if (maxc == fabs(object_point.y))
+	{
+		init_vector(local_normal_at, 0, object_point.y, 0);
+		return ;
+	}
+	init_vector(local_normal_at, 0, 0, object_point.z);
+	return ;
 }
