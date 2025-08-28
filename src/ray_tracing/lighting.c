@@ -16,7 +16,7 @@ void	calculate_lighting_components(t_rgb *result, t_material material, t_light l
 	ambient.b = effective_color.b * material.ambient;
 	if (light_dot_normal < 0)
 	{
-		result = &ambient;
+		init_rgb(result, ambient.r, ambient.g, ambient.b);
 		return ;
 	}
 	diffuse.r = effective_color.r * material.diffuse * light_dot_normal;
@@ -93,6 +93,7 @@ void	lighting(t_rgb *res, t_scene *scene, t_computations comps,
 	t_material	material;
 	t_tuples	lightv;
 	double		light_dot_normal;
+	t_rgb		specular;
 
 	material = get_material_from_comps(comps, scene->obj_list);
 	ftm_tup_subtract(&lightv, light.pos, comps.over_point);
@@ -107,6 +108,11 @@ void	lighting(t_rgb *res, t_scene *scene, t_computations comps,
 		return ;
 	}
 	calculate_lighting_components(res, material, light, light_dot_normal);
-	// if (light_dot_normal >= 0)
-	// 	calculate_specular(res, scene, lightv, comps);
+	if (light_dot_normal >= 0)
+	{
+		calculate_specular(&specular, scene, lightv, comps);
+		res->r += specular.r;
+		res->g += specular.g;
+		res->b += specular.b;
+	}
 }

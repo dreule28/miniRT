@@ -66,5 +66,8 @@ int	main(int argc, char **argv)
 	mlx_key_hook(scene->mlx, &key_hook, scene);
 	mlx_loop(scene->mlx);
 	mlx_terminate(scene->mlx);
+	free_light_list(scene->light_list);
+	free_obj_list(scene->obj_list);
+	free(scene);
 	return (0);
 }
