@@ -39,7 +39,7 @@ void	paint_pixel(t_scene *scene, t_ray *ray, int pixel_index)
 	ftm_tup_norm(&normalized, ray->direction);
 	ray->direction = normalized;
 	intersect_to_list(scene, ray);
-	if (scene->obj_list->head->t)
+	if (scene->obj_list->head && scene->obj_list->head->has_intersection)
 	{
 		if (!set_comp_to_obj(scene->obj_list->head, ray))
 		{

@@ -24,11 +24,13 @@ void	set_epsilon_offset(t_obj_node *curr)
 
 bool	set_comp_to_obj(t_obj_node *curr, t_ray *ray)
 {
+
 	if (!curr->t)
 		return (true);
 	ray_position(&curr->comp.point, ray, curr->t[0]);
 	if (!&curr->comp.point)
 		return (false);
+	curr->comp.eyev = ray->direction;
 	ftm_tup_negate(&curr->comp.eyev);
 	if (!&curr->comp.eyev)
 		return (false);
