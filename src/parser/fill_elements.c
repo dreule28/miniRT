@@ -40,9 +40,9 @@ void	calc_pixel_size(t_camera *camera)
 	double	half_view;
 	double	aspect;
 
-	half_view = tan(camera->fov / 2);
+	half_view = tan(camera->fov / 2.0);
 	aspect = camera->hsize / camera->vsize;
-	if (aspect >= 1)
+	if (aspect >= 1.0)
 	{
 		camera->half_width = half_view;
 		camera->half_height = half_view / aspect;

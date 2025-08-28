@@ -1,16 +1,16 @@
 # This file tests comment handling
 # Multiple comment lines
-A	0.1							255,255,255
+A	0.1							1,1,1
 # Comment after ambient
 
 # Comment before camera
 C	0,0,20		0,0,-1		80
 # Another comment
 
-L	10,0,10		0.5				255,255,255
+L	-10,0,-10		0.5				255,255,255
 
 # Objects section
-pl	0,0,0		0,0,1			200,100,50
+pl	0,0,0		0,0,0		200,100,50
 # Plane comment
 sp	3,0,5		8				100,200,150
 # Sphere comment

@@ -14,18 +14,6 @@ void	translate_sphere(t_obj_node *sphere)
 	sphere->data->sphere->radius = 1.0;
 }
 
-void	translate_camera(t_camera *camera)
-{
-	t_tuples	from;
-	t_tuples	ov;
-	t_tuples	to;
-
-	from = camera->pos;
-	ov = camera->orientation_vector;
-	init_vector(&to, 0, 1, 0);
-	view_transformation(&camera->matrix, from, to, ov);
-}
-
 void	translate_plane(t_obj_node *plane)
 {
 	t_tuples pos;
@@ -111,7 +99,6 @@ void	translate_objs(t_scene *scene)
 	t_obj_node	*curr;
 
 	curr = scene->obj_list->head;
-	translate_camera(&scene->camera);
 	while (curr)
 	{
 		if (curr->type == SPHERE)
