@@ -26,6 +26,7 @@ t_obj_node	*add_obj_node(t_obj_list *obj_list, int obj_type)
 	new_node->data = init_obj_data(obj_type);
 	if (!new_node->data)
 		return (free(new_node), NULL);
+	new_node->data->cylinder->closed = false;
 	if (!obj_list->head)
 		obj_list->head = new_node;
 	else
@@ -50,6 +51,8 @@ t_obj_data	*init_obj_data(int obj_type)
 		return (init_cylinder_data(new_data));
 	else if (obj_type == CUBE)
 		return (init_cube_data(new_data));
+	else if (obj_type == TRIANGLE)
+		return (init_triangle_data(new_data));
 	else
 		return (free(new_data), NULL);
 }

@@ -41,6 +41,15 @@ t_cube			*init_cube(void);
 t_obj_data		*init_cube_data(t_obj_data *data);
 //init_cubes.c -- END
 
+// init_triangles.c -- BEGIN
+t_triangle		*init_triangle(void);
+void			add_triangle_p1(t_obj_node *obj_node, char *parsed_line);
+void			add_triangle_p2(t_obj_node *obj_node, char *parsed_line);
+t_obj_data		*init_triangle_data(t_obj_data *data);
+void			handle_triangle(t_scene *scene, t_obj_node *new_node,
+					char *parsed_line);
+// init_triangles.c -- END
+
 //initialize_objects.c -- BEGIN
 t_sphere		*init_sphere(void);
 t_plane			*init_plane(void);
