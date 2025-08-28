@@ -25,7 +25,7 @@ bool	get_transformed_intersection(t_obj_node *curr, t_ray ray)
 
 bool	check_shadow_intersection(t_obj_node *node, double dist, double *min_t)
 {
-	if (node->t && node->t[0] >= 0
+	if (node->has_intersection && node->t[0] >= 0
 			&& node->t[0] < dist && node->t[0] < *min_t)
 	{
 		*min_t = node->t[0];
@@ -45,10 +45,9 @@ bool	check_objects_for_shadow(t_scene *scene, t_ray ray, double distance)
 	curr = scene->obj_list->head;
 	while (curr)
 	{
-		if (!get_transformed_intersection(curr, ray))
-			return (false);
-		if (check_shadow_intersection(curr, distance, &min_t))
-			shadowed = true;
+		if (get_transformed_intersection(curr, ray))
+			if (check_shadow_intersection(curr, distance, &min_t))
+				shadowed = true;
 		curr = curr->next;
 	}
 	return (shadowed);

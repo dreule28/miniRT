@@ -8,6 +8,8 @@ void	free_obj_data(t_obj_data *data, int type)
 		free(data->plane);
 	else if (type == CYLINDER && data->cylinder)
 		free(data->cylinder);
+	else if (type == CUBE && data->cube)
+		free(data->cube);
 	free(data);
 }
 
