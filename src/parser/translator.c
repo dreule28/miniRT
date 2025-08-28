@@ -23,7 +23,6 @@ void	translate_camera(t_camera *camera)
 	from = camera->pos;
 	ov = camera->orientation_vector;
 	init_vector(&to, 0, 1, 0);
-	camera->fov = M_PI/3;
 	view_transformation(&camera->matrix, from, to, ov);
 }
 

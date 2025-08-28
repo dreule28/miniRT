@@ -73,7 +73,7 @@ void	reflected_color(t_rgb *reflected, t_scene *scene,
 		return ;
 	init_ray(&reflected_ray, comps.over_point, comps.reflectv);
 	intersect_to_list(scene, &reflected_ray);
-	if (!scene->obj_list->head || !scene->obj_list->head->t)
+	if (!scene->obj_list->head || !scene->obj_list->head->has_intersection)
 	{
 		// init_rgb(reflected, 0, 0, 0);
 		return ;

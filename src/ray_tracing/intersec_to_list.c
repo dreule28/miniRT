@@ -35,12 +35,10 @@ t_obj_list	*intersect_to_list(t_scene *scene, t_ray *ray)
 	curr = scene->obj_list->head;
 	while (curr)
 	{
-		if (!intersec_to_obj(curr, *ray)) {
-			return (NULL);
-		}
-		if (!set_comp_to_obj(curr, ray)) {
-			return (NULL);
-		}
+		intersec_to_obj(curr, *ray);
+		if (curr->has_intersection)
+			if (!set_comp_to_obj(curr, ray))
+				return (NULL);
 		curr = curr->next;
 	}
 	return (sort_obj_list(scene->obj_list));

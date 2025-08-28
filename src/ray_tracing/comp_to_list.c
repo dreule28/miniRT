@@ -25,7 +25,7 @@ void	set_epsilon_offset(t_obj_node *curr)
 bool	set_comp_to_obj(t_obj_node *curr, t_ray *ray)
 {
 
-	if (!curr->t)
+	if (!curr->has_intersection)
 		return (true);
 	ray_position(&curr->comp.point, ray, curr->t[0]);
 	if (!&curr->comp.point)
