@@ -166,4 +166,18 @@ void	create_view_matrix(t_m4 *orientation, t_tuples left, t_tuples forward,
 void bonus_scene(t_scene *scene);
 // bonus_scene.c -- END
 
+// more_scene_objs.c -- BEGIN
+void	p3_plane(t_scene *scene);
+void	c1_cylinder(t_scene *scene);
+void	c1_cube(t_scene *scene);
+// more_scene_objs.c -- END
+
+// scene_objs.c -- BEGIN
+void	s1_sphere(t_scene *scene);
+void	s2_sphere(t_scene *scene);
+void	s3_sphere(t_scene *scene);
+void	p1_plane(t_scene *scene);
+void	p2_plane(t_scene *scene);
+// scene_objs.c -- END
+
 #endif

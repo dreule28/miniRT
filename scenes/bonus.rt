@@ -19,9 +19,9 @@ pl	3,0,0		0,0,1			62,7,3
 
 # # SPHERE
 # #	x,y,z			radius			r,g,b
-sp	-4,3.0,-10	1				255,255,255
-sp	1.5,3,-0.5	0.33			255,255,255
-sp	-1.5,3,-0.75	0.33			255,255,255
+sp	-4,1,-5	1				255,255,255
+sp	3,0,3	5				255,255,255
+sp	-2,0.25,-7	0.25			255,255,255
 
 # CYLINDER
 #	center_x,y,z	axis_x,y,z		diameter	height	r,g,b
@@ -30,6 +30,6 @@ cy	-2,0.5,-10		1,0,0			0.5	1		5		255,255,255
 
 # CUBE
 #	x,y,z		orientation		scale		r,g,b
-cb	-7,1,-5		0,1,0			0.25,0.25,0.25		0,255,255	#unit cube
+cb	-7.5,2,-5.5		0,1,0	0.5,0.5,2		255,255,255	#unit cube
 # cb	2,0,0		0,45,0			1,2,0.5		1,1,1	#streched and rotated
 # cb	-1,1,0		30,0,0			0.5,0.5,0.5		1,1,1	#smaller cube, tilted
