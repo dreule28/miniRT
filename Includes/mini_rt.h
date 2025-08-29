@@ -1,7 +1,7 @@
 #ifndef MINI_RT_H
 # define MINI_RT_H
-# define WIDTH 500
-# define HEIGHT 500
+# define WIDTH 2000
+# define HEIGHT 1000
 # define DBL_EPSILON 1e-5
 # define EPSILON 1e-5
 
@@ -83,6 +83,15 @@ void			translate_cylinder(t_obj_node *cyl);
 void			translate_cube(t_obj_node *cube);
 void			translate_objs(t_scene *scene);
 //translator.c -- END
+
+// translator_utils.c -- BEGIN
+void			handle_cyl_axis_x(t_tuples axis, t_tuples pos,
+					t_obj_node *cylinder);
+void			handle_cyl_axis_y(t_tuples axis, t_tuples pos,
+					t_obj_node *cylinder);
+void			handle_cyl_axis_z(t_tuples axis, t_tuples pos,
+					t_obj_node *cylinder);
+// translator_utils.c -- END
 
 //parser.c -- BEGIN
 //parser-Folder -- END

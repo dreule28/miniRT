@@ -1,0 +1,29 @@
+# Ambient light (soft)
+A	0.12						1,1,1
+
+# Camera (slightly elevated, looking forward)
+C	0,3,-12					0,0,1	55
+
+# Lights (key + fill)
+L	-10,12,-10				0.7				255,255,255
+L	10,8,-6					0.3				255,240,230
+
+# Background wall (light blue)
+# pos            axis         rgb
+pl	0,5,22			1,0,0			180,210,255
+
+# Podium base (dark ring)
+# center          axis     diameter height  rgb
+cy	0,0,8			0,1,0		12.6     1.2    30,30,30
+
+# Podium main body (dark)
+cy	0,0.1,8			0,1,0		12.0     1.0    38,38,38
+
+# Podium top (light “glass” disk)
+cy	0,0.85,8		0,1,0		11.6     0.3    200,200,205
+
+# Cubes (different sizes/colors)
+# pos                orientation   scale          rgb
+cb	-3.2,1.95,7.2		0,0,0        1.9,1.9,1.9    180,60,40
+cb	0.0,2.05,8.2		0,0,0        2.1,2.1,2.1    40,50,160
+cb	3.2,2.00,9.0		0,0,0        2.0,2.0,2.0    220,220,220

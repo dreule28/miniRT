@@ -1,0 +1,35 @@
+# AMBIENT LIGHTING
+# ambient_ratio					r,g,b
+A	0.2							1,1,1
+
+# CAMERA
+#	vpx,y,z		ovx,y,z	fov
+C	-2,2,-15		0,0,1	90
+
+# LIGHT SOURCEz
+#	x,y,z		brightness		r,g,b
+L	-10,10,-10		1				255, 240, 196
+# L	-10,5,-10		0.5				255,255,255
+
+# PLANE
+#	x,y,zpos	x,y,z			r,g,b
+pl	0,0,0		0,1,0			255,255,255
+pl	0,0,3		1,0,0			62,7,3
+pl	3,0,0		0,0,1			62,7,3
+
+# # SPHERE
+# #	x,y,z			radius			r,g,b
+sp	-4,1,-5	1				255,255,255
+sp	3,0,3	5				255,255,255
+sp	-2,0.25,-7	0.25			255,255,255
+
+# CYLINDER
+#	center_x,y,z	axis_x,y,z		diameter	height	r,g,b
+cy	-2,0.5,-10		1,0,0			0.5	1		5		255,255,255
+# cy	7,2.5,3		0,0,0			0.5	15	10,0,255
+
+# CUBE
+#	x,y,z		orientation		scale		r,g,b
+cb	-7.5,2,-5.5		0,1,0	0.5,0.5,2		255,255,255	#unit cube
+# cb	2,0,0		0,45,0			1,2,0.5		1,1,1	#streched and rotated
+# cb	-1,1,0		30,0,0			0.5,0.5,0.5		1,1,1	#smaller cube, tilted

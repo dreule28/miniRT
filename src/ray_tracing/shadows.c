@@ -1,61 +1,42 @@
 #include "mini_rt.h"
 
-t_ray	*get_shadow_ray(t_scene *scene, t_tuples *point, double *distance, t_light *curr)
+void	get_shadow_ray(t_ray *ray, t_tuples point, double *distance,
+			t_light curr)
 {
-	t_tuples	*distance_v;
-	t_tuples	*direction;
-	t_ray		*ray;
+	t_tuples	distance_v;
+	t_tuples	direction;
 
-	if (!scene->obj_list || !scene->light_list->head || !point)
-		return (NULL);
-	distance_v = ftm_tup_subtract(&curr->pos, point);
+	ftm_tup_subtract(&distance_v, curr.pos, point);
 	*distance = magnitude_vector(distance_v);
-	direction = ftm_tup_norm(distance_v);
-	ray = init_ray(copy_point(point), direction);
-	if (!ray)
-		return (NULL);
-	free_tuple(distance_v);
-	return (ray);
+	ftm_tup_norm(&direction, distance_v);
+	init_ray(ray, point, direction);
 }
 
-double	*get_transformed_intersection(t_obj_node *curr, t_ray *ray)
+bool	get_transformed_intersection(t_obj_node *curr, t_ray ray)
 {
-	t_ray	*transformed_ray;
-	t_m4	*inv;
-	double	*t;
+	t_ray	transformed_ray;
+	t_m4	inv;
 
 	transformed_ray = ray;
-	if (curr->matrix)
-	{
-		inv = ftm_m4_inversion(curr->matrix);
-		if (inv)
-		{
-			transformed_ray = transform_ray(ray, inv);
-			if (!transformed_ray)
-				return (NULL);
-			free_matrix_m4(inv);
-		}
-	}
-	t = intersect_shape(curr, transformed_ray);
-	if (transformed_ray != ray)
-		free_ray(transformed_ray);
-	return (t);
+	ftm_m4_inversion(&inv, curr->matrix);
+	transform_ray(&transformed_ray, ray, inv);
+	return (intersect_shape(curr, transformed_ray));
 }
 
-bool	check_shadow_intersection(double *t, double distance, double *min_t)
+bool	check_shadow_intersection(t_obj_node *node, double dist, double *min_t)
 {
-	if (t && t[0] >= 0 && t[0] < distance && t[0] < *min_t)
+	if (node->has_intersection && node->t[0] >= 0
+			&& node->t[0] < dist && node->t[0] < *min_t)
 	{
-		*min_t = t[0];
+		*min_t = node->t[0];
 		return (true);
 	}
 	return (false);
 }
 
-bool	check_objects_for_shadow(t_scene *scene, t_ray *ray, double distance)
+bool	check_objects_for_shadow(t_scene *scene, t_ray ray, double distance)
 {
 	t_obj_node	*curr;
-	double		*t;
 	double		min_t;
 	bool		shadowed;
 
@@ -64,25 +45,21 @@ bool	check_objects_for_shadow(t_scene *scene, t_ray *ray, double distance)
 	curr = scene->obj_list->head;
 	while (curr)
 	{
-		t = get_transformed_intersection(curr, ray);
-		if (check_shadow_intersection(t, distance, &min_t))
-			shadowed = true;
-		if (t)
-			free(t);
+		if (get_transformed_intersection(curr, ray))
+			if (check_shadow_intersection(curr, distance, &min_t))
+				shadowed = true;
 		curr = curr->next;
 	}
 	return (shadowed);
 }
 
-bool	is_shadowed(t_scene *scene, t_tuples *point, t_light *curr)
+bool	is_shadowed(t_scene *scene, t_tuples point, t_light curr)
 {
-	t_ray	*ray;
+	t_ray	ray;
 	double	distance;
 	bool	shadowed;
 
-	ray = get_shadow_ray(scene, point, &distance, curr);
-	if (!ray)
-		return (false);
+	get_shadow_ray(&ray, point, &distance, curr);
 	shadowed = check_objects_for_shadow(scene, ray, distance);
 	return (shadowed);
 }

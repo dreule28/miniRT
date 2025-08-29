@@ -3,8 +3,8 @@
 
 # include "custom_math.h"
 # include <unistd.h>
+# include "matrices.h"
 
-typedef struct s_m4	t_m4;
 
 /* Enumeration of supported 3D object types */
 typedef enum e_obj_type
@@ -26,23 +26,24 @@ typedef enum e_pattern_type
 
 typedef struct s_pattern
 {
-	t_rgb *color1;
-	t_rgb *color2;
-	t_m4	*transform;
-	t_pattern_type type;
-}			t_pattern;
+	t_rgb			color1;
+	t_rgb			color2;
+	t_m4			transform;
+	t_pattern_type	type;
+	bool			has_pattern;
+}					t_pattern;
 
 typedef struct s_material
 {
-	t_rgb	rgb; /* Color information for the material */
-	double	ambient; /* Ambient lighting coefficient (0.0 to 1.0) */
-	double	diffuse; /* Diffuse reflection coefficient (0.0 to 1.0) */
-	double	specular; /* Specular reflection coefficient (0.0 to 1.0) */
-	double	shininess; /* Shininess factor for specular highlights */
-	double	reflective;
-	double	transparency;
-	double	refractive_index;
-	t_pattern *pattern;
+	t_rgb		rgb; /* Color information for the material */
+	double		ambient; /* Ambient lighting coefficient (0.0 to 1.0) */
+	double		diffuse; /* Diffuse reflection coefficient (0.0 to 1.0) */
+	double		specular; /* Specular reflection coefficient (0.0 to 1.0) */
+	double		shininess; /* Shininess factor for specular highlights */
+	double		reflective;
+	double		transparency;
+	double		refractive_index;
+	t_pattern	pattern;
 }			t_material;
 
 /* ========================================================================== */
@@ -101,12 +102,12 @@ typedef union u_obj_data
 
 typedef struct s_computations
 {
-	t_tuples	*point;
-	t_tuples	*eyev;
-	t_tuples	*normalv;
-	t_tuples	*over_point;
-	t_tuples	*reflectv;
-	t_tuples	*under_point;
+	t_tuples	point;
+	t_tuples	eyev;
+	t_tuples	normalv;
+	t_tuples	over_point;
+	t_tuples	reflectv;
+	t_tuples	under_point;
 	bool		inside;
 	bool		in_shadow;
 	double		n1;
@@ -118,9 +119,10 @@ typedef struct s_obj_node
 {
 	t_obj_type			type;		/* Type of object stored */
 	t_obj_data			*data;		/* Pointer to object data */
-	double				*t;			/* Intersection parameter values */
-	t_m4				*matrix;
-	t_computations		*comp;
+	double				t[2];			/* Intersection parameter values */
+	bool				has_intersection;
+	t_m4				matrix;
+	t_computations		comp;
 	struct s_obj_node	*next;		/* Pointer to next node */
 }						t_obj_node;
 

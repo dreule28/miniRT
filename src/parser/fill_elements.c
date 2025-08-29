@@ -40,9 +40,9 @@ void	calc_pixel_size(t_camera *camera)
 	double	half_view;
 	double	aspect;
 
-	half_view = tan(camera->fov / 2);
+	half_view = tan(camera->fov / 2.0);
 	aspect = camera->hsize / camera->vsize;
-	if (aspect >= 1)
+	if (aspect >= 1.0)
 	{
 		camera->half_width = half_view;
 		camera->half_height = half_view / aspect;
@@ -74,7 +74,7 @@ void	add_camera(t_scene *scene, char *parsed_line)
 	scene->camera.fov = radians(ft_atof(parsed_line));
 	scene->camera.vsize = HEIGHT;
 	scene->camera.hsize = WIDTH;
-	scene->camera.matrix = init_view_transformation(scene);
+	init_view_transformation(&scene->camera.matrix, scene);
 	scene->camera.half_height = 0;
 	scene->camera.half_width = 0;
 	calc_pixel_size(&scene->camera);

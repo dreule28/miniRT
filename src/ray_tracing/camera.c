@@ -1,71 +1,71 @@
 #include "mini_rt.h"
 
-t_ray	*calculate_ray_for_pixel(t_camera *camera, double world_x,
-	double world_y)
+void	calculate_ray_for_pixel(t_ray *ray, t_m4 inv,
+			double world_x, double world_y)
 {
-	t_tuples	*origin;
-	t_tuples	*pixel;
-	t_tuples	*direction;
+	t_tuples	origin;
+	t_tuples	pixel;
+	t_tuples	direction;
+	t_tuples	point;
 
-	pixel = ftm_matrix_times_tuple(ftm_m4_inversion(camera->matrix),
-			init_point(world_x, world_y, -1));
-	origin = ftm_matrix_times_tuple(ftm_m4_inversion(camera->matrix),
-			init_point(0, 0, 0));
-	direction = ftm_tup_norm(ftm_tup_subtract(pixel, origin));
-	return (init_ray(origin, direction));
+	init_point(&point, world_x, world_y, -1);
+	ftm_matrix_times_tuple(&pixel, inv, point);
+	init_point(&point, 0, 0, 0);
+	ftm_matrix_times_tuple(&origin, inv, point);
+	ftm_tup_subtract(&point, pixel, origin);
+	ftm_tup_norm(&direction, point);
+	init_ray(ray, origin, direction);
 }
 
-t_ray	*ray_for_pixel(t_camera *camera, double px, double py)
+void	ray_for_pixel(t_ray *ray, t_camera *camera, t_m4 inv,
+			double px, double py)
 {
 	double		xoffset;
 	double		yoffset;
 	double		world_x;
 	double		world_y;
-	t_ray		*ray;
 
 	xoffset = (px + 0.5) * camera->pixel_size;
 	yoffset = (py + 0.5) * camera->pixel_size;
 	world_x = camera->half_width - xoffset;
 	world_y = camera->half_height - yoffset;
-	ray = calculate_ray_for_pixel(camera, world_x, world_y);
-	return (ray);
+	calculate_ray_for_pixel(ray, inv, world_x, world_y);
 }
 
 void	render(t_scene *scene)
 {
-	t_ray	*ray;
+	t_ray	ray;
+	t_m4	inv;
 	int		y;
 	int		x;
 
+	ftm_m4_inversion(&inv, scene->camera.matrix);
 	y = 0;
 	while (y < scene->camera.vsize)
 	{
 		x = 0;
 		while (x < scene->camera.hsize)
 		{
-			ray = ray_for_pixel(&scene->camera, x, y);
-			paint_pixel(scene, ray, y * scene->camera.hsize + x);
-			free_ray(ray);
+			ray_for_pixel(&ray, &scene->camera, inv, x, y);
+			paint_pixel(scene, &ray, y * scene->camera.hsize + x);
 			x++;
 		}
 		y++;
 	}
 }
 
-t_m4	*init_view_transformation(t_scene *scene)
+void	init_view_transformation(t_m4 *matrix, t_scene *scene)
 {
-	t_tuples	*from;
-	t_tuples	*to;
-	t_tuples	*up;
-	t_m4		*result;
+	t_tuples	from;
+	t_tuples	to;
+	t_tuples	up;
 
-	from = init_point(scene->camera.pos.x, scene->camera.pos.y,
+	init_point(&from, scene->camera.pos.x, scene->camera.pos.y,
 			scene->camera.pos.z);
-	to = init_point(scene->camera.pos.x + scene->camera.orientation_vector.x,
+	init_point(&to, scene->camera.pos.x + scene->camera.orientation_vector.x,
 			scene->camera.pos.y + scene->camera.orientation_vector.y,
 			scene->camera.pos.z + scene->camera.orientation_vector.z);
-	up = init_vector(0, 1, 0);
-	result = view_transformation(from, to, up);
-	return (result);
+	init_vector(&up, 0, 1, 0);
+	view_transformation(matrix, from, to, up);
 }
 
