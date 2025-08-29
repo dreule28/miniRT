@@ -163,7 +163,8 @@ void	create_view_matrix(t_m4 *orientation, t_tuples left, t_tuples forward,
 // view_tranformation.c -- END
 
 // bonus_scene.c -- BEGIN
-void bonus_scene(t_scene *scene);
+void bonus_scene1(t_scene *scene);
+void	bonus_scenes(t_scene *scene, char *str);
 // bonus_scene.c -- END
 
 // more_scene_objs.c -- BEGIN

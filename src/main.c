@@ -57,8 +57,7 @@ int	main(int argc, char **argv)
 	translate_objs(scene);
 	if (!init_mlx_window(scene))
 		return (1);
-	bonus_scene(scene);
-	// printf("color : r = %6f,  g = %6f, b = %6f",scene->obj_list->head->data->sphere->material.rgb.r, scene->obj_list->head->data->sphere->material.rgb.g, scene->obj_list->head->data->sphere->material.rgb.r);
+	bonus_scenes(scene, argv[1]);
 	render(scene);
 	mlx_key_hook(scene->mlx, &key_hook, scene);
 	mlx_loop(scene->mlx);

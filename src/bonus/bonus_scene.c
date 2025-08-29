@@ -1,6 +1,6 @@
 #include "mini_rt.h"
 
-void	bonus_scene(t_scene *scene)
+void	bonus_scene1(t_scene *scene)
 {
 	s1_sphere(scene);
 	s2_sphere(scene);
@@ -10,4 +10,11 @@ void	bonus_scene(t_scene *scene)
 	p3_plane(scene);
 	c1_cylinder(scene);
 	c1_cube(scene);
+}
+
+void	bonus_scenes(t_scene *scene, char *str)
+{
+	printf("%s\n", str);
+	if(!ft_strcmp(str, "scenes/bonus.rt"))
+		bonus_scene1(scene);
 }
