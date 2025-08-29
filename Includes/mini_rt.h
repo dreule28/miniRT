@@ -43,8 +43,7 @@ t_obj_data		*init_cube_data(t_obj_data *data);
 
 // init_triangles.c -- BEGIN
 t_triangle		*init_triangle(void);
-void			add_triangle_p1(t_obj_node *obj_node, char *parsed_line);
-void			add_triangle_p2(t_obj_node *obj_node, char *parsed_line);
+void			add_triangle(t_obj_node *obj_node, char *parsed_line);
 t_obj_data		*init_triangle_data(t_obj_data *data);
 void			handle_triangle(t_scene *scene, t_obj_node *new_node,
 					char *parsed_line);

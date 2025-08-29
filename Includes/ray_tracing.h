@@ -22,6 +22,17 @@ typedef struct s_axis_params
 	double	ztmax;
 }	t_axis_params;
 
+typedef struct s_tri_inter
+{
+	t_tuples	dir_cross_e2;
+	double		det;
+	double		f;
+	t_tuples	p1_to_origin;
+	double		u;
+	t_tuples	origin_cross_e1;
+	double		v;
+}				t_tri_inter;
+
 /* Ray structure for ray tracing calculations */
 typedef struct s_ray
 {
@@ -151,6 +162,10 @@ t_obj_list	*sort_obj_list(t_obj_list *obj_list);
 void		free_tuple(t_tuples *tuple);
 void	normal_at(t_tuples *normal, t_obj_node curr, t_tuples world_point);
 // surface_normals.c -- END
+
+// triangles.c -- BEGIN
+bool	intersect_triangle(t_obj_node *node, t_ray ray);
+// triangles.c -- END
 
 // utils.c -- BEGIN
 t_material	get_material_from_comps(t_computations comps, t_obj_list *obj_list);
