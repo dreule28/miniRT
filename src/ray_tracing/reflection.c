@@ -75,7 +75,7 @@ void	reflected_color(t_rgb *reflected, t_scene *scene,
 	intersect_to_list(scene, &reflected_ray);
 	if (!scene->obj_list->head || !scene->obj_list->head->has_intersection)
 	{
-		// init_rgb(reflected, 0, 0, 0);
+		init_rgb(reflected, 0, 0, 0);
 		return ;
 	}
 	get_shaded_with_shadows(&colr, scene, remaining - 1);

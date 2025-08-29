@@ -50,8 +50,11 @@ MLX := $(addprefix mlx_src/, $(MLX_FILES))
 PATTERNS_FILES := patterns.c pattern_utils.c init_patterns.c
 PATTERNS := $(addprefix patterns/, $(PATTERNS_FILES))
 
+BONUS_FILES := bonus_scene.c
+BONUS := $(addprefix bonus/, $(BONUS_FILES))
+
 SRC_FILES := main.c
-SRC := $(addprefix src/, $(SRC_FILES) $(MATRICES) $(TUPLES) $(RAY_TRACING) $(PARSER) $(MLX) $(PATTERNS))
+SRC := $(addprefix src/, $(SRC_FILES) $(MATRICES) $(TUPLES) $(RAY_TRACING) $(PARSER) $(MLX) $(PATTERNS) $(BONUS))
 
 ################################################################################
 ###############               OBJECT FILES & RULES                ##############

@@ -92,11 +92,11 @@ void	local_cube(t_tuples *local_normal_at, t_tuples object_point);
 // local_normal_at.c -- END
 
 // init_patterns.c -- BEGIN
-t_pattern	*test_pattern(void);
-t_pattern	*checkers_pattern(t_rgb *color1, t_rgb *color2);
-t_pattern	*ring_pattern(t_rgb *color1, t_rgb *color2);
-t_pattern   *gradient_pattern(t_rgb *color1, t_rgb *color2);
-t_pattern	*stripe_pattern(t_rgb *color1, t_rgb *color2);
+void	stripe_pattern(t_pattern *pattern, t_rgb color1, t_rgb color2);
+void	gradient_pattern(t_pattern *pattern, t_rgb color1, t_rgb color2);
+void	ring_pattern(t_pattern *pattern, t_rgb color1, t_rgb color2);
+void	checkers_pattern(t_pattern *pattern, t_rgb color1, t_rgb color2);
+
 // init_patterns.c -- END
 
 // pattern_utils.c -- BEGIN
@@ -161,4 +161,9 @@ void	view_transformation(t_m4 *matrix, t_tuples from, t_tuples to, t_tuples up);
 void	create_view_matrix(t_m4 *orientation, t_tuples left, t_tuples forward,
 			t_tuples true_up);
 // view_tranformation.c -- END
+
+// bonus_scene.c -- BEGIN
+void bonus_scene(t_scene *scene);
+// bonus_scene.c -- END
+
 #endif
