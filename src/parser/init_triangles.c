@@ -17,7 +17,7 @@ t_triangle	*init_triangle(void)
 	return (triangle);
 }
 
-void	add_triangle_p1(t_obj_node *obj_node, char *parsed_line)
+void	add_triangle(t_obj_node *obj_node, char *parsed_line)
 {
 	skip_spaces_or_value(&parsed_line, 1, 0);
 	skip_spaces_or_value(&parsed_line, 0, 0);
@@ -39,36 +39,11 @@ void	add_triangle_p1(t_obj_node *obj_node, char *parsed_line)
 	skip_spaces_or_value(&parsed_line, 0, 1);
 	obj_node->data->triangle->p3.z = ft_atof(parsed_line);
 	skip_spaces_or_value(&parsed_line, 1, 0);
-	add_triangle_p2(obj_node, parsed_line);
-}
-
-void	add_triangle_p2(t_obj_node *obj_node, char *parsed_line)
-{
-	obj_node->data->triangle->e1.x = ft_atof(parsed_line);
-	skip_spaces_or_value(&parsed_line, 0, 1);
-	obj_node->data->triangle->e1.y = ft_atof(parsed_line);
-	skip_spaces_or_value(&parsed_line, 0, 1);
-	obj_node->data->triangle->e1.z = ft_atof(parsed_line);
-	skip_spaces_or_value(&parsed_line, 1, 0);
-	obj_node->data->triangle->e2.x = ft_atof(parsed_line);
-	skip_spaces_or_value(&parsed_line, 0, 1);
-	obj_node->data->triangle->e2.y = ft_atof(parsed_line);
-	skip_spaces_or_value(&parsed_line, 0, 1);
-	obj_node->data->triangle->e2.z = ft_atof(parsed_line);
-	skip_spaces_or_value(&parsed_line, 1, 0);
-	obj_node->data->triangle->normal.x = ft_atof(parsed_line);
-	skip_spaces_or_value(&parsed_line, 0, 1);
-	obj_node->data->triangle->normal.y = ft_atof(parsed_line);
-	skip_spaces_or_value(&parsed_line, 0, 1);
-	obj_node->data->triangle->normal.z = ft_atof(parsed_line);
-	skip_spaces_or_value(&parsed_line, 0, 0);
-	skip_spaces_or_value(&parsed_line, 1, 0);
 	obj_node->data->triangle->material.rgb.r = ft_atof(parsed_line);
 	skip_spaces_or_value(&parsed_line, 0, 1);
 	obj_node->data->triangle->material.rgb.g = ft_atof(parsed_line);
 	skip_spaces_or_value(&parsed_line, 0, 1);
 	obj_node->data->triangle->material.rgb.b = ft_atof(parsed_line);
-	normalize_rgb_triplet(&obj_node->data->triangle->material.rgb);
 }
 
 t_obj_data	*init_triangle_data(t_obj_data *data)
@@ -84,5 +59,14 @@ t_obj_data	*init_triangle_data(t_obj_data *data)
 void	handle_triangle(t_scene *scene, t_obj_node *new_node, char *parsed_line)
 {
 	new_node = add_obj_node(scene->obj_list, TRIANGLE);
-	add_triangle_p1(new_node, parsed_line);
+	add_triangle(new_node, parsed_line);
+	normalize_rgb_triplet(&new_node->data->triangle->material.rgb);
+	ftm_tup_subtract(&new_node->data->triangle->e1,
+		new_node->data->triangle->p2, new_node->data->triangle->p1);
+	ftm_tup_subtract(&new_node->data->triangle->e2,
+		new_node->data->triangle->p3, new_node->data->triangle->p1);
+	ftm_tup_cross(&new_node->data->triangle->normal,
+		new_node->data->triangle->e2, new_node->data->triangle->e1);
+	ftm_tup_norm(&new_node->data->triangle->normal,
+		new_node->data->triangle->normal);
 }
