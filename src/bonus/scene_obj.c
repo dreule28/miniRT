@@ -19,7 +19,7 @@ void	s1_sphere(t_scene *scene)
 	s1->data->sphere->material.specular = 0.1;
 	s1->data->sphere->material.ambient = 0.2;
 	s1->data->sphere->material.reflective = 0;
-	gradient_pattern(&s1->data->sphere->material.pattern, col2, col1);
+	gradient_pattern(&s1->data->sphere->material.pattern, col1, col2);
 	ftm_matrix_mult(&s1->data->sphere->material.pattern.transform,
 		ftm_translation(point1), ftm_scaling(point2));
 }
