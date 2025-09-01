@@ -2,21 +2,18 @@
 
 bool	intersect_shape(t_obj_node *curr, t_ray ray)
 {
-	if(curr->type == SPHERE) {
+	if(curr->type == SPHERE)
 		return (intersect_sphere(curr, ray, *curr->data->sphere));
-	}
-	if(curr->type == PLANE) {
+	if(curr->type == PLANE)
 		return (intersect_plane(curr, ray));
-	}
-	if(curr->type == CYLINDER) {
+	if(curr->type == CYLINDER)
 		return (intersect_cylinder(curr, ray, *curr->data->cylinder));
-	}
-	if (curr->type == CUBE) {
+	if (curr->type == CUBE)
 		return (local_intersect(curr, ray));
-	}
+	if (curr->type == CONE)
+		return (intersect_cone(curr, ray, *curr->data->cone));
 	return(false);
 }
-
 bool	intersec_to_obj(t_obj_node *curr, t_ray ray)
 {
 	t_ray	transformed_ray;

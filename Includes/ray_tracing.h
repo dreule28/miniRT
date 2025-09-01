@@ -44,6 +44,13 @@ void		set_epsilon_offset(t_obj_node *curr);
 bool		set_comp_to_obj(t_obj_node *curr, t_ray *ray);
 // comp_to_list.c -- END
 
+// cone_cal.c -- BEGIN
+bool	cone_intersec_cal(t_obj_node *node, t_ray ray);
+int		check_cone_height(t_obj_node *node, t_ray ray, t_cone cone);
+bool	intersect_cone(t_obj_node *node, t_ray ray, t_cone cone);
+void	local_cone(t_tuples *normal, t_obj_node curr, t_tuples p);
+// cone_cal.c -- END
+
 // cubes.c -- BEGIN
 bool		local_intersect(t_obj_node *node, t_ray ray);
 void		check_axis(double origin, double direction, double *tmax,

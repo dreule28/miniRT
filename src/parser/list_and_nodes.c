@@ -50,6 +50,8 @@ t_obj_data	*init_obj_data(int obj_type)
 		return (init_cylinder_data(new_data));
 	else if (obj_type == CUBE)
 		return (init_cube_data(new_data));
+	else if (obj_type == CONE)
+		return (init_cone_data(new_data));
 	else
 		return (free(new_data), NULL);
 }

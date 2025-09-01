@@ -36,6 +36,13 @@ void			add_cube(t_obj_node *obj_node, char *parsed_line);
 void			normalize_rgb_triplet(t_rgb *c);
 //fill_objects.c -- END
 
+// init_cone.c -- BEGIN
+t_cone			*init_cone(void);
+t_obj_data		*init_cone_data(t_obj_data *data);
+void			add_cone(t_obj_node *obj_node, char *parsed_line);
+
+// init_cone.c -- END
+
 //init_cubes.c -- BEGIN
 t_cube			*init_cube(void);
 t_obj_data		*init_cube_data(t_obj_data *data);
@@ -70,6 +77,13 @@ bool			check_elements(t_scene *scene, char *parsed_line);
 bool			validate_file(char **argv);
 bool			parser(t_scene *scene, int argc, char **argv);
 
+// translate_cone.c -- BEGIN
+void			handle_cone_axis_x(t_tuples axis, t_tuples pos, t_obj_node *cone);
+void			handle_cone_axis_y(t_tuples axis, t_tuples pos, t_obj_node *cone);
+void			handle_cone_axis_z(t_tuples axis, t_tuples pos, t_obj_node *cone);
+void			translate_cone(t_obj_node *cone);
+// translate_cone.c -- END
+
 //translator_utils.c -- BEGIN
 bool			check_norm_vec(t_tuples *vec);
 void			translate_sphere(t_obj_node *sphere);
@@ -78,7 +92,7 @@ void			translate_camera(t_camera camera);
 
 //translator.c -- BEGIN
 void			translate_plane(t_obj_node *plane);
-void		rotate_cylinder(t_obj_node *cylinder, t_tuples pos, t_tuples axis);
+void			rotate_cylinder(t_obj_node *cylinder, t_tuples pos, t_tuples axis);
 void			translate_cylinder(t_obj_node *cyl);
 void			translate_cube(t_obj_node *cube);
 void			translate_objs(t_scene *scene);

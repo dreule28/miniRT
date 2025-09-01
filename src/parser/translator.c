@@ -109,6 +109,8 @@ void	translate_objs(t_scene *scene)
 			translate_cylinder(curr);
 		else if (curr->type == CUBE)
 			translate_cube(curr);
+		else if (curr->type == CONE)
+			translate_cone(curr);
 		curr = curr->next;
 	}
 }
