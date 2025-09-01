@@ -178,6 +178,7 @@ void	bonus_scenes(t_scene *scene, char *str);
 void	p3_plane(t_scene *scene);
 void	c1_cylinder(t_scene *scene);
 void	c1_cube(t_scene *scene);
+void	c1_cone(t_scene *scene);
 // more_scene_objs.c -- END
 
 // scene_objs.c -- BEGIN

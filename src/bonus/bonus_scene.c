@@ -10,10 +10,16 @@ void	bonus_scene1(t_scene *scene)
 	p3_plane(scene);
 	c1_cylinder(scene);
 	c1_cube(scene);
+	c1_cone(scene);
 }
+
+// void bonus_scene2(t_scene *scene)
+// {
+
+// }	
 
 void	bonus_scenes(t_scene *scene, char *str)
 {
-	if(!ft_strcmp(str, "scenes/bonus.rt"))
+	if(!ft_strcmp(str, "scenes/bonus1.rt"))
 		bonus_scene1(scene);
 }
