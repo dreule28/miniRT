@@ -16,9 +16,9 @@ void	s1_sphere(t_scene *scene)
 	init_point(&point1, 1, 1, 1);
 	init_point(&point2, 2, 2, 2);
 	s1->data->sphere->material.diffuse = 0.7;
-	s1->data->sphere->material.specular = 0.1;
+	s1->data->sphere->material.specular = 0.5;
 	s1->data->sphere->material.ambient = 0.2;
-	s1->data->sphere->material.reflective = 0;
+	s1->data->sphere->material.reflective = 0.025;
 	gradient_pattern(&s1->data->sphere->material.pattern, col1, col2);
 	ftm_matrix_mult(&s1->data->sphere->material.pattern.transform,
 		ftm_translation(point1), ftm_scaling(point2));
