@@ -57,6 +57,11 @@ void		check_axis(double origin, double direction, double *tmax,
 				double *tmin);
 // cubes.c -- END
 
+// cylinder_cal_utils.c -- BEGIN
+void	swap_value(double *t0, double *t1);
+bool	check_sides(double caps[2], t_obj_node *node,int cap_count);
+// cylinder_cal_utils.c -- END
+
 // cylinder_cal.c --BEGIN
 bool		check_cap(t_ray ray, double t);
 int			intersect_caps(t_ray ray, t_cylinder cylinder, double *out);

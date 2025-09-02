@@ -62,58 +62,19 @@ bool	intersect_cylinder(t_obj_node *node, t_ray ray, t_cylinder cylinder)
 	int		side_count;
 	double	caps[2];
 	int		cap_count;
-	double	best_cap;
-	int		i;
-	double	tmp;
 
-	// Calculate side intersections
 	if (!cylinder_intersec_cal(node, ray))
 		side_count = 0;
 	else
 		side_count = check_cylinder_height(node, ray, cylinder);
-
-	// Calculate cap intersections
 	cap_count = intersect_caps(ray, cylinder, caps);
-
 	if (side_count == 2)
-	{
-		node->t[0] = node->t[0];
-		node->t[1] = node->t[1];
-		node->has_intersection = true;
-		return (true);
-	}
+		return (node->has_intersection = true,true);
 	if (side_count == 1)
 	{
-		best_cap = INFINITY;
-		i = 0;
-		while (i < cap_count)
-		{
-			if (caps[i] > 0.0 && caps[i] < best_cap)
-				best_cap = caps[i];
-			i++;
-		}
-		if (best_cap < INFINITY)
-		{
-			node->t[1] = best_cap;
-			// Sort them
-			if (node->t[0] > node->t[1])
-			{
-				tmp = node->t[0];
-				node->t[0] = node->t[1];
-				node->t[1] = tmp;
-			}
-			node->has_intersection = true;
-			return (true);
-		}
-		else
-		{
-			node->t[1] = node->t[0];
-			node->has_intersection = true;
-			return (true);
-		}
+		if(check_sides(caps, node, cap_count))
+			return(true);
 	}
-
-	// No side intersections, try caps only
 	if (cap_count > 0)
 	{
 		node->t[0] = caps[0];
@@ -121,7 +82,5 @@ bool	intersect_cylinder(t_obj_node *node, t_ray ray, t_cylinder cylinder)
 		node->has_intersection = true;
 		return (true);
 	}
-
-	node->has_intersection = false;
-	return (false);
+	return (node->has_intersection = false, false);
 }
