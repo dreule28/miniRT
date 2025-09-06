@@ -29,6 +29,15 @@ typedef struct s_ray
 	t_tuples	direction;	/* Direction vector of the ray */
 }			t_ray;
 
+// anti_aliasing.c -- BEGIN
+void	ray_for_sample(t_ray *ray, t_camera *camera, t_m4 inv, double px,
+		double py, double sx, double sy);
+void	shade_single_ray(t_scene *scene, t_ray *ray, t_rgb *out);
+void	aa_cal_color(t_rgb *acc);
+void	aa_loop(t_scene *scene, t_ray *ray, t_m4 inv, t_rgb *acc, int x, int y);
+void	anti_aliasing(t_scene *scene, t_ray *ray, t_m4 inv, int x, int y);
+// anti_aliasing.c -- BEGIN
+
 // camera.c -- BEGIN
 void		calculate_ray_for_pixel(t_ray *ray, t_m4 inv, double world_x,
 				double world_y);
@@ -36,7 +45,7 @@ void		ray_for_pixel(t_ray *ray, t_camera *camera, t_m4 inv, double px,
 				double py);
 void		render(t_scene *scene);
 void	init_view_transformation(t_m4 *matrix, t_scene *scene);
-// camera.c -- BEGIN
+// camera.c -- END
 
 // comp_to_list.c -- BEGIN
 void		set_dot_product(t_obj_node *curr);
