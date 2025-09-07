@@ -18,8 +18,7 @@ typedef enum e_obj_type
 
 typedef enum e_pattern_type
 {
-    STRIPE_PATTERN,
-    TEST_PATTERN,
+	STRIPE_PATTERN,
 	GRADIENT_PATTERN,
 	RING_PATTERN,
 	CHECKERS_PATTERN

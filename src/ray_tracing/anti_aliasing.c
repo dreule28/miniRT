@@ -53,7 +53,7 @@ void	aa_loop(t_scene *scene, t_ray *ray, t_m4 inv, t_rgb *acc, int x, int y)
 	int		ox;
 	double	fx;
 	double	fy;
-			t_rgb sample;
+	t_rgb	sample;
 
 	oy = 0;
 	while (oy < AA_GRID)

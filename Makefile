@@ -21,10 +21,6 @@ else
 	LIBS = $(LIBFT) $(MLX42_LIB) -ldl -pthread -lm -lglfw -framework Cocoa -framework OpenGL -framework IOKit
 endif
 
-#if needed for dorker
-#	dorker apt update
-#	apt install build-essential libx11-dev libglfw3-dev libglfw3 xorg-dev
-
 vpath %.h $(INC_DIRS)
 vpath %.c $(SRC_DIRS)
 
@@ -50,11 +46,14 @@ MLX := $(addprefix mlx_src/, $(MLX_FILES))
 PATTERNS_FILES := patterns.c pattern_utils.c init_patterns.c
 PATTERNS := $(addprefix patterns/, $(PATTERNS_FILES))
 
+BUMP_TEXTURES_FILES := bump.c
+BUMP_TEXTURES := $(addprefix bump_textures/, $(BUMP_TEXTURES_FILES))
+
 BONUS_FILES := bonus_scene.c scene_obj.c more_scene_obj.c
 BONUS := $(addprefix bonus/, $(BONUS_FILES))
 
 SRC_FILES := main.c
-SRC := $(addprefix src/, $(SRC_FILES) $(MATRICES) $(TUPLES) $(RAY_TRACING) $(PARSER) $(MLX) $(PATTERNS) $(BONUS))
+SRC := $(addprefix src/, $(SRC_FILES) $(MATRICES) $(TUPLES) $(RAY_TRACING) $(PARSER) $(MLX) $(PATTERNS) $(BONUS) $(BUMP_TEXTURES))
 
 ################################################################################
 ###############               OBJECT FILES & RULES                ##############

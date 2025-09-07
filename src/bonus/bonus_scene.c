@@ -13,11 +13,6 @@ void	bonus_scene1(t_scene *scene)
 	c1_cone(scene);
 }
 
-// void bonus_scene2(t_scene *scene)
-// {
-
-// }	
-
 void	bonus_scenes(t_scene *scene, char *str)
 {
 	if(!ft_strcmp(str, "scenes/bonus1.rt"))
