@@ -24,6 +24,15 @@ typedef enum e_pattern_type
 	CHECKERS_PATTERN
 } t_pattern_type;
 
+typedef enum e_bump_type
+{
+	SINE_BUMP,
+	QUILT_BUMP,
+	CHECKERS_BUMP,
+	WAVE_BUMP
+} t_bump_type;
+
+
 typedef struct s_pattern
 {
 	t_rgb			color1;
@@ -32,6 +41,14 @@ typedef struct s_pattern
 	t_pattern_type	type;
 	bool			has_pattern;
 }					t_pattern;
+
+typedef struct s_bump
+{
+	t_m4			transform;
+	t_bump_type		type;
+	double			amplitude;
+	bool			has_bump;
+}					t_bump;
 
 typedef struct s_material
 {
@@ -44,6 +61,7 @@ typedef struct s_material
 	double		transparency;
 	double		refractive_index;
 	t_pattern	pattern;
+	t_bump		bump;
 }			t_material;
 
 /* ========================================================================== */

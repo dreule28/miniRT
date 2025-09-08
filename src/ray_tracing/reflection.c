@@ -38,6 +38,8 @@ t_material	get_material(void)
 	material.reflective = 0;
 	material.transparency = 0.0;
 	material.refractive_index = 1.0;
+	material.bump.has_bump = false;
+	material.bump.amplitude = 0.0;
 	return (material);
 }
 

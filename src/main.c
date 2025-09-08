@@ -58,6 +58,9 @@ int	main(int argc, char **argv)
 	if (!init_mlx_window(scene))
 		return (1);
 	bonus_scenes(scene, argv[1]);
+	scene->obj_list->head->data->plane->material.bump.has_bump = true;
+	scene->obj_list->head->data->plane->material.bump.type = SINE_BUMP;
+	scene->obj_list->head->data->plane->material.bump.amplitude = 0.15;
 	render(scene);
 	mlx_key_hook(scene->mlx, &key_hook, scene);
 	mlx_loop(scene->mlx);

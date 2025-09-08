@@ -203,4 +203,11 @@ void	p1_plane(t_scene *scene);
 void	p2_plane(t_scene *scene);
 // scene_objs.c -- END
 
+// bump.c -- BEGIN
+void	sine_at(t_tuples *out, t_bump *bump, t_tuples *bump_point);
+void	select_bump(t_tuples *out, t_bump bump, t_tuples bump_point);
+void	bump_at_shape(t_tuples *out, t_bump bump, t_obj_node shape,
+			t_tuples world_point);
+// bump.c -- END
+
 #endif
