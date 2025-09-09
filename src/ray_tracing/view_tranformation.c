@@ -21,8 +21,14 @@ void	view_transformation(t_m4 *matrix, t_tuples from, t_tuples to, t_tuples up)
 void	create_view_matrix(t_m4 *orientation, t_tuples left, t_tuples forward,
 		t_tuples true_up)
 {
-	assign_m4_col(&orientation->col0, left.x, true_up.x, -forward.x, 0.0);
-	assign_m4_col(&orientation->col1, left.y, true_up.y, -forward.y, 0.0);
-	assign_m4_col(&orientation->col2, left.z, true_up.z, -forward.z, 0.0);
-	assign_m4_col(&orientation->col3, 0.0, 0.0, 0.0, 1.0);
+	t_m4_col	col_values;
+
+	col_values = (t_m4_col){left.x, true_up.x, -forward.x, 0.0};
+	assign_m4_col(&orientation->col0, col_values);
+	col_values = (t_m4_col){left.y, true_up.y, -forward.y, 0.0};
+	assign_m4_col(&orientation->col1, col_values);
+	col_values = (t_m4_col){left.z, true_up.z, -forward.z, 0.0};
+	assign_m4_col(&orientation->col2, col_values);
+	col_values = (t_m4_col){0.0, 0.0, 0.0, 1.0};
+	assign_m4_col(&orientation->col3, col_values);
 }

@@ -66,7 +66,6 @@ void	translate_cube(t_obj_node *cube)
 	t_tuples	pos;
 	t_tuples	axis;
 	t_tuples	scale;
-	t_m4		product;
 
 	pos = cube->data->cube->pos;
 	axis = cube->data->cube->orientation;

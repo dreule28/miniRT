@@ -2,10 +2,12 @@
 
 t_m4	ftm_translation(t_tuples tuple)
 {
-	t_m4	matrix;
+	t_m4		matrix;
+	t_m4_col	col_values;
 
 	init_identity(&matrix);
-	assign_m4_col(&matrix.col3, tuple.x, tuple.y, tuple.z, 1);
+	col_values = (t_m4_col){tuple.x, tuple.y, tuple.z, 1};
+	assign_m4_col(&matrix.col3, col_values);
 	return (matrix);
 }
 

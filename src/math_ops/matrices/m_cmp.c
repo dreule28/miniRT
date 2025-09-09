@@ -28,8 +28,8 @@ bool	ftm_m3_cmp(t_m3 *matrix1, t_m3 *matrix2)
 	if (!matrix1 || !matrix2)
 		return (false);
 	return (cmp_m3_col(&matrix1->col0, &matrix2->col0)
-		&& cmp_m3_col(&matrix1->col1, &matrix2->col1) && cmp_m3_col(&matrix1->col2,
-			&matrix2->col2));
+		&& cmp_m3_col(&matrix1->col1, &matrix2->col1)
+		&& cmp_m3_col(&matrix1->col2, &matrix2->col2));
 }
 
 bool	ftm_m4_cmp(t_m4 *matrix1, t_m4 *matrix2)
@@ -39,6 +39,7 @@ bool	ftm_m4_cmp(t_m4 *matrix1, t_m4 *matrix2)
 	if (!matrix1 || !matrix2)
 		return (false);
 	return (cmp_m4_col(&matrix1->col0, &matrix2->col0)
-		&& cmp_m4_col(&matrix1->col1, &matrix2->col1) && cmp_m4_col(&matrix1->col2,
-			&matrix2->col2) && cmp_m4_col(&matrix1->col3, &matrix2->col3));
+		&& cmp_m4_col(&matrix1->col1, &matrix2->col1)
+		&& cmp_m4_col(&matrix1->col2, &matrix2->col2)
+		&& cmp_m4_col(&matrix1->col3, &matrix2->col3));
 }
