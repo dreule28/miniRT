@@ -44,6 +44,7 @@ typedef struct s_camera
 /* Complete scene containing all rendering elements */
 typedef struct s_scene
 {
+	int				syntax_count;
 	mlx_t			*mlx;			/* MLX graphics library instance */
 	mlx_image_t		*img;			/* Image buffer for rendering */
 	t_ambi_light	ambi_light;		/* Ambient lighting settings */
