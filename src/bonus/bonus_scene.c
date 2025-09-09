@@ -15,6 +15,6 @@ void	bonus_scene1(t_scene *scene)
 
 void	bonus_scenes(t_scene *scene, char *str)
 {
-	if(!ft_strcmp(str, "scenes/bonus1.rt"))
+	if (!ft_strcmp(str, "scenes/bonus1.rt"))
 		bonus_scene1(scene);
 }

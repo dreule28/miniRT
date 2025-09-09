@@ -84,7 +84,7 @@ void	c1_cone(t_scene *scene)
 	normalize_rgb_triplet(&col1);
 	init_rgb(&col2, 255, 240, 196);
 	normalize_rgb_triplet(&col2);
-	init_point(&point1,0, 0, 0);
+	init_point(&point1, 0, 0, 0);
 	init_point(&point2, 1, 1, 1);
 	co1->data->cone->material.ambient = 0.2;
 	co1->data->cone->material.diffuse = 0.8;
