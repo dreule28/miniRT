@@ -1,6 +1,5 @@
 #include "mini_rt.h"
 
-/*calculates the determenant of an 2x2 matrix*/
 double	ftm_m_dmt(t_m2 m2)
 {
 	double	x;

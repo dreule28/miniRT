@@ -33,19 +33,3 @@ double	ftm_m4_cofactor(t_m4 m4, int col, int row)
 		result = -result;
 	return (result);
 }
-
-// t_m3	*ftm_cofomatrix(t_m3 *m3)
-// {
-// 	t_m3	*cofomatrix;
-
-// 	cofomatrix = init_m3();
-// 	if (!cofomatrix)
-// 		return (NULL);
-// 	cofomatrix->col0 = assign_m3_col(ftm_m3_cofactor(m3, 0, 0),
-// 			ftm_m3_cofactor(m3, 0, 1), ftm_m3_cofactor(m3, 0, 2));
-// 	cofomatrix->col1 = assign_m3_col(ftm_m3_cofactor(m3, 1, 0),
-// 			ftm_m3_cofactor(m3, 1, 1), ftm_m3_cofactor(m3, 1, 2));
-// 	cofomatrix->col2 = assign_m3_col(ftm_m3_cofactor(m3, 2, 0),
-// 			ftm_m3_cofactor(m3, 2, 1), ftm_m3_cofactor(m3, 2, 2));
-// 	return (cofomatrix);
-// }
