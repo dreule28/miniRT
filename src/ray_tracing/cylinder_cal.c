@@ -49,16 +49,15 @@ bool	cylinder_intersec_cal(t_obj_node *node, t_ray ray)
 	double	c;
 	double	discri;
 
-	a = ray.direction.x * ray.direction.x + ray.direction.z
-		* ray.direction.z;
-	if(fabs(a) < DBL_EPSILON)
-		return(false);
+	a = ray.direction.x * ray.direction.x + ray.direction.z * ray.direction.z;
+	if (fabs(a) < DBL_EPSILON)
+		return (false);
 	b = (2 * ray.origin.x * ray.direction.x) + (2 * ray.origin.z
 			* ray.direction.z);
 	c = ray.origin.x * ray.origin.x + ray.origin.z * ray.origin.z - 1;
 	discri = b * b - 4 * a * c;
-	if(discri < 0.0)
-		return(false);
+	if (discri < 0.0)
+		return (false);
 	node->t[0] = (-b - sqrtf(discri)) / (2 * a);
 	node->t[1] = (-b + sqrtf(discri)) / (2 * a);
 	return (true);

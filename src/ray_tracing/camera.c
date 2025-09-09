@@ -17,29 +17,31 @@ void	calculate_ray_for_pixel(t_ray *ray, t_m4 inv, double world_x,
 	init_ray(ray, origin, direction);
 }
 
-void	ray_for_pixel(t_ray *ray, t_camera *camera, t_m4 inv, double px,
-		double py)
+void	ray_for_pixel(t_ray_params *ray_params, double px, double py)
 {
 	double	xoffset;
 	double	yoffset;
 	double	world_x;
 	double	world_y;
 
-	xoffset = (px + 0.5) * camera->pixel_size;
-	yoffset = (py + 0.5) * camera->pixel_size;
-	world_x = camera->half_width - xoffset;
-	world_y = camera->half_height - yoffset;
-	calculate_ray_for_pixel(ray, inv, world_x, world_y);
+	xoffset = (px + 0.5) * ray_params->scene.camera.pixel_size;
+	yoffset = (py + 0.5) * ray_params->scene.camera.pixel_size;
+	world_x = ray_params->scene.camera.half_width - xoffset;
+	world_y = ray_params->scene.camera.half_height - yoffset;
+	calculate_ray_for_pixel(&ray_params->ray, ray_params->inv, world_x,
+		world_y);
 }
 
 void	render(t_scene *scene)
 {
-	t_ray	ray;
-	t_m4	inv;
-	int		y;
-	int		x;
+	t_ray			ray;
+	t_m4			inv;
+	int				y;
+	int				x;
+	t_ray_params	ray_params;
 
 	ftm_m4_inversion(&inv, scene->camera.matrix);
+	init_ray_params(&ray_params, scene, &ray, inv);
 	y = 0;
 	while (y < scene->camera.vsize)
 	{
@@ -47,12 +49,9 @@ void	render(t_scene *scene)
 		while (x < scene->camera.hsize)
 		{
 			if (AA_GRID == 1)
-			{
-				ray_for_pixel(&ray, &scene->camera, inv, x, y);
-				paint_pixel(scene, &ray, y * scene->camera.hsize + x);
-			}
+				normal_rendering(&ray_params, x, y);
 			else
-				anti_aliasing(scene, &ray, inv, x, y);
+				anti_aliasing(&ray_params, x, y);
 			x++;
 		}
 		y++;

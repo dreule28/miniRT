@@ -53,4 +53,5 @@ typedef struct s_scene
 	t_obj_list		*obj_list;		/* List of all 3D objects */
 }					t_scene;
 
+
 #endif

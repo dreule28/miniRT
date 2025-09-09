@@ -40,20 +40,34 @@ typedef struct s_ray
 	t_tuples	direction;	/* Direction vector of the ray */
 }			t_ray;
 
+typedef struct s_ray_params
+{
+	t_scene		scene;
+	t_ray		ray;
+	t_m4		inv;
+}			t_ray_params;
+
+
+// aa_utils.c -- BEGIN
+void	init_ray_params(t_ray_params *ray_params, t_scene *scene, t_ray *ray,
+		t_m4 inv);
+void	get_aa_color(t_ray_params *ray_params, t_rgb *acc);
+void	normal_rendering(t_ray_params *ray_params, int x, int y);
+// aa_utils.c -- END
+
 // anti_aliasing.c -- BEGIN
-void	ray_for_sample(t_ray *ray, t_camera *camera, t_m4 inv, double px,
-		double py, double sx, double sy);
+void	ray_for_sample(t_ray *ray, t_camera *camera, t_m4 inv, t_tuples params);
 void	shade_single_ray(t_scene *scene, t_ray *ray, t_rgb *out);
 void	aa_cal_color(t_rgb *acc);
-void	aa_loop(t_scene *scene, t_ray *ray, t_m4 inv, t_rgb *acc, int x, int y);
-void	anti_aliasing(t_scene *scene, t_ray *ray, t_m4 inv, int x, int y);
+void	aa_loop(t_ray_params *ray_params, t_rgb *acc, int x, int y);
+void	init_ray_params(t_ray_params *ray_params, t_scene *scene, t_ray *ray, t_m4 inv);
+void	anti_aliasing(t_ray_params *ray_params, int x, int y);
 // anti_aliasing.c -- BEGIN
 
 // camera.c -- BEGIN
 void		calculate_ray_for_pixel(t_ray *ray, t_m4 inv, double world_x,
 				double world_y);
-void		ray_for_pixel(t_ray *ray, t_camera *camera, t_m4 inv, double px,
-				double py);
+void		ray_for_pixel(t_ray_params *ray_params, double px, double py);
 void		render(t_scene *scene);
 void	init_view_transformation(t_m4 *matrix, t_scene *scene);
 // camera.c -- END
