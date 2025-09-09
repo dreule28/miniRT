@@ -4,7 +4,7 @@
 # define HEIGHT 1080
 # define DBL_EPSILON 1e-5
 # define EPSILON 1e-5
-# define AA_GRID 6
+# define AA_GRID 2
 
 //Includes -- BEGIN
 # include <stdio.h>

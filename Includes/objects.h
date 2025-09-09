@@ -142,6 +142,7 @@ typedef union u_obj_data
 	t_cylinder	*cylinder;	/* Pointer to cylinder data */
 	t_cube		*cube;
 	t_triangle	*triangle;
+	t_cone		*cone;
 }					t_obj_data;
 
 typedef struct s_computations
