@@ -3,12 +3,21 @@
 void	p3_plane(t_scene *scene)
 {
 	t_obj_node	*p3;
+	t_tuples	t;
+	t_tuples	s;
 
 	p3 = scene->obj_list->head->next->next;
 	p3->data->plane->material.ambient = 0.2;
 	p3->data->plane->material.diffuse = 0.8;
 	p3->data->plane->material.specular = 0.1;
 	p3->data->plane->material.reflective = 0.0;
+	p3->data->plane->material.bump.has_bump = true;
+	p3->data->plane->material.bump.type = WAVE_BUMP;
+	p3->data->plane->material.bump.amplitude = 0.3;
+	init_point(&t, 0, 0, 0);
+	init_point(&s, 1, 1, 1);
+	ftm_matrix_mult(&p3->data->plane->material.bump.transform,
+		ftm_translation(t), ftm_scaling(s));
 }
 
 void	c1_cylinder(t_scene *scene)

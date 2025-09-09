@@ -26,14 +26,26 @@ void	s1_sphere(t_scene *scene)
 
 void	s2_sphere(t_scene *scene)
 {
+	t_rgb		col1;
+	t_rgb		col2;
+	t_tuples	point1;
+	t_tuples	point2;
 	t_obj_node	*s2;
 
 	s2 = scene->obj_list->head->next->next->next->next;
-	s2->data->sphere->material.diffuse = 0.5;
-	s2->data->sphere->material.specular = 0.1;
-	s2->data->sphere->material.ambient = 0.1;
-	s2->data->sphere->material.reflective = 1;
-	s2->data->sphere->material.shininess = 10;
+	init_rgb(&col1, 140, 16, 7);
+	normalize_rgb_triplet(&col1);
+	init_rgb(&col2, 255, 240, 196);
+	normalize_rgb_triplet(&col2);
+	init_point(&point1, 1, 1, 1);
+	init_point(&point2, 0.01, 0.01, 0.01);
+	s2->data->sphere->material.diffuse = 0.7;
+	s2->data->sphere->material.specular = 0.5;
+	s2->data->sphere->material.ambient = 0.2;
+	s2->data->sphere->material.reflective = 0.1;
+	ring_pattern(&s2->data->sphere->material.pattern, col1, col2);
+	ftm_matrix_mult(&s2->data->sphere->material.pattern.transform,
+		ftm_translation(point1), ftm_scaling(point2));
 }
 
 void	s3_sphere(t_scene *scene)
@@ -88,6 +100,8 @@ void	p1_plane(t_scene *scene)
 void	p2_plane(t_scene *scene)
 {
 	t_obj_node	*p2;
+	t_tuples	t;
+	t_tuples	s;
 
 	p2 = scene->obj_list->head->next;
 	p2->data->plane->material.ambient = 0.2;
@@ -95,4 +109,11 @@ void	p2_plane(t_scene *scene)
 	p2->data->plane->material.specular = 0.1;
 	p2->data->plane->material.reflective = 0.0;
 	p2->data->plane->material.shininess = 1.0;
+	p2->data->plane->material.bump.has_bump = true;
+	p2->data->plane->material.bump.type = QUILT_BUMP;
+	p2->data->plane->material.bump.amplitude = 0.3;
+	init_point(&t, 0, 0, 0);
+	init_point(&s, 1, 1, 1);
+	ftm_matrix_mult(&p2->data->plane->material.bump.transform,
+		ftm_translation(t), ftm_scaling(s));
 }

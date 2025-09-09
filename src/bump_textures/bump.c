@@ -1,19 +1,53 @@
 #include "mini_rt.h"
 
-void	sine_at(t_tuples *out, t_bump *bump, t_tuples *bump_point)
+t_material	*mat_of(t_obj_node *n)
 {
-	double	freq;
-
-	freq = 10.0;
-	return (init_vector(out, 0.0, bump->amplitude * sin(freq * bump_point->x),
-			0.0));
+	if (!n || !n->data)
+		return (NULL);
+	if (n->type == SPHERE)
+		return (&n->data->sphere->material);
+	if (n->type == PLANE)
+		return (&n->data->plane->material);
+	if (n->type == CYLINDER)
+		return (&n->data->cylinder->material);
+	if (n->type == CUBE)
+		return (&n->data->cube->material);
+	if (n->type == CONE)
+		return (&n->data->cone->material);
+	return (NULL);
 }
 
-void	select_bump(t_tuples *out, t_bump bump, t_tuples bump_point)
+void	apply_bump_texture(t_obj_node *curr)
+{
+	t_material	*mat;
+	double		k;
+
+	mat = mat_of(curr);
+	if (mat && mat->bump.has_bump)
+	{
+		t_tuples dv, dv_tan;
+		bump_at_shape(&dv, mat->bump, *curr, curr->comp.point);
+		k = ftm_tup_dot(curr->comp.normalv, dv);
+		ftm_tup_mult(&dv_tan, curr->comp.normalv, k);
+		ftm_tup_subtract(&dv, dv, dv_tan);
+		ftm_tup_add(&curr->comp.normalv, curr->comp.normalv, dv);
+		ftm_tup_norm(&curr->comp.normalv, curr->comp.normalv);
+	}
+}
+
+void	select_bump(t_tuples *out, t_bump bump, t_tuples p)
 {
 	init_vector(out, 0, 0, 0);
+	if (!bump.has_bump)
+		return ;
 	if (bump.type == SINE_BUMP)
-		sine_at(out, &bump, &bump_point);
+		bump_sine(out, bump.amplitude, p);
+	else if (bump.type == QUILT_BUMP)
+		bump_quilt(out, bump.amplitude, p);
+	else if (bump.type == CHECKERS_BUMP)
+		bump_checkers(out, bump.amplitude, p);
+	else if (bump.type == WAVE_BUMP)
+		bump_wave(out, bump.amplitude, p);
 }
 
 void	bump_at_shape(t_tuples *out, t_bump bump, t_obj_node shape,

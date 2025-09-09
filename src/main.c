@@ -44,10 +44,9 @@ void	free_light_list(t_light_list *light_list)
 	free(light_list);
 }
 
-
 int	main(int argc, char **argv)
 {
-	t_scene	*scene;
+	t_scene		*scene;
 
 	scene = ft_calloc(sizeof(t_scene), 1);
 	if (!scene)
@@ -58,9 +57,6 @@ int	main(int argc, char **argv)
 	if (!init_mlx_window(scene))
 		return (1);
 	bonus_scenes(scene, argv[1]);
-	scene->obj_list->head->data->plane->material.bump.has_bump = true;
-	scene->obj_list->head->data->plane->material.bump.type = SINE_BUMP;
-	scene->obj_list->head->data->plane->material.bump.amplitude = 0.15;
 	render(scene);
 	mlx_key_hook(scene->mlx, &key_hook, scene);
 	mlx_loop(scene->mlx);

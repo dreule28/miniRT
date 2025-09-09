@@ -24,7 +24,6 @@ void	set_epsilon_offset(t_obj_node *curr)
 
 bool	set_comp_to_obj(t_obj_node *curr, t_ray *ray)
 {
-
 	if (!curr->has_intersection)
 		return (true);
 	ray_position(&curr->comp.point, ray, curr->t[0]);
@@ -35,6 +34,7 @@ bool	set_comp_to_obj(t_obj_node *curr, t_ray *ray)
 	if (!&curr->comp.eyev)
 		return (false);
 	normal_at(&curr->comp.normalv, *curr, curr->comp.point);
+	apply_bump_texture(curr);
 	if (!&curr->comp.normalv)
 		return (false);
 	reflect(&curr->comp.reflectv, ray->direction, curr->comp.normalv);

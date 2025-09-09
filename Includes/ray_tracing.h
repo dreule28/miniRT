@@ -204,10 +204,18 @@ void	p2_plane(t_scene *scene);
 // scene_objs.c -- END
 
 // bump.c -- BEGIN
-void	sine_at(t_tuples *out, t_bump *bump, t_tuples *bump_point);
-void	select_bump(t_tuples *out, t_bump bump, t_tuples bump_point);
+t_material	*mat_of(t_obj_node *n);
+void	apply_bump_texture(t_obj_node *curr);
+void	select_bump(t_tuples *out, t_bump bump, t_tuples p);
 void	bump_at_shape(t_tuples *out, t_bump bump, t_obj_node shape,
 			t_tuples world_point);
 // bump.c -- END
+
+// textures.c -- BEGIN
+void	bump_sine(t_tuples *out, double amp, t_tuples p);
+void	bump_quilt(t_tuples *out, double amp, t_tuples p);
+void	bump_checkers(t_tuples *out, double amp, t_tuples p);
+void	bump_wave(t_tuples *out, double amp, t_tuples p);
+// textures.c -- END
 
 #endif
