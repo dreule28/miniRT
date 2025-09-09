@@ -53,6 +53,7 @@ void	init_ray_params(t_ray_params *ray_params, t_scene *scene, t_ray *ray,
 		t_m4 inv);
 void	get_aa_color(t_ray_params *ray_params, t_rgb *acc);
 void	normal_rendering(t_ray_params *ray_params, int x, int y);
+void	swap_values(double t0, double t1);
 // aa_utils.c -- END
 
 // anti_aliasing.c -- BEGIN

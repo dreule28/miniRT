@@ -24,3 +24,12 @@ void	normal_rendering(t_ray_params *ray_params, int x, int y)
 	paint_pixel(&ray_params->scene, &ray_params->ray, y
 		* ray_params->scene.camera.hsize + x);
 }
+
+void	swap_values(double t0, double t1)
+{
+	double	tmp;
+
+	tmp = t0;
+	t0 = t1;
+	t1 = tmp;
+}

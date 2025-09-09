@@ -69,17 +69,12 @@ int	check_cylinder_height(t_obj_node *node, t_ray ray, t_cylinder cylinder)
 	double	t1;
 	double	y0;
 	double	y1;
-	double	tmp;
 	int		count;
 
 	t0 = node->t[0];
 	t1 = node->t[1];
 	if (t0 > t1)
-	{
-		tmp = t0;
-		t0 = t1;
-		t1 = tmp;
-	}
+		swap_values(t0, t1);
 	y0 = ray.origin.y + t0 * ray.direction.y;
 	y1 = ray.origin.y + t1 * ray.direction.y;
 	count = 0;

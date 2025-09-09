@@ -1,6 +1,7 @@
 #include "mini_rt.h"
 
-void	view_transformation(t_m4 *matrix, t_tuples from, t_tuples to, t_tuples up)
+void	view_transformation(t_m4 *matrix, t_tuples from, t_tuples to,
+		t_tuples up)
 {
 	t_tuples	forward;
 	t_tuples	up_normelized;

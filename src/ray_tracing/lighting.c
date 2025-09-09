@@ -1,7 +1,7 @@
 #include "mini_rt.h"
 
-void	calculate_lighting_components(t_rgb *result, t_material material, t_light light,
-		double light_dot_normal)
+void	calculate_lighting_components(t_rgb *result, t_material material,
+		t_light light, double light_dot_normal)
 {
 	t_rgb	effective_color;
 	t_rgb	ambient;
@@ -23,7 +23,7 @@ void	calculate_lighting_components(t_rgb *result, t_material material, t_light l
 	diffuse.g = effective_color.g * material.diffuse * light_dot_normal;
 	diffuse.b = effective_color.b * material.diffuse * light_dot_normal;
 	init_rgb(result, ambient.r + diffuse.r, ambient.g + diffuse.g, ambient.b
-			+ diffuse.b);
+		+ diffuse.b);
 }
 
 t_material	get_obj_mat(t_scene *scene)
@@ -52,7 +52,7 @@ t_material	get_obj_mat(t_scene *scene)
 }
 
 void	calculate_specular(t_rgb *specular, t_scene *scene, t_tuples lightv,
-			t_computations comps)
+		t_computations comps)
 {
 	t_material	material;
 	t_light		*light;
@@ -86,13 +86,12 @@ void	ambient_comp(t_rgb *result, t_material material, t_light light)
 	effective_color.r = material.rgb.r * light.rgb.r * light.intensity;
 	effective_color.g = material.rgb.g * light.rgb.g * light.intensity;
 	effective_color.b = material.rgb.b * light.rgb.b * light.intensity;
-	init_rgb(result, effective_color.r * material.ambient,
-			effective_color.g * material.ambient,
-			effective_color.b * material.ambient);
+	init_rgb(result, effective_color.r * material.ambient, effective_color.g
+		* material.ambient, effective_color.b * material.ambient);
 }
 
 void	lighting(t_rgb *res, t_scene *scene, t_computations comps,
-			t_light light)
+		t_light light)
 {
 	t_material	material;
 	t_tuples	lightv;
@@ -103,7 +102,7 @@ void	lighting(t_rgb *res, t_scene *scene, t_computations comps,
 	ftm_tup_subtract(&lightv, light.pos, comps.over_point);
 	ftm_tup_norm(&lightv, lightv);
 	light_dot_normal = ftm_tup_dot(lightv, comps.normalv);
-	if(material.pattern.has_pattern)
+	if (material.pattern.has_pattern)
 		pattern_at_shape(&material.rgb, material.pattern,
 			*scene->obj_list->head, scene->obj_list->head->comp.over_point);
 	if (comps.in_shadow)

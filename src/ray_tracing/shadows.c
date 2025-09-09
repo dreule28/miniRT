@@ -1,7 +1,7 @@
 #include "mini_rt.h"
 
 void	get_shadow_ray(t_ray *ray, t_tuples point, double *distance,
-			t_light curr)
+		t_light curr)
 {
 	t_tuples	distance_v;
 	t_tuples	direction;
@@ -25,8 +25,8 @@ bool	get_transformed_intersection(t_obj_node *curr, t_ray ray)
 
 bool	check_shadow_intersection(t_obj_node *node, double dist, double *min_t)
 {
-	if (node->has_intersection && node->t[0] >= 0
-			&& node->t[0] < dist && node->t[0] < *min_t)
+	if (node->has_intersection && node->t[0] >= 0 && node->t[0] < dist
+		&& node->t[0] < *min_t)
 	{
 		*min_t = node->t[0];
 		return (true);

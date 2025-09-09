@@ -2,17 +2,17 @@
 
 void	swap_value(double *t0, double *t1)
 {
-	double tmp;
+	double	tmp;
 
 	tmp = *t0;
 	*t0 = *t1;
 	*t1 = tmp;
 }
 
-bool	check_sides(double caps[2], t_obj_node *node,int cap_count)
+bool	check_sides(double caps[2], t_obj_node *node, int cap_count)
 {
-	int i;
-	double best_cap;
+	int		i;
+	double	best_cap;
 
 	best_cap = INFINITY;
 	i = 0;
@@ -26,7 +26,7 @@ bool	check_sides(double caps[2], t_obj_node *node,int cap_count)
 	{
 		node->t[1] = best_cap;
 		if (node->t[0] > node->t[1])
-			swap_value(&node->t[0],&node->t[1]);
+			swap_value(&node->t[0], &node->t[1]);
 		return (node->has_intersection = true, true);
 	}
 	else
@@ -34,5 +34,5 @@ bool	check_sides(double caps[2], t_obj_node *node,int cap_count)
 		node->t[1] = node->t[0];
 		return (node->has_intersection = true, true);
 	}
-	return(false);
+	return (false);
 }
