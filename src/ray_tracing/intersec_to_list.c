@@ -10,6 +10,8 @@ bool	intersect_shape(t_obj_node *curr, t_ray ray)
 		return (intersect_cylinder(curr, ray, *curr->data->cylinder));
 	if (curr->type == CUBE)
 		return (local_intersect(curr, ray));
+	if (curr->type == TRIANGLE)
+		return (intersect_triangle(curr, ray));
 	if (curr->type == CONE)
 		return (intersect_cone(curr, ray, *curr->data->cone));
 	return(false);

@@ -11,6 +11,8 @@ void	local_normal_at(t_tuples *local_normal_at, t_obj_node curr,
 		local_cylinder(local_normal_at, curr, object_point);
 	if (curr.type == CUBE)
 		local_cube(local_normal_at, object_point);
+	if (curr.type == TRIANGLE)
+		*local_normal_at = curr.data->triangle->normal;
 	if ( curr.type == CONE)
 		local_cone(local_normal_at,curr, object_point);
 }

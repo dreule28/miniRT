@@ -23,13 +23,13 @@ void	translate_plane(t_obj_node *plane)
 	axis = plane->data->plane->axis;
 	if (axis.x != 0)
 		ftm_matrix_mult(&plane->matrix, ftm_translation(pos),
-						ftm_rotate_x(radians(axis.x * 90)));
+						ftm_rotate_z(radians(90)));
 	else if (axis.y != 0)
 		ftm_matrix_mult(&plane->matrix, ftm_translation(pos),
-						ftm_rotate_y(radians(axis.y * 90)));
+						ftm_rotate_y(radians(90)));
 	else if (axis.z != 0)
 		ftm_matrix_mult(&plane->matrix, ftm_translation(pos),
-						ftm_rotate_z(radians(axis.z * 90)));
+						ftm_rotate_x(radians(90)));
 	else
 		plane->matrix = ftm_translation(pos);
 	init_point(&plane->data->plane->pos, 0, 0, 0);
@@ -74,19 +74,19 @@ void	translate_cube(t_obj_node *cube)
 	if (axis.x != 0)
 	{
 		ftm_matrix_mult(&product, ftm_translation(pos),
-			ftm_rotate_x(radians(axis.x * 90)));
+			ftm_rotate_z(radians(90)));
 		ftm_matrix_mult(&cube->matrix, product, ftm_scaling(scale));
 	}
 	else if (axis.y != 0)
 	{
 		ftm_matrix_mult(&product, ftm_translation(pos),
-			ftm_rotate_x(radians(axis.y * 90)));
+			ftm_rotate_x(radians(90)));
 		ftm_matrix_mult(&cube->matrix, product, ftm_scaling(scale));
 	}
 	else if (axis.z != 0)
 	{
 		ftm_matrix_mult(&product, ftm_translation(pos),
-			ftm_rotate_x(radians(axis.z * 90)));
+			ftm_rotate_y(radians(90)));
 		ftm_matrix_mult(&cube->matrix, product, ftm_scaling(scale));
 	}
 	else

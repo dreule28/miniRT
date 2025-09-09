@@ -34,9 +34,15 @@ bool	check_argv(char **argv)
 bool	check_elements(t_scene *scene, char *parsed_line)
 {
 	if (!ft_strncmp(parsed_line, "A", 1))
+	{
 		add_ambient(scene, parsed_line);
+		scene->syntax_count++;
+	}
 	if (!ft_strncmp(parsed_line, "C", 1))
+	{
 		add_camera(scene, parsed_line);
+		scene->syntax_count++;
+	}
 	if (!ft_strncmp(parsed_line, "L", 1))
 		add_light_node(scene->light_list, parsed_line);
 	return (true);

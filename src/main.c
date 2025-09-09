@@ -10,6 +10,8 @@ void	free_obj_data(t_obj_data *data, int type)
 		free(data->cylinder);
 	else if (type == CUBE && data->cube)
 		free(data->cube);
+	else if (type == TRIANGLE && data->triangle)
+		free(data->triangle);
 	free(data);
 }
 
@@ -44,6 +46,14 @@ void	free_light_list(t_light_list *light_list)
 	free(light_list);
 }
 
+void	handle_syntax_error(t_scene *scene)
+{
+	if (scene->syntax_count > 2)
+		ft_putstr_fd("Error\nToo many Elements\n", 2);
+	else
+		ft_putstr_fd("Error\nParser failed\n", 2);
+}
+
 int	main(int argc, char **argv)
 {
 	t_scene		*scene;
@@ -51,8 +61,8 @@ int	main(int argc, char **argv)
 	scene = ft_calloc(sizeof(t_scene), 1);
 	if (!scene)
 		return (1);
-	if (!parser(scene, argc, argv))
-		return (free(scene), 1);
+	if (!parser(scene, argc, argv) || scene->syntax_count > 2)
+		return (handle_syntax_error(scene), free(scene), 1);
 	translate_objs(scene);
 	if (!init_mlx_window(scene))
 		return (1);

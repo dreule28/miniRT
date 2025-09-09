@@ -1,0 +1,35 @@
+# Alien Landscape - Strange world with unusual formations
+A	0.4							60,40,80
+
+C	0,2,-15		0,-0.1,1		80
+
+# Alien sun lighting
+L	-12,18,8	0.9				255,150,200
+L	10,12,12	0.5				150,255,150
+
+# Alien ground
+pl	0,0,0		0,1,0			80,40,100
+
+# Strange rock formations
+cy	-8,4,8		0.2,1,0.1		2		8		120,80,140
+cy	5,3,12		-0.1,1,0.2		1.5		6		100,60,120
+cy	-3,5,15		0.3,1,-0.1		2.5		10		140,100,160
+
+# Alien plants (unusual shapes)
+sp	-5,1,4		1.5				200,100,50
+cy	-5,3,4		0,1,0			0.3		4		180,80,30
+sp	8,2,6		2				100,200,80
+cy	8,4,6		0,1,0			0.4		3		80,180,60
+
+# Glowing crystals
+sp	2,0.5,10	0.8				255,200,255
+sp	-10,0.8,12	1				200,255,200
+sp	6,0.6,18	0.6				255,255,200
+
+# Strange atmosphere effects
+pl	-25,10,0	1,0,0			100,50,150
+pl	25,8,0		-1,0,0			150,100,200
+
+# Distant alien structures
+cy	-20,6,25	0,1,0.2			3		12		80,80,120
+sp	20,8,30		4				120,120,180
