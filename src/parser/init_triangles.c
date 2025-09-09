@@ -13,7 +13,7 @@ t_triangle	*init_triangle(void)
 	init_vector(&triangle->e1, 0, 0, 0);
 	init_vector(&triangle->e2, 0, 0, 0);
 	init_vector(&triangle->normal, 0, 0, 0);
-	init_rgb(&triangle->material.rgb,0, 0, 0);
+	init_rgb(&triangle->material.rgb, 0, 0, 0);
 	return (triangle);
 }
 

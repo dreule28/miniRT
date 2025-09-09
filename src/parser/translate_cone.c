@@ -12,7 +12,7 @@ void	handle_cone_axis_x(t_tuples axis, t_tuples pos, t_obj_node *cone)
 	init_point(&point, radius, height, radius);
 	ftm_matrix_mult(&product, ftm_translation(pos),
 		ftm_rotate_x(radians(axis.x * 90)));
-	ftm_matrix_mult(&cone->matrix, product,ftm_scaling(point));
+	ftm_matrix_mult(&cone->matrix, product, ftm_scaling(point));
 }
 
 void	handle_cone_axis_y(t_tuples axis, t_tuples pos, t_obj_node *cone)
@@ -27,7 +27,7 @@ void	handle_cone_axis_y(t_tuples axis, t_tuples pos, t_obj_node *cone)
 	init_point(&point, radius, height, radius);
 	ftm_matrix_mult(&product, ftm_translation(pos),
 		ftm_rotate_y(radians(axis.y * 90)));
-	ftm_matrix_mult(&cone->matrix, product,ftm_scaling(point));
+	ftm_matrix_mult(&cone->matrix, product, ftm_scaling(point));
 }
 
 void	handle_cone_axis_z(t_tuples axis, t_tuples pos, t_obj_node *cone)
@@ -42,7 +42,7 @@ void	handle_cone_axis_z(t_tuples axis, t_tuples pos, t_obj_node *cone)
 	init_point(&point, radius, height, radius);
 	ftm_matrix_mult(&product, ftm_translation(pos),
 		ftm_rotate_z(radians(axis.z * 90)));
-	ftm_matrix_mult(&cone->matrix, product,ftm_scaling(point));
+	ftm_matrix_mult(&cone->matrix, product, ftm_scaling(point));
 }
 
 void	translate_cone(t_obj_node *cone)

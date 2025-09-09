@@ -70,6 +70,8 @@ void	add_camera(t_scene *scene, char *parsed_line)
 	scene->camera.orientation_vector.y = ft_atof(parsed_line);
 	skip_spaces_or_value(&parsed_line, 0, 1);
 	scene->camera.orientation_vector.z = ft_atof(parsed_line);
+	ftm_tup_norm(&scene->camera.orientation_vector,
+		scene->camera.orientation_vector);
 	skip_spaces_or_value(&parsed_line, 1, 0);
 	scene->camera.fov = radians(ft_atof(parsed_line));
 	scene->camera.vsize = HEIGHT;
