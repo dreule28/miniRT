@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   objects.h                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dreule <dreule@student.42heilbronn.de>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/09/09 15:09:03 by dreule            #+#    #+#             */
+/*   Updated: 2025/09/09 15:09:04 by dreule           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef OBJECTS_H
 # define OBJECTS_H
 
@@ -5,12 +17,10 @@
 # include <unistd.h>
 # include "matrices.h"
 
-
-/* Enumeration of supported 3D object types */
 typedef enum e_obj_type
 {
-	SPHERE,		/* Spherical object */
-	PLANE,		/* Infinite plane */
+	SPHERE,
+	PLANE,
 	CYLINDER,
 	CUBE,
 	TRIANGLE,
@@ -23,16 +33,12 @@ typedef enum e_pattern_type
 	GRADIENT_PATTERN,
 	RING_PATTERN,
 	CHECKERS_PATTERN
-} t_pattern_type;
+}	t_pattern_type;
 
 typedef enum e_bump_type
 {
-	SINE_BUMP,
 	QUILT_BUMP,
-	CHECKERS_BUMP,
-	WAVE_BUMP
-} t_bump_type;
-
+}	t_bump_type;
 
 typedef struct s_pattern
 {
@@ -53,11 +59,11 @@ typedef struct s_bump
 
 typedef struct s_material
 {
-	t_rgb		rgb; /* Color information for the material */
-	double		ambient; /* Ambient lighting coefficient (0.0 to 1.0) */
-	double		diffuse; /* Diffuse reflection coefficient (0.0 to 1.0) */
-	double		specular; /* Specular reflection coefficient (0.0 to 1.0) */
-	double		shininess; /* Shininess factor for specular highlights */
+	t_rgb		rgb;
+	double		ambient;
+	double		diffuse;
+	double		specular;
+	double		shininess;
 	double		reflective;
 	double		transparency;
 	double		refractive_index;
@@ -69,33 +75,30 @@ typedef struct s_material
 /*                           3D OBJECT STRUCTURES                            */
 /* ========================================================================== */
 
-/* Sphere object with position, size, color and transformation */
 typedef struct s_sphere
 {
-	t_tuples	pos;		/* Center position in 3D space */
-	double		radius;		/* Radius of the sphere */
-	t_material	material;	/* Material of the object*/
+	t_tuples	pos;
+	double		radius;
+	t_material	material;
 }				t_sphere;
 
-/* Plane object with position, orientation and color */
 typedef struct s_plane
 {
-	t_tuples	pos;		/* Point on the plane */
-	t_tuples	axis;		/* Normal vector defining plane orientation */
-	t_material	material;	/* Material of the object*/
+	t_tuples	pos;
+	t_tuples	axis;
+	t_material	material;
 }				t_plane;
 
-/* Cylinder object with position, orientation, dimensions and color */
 typedef struct s_cylinder
 {
-	t_tuples	pos;		/* Center position of cylinder base */
-	t_tuples	axis;		/* Direction vector of cylinder axis */
-	double		radius;		/* Radius of the cylinder */
-	double		height;		/* Height of the cylinder */
+	t_tuples	pos;
+	t_tuples	axis;
+	double		radius;
+	double		height;
 	double		maximum;
 	double		minimum;
 	bool		closed;
-	t_material	material;	/* Material of the object*/
+	t_material	material;
 }				t_cylinder;
 
 typedef struct s_triangle
@@ -129,17 +132,15 @@ typedef struct s_cone
 	t_material	material;
 }				t_cone;
 
-
 /* ========================================================================== */
 /*                           OBJECT DATA STRUCTURES                          */
 /* ========================================================================== */
 
-/* Union to store different object types efficiently */
 typedef union u_obj_data
 {
-	t_sphere	*sphere;	/* Pointer to sphere data */
-	t_plane		*plane;		/* Pointer to plane data */
-	t_cylinder	*cylinder;	/* Pointer to cylinder data */
+	t_sphere	*sphere;
+	t_plane		*plane;
+	t_cylinder	*cylinder;
 	t_cube		*cube;
 	t_triangle	*triangle;
 	t_cone		*cone;
@@ -159,23 +160,21 @@ typedef struct s_computations
 	double		n2;
 }					t_computations;
 
-/* Node in linked list of objects */
 typedef struct s_obj_node
 {
-	t_obj_type			type;		/* Type of object stored */
-	t_obj_data			*data;		/* Pointer to object data */
-	double				t[2];			/* Intersection parameter values */
+	t_obj_type			type;
+	t_obj_data			*data;
+	double				t[2];
 	bool				has_intersection;
 	t_m4				matrix;
 	t_computations		comp;
-	struct s_obj_node	*next;		/* Pointer to next node */
+	struct s_obj_node	*next;
 }						t_obj_node;
 
-/* Linked list containing all objects in the scene */
 typedef struct s_obj_list
 {
-	t_obj_node	*head;		/* First node in the list */
-	t_obj_node	*tail;		/* Last node in the list */
-	ssize_t		size;		/* Number of objects in the list */
+	t_obj_node	*head;
+	t_obj_node	*tail;
+	ssize_t		size;
 }				t_obj_list;
 #endif

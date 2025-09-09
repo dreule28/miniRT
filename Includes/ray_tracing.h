@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ray_tracing.h                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dreule <dreule@student.42heilbronn.de>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/09/09 15:11:43 by dreule            #+#    #+#             */
+/*   Updated: 2025/09/09 15:13:36 by dreule           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef RAY_TRACING_H
 # define RAY_TRACING_H
 
@@ -33,11 +45,10 @@ typedef struct s_tri_inter
 	double		v;
 }				t_tri_inter;
 
-/* Ray structure for ray tracing calculations */
 typedef struct s_ray
 {
-	t_tuples	origin;	/* Starting point of the ray */
-	t_tuples	direction;	/* Direction vector of the ray */
+	t_tuples	origin;
+	t_tuples	direction;
 }			t_ray;
 
 typedef struct s_ray_params
@@ -47,22 +58,21 @@ typedef struct s_ray_params
 	t_m4		inv;
 }			t_ray_params;
 
-
 // aa_utils.c -- BEGIN
-void	init_ray_params(t_ray_params *ray_params, t_scene *scene, t_ray *ray,
-		t_m4 inv);
-void	get_aa_color(t_ray_params *ray_params, t_rgb *acc);
-void	normal_rendering(t_ray_params *ray_params, int x, int y);
-void	swap_values(double t0, double t1);
+void		init_ray_params(t_ray_params *ray_params, t_scene *scene,
+				t_ray *ray, t_m4 inv);
+void		get_aa_color(t_ray_params *ray_params, t_rgb *acc);
+void		normal_rendering(t_ray_params *ray_params, int x, int y);
+void		swap_values(double t0, double t1);
 // aa_utils.c -- END
 
 // anti_aliasing.c -- BEGIN
-void	ray_for_sample(t_ray *ray, t_camera *camera, t_m4 inv, t_tuples params);
-void	shade_single_ray(t_scene *scene, t_ray *ray, t_rgb *out);
-void	aa_cal_color(t_rgb *acc);
-void	aa_loop(t_ray_params *ray_params, t_rgb *acc, int x, int y);
-void	init_ray_params(t_ray_params *ray_params, t_scene *scene, t_ray *ray, t_m4 inv);
-void	anti_aliasing(t_ray_params *ray_params, int x, int y);
+void		ray_for_sample(t_ray *ray, t_camera *camera, t_m4 inv,
+				t_tuples params);
+void		shade_single_ray(t_scene *scene, t_ray *ray, t_rgb *out);
+void		aa_cal_color(t_rgb *acc);
+void		aa_loop(t_ray_params *ray_params, t_rgb *acc, int x, int y);
+void		anti_aliasing(t_ray_params *ray_params, int x, int y);
 // anti_aliasing.c -- BEGIN
 
 // camera.c -- BEGIN
@@ -70,7 +80,7 @@ void		calculate_ray_for_pixel(t_ray *ray, t_m4 inv, double world_x,
 				double world_y);
 void		ray_for_pixel(t_ray_params *ray_params, double px, double py);
 void		render(t_scene *scene);
-void	init_view_transformation(t_m4 *matrix, t_scene *scene);
+void		init_view_transformation(t_m4 *matrix, t_scene *scene);
 // camera.c -- END
 
 // comp_to_list.c -- BEGIN
@@ -80,10 +90,10 @@ bool		set_comp_to_obj(t_obj_node *curr, t_ray *ray);
 // comp_to_list.c -- END
 
 // cone_cal.c -- BEGIN
-bool	cone_intersec_cal(t_obj_node *node, t_ray ray);
-int		check_cone_height(t_obj_node *node, t_ray ray, t_cone cone);
-bool	intersect_cone(t_obj_node *node, t_ray ray, t_cone cone);
-void	local_cone(t_tuples *normal, t_obj_node curr, t_tuples p);
+bool		cone_intersec_cal(t_obj_node *node, t_ray ray);
+int			check_cone_height(t_obj_node *node, t_ray ray, t_cone cone);
+bool		intersect_cone(t_obj_node *node, t_ray ray, t_cone cone);
+void		local_cone(t_tuples *normal, t_obj_node curr, t_tuples p);
 // cone_cal.c -- END
 
 // cubes.c -- BEGIN
@@ -93,16 +103,17 @@ void		check_axis(double origin, double direction, double *tmax,
 // cubes.c -- END
 
 // cylinder_cal_utils.c -- BEGIN
-void	swap_value(double *t0, double *t1);
-bool	check_sides(double caps[2], t_obj_node *node,int cap_count);
+void		swap_value(double *t0, double *t1);
+bool		check_sides(double caps[2], t_obj_node *node, int cap_count);
 // cylinder_cal_utils.c -- END
 
 // cylinder_cal.c --BEGIN
 bool		check_cap(t_ray ray, double t);
 int			intersect_caps(t_ray ray, t_cylinder cylinder, double *out);
 bool		cylinder_intersec_cal(t_obj_node *node, t_ray ray);
-int	check_cylinder_height(t_obj_node *node, t_ray ray, t_cylinder cylinder);
-bool	cylinder_cap_cal(t_obj_node *node, t_ray ray, t_cylinder cylinder);
+int			check_cylinder_height(t_obj_node *node, t_ray ray,
+				t_cylinder cylinder);
+bool		cylinder_cap_cal(t_obj_node *node, t_ray ray, t_cylinder cylinder);
 // cylinder_cal.c --END
 
 // intersec_to_list.c -- BEGIN
@@ -115,56 +126,57 @@ t_obj_list	*intersect_to_list(t_scene *scene, t_ray *ray);
 double		discri(t_ray ray, t_sphere sphere, double *a, double *b);
 bool		intersect_sphere(t_obj_node *node, t_ray ray, t_sphere sphere);
 bool		intersect_plane(t_obj_node *node, t_ray ray);
-bool		intersect_cylinder(t_obj_node *node, t_ray ray, t_cylinder cylinder);
+bool		intersect_cylinder(t_obj_node *node, t_ray ray,
+				t_cylinder cylinder);
 //intersect_obj.c -- END
 
 // lighting.c -- BEGIN
-void	calculate_lighting_components(t_rgb *result, t_material material, t_light light,
-		double light_dot_normal);
-void	calculate_specular(t_rgb *specular, t_scene *scene, t_tuples lightv,
-			t_computations comps);
+void		calculate_lighting_components(t_rgb *result, t_material material,
+				t_light light, double light_dot_normal);
+void		calculate_specular(t_rgb *specular, t_scene *scene, t_tuples lightv,
+				t_computations comps);
 t_material	get_obj_mat(t_scene *scene);
-void	ambient_comp(t_rgb *result, t_material material, t_light light);
-void	lighting(t_rgb *res, t_scene *scene, t_computations comps,
-			t_light light);
+void		ambient_comp(t_rgb *result, t_material material, t_light light);
+void		lighting(t_rgb *res, t_scene *scene, t_computations comps,
+				t_light light);
 // lighting.c -- END
 
 // local_normal_at.c -- BEGIN
-void	local_normal_at(t_tuples *local_normal_at, t_obj_node curr,
+void		local_normal_at(t_tuples *local_normal_at, t_obj_node curr,
 				t_tuples object_point);
-void	local_sphere(t_tuples *normal, t_tuples object_point);
-void	local_plane(t_tuples *local_normal_at);
-void	local_cylinder(t_tuples *normal, t_obj_node curr, t_tuples object_point);
-void	local_cube(t_tuples *local_normal_at, t_tuples object_point);
+void		local_sphere(t_tuples *normal, t_tuples object_point);
+void		local_plane(t_tuples *local_normal_at);
+void		local_cylinder(t_tuples *normal, t_obj_node curr,
+				t_tuples object_point);
+void		local_cube(t_tuples *local_normal_at, t_tuples object_point);
 // local_normal_at.c -- END
 
 // init_patterns.c -- BEGIN
-void	stripe_pattern(t_pattern *pattern, t_rgb color1, t_rgb color2);
-void	gradient_pattern(t_pattern *pattern, t_rgb color1, t_rgb color2);
-void	ring_pattern(t_pattern *pattern, t_rgb color1, t_rgb color2);
-void	checkers_pattern(t_pattern *pattern, t_rgb color1, t_rgb color2);
+void		stripe_pattern(t_pattern *pattern, t_rgb color1, t_rgb color2);
+void		gradient_pattern(t_pattern *pattern, t_rgb color1, t_rgb color2);
+void		ring_pattern(t_pattern *pattern, t_rgb color1, t_rgb color2);
+void		checkers_pattern(t_pattern *pattern, t_rgb color1, t_rgb color2);
 
 // init_patterns.c -- END
 
 // pattern_utils.c -- BEGIN
 void		select_pattern(t_rgb *pattern_color, t_pattern pattern,
-			t_tuples pattern_point);
+				t_tuples pattern_point);
 void		pattern_at_shape(t_rgb *rgb, t_pattern pattern, t_obj_node shape,
 				t_tuples world_point);
 // pattern_utils.c -- END
 
 // patterns.c -- BEGIN
-void	stripe_at(t_rgb *color, t_pattern pattern, t_tuples point);
-void	gradient_at(t_rgb *result, t_pattern pattern, t_tuples point);
-void	ring_at(t_rgb *color, t_pattern pattern, t_tuples point);
-void	checkers_at(t_rgb *color, t_pattern pattern, t_tuples point);
+void		stripe_at(t_rgb *color, t_pattern pattern, t_tuples point);
+void		gradient_at(t_rgb *result, t_pattern pattern, t_tuples point);
+void		ring_at(t_rgb *color, t_pattern pattern, t_tuples point);
+void		checkers_at(t_rgb *color, t_pattern pattern, t_tuples point);
 // patterns.c -- END
 
 // rays.c -- BEGIN
-void		free_ray(t_ray *ray);
-void	init_ray(t_ray *ray, t_tuples origin, t_tuples direction);
+void		init_ray(t_ray *ray, t_tuples origin, t_tuples direction);
 void		ray_position(t_tuples *point, t_ray *ray, double time);
-void	transform_ray(t_ray *new_ray, t_ray old_ray, t_m4 m4);
+void		transform_ray(t_ray *new_ray, t_ray old_ray, t_m4 m4);
 void		set_transform(t_obj_node *curr, t_m4 *translation_matrix);
 // rays.c -- END
 
@@ -181,8 +193,10 @@ void		reflected_color(t_rgb *reflected, t_scene *scene,
 void		get_shadow_ray(t_ray *ray, t_tuples point, double *distance,
 				t_light curr);
 bool		get_transformed_intersection(t_obj_node *curr, t_ray ray);
-bool		check_shadow_intersection(t_obj_node *node, double dist, double *min_t);
-bool		check_objects_for_shadow(t_scene *scene, t_ray ray,double distance);
+bool		check_shadow_intersection(t_obj_node *node, double dist,
+				double *min_t);
+bool		check_objects_for_shadow(t_scene *scene, t_ray ray,
+				double distance);
 bool		is_shadowed(t_scene *scene, t_tuples point, t_light curr);
 // shadows.c -- END
 
@@ -195,12 +209,11 @@ t_obj_list	*sort_obj_list(t_obj_list *obj_list);
 // sort_obj_list.c -- END
 
 // surface_normals.c -- BEGIN
-void		free_tuple(t_tuples *tuple);
-void	normal_at(t_tuples *normal, t_obj_node curr, t_tuples world_point);
+void		normal_at(t_tuples *normal, t_obj_node curr, t_tuples world_point);
 // surface_normals.c -- END
 
 // triangles.c -- BEGIN
-bool	intersect_triangle(t_obj_node *node, t_ray ray);
+bool		intersect_triangle(t_obj_node *node, t_ray ray);
 // triangles.c -- END
 
 // utils.c -- BEGIN
@@ -208,44 +221,42 @@ t_material	get_material_from_comps(t_computations comps, t_obj_list *obj_list);
 // utils.c -- END
 
 // view_tranformation.c -- BEGIN
-void	view_transformation(t_m4 *matrix, t_tuples from, t_tuples to, t_tuples up);
-void	create_view_matrix(t_m4 *orientation, t_tuples left, t_tuples forward,
-			t_tuples true_up);
+void		view_transformation(t_m4 *matrix, t_tuples from, t_tuples to,
+				t_tuples up);
+void		create_view_matrix(t_m4 *orientation, t_tuples left,
+				t_tuples forward, t_tuples true_up);
 // view_tranformation.c -- END
 
 // bonus_scene.c -- BEGIN
-void bonus_scene1(t_scene *scene);
-void	bonus_scenes(t_scene *scene, char *str);
+void		bonus_scene1(t_scene *scene);
+void		bonus_scenes(t_scene *scene, char *str);
 // bonus_scene.c -- END
 
 // more_scene_objs.c -- BEGIN
-void	p3_plane(t_scene *scene);
-void	c1_cylinder(t_scene *scene);
-void	c1_cube(t_scene *scene);
-void	c1_cone(t_scene *scene);
+void		p3_plane(t_scene *scene);
+void		c1_cylinder(t_scene *scene);
+void		c1_cube(t_scene *scene);
+void		c1_cone(t_scene *scene);
 // more_scene_objs.c -- END
 
 // scene_objs.c -- BEGIN
-void	s1_sphere(t_scene *scene);
-void	s2_sphere(t_scene *scene);
-void	s3_sphere(t_scene *scene);
-void	p1_plane(t_scene *scene);
-void	p2_plane(t_scene *scene);
+void		s1_sphere(t_scene *scene);
+void		s2_sphere(t_scene *scene);
+void		s3_sphere(t_scene *scene);
+void		p1_plane(t_scene *scene);
+void		p2_plane(t_scene *scene);
 // scene_objs.c -- END
 
 // bump.c -- BEGIN
 t_material	*mat_of(t_obj_node *n);
-void	apply_bump_texture(t_obj_node *curr);
-void	select_bump(t_tuples *out, t_bump bump, t_tuples p);
-void	bump_at_shape(t_tuples *out, t_bump bump, t_obj_node shape,
-			t_tuples world_point);
+void		apply_bump_texture(t_obj_node *curr);
+void		select_bump(t_tuples *out, t_bump bump, t_tuples p);
+void		bump_at_shape(t_tuples *out, t_bump bump, t_obj_node shape,
+				t_tuples world_point);
 // bump.c -- END
 
 // textures.c -- BEGIN
-void	bump_sine(t_tuples *out, double amp, t_tuples p);
-void	bump_quilt(t_tuples *out, double amp, t_tuples p);
-void	bump_checkers(t_tuples *out, double amp, t_tuples p);
-void	bump_wave(t_tuples *out, double amp, t_tuples p);
+void		bump_quilt(t_tuples *out, double amp, t_tuples p);
 // textures.c -- END
 
 #endif

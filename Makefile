@@ -28,7 +28,7 @@ vpath %.c $(SRC_DIRS)
 ###############                  SOURCE FILES                     ##############
 ################################################################################
 
-MATRICES_FILES := add_col.c cmp_col.c init_matrices.c m_cmp.c matrix_multi.c transpose_matrix.c determinant.c m3_sub_matrix.c m4_sub_matrix.c cofo.c inversion.c transformation.c rotate_matrix.c free_matrices.c
+MATRICES_FILES := add_col.c cmp_col.c init_matrices.c m_cmp.c matrix_multi.c transpose_matrix.c determinant.c m3_sub_matrix.c m4_sub_matrix.c cofo.c inversion.c transformation.c rotate_matrix.c
 MATRICES := $(addprefix math_ops/matrices/, $(MATRICES_FILES))
 
 TUPLES_FILES := tuples_func.c more_tuples_func.c tup_func.c custom_math_func.c
@@ -40,7 +40,7 @@ RAY_TRACING := $(addprefix ray_tracing/, $(RAY_TRACING_FILES))
 PARSER_FILES := fill_elements.c fill_objects.c initialize_objects.c list_and_nodes.c parser.c inits.c init_cubes.c translator.c translator_utils.c init_cone.c translate_cone.c init_triangles.c parser_utils.c
 PARSER := $(addprefix parser/, $(PARSER_FILES))
 
-MLX_FILES := mlx_hooks.c mlx_utils.c ray_tracing_loop.c paint_pixle.c
+MLX_FILES := mlx_hooks.c mlx_utils.c paint_pixle.c
 MLX := $(addprefix mlx_src/, $(MLX_FILES))
 
 PATTERNS_FILES := patterns.c pattern_utils.c init_patterns.c

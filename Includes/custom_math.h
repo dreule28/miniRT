@@ -1,29 +1,39 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   custom_math.h                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dreule <dreule@student.42heilbronn.de>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/09/09 15:03:24 by dreule            #+#    #+#             */
+/*   Updated: 2025/09/09 15:03:25 by dreule           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef CUSTOM_MATH_H
 # define CUSTOM_MATH_H
 
 # include <stdbool.h>
 
-/* Enum to distinguish between vectors and points in 3D space */
 typedef enum e_tuples_enum
 {
-	VECTOR,		/* Represents direction and magnitude (w = 0) */
+	VECTOR,
 	POINT
 }					t_tuples_enum;
 
 typedef struct s_tuples
 {
-	double	x;		/* X component */
-	double	y;		/* Y component */
-	double	z;		/* Z component */
-	double	w;		/* W component (0 for vectors, 1 for points) */
-}					t_tuples;
+	double	x;
+	double	y;
+	double	z;
+	double	w;
+}			t_tuples;
 
-/* RGB color structure with double precision for color calculations */
 typedef struct s_rgb
 {
-	double	r;		/* Red component (0.0 - 1.0) */
-	double	g;		/* Green component (0.0 - 1.0) */
-	double	b;		/* Blue component (0.0 - 1.0) */
+	double	r;
+	double	g;
+	double	b;
 }			t_rgb;
 
 // ray_tracing/custom_math_func.c
@@ -60,7 +70,6 @@ double	magnitude_vector(t_tuples vector);
 
 /* Normalizes a vector to unit length */
 void	ftm_tup_norm(t_tuples *new_vector, t_tuples in);
-
 
 /* Calculates cross product of two vectors */
 void	ftm_tup_cross(t_tuples *new_tuples, t_tuples tup1, t_tuples tup2);

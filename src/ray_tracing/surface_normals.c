@@ -1,10 +1,16 @@
-#include "mini_rt.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   surface_normals.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dreule <dreule@student.42heilbronn.de>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/09/09 15:00:02 by dreule            #+#    #+#             */
+/*   Updated: 2025/09/09 15:00:10 by dreule           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-void	free_tuple(t_tuples *tuple)
-{
-	if (tuple)
-		free(tuple);
-}
+#include "mini_rt.h"
 
 void	normal_at(t_tuples *normal, t_obj_node curr, t_tuples world_point)
 {

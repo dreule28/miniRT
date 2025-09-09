@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   mini_rt.h                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dreule <dreule@student.42heilbronn.de>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/09/09 15:06:33 by dreule            #+#    #+#             */
+/*   Updated: 2025/09/09 15:06:34 by dreule           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef MINI_RT_H
 # define MINI_RT_H
 # define WIDTH 2560
@@ -95,21 +107,18 @@ bool			validate_file(char **argv);
 bool			parser(t_scene *scene, int argc, char **argv);
 
 // translate_cone.c -- BEGIN
-void			handle_cone_axis_x(t_tuples axis, t_tuples pos, t_obj_node *cone);
-void			handle_cone_axis_y(t_tuples axis, t_tuples pos, t_obj_node *cone);
-void			handle_cone_axis_z(t_tuples axis, t_tuples pos, t_obj_node *cone);
+void			handle_cone_axis_x(t_tuples axis, t_tuples pos,
+					t_obj_node *cone);
+void			handle_cone_axis_y(t_tuples axis, t_tuples pos,
+					t_obj_node *cone);
+void			handle_cone_axis_z(t_tuples axis, t_tuples pos,
+					t_obj_node *cone);
 void			translate_cone(t_obj_node *cone);
 // translate_cone.c -- END
 
-//translator_utils.c -- BEGIN
-bool			check_norm_vec(t_tuples *vec);
-void			translate_sphere(t_obj_node *sphere);
-void			translate_camera(t_camera camera);
-//translator_utils.c -- END
-
 //translator.c -- BEGIN
+void			translate_sphere(t_obj_node *sphere);
 void			translate_plane(t_obj_node *plane);
-void			rotate_cylinder(t_obj_node *cylinder, t_tuples pos, t_tuples axis);
 void			translate_cylinder(t_obj_node *cyl);
 void			translate_cube(t_obj_node *cube);
 void			translate_objs(t_scene *scene);

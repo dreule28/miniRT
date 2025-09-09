@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   bump.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dreule <dreule@student.42heilbronn.de>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/09/09 14:57:55 by dreule            #+#    #+#             */
+/*   Updated: 2025/09/09 14:57:56 by dreule           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "mini_rt.h"
 
 t_material	*mat_of(t_obj_node *n)
@@ -41,14 +53,8 @@ void	select_bump(t_tuples *out, t_bump bump, t_tuples p)
 	init_vector(out, 0, 0, 0);
 	if (!bump.has_bump)
 		return ;
-	if (bump.type == SINE_BUMP)
-		bump_sine(out, bump.amplitude, p);
-	else if (bump.type == QUILT_BUMP)
+	if (bump.type == QUILT_BUMP)
 		bump_quilt(out, bump.amplitude, p);
-	else if (bump.type == CHECKERS_BUMP)
-		bump_checkers(out, bump.amplitude, p);
-	else if (bump.type == WAVE_BUMP)
-		bump_wave(out, bump.amplitude, p);
 }
 
 void	bump_at_shape(t_tuples *out, t_bump bump, t_obj_node shape,

@@ -1,16 +1,16 @@
-#include "mini_rt.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   rays.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dreule <dreule@student.42heilbronn.de>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/09/09 14:59:56 by dreule            #+#    #+#             */
+/*   Updated: 2025/09/09 14:59:57 by dreule           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-void	free_ray(t_ray *ray)
-{
-	if (ray)
-	{
-		if (&ray->direction)
-			free_tuple(&ray->direction);
-		if (&ray->origin)
-			free_tuple(&ray->origin);
-		free(ray);
-	}
-}
+#include "mini_rt.h"
 
 void	init_ray(t_ray *ray, t_tuples origin, t_tuples direction)
 {
