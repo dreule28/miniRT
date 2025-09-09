@@ -12,7 +12,7 @@ void	select_pattern(t_rgb *pattern_color, t_pattern pattern,
 	else if (pattern.type == CHECKERS_PATTERN)
 		checkers_at(pattern_color, pattern, pattern_point);
 	else
-		init_rgb(pattern_color,1 , 1, 1);
+		init_rgb(pattern_color, 1, 1, 1);
 }
 
 void	pattern_at_shape(t_rgb *rgb, t_pattern pattern, t_obj_node shape,

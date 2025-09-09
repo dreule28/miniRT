@@ -52,6 +52,4 @@ void	add_cone(t_obj_node *obj_node, char *parsed_line)
 	obj_node->data->cone->material.rgb.g = ft_atof(parsed_line);
 	skip_spaces_or_value(&parsed_line, 0, 1);
 	obj_node->data->cone->material.rgb.b = ft_atof(parsed_line);
-	normalize_rgb_triplet(&obj_node->data->cone->material.rgb);
 }
-

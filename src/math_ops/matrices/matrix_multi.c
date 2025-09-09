@@ -43,10 +43,12 @@ double	get_col_val(t_m4 matrix, int col, int row)
 void	set_result_col(t_m4 *matrix, int col_index, double vals[4])
 {
 	t_m4_col	new_col;
+	t_m4_col	col_values;
 
 	if (!matrix || col_index < 0 || col_index > 3 || !vals)
 		return ;
-	assign_m4_col(&new_col, vals[0], vals[1], vals[2], vals[3]);
+	col_values = (t_m4_col){vals[0], vals[1], vals[2], vals[3]};
+	assign_m4_col(&new_col, col_values);
 	if (col_index == 0)
 		matrix->col0 = new_col;
 	if (col_index == 1)

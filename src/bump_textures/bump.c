@@ -21,11 +21,12 @@ void	apply_bump_texture(t_obj_node *curr)
 {
 	t_material	*mat;
 	double		k;
+	t_tuples	dv;
+	t_tuples	dv_tan;
 
 	mat = mat_of(curr);
 	if (mat && mat->bump.has_bump)
 	{
-		t_tuples dv, dv_tan;
 		bump_at_shape(&dv, mat->bump, *curr, curr->comp.point);
 		k = ftm_tup_dot(curr->comp.normalv, dv);
 		ftm_tup_mult(&dv_tan, curr->comp.normalv, k);

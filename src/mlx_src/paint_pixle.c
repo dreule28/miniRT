@@ -48,7 +48,7 @@ void	paint_pixel(t_scene *scene, t_ray *ray, int pixel_index)
 		}
 		get_shaded_with_shadows(&color, scene, 4);
 		pixels[pixel_index] = get_rgba((int)(color.r * 255), (int)(color.g
-				* 255), (int)(color.b * 255), 255);
+					* 255), (int)(color.b * 255), 255);
 	}
 	else
 	{

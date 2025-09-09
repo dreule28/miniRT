@@ -27,12 +27,12 @@ void	gradient_at(t_rgb *result, t_pattern pattern, t_tuples point)
 	double	fraction;
 
 	init_rgb(&distance, pattern.color2.r - pattern.color1.r,
-			pattern.color2.g - pattern.color1.g, pattern.color2.b
-			- pattern.color1.b);
+		pattern.color2.g - pattern.color1.g, pattern.color2.b
+		- pattern.color1.b);
 	fraction = point.x - floor(point.x);
 	init_rgb(result, pattern.color1.r + distance.r * fraction,
-			pattern.color1.g + distance.g * fraction, pattern.color1.b
-			+ distance.b * fraction);
+		pattern.color1.g + distance.g * fraction, pattern.color1.b
+		+ distance.b * fraction);
 }
 
 void	ring_at(t_rgb *color, t_pattern pattern, t_tuples point)

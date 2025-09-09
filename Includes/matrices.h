@@ -70,7 +70,7 @@ void	assign_m2_col(t_m2_col *new_col, double x, double y);
 void	assign_m3_col(t_m3_col *new_col, double x, double y, double z);
 
 /* Creates a new 4D column vector with x, y, z, w components */
-void	assign_m4_col(t_m4_col *new_col, double x, double y, double z, double w);
+void	assign_m4_col(t_m4_col *new_col, t_m4_col values);
 //add_col.c -- END
 
 //cmp_col.c -- BEGIN

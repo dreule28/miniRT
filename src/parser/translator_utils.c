@@ -12,7 +12,7 @@ void	handle_cyl_axis_x(t_tuples axis, t_tuples pos, t_obj_node *cylinder)
 	init_point(&point, radius, height, radius);
 	ftm_matrix_mult(&product, ftm_translation(pos),
 		ftm_rotate_z(radians(axis.x * 90)));
-	ftm_matrix_mult(&cylinder->matrix, product,ftm_scaling(point));
+	ftm_matrix_mult(&cylinder->matrix, product, ftm_scaling(point));
 }
 
 void	handle_cyl_axis_y(t_tuples axis, t_tuples pos, t_obj_node *cylinder)
@@ -27,7 +27,7 @@ void	handle_cyl_axis_y(t_tuples axis, t_tuples pos, t_obj_node *cylinder)
 	init_point(&point, radius, height, radius);
 	ftm_matrix_mult(&product, ftm_translation(pos),
 		ftm_rotate_y(radians(axis.y * 90)));
-	ftm_matrix_mult(&cylinder->matrix, product,ftm_scaling(point));
+	ftm_matrix_mult(&cylinder->matrix, product, ftm_scaling(point));
 }
 
 void	handle_cyl_axis_z(t_tuples axis, t_tuples pos, t_obj_node *cylinder)
@@ -42,5 +42,5 @@ void	handle_cyl_axis_z(t_tuples axis, t_tuples pos, t_obj_node *cylinder)
 	init_point(&point, radius, height, radius);
 	ftm_matrix_mult(&product, ftm_translation(pos),
 		ftm_rotate_x(radians(axis.z * 90)));
-	ftm_matrix_mult(&cylinder->matrix, product,ftm_scaling(point));
+	ftm_matrix_mult(&cylinder->matrix, product, ftm_scaling(point));
 }

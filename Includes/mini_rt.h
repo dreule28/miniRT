@@ -79,6 +79,14 @@ t_light_list	*init_light_list(void);
 t_light			*add_light_node(t_light_list *light_list, char *parsed_line);
 //list_and_nodes.c -- END
 
+// parser_utils.c -- BEGIN
+void			search_for_bonus_objects(t_scene *scene, char *parsed_line,
+					t_obj_node *new_node);
+void			rotate_cube_x(t_obj_node *cube);
+void			rotate_cube_y(t_obj_node *cube);
+void			rotate_cube_z(t_obj_node *cube);
+// parser_utils.c -- END
+
 //parser.c -- BEGIN
 bool			check_argc(int argc);
 bool			check_argv(char **argv);
